@@ -12,6 +12,7 @@ public class StartUpActivity extends AppCompatActivity {
     private LinearLayout projectlistLinearLayout;
 
     private Button activeButton;
+    private Button newProjectButton;
 
     private TextView validationStatusTextView;
 
@@ -23,6 +24,7 @@ public class StartUpActivity extends AppCompatActivity {
         projectlistLinearLayout = (LinearLayout) findViewById(R.id.linearlayout_project_list);
 
         activeButton = (Button) findViewById(R.id.button_active_system);
+        newProjectButton = (Button) findViewById(R.id.button_new_project);
 
         validationStatusTextView = (TextView) findViewById(R.id.textview_validation_info);
 
@@ -30,6 +32,13 @@ public class StartUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Alfred, Input key.
+            }
+        });
+
+        newProjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Alfred, new Project
             }
         });
 

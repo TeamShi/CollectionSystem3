@@ -43,7 +43,19 @@
             android:layout_height="2dp"
             android:background="#000000" />
 
-        <!-- Project -->
+        <!-- Project Button-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新建工程..."
+                android:id="@+id/button_new_project"/>
+        </LinearLayout>
+        <!-- Project List-->
 
         <LinearLayout
             android:layout_width="match_parent"
