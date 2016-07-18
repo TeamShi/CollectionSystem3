@@ -9,5 +9,7 @@ public class HoleIndexActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole_index);
+
+        this.setTitle(DataManager.project.getProjectName());
     }
 }

@@ -8,4 +8,25 @@ import java.util.ArrayList;
 public class Project {
     private String projectName;
     private ArrayList<Hole> holeList;
+
+    public Project(String projectName) {
+        this.projectName = projectName;
+        this.holeList = new ArrayList<Hole>();
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public ArrayList<Hole> getHoleList() {
+        return holeList;
+    }
+
+    public void setHoleList(ArrayList<Hole> holeList) {
+        this.holeList = holeList;
+    }
 }
