@@ -11,4 +11,8 @@ public class DataManager {
     public static void loadProject(Project project) {
         DataManager.project = project;
     }
+
+    public static Project getProject() {
+        return project;
+    }
 }
