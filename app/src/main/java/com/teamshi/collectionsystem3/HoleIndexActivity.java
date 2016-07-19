@@ -11,7 +11,7 @@ public class HoleIndexActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
     private static final int ACTION_ADD_HOLE = 1;
-    private static final int ACCTION_EDIT_HOLE = 2;
+    private static final int ACTION_EDIT_HOLE = 2;
 
     private Button saveProjectButton;
     private Button newHoleButton;
@@ -42,6 +42,8 @@ public class HoleIndexActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "newHoleButton clicked.");
                 Intent intent = new Intent(HoleIndexActivity.this, HoleInfoActivity.class);
+                intent.putExtra("requestCode", "ACTION_ADD_HOLE");
+                intent.putExtra("projectName", DataManager.project.getProjectName());
                 startActivityForResult(intent, ACTION_ADD_HOLE);
             }
         });

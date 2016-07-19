@@ -22,16 +22,18 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:id="@+id/button_add_hole"
-                    android:text="添加新孔"/>
+                    android:text="添加新孔"
+                    android:textSize="16dp"/>
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:id="@+id/button_preview_project"
-                    android:text="预览"/>
+                    android:text="预览"
+                    android:textSize="16dp"/>
 
             </LinearLayout>
 
@@ -40,11 +42,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
                     android:id="@+id/button_save_project"
                     android:layout_gravity="right"
-                    android:text="保存" />
+                    android:text="保存"
+                    android:textSize="16dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -53,7 +56,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="勘探点基本信息表"/>
+            android:text="勘探点基本信息表"
+            android:textSize="32dp"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>

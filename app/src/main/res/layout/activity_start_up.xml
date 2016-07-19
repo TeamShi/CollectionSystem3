@@ -20,19 +20,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
                 android:text="输入激活码"
-                android:id="@+id/button_active_system"/>
+                android:id="@+id/button_active_system"
+                android:textSize="18dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="过期时间: "/>
+                android:text="过期时间: "
+                android:textSize="18dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textview_validation_info"
-                android:text="2016/07/14"/>
+                android:text="2016/07/14"
+                android:textSize="18dp"/>
 
         </LinearLayout>
 
@@ -40,7 +43,7 @@
 
         <View
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#000000" />
 
         <!-- Project Button-->
@@ -50,8 +53,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:textSize="18dp"
                 android:text="新建工程..."
                 android:id="@+id/button_new_project"/>
         </LinearLayout>
