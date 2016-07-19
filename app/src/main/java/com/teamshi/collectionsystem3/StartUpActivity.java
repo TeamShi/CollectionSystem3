@@ -2,24 +2,37 @@ package com.teamshi.collectionsystem3;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.transition.Visibility;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Project;
 
+import java.io.File;
+
 public class StartUpActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
-    private LinearLayout projectlistLinearLayout;
+    private static String APP_ROOT = Environment.getExternalStorageDirectory().getPath()+"/ZuanTan/";
+    /**
+     * app file system overview
+     *
+     *           |- Project name - ...
+     * ZuanTan - |                 |- Hole id
+     *           |- Project name - |
+     *                             |- Hole id
+     *
+     */
 
+    private LinearLayout projectlistLinearLayout;
     private Button activeButton;
     private Button newProjectButton;
 
@@ -102,5 +115,14 @@ public class StartUpActivity extends AppCompatActivity {
 
             validationStatusTextView.setText("未激活");
         }
+
+        //Scan app dir to list all exists valid projects
+        File[] projectFiles = new File(APP_ROOT).listFiles();
+        if (null == projectFiles || projectFiles.length == 0) {
+            Toast.makeText(getApplicationContext(), "应用目录工程项目为空 请新建工程", Toast.LENGTH_SHORT).show();
+        } else {
+            //TODO: Johnson add file manager plugin
+        }
+
     }
 }
