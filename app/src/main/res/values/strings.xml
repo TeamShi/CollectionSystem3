@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">钻探信息采集系统-V3</string>
+    <string name="actionSettings">设置</string>
 </resources>

@@ -11,17 +11,18 @@ public class Hole {
     /* 钻探编号或者为五段部分, 或者为其他, 由用户编辑纯文本.*/
     private boolean isSpecialHoleId;                // 标示该孔是否为特殊钻探编号
 
-    private String holeId1;                         // 钻探编号第一部分. (JC, JZ) 默认JC
-    private String holeId2;                         // 钻探编号第二部分. (I, II, III, IV)
-    private String holeId3;                         // 钻探编号第三部分, 默认为该年年份, 可编辑, 可修改
-    private String holeId4;                         // 钻探编号第四部分, (1, 2, 3, 4)
-    private String holeId5;                         // 钻探编号第五部分, 纯文本.默认值为1.
+    private String holeIdPart1;                         // 钻探编号第一部分. (JC, JZ) 默认JC
+    private String holeIdPart2;                         // 钻探编号第二部分. (I, II, III, IV)
+    private String holeIdPart3;                         // 钻探编号第三部分, 默认为该年年份, 可编辑, 可修改
+    private String holeIdPart4;                         // 钻探编号第四部分, (1, 2, 3, 4)
+    private String holeIdPart5;                         // 钻探编号第五部分, 纯文本.默认值为1.
 
     private String specialHoleId;                   // 钻探特殊编号.当且仅当特殊钻探编号为true时有效.
 
     private Calendar startDate;                     // 开始日期
     private Calendar endDate;                       // 完工日期
 
+    private boolean isSpecialArticle;               // 标示该孔是否为特殊冠词
     private String article;                         // 冠词, 默认值为DK. 取值范围为(K, DK, AK, ACK, CDK或其他)
 
     private double mileage;                         // 里程数
@@ -64,12 +65,12 @@ public class Hole {
 
         this.isSpecialHoleId = false;
 
-        this.holeId1 = "JC";
-        this.holeId2 = "I";
+        this.holeIdPart1 = "JC";
+        this.holeIdPart2 = "I";
         String currentYearString = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-        this.holeId3 = currentYearString.substring(currentYearString.length() - 2);
-        this.holeId4 = "1";
-        this.holeId5 = "1";
+        this.holeIdPart3 = currentYearString.substring(currentYearString.length() - 2);
+        this.holeIdPart4 = "1";
+        this.holeIdPart5 = "1";
 
         this.startDate = Calendar.getInstance();
         this.endDate = Calendar.getInstance();
@@ -127,44 +128,44 @@ public class Hole {
         isSpecialHoleId = specialHoleId;
     }
 
-    public String getHoleId1() {
-        return holeId1;
+    public String getHoleIdPart1() {
+        return holeIdPart1;
     }
 
-    public void setHoleId1(String holeId1) {
-        this.holeId1 = holeId1;
+    public void setHoleIdPart1(String holeIdPart1) {
+        this.holeIdPart1 = holeIdPart1;
     }
 
-    public String getHoleId2() {
-        return holeId2;
+    public String getHoleIdPart2() {
+        return holeIdPart2;
     }
 
-    public void setHoleId2(String holeId2) {
-        this.holeId2 = holeId2;
+    public void setHoleIdPart2(String holeIdPart2) {
+        this.holeIdPart2 = holeIdPart2;
     }
 
-    public String getHoleId3() {
-        return holeId3;
+    public String getHoleIdPart3() {
+        return holeIdPart3;
     }
 
-    public void setHoleId3(String holeId3) {
-        this.holeId3 = holeId3;
+    public void setHoleIdPart3(String holeIdPart3) {
+        this.holeIdPart3 = holeIdPart3;
     }
 
-    public String getHoleId4() {
-        return holeId4;
+    public String getHoleIdPart4() {
+        return holeIdPart4;
     }
 
-    public void setHoleId4(String holeId4) {
-        this.holeId4 = holeId4;
+    public void setHoleIdPart4(String holeIdPart4) {
+        this.holeIdPart4 = holeIdPart4;
     }
 
-    public String getHoleId5() {
-        return holeId5;
+    public String getHoleIdPart5() {
+        return holeIdPart5;
     }
 
-    public void setHoleId5(String holeId5) {
-        this.holeId5 = holeId5;
+    public void setHoleIdPart5(String holeIdPart5) {
+        this.holeIdPart5 = holeIdPart5;
     }
 
     public String getSpecialHoleId() {
@@ -389,5 +390,32 @@ public class Hole {
 
     public void setMachineMonitor(String machineMonitor) {
         this.machineMonitor = machineMonitor;
+    }
+
+    public boolean isSpecialArticle() {
+        return isSpecialArticle;
+    }
+
+    public void setSpecialArticle(boolean specialArticle) {
+        isSpecialArticle = specialArticle;
+    }
+
+    public String getHoleId() {
+        if (isSpecialHoleId()) {
+            return specialHoleId;
+        } else {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(holeIdPart1);
+            sb.append("-");
+            sb.append(holeIdPart2);
+            sb.append(holeIdPart3);
+            sb.append("-");
+            sb.append(holeIdPart4);
+            sb.append("-");
+            sb.append(holeIdPart5);
+
+            return sb.toString();
+        }
     }
 }
