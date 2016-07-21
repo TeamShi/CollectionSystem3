@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Hole;
 
+import java.util.Calendar;
+
 public class HoleInfoActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
@@ -91,22 +93,46 @@ public class HoleInfoActivity extends AppCompatActivity {
         holeIdPart1Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String currentYearString = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+
                 switch (position) {
                     case 0:
+                        if (holeViewModel.isSpecialHoleId()) {
+                            holeViewModel.setHoleIdPart2("I");
+                            holeViewModel.setHoleIdPart3(currentYearString.substring(currentYearString.length() - 2));
+                            holeViewModel.setHoleIdPart4("1");
+                            holeViewModel.setHoleIdPart5("1");
+                        }
+
                         holeViewModel.setSpecialHoleId(false);
                         holeViewModel.setHoleIdPart1("JC");
+
                         holeViewModel.setSpecialHoleId("");
                         setHoleIdNormalControllers();
+
+                        refreshInfo();
                         break;
                     case 1:
+                        if (holeViewModel.isSpecialHoleId()) {
+                            holeViewModel.setHoleIdPart2("I");
+                            holeViewModel.setHoleIdPart3(currentYearString.substring(currentYearString.length() - 2));
+                            holeViewModel.setHoleIdPart4("1");
+                            holeViewModel.setHoleIdPart5("1");
+                        }
+
                         holeViewModel.setSpecialHoleId(false);
                         holeViewModel.setHoleIdPart1("JZ");
+
                         holeViewModel.setSpecialHoleId("");
                         setHoleIdNormalControllers();
+
+                        refreshInfo();
                         break;
                     case 2:
                         holeViewModel.setSpecialHoleId(true);
                         setHoleIdSpecialControllers();
+
+                        refreshInfo();
                         break;
                 }
             }
@@ -264,7 +290,46 @@ public class HoleInfoActivity extends AppCompatActivity {
         articleSpecialCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holeViewModel.setSpecialArticle(false);
+                holeViewModel.setArticle("DK");
+
                 setArticleNormalControllers();
+                refreshInfo();
+            }
+        });
+
+        articleEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setSpecialArticle(true);
+                holeViewModel.setArticle(s.toString());
+            }
+        });
+
+        rigMachineTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setRigMachineType(s.toString());
             }
         });
 
@@ -468,7 +533,7 @@ public class HoleInfoActivity extends AppCompatActivity {
     }
 
     private boolean validateAdding() {
-        if (holeViewModel.getHoleId() == "") {
+        if (holeViewModel.getHoleId().equals("")) {
             Toast.makeText(getApplicationContext(), "钻探编号不能为空", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -482,7 +547,7 @@ public class HoleInfoActivity extends AppCompatActivity {
     }
 
     private boolean validateUpdating() {
-        if (holeViewModel.getHoleId() == "") {
+        if (holeViewModel.getHoleId().equals("")) {
             Toast.makeText(getApplicationContext(), "钻探编号不能为空", Toast.LENGTH_LONG).show();
             return false;
         }
