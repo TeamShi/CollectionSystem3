@@ -269,15 +269,40 @@ public class HoleInfoActivity extends AppCompatActivity {
         });
 
         confirmAddHoleButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if (DataManager.isHoleExistInProject(holeViewModel.getHoleId())) {
-                    Toast.makeText(getApplicationContext(), "钻探编号已存在", Toast.LENGTH_LONG).show();
-                } else {
-                    DataManager.getProject().getHoleList().add(holeViewModel);
-                    HoleInfoActivity.this.setResult(RESULT_OK);
-                    HoleInfoActivity.this.finish();
+                String requestCode = getIntent().getStringExtra("requestCode");
+
+                switch (requestCode) {
+                    case "ACTION_ADD_HOLE":
+                    case "ACTION_COPY_HOLE":
+                        if (validateAdding()) {
+                            DataManager.getProject().getHoleList().add(holeViewModel);
+                            HoleInfoActivity.this.setResult(RESULT_OK);
+                            HoleInfoActivity.this.finish();
+                        }
+                        break;
+                    case "ACTION_EDIT_HOLE":
+                        if (validateUpdating()) {
+                            Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
+
+                            DataManager.updateHole(oldHole.getHoleId(), holeViewModel);
+
+                            HoleInfoActivity.this.setResult(RESULT_OK);
+                            HoleInfoActivity.this.finish();
+                        }
+                        break;
                 }
+
+            }
+        });
+
+        cancelAddHoleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HoleInfoActivity.this.setResult(RESULT_CANCELED);
+                HoleInfoActivity.this.finish();
             }
         });
 
@@ -285,13 +310,46 @@ public class HoleInfoActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_HOLE":
-                this.holeViewModel = new Hole(getIntent().getStringExtra("projectName"));
+                holeViewModel = new Hole(getIntent().getStringExtra("projectName"));
+
+                refreshInfo();
+                break;
+            case "ACTION_COPY_HOLE":
+                holeViewModel = new Hole();
+                Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
+
+                holeViewModel.setProjectName(oldHole.getProjectName());
+                holeViewModel.setStartDate(oldHole.getStartDate());
+                holeViewModel.setEndDate(oldHole.getEndDate());
+
+                holeViewModel.setSpecialHoleId(oldHole.isSpecialHoleId());
+                holeViewModel.setHoleIdPart1(oldHole.getHoleIdPart1());
+                holeViewModel.setHoleIdPart2(oldHole.getHoleIdPart2());
+                holeViewModel.setHoleIdPart3(oldHole.getHoleIdPart3());
+                holeViewModel.setHoleIdPart4(oldHole.getHoleIdPart4());
+                holeViewModel.setHoleIdPart5(oldHole.getHoleIdPart5());
+
+                holeViewModel.setSpecialHoleId(oldHole.isSpecialHoleId());
+                holeViewModel.setSpecialHoleId(oldHole.getSpecialHoleId());
+
+                holeViewModel.setStartDate(oldHole.getStartDate());
+                holeViewModel.setEndDate(oldHole.getEndDate());
+
+                holeViewModel.setArticle(oldHole.getArticle());
+                holeViewModel.setRigMachineType(oldHole.getRigMachineType());
+
+                refreshInfo();
+                break;
+            case "ACTION_EDIT_HOLE":
+                holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
 
                 refreshInfo();
                 break;
             default:
                 break;
         }
+
+        refreshInfo();
     }
 
     private void refreshInfo() {
@@ -378,32 +436,6 @@ public class HoleInfoActivity extends AppCompatActivity {
             }
         }
 
-        if (holeViewModel.isSpecialArticle()) {
-            setArticleSpecialControllers();
-
-            articleEditText.setText(holeViewModel.getArticle());
-        } else {
-            setArticleNormalControllers();
-
-            switch (holeViewModel.getArticle()) {
-                case "K":
-                    articleSpinner.setSelection(0);
-                    break;
-                case "DK":
-                    articleSpinner.setSelection(1);
-                    break;
-                case "AK":
-                    articleSpinner.setSelection(2);
-                    break;
-                case "ACK":
-                    articleSpinner.setSelection(3);
-                    break;
-                case "CDK":
-                    articleSpinner.setSelection(4);
-                    break;
-            }
-        }
-
         rigMachineTypeEditText.setText(holeViewModel.getRigMachineType());
     }
 
@@ -433,8 +465,35 @@ public class HoleInfoActivity extends AppCompatActivity {
         articleSpinner.setVisibility(View.VISIBLE);
         articleEditText.setVisibility(View.GONE);
         articleSpecialCancelButton.setVisibility(View.GONE);
+    }
 
-        articleSpinner.setSelection(0);
+    private boolean validateAdding() {
+        if (holeViewModel.getHoleId() == "") {
+            Toast.makeText(getApplicationContext(), "钻探编号不能为空", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (DataManager.isHoleExistInProject(holeViewModel.getHoleId())) {
+            Toast.makeText(getApplicationContext(), "钻探编号已存在", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validateUpdating() {
+        if (holeViewModel.getHoleId() == "") {
+            Toast.makeText(getApplicationContext(), "钻探编号不能为空", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
+        if (!holeViewModel.getHoleId().equals(oldHole.getHoleId()) && DataManager.isHoleExistInProject(holeViewModel.getHoleId())) {
+            Toast.makeText(getApplicationContext(), "钻探编号已存在", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 
 }

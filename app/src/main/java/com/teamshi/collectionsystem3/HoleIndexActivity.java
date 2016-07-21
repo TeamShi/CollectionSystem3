@@ -24,6 +24,7 @@ public class HoleIndexActivity extends AppCompatActivity {
 
     private static final int ACTION_ADD_HOLE = 1;
     private static final int ACTION_EDIT_HOLE = 2;
+    private static final int ACTION_COPY_HOLE = 3;
 
     private static final int CONTEXT_MENU_QUERY = 1;
     private static final int CONTEXT_MENU_INPUT = 2;
@@ -91,15 +92,30 @@ public class HoleIndexActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        Intent intent = null;
+        String holeId = getIntent().getStringExtra("selectedHoleId");;
 
         switch (item.getItemId()) {
             case CONTEXT_MENU_QUERY:
+                Log.d(TAG, "EditHole " + holeId + " clicked.");
+                intent = new Intent(HoleIndexActivity.this, HoleInfoActivity.class);
+                intent.putExtra("requestCode", "ACTION_EDIT_HOLE");
+                intent.putExtra("holeId", holeId);
+                startActivityForResult(intent, ACTION_EDIT_HOLE);
                 break;
             case CONTEXT_MENU_INPUT:
                 break;
             case CONTEXT_MENU_COPY_NEW:
+                Log.d(TAG, "Copy hole clicked.");
+                intent = new Intent(HoleIndexActivity.this, HoleInfoActivity.class);
+                intent.putExtra("requestCode", "ACTION_COPY_HOLE");
+                intent.putExtra("holeId", holeId);
+                startActivityForResult(intent, ACTION_COPY_HOLE);
                 break;
             case CONTEXT_MENU_DELETE:
+                Log.d(TAG, "Delete hole " + holeId + ".");
+                DataManager.deleteHole(holeId);
+                refreshInfo();
                 break;
         }
 
@@ -145,6 +161,8 @@ public class HoleIndexActivity extends AppCompatActivity {
 
             if (!hole.isSpecialHoleId()) {
                 row.addView(generateHoleInfoCell(hole.getHoleIdPart2()));
+            } else {
+                row.addView(generateHoleInfoCell(""));
             }
 
             row.addView(generateHoleInfoCell(hole.getArticle()));
@@ -213,12 +231,19 @@ public class HoleIndexActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case ACTION_ADD_HOLE:
+            case ACTION_COPY_HOLE:
                 if (resultCode == RESULT_OK) {
                     Log.d(TAG, "Hole added.");
                     Toast.makeText(HoleIndexActivity.this, "添加成功.", Toast.LENGTH_SHORT).show();
                     refreshInfo();
                 }
                 break;
+            case ACTION_EDIT_HOLE:
+                if (resultCode == RESULT_OK) {
+                    Log.d(TAG, "Hole modified.");
+                    Toast.makeText(HoleIndexActivity.this, "修改成功.", Toast.LENGTH_LONG).show();
+                    refreshInfo();
+                }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -59,13 +60,19 @@ public class Hole {
     private String classMonitor;                    // 班长
     private String machineMonitor;                  // 机长
 
+    private ArrayList<Rig> rigList;
+
+    public Hole() {
+
+    }
+
     // Default hole while creating.
     public Hole(String projectName) {
         this.projectName = projectName;
 
         this.isSpecialHoleId = false;
 
-        this.holeIdPart1 = "JC";
+        this.holeIdPart1 = "JZ";
         this.holeIdPart2 = "I";
         String currentYearString = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         this.holeIdPart3 = currentYearString.substring(currentYearString.length() - 2);
@@ -110,6 +117,8 @@ public class Hole {
 
         this.classMonitor = "";
         this.machineMonitor = "";
+
+        this.rigList = new ArrayList<>();
     }
 
     public String getProjectName() {
@@ -417,5 +426,69 @@ public class Hole {
 
             return sb.toString();
         }
+    }
+
+    public ArrayList<Rig> getRigList() {
+        return rigList;
+    }
+
+    public void setRigList(ArrayList<Rig> rigList) {
+        this.rigList = rigList;
+    }
+
+    public Hole deepCopy() {
+        Hole newHole = new Hole(getProjectName());
+
+        newHole.setSpecialHoleId(isSpecialHoleId());
+        newHole.setHoleIdPart1(getHoleIdPart1());
+        newHole.setHoleIdPart2(getHoleIdPart2());
+        newHole.setHoleIdPart3(getHoleIdPart3());
+        newHole.setHoleIdPart4(getHoleIdPart4());
+        newHole.setHoleIdPart5(getHoleIdPart5());
+
+        newHole.setSpecialHoleId(getSpecialHoleId());
+
+        newHole.setStartDate(getStartDate());
+        newHole.setEndDate(getEndDate());
+
+        newHole.setSpecialArticle(isSpecialArticle());
+        newHole.setArticle(getArticle());
+
+        newHole.setMileage(getMileage());
+        newHole.setOffset(getOffset());
+        newHole.setHoleHeight(getHoleHeight());
+        newHole.setHoleDepth(getHoleDepth());
+
+        newHole.setRigMachineType(getRigMachineType());
+        newHole.setEngineType(getEngineType());
+        newHole.setPumpType(getPumpType());
+
+        newHole.setInitialWaterDepth(getInitialWaterDepth());
+        newHole.setFinalWaterDepth(getFinalWaterDepth());
+        newHole.setInitialWaterDepthLoggedDate(getInitialWaterDepthLoggedDate());
+        newHole.setFinalWaterDepthLoggedDate(getFinalWaterDepthLoggedDate());
+
+        newHole.setLongitude(getLongitude());
+        newHole.setLatitude(getLatitude());
+
+        newHole.setCompany(getCompany());
+        newHole.setMachineId(getMachineId());
+
+        newHole.setActualDepth(getActualDepth());
+
+        newHole.setNote(getNote());
+        newHole.setPositionInformation(getPositionInformation());
+
+        newHole.setRecorder(getRecorder());
+        newHole.setReviewer(getReviewer());
+
+        newHole.setClassMonitor(getClassMonitor());
+        newHole.setMachineMonitor(getMachineMonitor());
+
+        for (Rig rig : getRigList()) {
+            rigList.add(rig.deepCopy());
+        }
+
+        return newHole;
     }
 }

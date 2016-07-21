@@ -26,4 +26,32 @@ public class DataManager {
 
         return false;
     }
+
+    public static Hole getHole(String holeId) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                return hole;
+            }
+        }
+
+        return null;
+    }
+
+    public static void deleteHole(String holeId) {
+        for (int i = 0; i < project.getHoleList().size(); i++) {
+            if (project.getHoleList().get(i).getHoleId().equals(holeId)) {
+                project.getHoleList().remove(i);
+                break;
+            }
+        }
+    }
+
+    public static void updateHole(String holeId, Hole hole) {
+        for (int i = 0; i < project.getHoleList().size(); i++) {
+            if (project.getHoleList().get(i).getHoleId().equals(holeId)) {
+                project.getHoleList().set(i, hole);
+                break;
+            }
+        }
+    }
 }
