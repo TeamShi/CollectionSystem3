@@ -166,21 +166,21 @@ public class HoleIndexActivity extends AppCompatActivity {
             }
 
             row.addView(generateHoleInfoCell(hole.getArticle()));
-            row.addView(generateHoleInfoCell("Text"));
+            row.addView(generateHoleInfoCell(String.valueOf(hole.getMileage())));
+            row.addView(generateHoleInfoCell(String.valueOf(hole.getOffset())));
 
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
+            row.addView(generateHoleInfoCell(String.valueOf(hole.getHoleHeight())));
+            row.addView(generateHoleInfoCell(String.valueOf(hole.getLongitude())));
+            row.addView(generateHoleInfoCell(String.valueOf(hole.getLatitude())));
+            row.addView(generateHoleInfoCell(hole.getPositionInformation()));
 
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
-            row.addView(generateHoleInfoCell("Text"));
+            row.addView(generateHoleInfoCell(hole.getRecorder()));
+            row.addView(generateHoleInfoCell(Utility.formatCalendarDateString(hole.getRecordDate())));
+            row.addView(generateHoleInfoCell(hole.getReviewer()));
+            row.addView(generateHoleInfoCell(Utility.formatCalendarDateString(hole.getReviewDate())));
 
-            row.addView(generateHoleInfoCell("Text"));
+            row.addView(generateHoleInfoCell(hole.getNote()));
+            row.addView(generateHoleInfoCell(String.valueOf(hole.getHoleDepth())));
 
             row.setTag(hole.getHoleId());
 

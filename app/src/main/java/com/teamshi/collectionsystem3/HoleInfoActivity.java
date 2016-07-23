@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,6 +56,39 @@ public class HoleInfoActivity extends AppCompatActivity {
     private ArrayAdapter<String> holeIdPart4SpinnerAdapter;
     private ArrayAdapter<String> articleSpinnerAdapter;
 
+    private EditText mileageEditText;
+    private EditText engineTypeEditText;
+    private EditText offsetEditText;
+    private EditText pumpTypeEditText;
+    private EditText holeHeightEditText;
+    private EditText holeDepthEditText;
+
+    private CheckBox initialWaterDepthCheckBox;
+    private EditText initialWaterDepthEditText;
+    private CheckBox finalWaterDepthCheckBox;
+    private EditText finalWaterDepthEditText;
+
+    private TextView initialWaterDepthDateTextView;
+    private TextView finalWaterDepthDateTextView;
+
+    private EditText longtitudeEditText;
+    private EditText latitudeEditText;
+
+    private EditText companyEditText;
+    private EditText machineIdEditText;
+
+    private Button takeHolePhotoButton;
+
+    private EditText noteEditText;
+    private EditText positionInformationEditText;
+
+    private EditText recorderEditText;
+    private EditText reviewerEditText;
+    private TextView recordDateTextView;
+    private TextView reviewDateTextView;
+
+    private EditText classMonitorEditText;
+    private EditText machineMonitorEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +125,40 @@ public class HoleInfoActivity extends AppCompatActivity {
         articleSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ARTICLE_SPINNER_OPTIONS);
         articleSpinner.setAdapter(articleSpinnerAdapter);
 
+        mileageEditText = (EditText) findViewById(R.id.edittext_mileage);
+        engineTypeEditText = (EditText) findViewById(R.id.edittext_engine_type);
+        offsetEditText = (EditText) findViewById(R.id.edittext_offset);
+        pumpTypeEditText = (EditText) findViewById(R.id.edittext_pump_type);
+        holeHeightEditText = (EditText) findViewById(R.id.edittext_hole_height);
+        holeDepthEditText = (EditText) findViewById(R.id.edittext_hole_depth);
+
+        initialWaterDepthCheckBox = (CheckBox) findViewById(R.id.checkbox_initial_water_depth);
+        initialWaterDepthEditText = (EditText) findViewById(R.id.edittext_initial_water_depth);
+        initialWaterDepthDateTextView = (TextView) findViewById(R.id.textview_initial_water_depth_date);
+
+        finalWaterDepthCheckBox = (CheckBox) findViewById(R.id.checkbox_final_water_depth);
+        finalWaterDepthEditText = (EditText) findViewById(R.id.edittext_final_water_depth);
+        finalWaterDepthDateTextView = (TextView) findViewById(R.id.textview_final_water_depth_date);
+
+        longtitudeEditText = (EditText) findViewById(R.id.edittext_longtitude);
+        latitudeEditText = (EditText) findViewById(R.id.edittext_latitude);
+
+        companyEditText = (EditText) findViewById(R.id.edittext_company);
+        machineIdEditText = (EditText) findViewById(R.id.edittext_machine_id);
+
+        takeHolePhotoButton = (Button) findViewById(R.id.button_take_hole_photo);
+
+        noteEditText = (EditText) findViewById(R.id.edittext_note);
+        positionInformationEditText = (EditText) findViewById(R.id.edittext_position_information);
+
+        recorderEditText = (EditText) findViewById(R.id.edittext_recorder);
+        reviewerEditText = (EditText) findViewById(R.id.edittext_reviewer);
+        recordDateTextView = (TextView) findViewById(R.id.textview_record_date);
+        reviewDateTextView = (TextView) findViewById(R.id.textview_review_date);
+
+        classMonitorEditText = (EditText) findViewById(R.id.edittext_class_monitor);
+        machineMonitorEditText = (EditText) findViewById(R.id.edittext_machine_monitor);
+
         holeIdPart1Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -108,9 +177,6 @@ public class HoleInfoActivity extends AppCompatActivity {
                         holeViewModel.setHoleIdPart1("JC");
 
                         holeViewModel.setSpecialHoleId("");
-                        setHoleIdNormalControllers();
-
-                        refreshInfo();
                         break;
                     case 1:
                         if (holeViewModel.isSpecialHoleId()) {
@@ -124,17 +190,13 @@ public class HoleInfoActivity extends AppCompatActivity {
                         holeViewModel.setHoleIdPart1("JZ");
 
                         holeViewModel.setSpecialHoleId("");
-                        setHoleIdNormalControllers();
-
-                        refreshInfo();
                         break;
                     case 2:
                         holeViewModel.setSpecialHoleId(true);
-                        setHoleIdSpecialControllers();
-
-                        refreshInfo();
                         break;
                 }
+
+                refreshInfo();
             }
 
             @Override
@@ -160,6 +222,8 @@ public class HoleInfoActivity extends AppCompatActivity {
                         holeViewModel.setHoleIdPart2("IV");
                         break;
                 }
+
+                refreshInfo();
             }
 
             @Override
@@ -202,6 +266,8 @@ public class HoleInfoActivity extends AppCompatActivity {
                         holeViewModel.setHoleIdPart4("4");
                         break;
                 }
+
+                refreshInfo();
             }
 
             @Override
@@ -251,34 +317,30 @@ public class HoleInfoActivity extends AppCompatActivity {
                     case 0:
                         holeViewModel.setSpecialArticle(false);
                         holeViewModel.setArticle("K");
-                        setArticleNormalControllers();
                         break;
                     case 1:
                         holeViewModel.setSpecialArticle(false);
                         holeViewModel.setArticle("DK");
-                        setArticleNormalControllers();
                         break;
                     case 2:
                         holeViewModel.setSpecialArticle(false);
                         holeViewModel.setArticle("AK");
-                        setArticleNormalControllers();
                         break;
                     case 3:
                         holeViewModel.setSpecialArticle(false);
                         holeViewModel.setArticle("ACK");
-                        setArticleNormalControllers();
                         break;
                     case 4:
                         holeViewModel.setSpecialArticle(false);
                         holeViewModel.setArticle("CDK");
-                        setArticleNormalControllers();
                         break;
                     case 5:
                         holeViewModel.setSpecialArticle(true);
                         holeViewModel.setArticle("");
-                        setArticleSpecialControllers();
                         break;
                 }
+
+                refreshInfo();
             }
 
             @Override
@@ -293,7 +355,6 @@ public class HoleInfoActivity extends AppCompatActivity {
                 holeViewModel.setSpecialArticle(false);
                 holeViewModel.setArticle("DK");
 
-                setArticleNormalControllers();
                 refreshInfo();
             }
         });
@@ -330,6 +391,376 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 holeViewModel.setRigMachineType(s.toString());
+            }
+        });
+
+        mileageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    holeViewModel.setMileage(Double.parseDouble(s.toString()));
+                    mileageEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    mileageEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        engineTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setEngineType(s.toString());
+            }
+        });
+
+        offsetEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    holeViewModel.setOffset(Double.parseDouble(s.toString()));
+                    offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        pumpTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setPumpType(s.toString());
+            }
+        });
+
+        holeHeightEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    holeViewModel.setHoleHeight(Double.parseDouble(s.toString()));
+                    holeHeightEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    holeHeightEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        holeDepthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    holeViewModel.setHoleDepth(Double.parseDouble(s.toString()));
+                    holeDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    holeDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        initialWaterDepthCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    holeViewModel.setInitialWaterDepth(-1);
+                } else {
+                    holeViewModel.setInitialWaterDepth(0);
+                }
+
+                refreshInfo();
+            }
+        });
+
+        finalWaterDepthCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    holeViewModel.setFinalWaterDepth(-1);
+                } else {
+                    holeViewModel.setFinalWaterDepth(0);
+                }
+
+                refreshInfo();
+            }
+        });
+
+        initialWaterDepthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setInitialWaterDepth(Double.parseDouble(s.toString()));
+            }
+        });
+
+        finalWaterDepthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setFinalWaterDepth(Double.parseDouble(s.toString()));
+                holeViewModel.setFinalWaterDepthLoggedDate(Calendar.getInstance());
+            }
+        });
+
+        longtitudeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    holeViewModel.setLongitude(Double.parseDouble(s.toString()));
+                    longtitudeEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    longtitudeEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        latitudeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    holeViewModel.setLatitude(Double.parseDouble(s.toString()));
+                    latitudeEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    latitudeEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        companyEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setCompany(s.toString());
+            }
+        });
+
+        machineIdEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setMachineId(s.toString());
+            }
+        });
+
+        recorderEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setRecorder(s.toString());
+            }
+        });
+
+        reviewerEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setReviewer(s.toString());
+            }
+        });
+
+        takeHolePhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Alfred take photo.
+            }
+        });
+
+        noteEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setNote(s.toString());
+            }
+        });
+
+        positionInformationEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setPositionInformation(s.toString());
+            }
+        });
+
+        machineMonitorEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setMachineMonitor(s.toString());
+            }
+        });
+
+        classMonitorEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                holeViewModel.setClassMonitor(s.toString());
             }
         });
 
@@ -376,8 +807,6 @@ public class HoleInfoActivity extends AppCompatActivity {
         switch (requestCode) {
             case "ACTION_ADD_HOLE":
                 holeViewModel = new Hole(getIntent().getStringExtra("projectName"));
-
-                refreshInfo();
                 break;
             case "ACTION_COPY_HOLE":
                 holeViewModel = new Hole();
@@ -402,13 +831,9 @@ public class HoleInfoActivity extends AppCompatActivity {
 
                 holeViewModel.setArticle(oldHole.getArticle());
                 holeViewModel.setRigMachineType(oldHole.getRigMachineType());
-
-                refreshInfo();
                 break;
             case "ACTION_EDIT_HOLE":
                 holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
-
-                refreshInfo();
                 break;
             default:
                 break;
@@ -420,13 +845,14 @@ public class HoleInfoActivity extends AppCompatActivity {
     private void refreshInfo() {
         projectNameTextView.setText(this.holeViewModel.getProjectName());
 
-        if (this.holeViewModel.isSpecialHoleId()) {
+        if (holeViewModel.isSpecialHoleId()) {
             holeIdPart1Spinner.setSelection(2);
 
             holeIdSpecialIdEditText.setText(holeViewModel.getSpecialHoleId());
 
             setHoleIdSpecialControllers();
         } else {
+            setHoleIdNormalControllers();
             switch (holeViewModel.getHoleIdPart1()) {
                 case "JC":
                     holeIdPart1Spinner.setSelection(0);
@@ -502,6 +928,54 @@ public class HoleInfoActivity extends AppCompatActivity {
         }
 
         rigMachineTypeEditText.setText(holeViewModel.getRigMachineType());
+
+        mileageEditText.setText(String.valueOf(holeViewModel.getMileage()));
+        engineTypeEditText.setText(holeViewModel.getEngineType());
+        offsetEditText.setText(String.valueOf(holeViewModel.getOffset()));
+        pumpTypeEditText.setText(holeViewModel.getPumpType());
+        holeHeightEditText.setText(String.valueOf(holeViewModel.getHoleHeight()));
+        holeDepthEditText.setText(String.valueOf(holeViewModel.getHoleDepth()));
+
+        if (holeViewModel.getInitialWaterDepth() == -1) {
+            initialWaterDepthCheckBox.setChecked(true);
+            initialWaterDepthEditText.setText("");
+            initialWaterDepthEditText.setEnabled(false);
+            initialWaterDepthDateTextView.setText("");
+        } else {
+            initialWaterDepthCheckBox.setChecked(false);
+            initialWaterDepthEditText.setText(String.valueOf(holeViewModel.getInitialWaterDepth()));
+            initialWaterDepthEditText.setEnabled(true);
+            initialWaterDepthDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getInitialWaterDepthLoggedDate()));
+        }
+
+        if (holeViewModel.getFinalWaterDepth() == -1) {
+            finalWaterDepthCheckBox.setChecked(true);
+            finalWaterDepthEditText.setText("");
+            finalWaterDepthEditText.setEnabled(false);
+            finalWaterDepthDateTextView.setText("");
+        } else {
+            finalWaterDepthCheckBox.setChecked(false);
+            finalWaterDepthEditText.setText(String.valueOf(holeViewModel.getFinalWaterDepth()));
+            finalWaterDepthEditText.setEnabled(true);
+            finalWaterDepthDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getFinalWaterDepthLoggedDate()));
+        }
+
+        longtitudeEditText.setText(String.valueOf(holeViewModel.getLongitude()));
+        latitudeEditText.setText(String.valueOf(holeViewModel.getLatitude()));
+
+        noteEditText.setText(holeViewModel.getNote());
+        positionInformationEditText.setText(holeViewModel.getPositionInformation());
+
+        companyEditText.setText(holeViewModel.getCompany());
+        machineIdEditText.setText(holeViewModel.getMachineId());
+
+        recorderEditText.setText(holeViewModel.getRecorder());
+        reviewerEditText.setText(holeViewModel.getReviewer());
+        recordDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getRecordDate()));
+        reviewDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getReviewDate()));
+
+        classMonitorEditText.setText(holeViewModel.getClassMonitor());
+        machineMonitorEditText.setText(holeViewModel.getMachineMonitor());
     }
 
     private void setHoleIdSpecialControllers() {
@@ -543,6 +1017,55 @@ public class HoleInfoActivity extends AppCompatActivity {
             return false;
         }
 
+
+        try {
+            Double.parseDouble(mileageEditText.getText().toString());
+        } catch (Exception e) {
+            mileageEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "里程数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(offsetEditText.getText().toString());
+        } catch (Exception e) {
+            offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "偏移量数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(holeHeightEditText.getText().toString());
+        } catch (Exception e) {
+            holeHeightEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "孔口标高数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(holeDepthEditText.getText().toString());
+        } catch (Exception e) {
+            holeDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "设计孔深数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(latitudeEditText.getText().toString());
+        } catch (Exception e) {
+            latitudeEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "经距数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(longtitudeEditText.getText().toString());
+        } catch (Exception e) {
+            longtitudeEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "纬距数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         return true;
     }
 
@@ -555,6 +1078,54 @@ public class HoleInfoActivity extends AppCompatActivity {
         Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
         if (!holeViewModel.getHoleId().equals(oldHole.getHoleId()) && DataManager.isHoleExistInProject(holeViewModel.getHoleId())) {
             Toast.makeText(getApplicationContext(), "钻探编号已存在", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(mileageEditText.getText().toString());
+        } catch (Exception e) {
+            mileageEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "里程数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(offsetEditText.getText().toString());
+        } catch (Exception e) {
+            offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "偏移量数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(holeHeightEditText.getText().toString());
+        } catch (Exception e) {
+            holeHeightEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "孔口标高数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(holeDepthEditText.getText().toString());
+        } catch (Exception e) {
+            holeDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "设计孔深数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(latitudeEditText.getText().toString());
+        } catch (Exception e) {
+            latitudeEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "经距数值非法", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        try {
+            Double.parseDouble(longtitudeEditText.getText().toString());
+        } catch (Exception e) {
+            longtitudeEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(HoleInfoActivity.this, "纬距数值非法", Toast.LENGTH_LONG).show();
             return false;
         }
 

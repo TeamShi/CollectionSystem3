@@ -75,21 +75,29 @@ public class StartUpActivity extends AppCompatActivity {
                 builder.setView(input);
                 Log.d(TAG, "Pop up window to input new project name.");
 
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "Confirm Button clicked.");
-                        Log.d(TAG, "Project name: \"" + input.getText().toString() + "\".");
-                        DataManager.loadProject(new Project(input.getText().toString()));
-                        Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
-                        startActivity(intent);
-                    }
-                });
+
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(TAG, "Cancel button is clicked.");
                         dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "Confirm Button clicked.");
+                        Log.d(TAG, "Project name: \"" + input.getText().toString() + "\".");
+
+                        if (input.getText().toString().equals("")) {
+                            Toast.makeText(getApplicationContext(), "项目名称不能为空.", Toast.LENGTH_LONG).show();
+                        } else if (false) {
+                            //TODO: Johnson, check if the project name exists on the sdcard.
+                        } else {
+                            DataManager.loadProject(new Project(input.getText().toString()));
+                            Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 });
 
