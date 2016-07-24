@@ -26,14 +26,14 @@
                     android:layout_height="80dp"
                     android:id="@+id/button_add_hole"
                     android:text="添加新孔"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_text_size"/>
 
                 <Button
                     android:layout_width="150dp"
                     android:layout_height="80dp"
                     android:id="@+id/button_preview_project"
                     android:text="预览"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_text_size"/>
 
             </LinearLayout>
 
@@ -47,7 +47,7 @@
                     android:id="@+id/button_save_project"
                     android:layout_gravity="right"
                     android:text="保存"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/default_text_size"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text="勘探点基本信息表"
-            android:textSize="32sp"
+            android:textSize="@dimen/headline_text_size"
             android:textStyle="bold"/>
 
         <HorizontalScrollView
@@ -75,8 +75,8 @@
                             android:text="勘探点名称"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -84,8 +84,8 @@
                             android:text="工程名称"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -93,8 +93,8 @@
                             android:text="阶段"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -102,8 +102,8 @@
                             android:text="冠词"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -111,8 +111,8 @@
                             android:text="里程"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -120,8 +120,8 @@
                             android:text="偏移量"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -129,8 +129,8 @@
                             android:text="高程"
                             android:textColor="@android:color/black"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -139,8 +139,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -149,8 +149,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -159,8 +159,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -169,8 +169,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -179,8 +179,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -189,8 +189,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -199,8 +199,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -209,8 +209,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>
@@ -219,8 +219,8 @@
                             android:textColor="@android:color/black"
                             android:layout_weight="1"
                             android:background="@drawable/cell_hint"
-                            android:textSize="16sp"
-                            android:layout_height="64dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
                             android:padding="5dp"
                             android:gravity="center"/>

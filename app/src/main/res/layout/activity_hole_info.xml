@@ -19,14 +19,14 @@
             <Button
                 android:layout_width="150dp"
                 android:layout_height="80dp"
-                android:textSize="16sp"
+                android:textSize="@dimen/default_text_size"
                 android:text="提交"
                 android:id="@+id/button_confirm_add_hole"/>
             
             <Button
                 android:layout_width="150dp"
                 android:layout_height="80dp"
-                android:textSize="16sp"
+                android:textSize="@dimen/default_text_size"
                 android:text="取消"
                 android:id="@+id/button_cancel_add_hole"/>
         </LinearLayout>
@@ -47,8 +47,8 @@
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_hint"
-                        android:textSize="16sp"
-                        android:layout_height="64dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"/>
                     <TextView
@@ -56,8 +56,8 @@
                         android:layout_weight="7"
                         android:id="@+id/textview_hole_info_project_name"
                         android:background="@drawable/cell_input"
-                        android:textSize="16sp"
-                        android:layout_height="64dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"/>
                 </TableRow>
@@ -71,9 +71,9 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <Spinner
                         android:id="@+id/spinner_hole_id_part1"
@@ -81,7 +81,7 @@
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
                         android:layout_gravity="center_vertical"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp">
                     </Spinner>
                     <Spinner
@@ -89,9 +89,9 @@
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical">
                     </Spinner>
                     <EditText
@@ -99,10 +99,10 @@
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:layout_gravity="center_vertical"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_hole_id_part5"
                         android:singleLine="true"/>
@@ -111,9 +111,9 @@
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical">
                     </Spinner>
                     <EditText
@@ -122,9 +122,9 @@
                         android:layout_weight="1"
                         android:padding="5dp"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_rig_machine_type"
                         android:singleLine="true"/>
@@ -134,9 +134,9 @@
                         android:textColor="@android:color/black"
                         android:layout_weight="4"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:visibility="gone"
                         android:singleLine="true"/>
@@ -149,27 +149,27 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
 
                     <TextView
                         android:id="@+id/textview_hole_start_date"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <TextView
                         android:text="完工日期"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
 
                     <TextView
@@ -177,9 +177,9 @@
                         android:layout_weight="3"
                         android:padding="5dp"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                 </TableRow>
 
@@ -189,34 +189,34 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
 
                     <Spinner
                         android:id="@+id/spinner_article"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
                     <EditText
                         android:id="@+id/edittext_article"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:visibility="gone"
                         android:singleLine="true"
                         />
                     <Button
                         android:layout_width="0dp"
-                        android:layout_height="64dp"
-                        android:textSize="16sp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:textSize="@dimen/default_text_size"
                         android:text="x"
                         android:layout_weight="1"
                         android:id="@+id/button_cancel_special_article"/>
@@ -226,9 +226,9 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
 
                     <EditText
@@ -236,9 +236,9 @@
                         android:textColor="@android:color/black"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_mileage"
                         android:singleLine="true"/>
@@ -251,17 +251,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_mileage"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_engine_type"
@@ -272,17 +272,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_engine_type"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_offset"
                         android:singleLine="true"
@@ -295,17 +295,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_offset"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_pump_type"
@@ -316,17 +316,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_pump_type"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_hole_height"
                         android:singleLine="true"
@@ -339,17 +339,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_hole_height"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_hole_depth"
@@ -359,17 +359,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_hole_depth"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_initial_water_depth"
@@ -382,25 +382,26 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <CheckBox
                         android:text="未见"
                         android:layout_weight="1"
                         android:id="@+id/checkbox_initial_water_depth"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
                         android:background="@drawable/cell_input"
                         />
                     <EditText
                         android:id="@+id/edittext_initial_water_depth"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_final_water_depth"
@@ -410,17 +411,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/textview_initial_water_depth_date"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                 </TableRow>
 
@@ -430,25 +431,26 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <CheckBox
                         android:text="未见"
                         android:layout_weight="1"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
                         android:id="@+id/checkbox_final_water_depth"
                         />
                     <EditText
                         android:id="@+id/edittext_final_water_depth"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_longtitude"
@@ -458,17 +460,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/textview_final_water_depth_date"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                 </TableRow>
 
@@ -480,17 +482,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_longtitude"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_latitude"
                         android:inputType="numberDecimal"
@@ -500,17 +502,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_latitude"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_company"
                         android:inputType="numberDecimal"
@@ -523,18 +525,18 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                         />
                     <EditText
                         android:id="@+id/edittext_company"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_machine_id"
                         android:singleLine="true"/>
@@ -544,17 +546,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_machine_id"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_note"
                         android:singleLine="true"/>
@@ -562,13 +564,13 @@
 
                 <TableRow>
                     <TextView
-                        android:text="钻孔示意图"
+                        android:text="钻孔位置图"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     />
                     <TextView
@@ -578,13 +580,13 @@
                         android:background="@drawable/cell_input"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <Button
                         android:layout_weight="1"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:text="拍摄"
                         android:id="@+id/button_take_hole_photo"/>
                 </TableRow>
@@ -597,7 +599,7 @@
                         android:background="@drawable/cell_hint"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_note"
@@ -605,7 +607,7 @@
                         android:background="@drawable/cell_input"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_position_information"
                         android:singleLine="true"/>
@@ -616,7 +618,7 @@
                         android:background="@drawable/cell_hint"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_position_information"
@@ -624,7 +626,7 @@
                         android:background="@drawable/cell_input"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_recorder"
                         android:singleLine="true"/>
@@ -636,17 +638,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_recorder"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_reviewer"
                         android:singleLine="true"/>
@@ -655,17 +657,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/textview_record_date"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                 </TableRow>
 
@@ -675,17 +677,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_reviewer"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_class_monitor"
                         android:singleLine="true"/>
@@ -694,17 +696,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <TextView
                         android:id="@+id/textview_review_date"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                 </TableRow>
 
@@ -714,17 +716,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_class_monitor"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_machine_monitor"
                         android:singleLine="true"/>
@@ -733,17 +735,17 @@
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_machine_monitor"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
-                        android:layout_height="64dp"
+                        android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
                         android:singleLine="true"/>
                 </TableRow>

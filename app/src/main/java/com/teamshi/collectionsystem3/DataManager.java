@@ -3,6 +3,9 @@ package com.teamshi.collectionsystem3;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by Alfred on 16/7/14.
  */
@@ -53,5 +56,16 @@ public class DataManager {
                 break;
             }
         }
+    }
+
+    public static String[] getHoleIdOptionList() {
+        ArrayList<String> resultArray = new ArrayList<>();
+        String[] resultStringArray = new String[project.getHoleList().size()];
+
+        for (Hole hole : project.getHoleList()) {
+            resultArray.add(hole.getHoleId());
+        }
+
+        return resultArray.toArray(resultStringArray);
     }
 }

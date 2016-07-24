@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HoleIndexActivity" />
-        <activity android:name=".HoleInfoActivity"></activity>
+        <activity android:name=".HoleInfoActivity" />
+        <activity android:name=".RigIndexActivity"></activity>
     </application>
 
 </manifest>

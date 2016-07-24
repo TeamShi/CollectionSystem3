@@ -24,18 +24,18 @@
                 android:layout_height="80dp"
                 android:text="输入激活码"
                 android:id="@+id/button_active_system"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/default_text_size"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="过期时间: "
-                android:textSize="18sp"/>
+                android:textSize="@dimen/default_text_size"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textview_validation_info"
                 android:text="2016/07/14"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/default_text_size"/>
 
         </LinearLayout>
 
@@ -55,7 +55,7 @@
             <Button
                 android:layout_width="150dp"
                 android:layout_height="80dp"
-                android:textSize="18sp"
+                android:textSize="@dimen/default_text_size"
                 android:text="新建工程..."
                 android:id="@+id/button_new_project"/>
         </LinearLayout>

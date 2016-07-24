@@ -104,6 +104,10 @@ public class HoleIndexActivity extends AppCompatActivity {
                 startActivityForResult(intent, ACTION_EDIT_HOLE);
                 break;
             case CONTEXT_MENU_INPUT:
+                Log.d(TAG, "Input rig for hole " + holeId + ".");
+                intent = new Intent(HoleIndexActivity.this, RigIndexActivity.class);
+                intent.putExtra("holeId", holeId);
+                startActivity(intent);
                 break;
             case CONTEXT_MENU_COPY_NEW:
                 Log.d(TAG, "Copy hole clicked.");
@@ -214,9 +218,9 @@ public class HoleIndexActivity extends AppCompatActivity {
         tv.setText(s);
         tv.setBackground(getResources().getDrawable(R.drawable.cell_input));
 
-        tv.setTextSize(16);
+        tv.setTextSize(getResources().getDimension(R.dimen.default_text_size) / getResources().getDisplayMetrics().density);
 
-        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, getResources().getDisplayMetrics());
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_height) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
         TableRow.LayoutParams param = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, height, 0f);
         tv.setLayoutParams(param);
 

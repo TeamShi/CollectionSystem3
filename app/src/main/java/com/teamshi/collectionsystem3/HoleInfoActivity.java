@@ -555,7 +555,11 @@ public class HoleInfoActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                holeViewModel.setInitialWaterDepth(Double.parseDouble(s.toString()));
+                if (s.toString().equals("")) {
+                    holeViewModel.setInitialWaterDepth(-1);
+                } else {
+                    holeViewModel.setInitialWaterDepth(Double.parseDouble(s.toString()));
+                }
             }
         });
 
@@ -572,7 +576,11 @@ public class HoleInfoActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                holeViewModel.setFinalWaterDepth(Double.parseDouble(s.toString()));
+                if (s.toString().equals("")) {
+                    holeViewModel.setFinalWaterDepth(-1);
+                } else {
+                    holeViewModel.setFinalWaterDepth(Double.parseDouble(s.toString()));
+                }
                 holeViewModel.setFinalWaterDepthLoggedDate(Calendar.getInstance());
             }
         });
@@ -809,12 +817,10 @@ public class HoleInfoActivity extends AppCompatActivity {
                 holeViewModel = new Hole(getIntent().getStringExtra("projectName"));
                 break;
             case "ACTION_COPY_HOLE":
-                holeViewModel = new Hole();
+
                 Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
 
-                holeViewModel.setProjectName(oldHole.getProjectName());
-                holeViewModel.setStartDate(oldHole.getStartDate());
-                holeViewModel.setEndDate(oldHole.getEndDate());
+                holeViewModel = new Hole(oldHole.getProjectName());
 
                 holeViewModel.setSpecialHoleId(oldHole.isSpecialHoleId());
                 holeViewModel.setHoleIdPart1(oldHole.getHoleIdPart1());
@@ -826,11 +832,19 @@ public class HoleInfoActivity extends AppCompatActivity {
                 holeViewModel.setSpecialHoleId(oldHole.isSpecialHoleId());
                 holeViewModel.setSpecialHoleId(oldHole.getSpecialHoleId());
 
-                holeViewModel.setStartDate(oldHole.getStartDate());
-                holeViewModel.setEndDate(oldHole.getEndDate());
-
                 holeViewModel.setArticle(oldHole.getArticle());
                 holeViewModel.setRigMachineType(oldHole.getRigMachineType());
+
+                holeViewModel.setEngineType(oldHole.getEngineType());
+                holeViewModel.setPumpType(oldHole.getPumpType());
+                holeViewModel.setCompany(oldHole.getCompany());
+                holeViewModel.setMachineId(oldHole.getMachineId());
+                holeViewModel.setRecorder(oldHole.getRecorder());
+                holeViewModel.setRecordDate((Calendar) oldHole.getRecordDate().clone());
+                holeViewModel.setClassMonitor(oldHole.getClassMonitor());
+                holeViewModel.setMachineMonitor(oldHole.getMachineMonitor());
+                holeViewModel.setReviewer(oldHole.getReviewer());
+                holeViewModel.setReviewDate((Calendar) oldHole.getReviewDate().clone());
                 break;
             case "ACTION_EDIT_HOLE":
                 holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
