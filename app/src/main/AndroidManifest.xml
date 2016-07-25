@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".HoleIndexActivity" />
         <activity android:name=".HoleInfoActivity" />
-        <activity android:name=".RigIndexActivity"></activity>
+        <activity android:name=".RigIndexActivity" />
+        <activity android:name=".NARigInfoActivity"></activity>
     </application>
 
 </manifest>

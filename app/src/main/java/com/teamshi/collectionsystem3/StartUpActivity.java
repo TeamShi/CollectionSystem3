@@ -75,7 +75,6 @@ public class StartUpActivity extends AppCompatActivity {
                 builder.setView(input);
                 Log.d(TAG, "Pop up window to input new project name.");
 
-
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -23,8 +23,6 @@ import java.util.Calendar;
 public class HoleInfoActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
-    private static final int ACTION_ADD_HOLE = 1;
-
     private Hole holeViewModel;
 
     private Button confirmAddHoleButton;

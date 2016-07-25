@@ -2,6 +2,7 @@ package com.teamshi.collectionsystem3;
 
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.datastructure.Rig;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -67,5 +68,42 @@ public class DataManager {
         }
 
         return resultArray.toArray(resultStringArray);
+    }
+
+    public static Rig queryRig(String holeId, int selectedRigIndex) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                return hole.getRigList().get(selectedRigIndex);
+            }
+        }
+
+        return null;
+    }
+
+    public static void addRig(String holeId, Rig rig) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                hole.getRigList().add(rig);
+                break;
+            }
+        }
+    }
+
+    public static void removeRig(String holeId) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                hole.getRigList().remove(hole.getRigList().size() - 1);
+                break;
+            }
+        }
+    }
+
+    public static void updateRig(String holeId, int index, Rig newRig) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                hole.getRigList().set(index, newRig);
+                break;
+            }
+        }
     }
 }

@@ -78,7 +78,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="工程名称"
@@ -87,7 +87,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="阶段"
@@ -96,7 +96,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="冠词"
@@ -105,7 +105,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="里程"
@@ -114,7 +114,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="偏移量"
@@ -123,7 +123,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="高程"
@@ -132,7 +132,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="经距X"
@@ -142,7 +142,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="纬距Y"
@@ -152,7 +152,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="位置描述"
@@ -162,7 +162,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="记录者"
@@ -172,7 +172,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="记录日期"
@@ -182,7 +182,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="复核者"
@@ -192,7 +192,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="复核日期"
@@ -202,7 +202,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="附注"
@@ -212,7 +212,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                         <TextView
                             android:text="孔深"
@@ -222,7 +222,7 @@
                             android:textSize="@dimen/default_text_size"
                             android:layout_height="@dimen/default_table_height"
                             android:layout_width="wrap_content"
-                            android:padding="5dp"
+                            android:padding="@dimen/default_table_padding"
                             android:gravity="center"/>
                     </TableRow>
                 </TableLayout>

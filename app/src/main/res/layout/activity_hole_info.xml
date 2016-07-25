@@ -120,7 +120,7 @@
                         android:id="@+id/edittext_hole_id_part5"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
-                        android:padding="5dp"
+                        android:padding="@dimen/default_table_padding"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
@@ -175,7 +175,7 @@
                     <TextView
                         android:id="@+id/textview_hole_end_date"
                         android:layout_weight="3"
-                        android:padding="5dp"
+                        android:padding="@dimen/default_table_padding"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"

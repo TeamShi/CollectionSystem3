@@ -18,6 +18,93 @@ public class Utility {
         return c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH);
     }
 
+    public static String formatTimeString(Calendar c) {
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        if (minute < 10) {
+            return hour + ":0" + minute;
+        } else {
+            return hour + ":" + minute;
+        }
+    }
+
+    public static String formatCalendarDateStringWithoutYear(Calendar c) {
+        return (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String formatTimeStringChinese(Calendar c) {
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        if (minute < 10) {
+            return hour + "时0" + minute + "分";
+        } else {
+            return hour + "时" + minute + "分";
+        }
+    }
+
+    public static String calculateTimeSpan(Calendar c1, Calendar c2) {
+        int hour1 = c1.get(Calendar.HOUR_OF_DAY);
+        int hour2 = c2.get(Calendar.HOUR_OF_DAY);
+        int minute1 = c1.get(Calendar.MINUTE);
+        int minute2 = c2.get(Calendar.MINUTE);
+
+        int answerHour = 0;
+        int answerMinute = 0;
+
+        if (minute2 < minute1) {
+            answerMinute = minute2 + 60 - minute1;
+            answerHour = hour2 - hour1 - 1;
+        } else {
+            answerHour = hour2 - hour1;
+            answerMinute = minute2 - minute1;
+        }
+
+        if (answerMinute < 10) {
+            return answerHour + ":0" + answerMinute;
+        } else {
+            return answerHour + ":" + answerMinute;
+        }
+    }
+
+    public static String calculateTimeSpanChinese(Calendar c1, Calendar c2) {
+        int hour1 = c1.get(Calendar.HOUR_OF_DAY);
+        int hour2 = c2.get(Calendar.HOUR_OF_DAY);
+        int minute1 = c1.get(Calendar.MINUTE);
+        int minute2 = c2.get(Calendar.MINUTE);
+
+        int answerHour = 0;
+        int answerMinute = 0;
+
+        if (minute2 < minute1) {
+            answerMinute = minute2 + 60 - minute1;
+            answerHour = hour2 - hour1 - 1;
+        } else {
+            answerHour = hour2 - hour1;
+            answerMinute = minute2 - minute1;
+        }
+
+        if (answerMinute < 10) {
+            return answerHour + "时0" + answerMinute + "分";
+        } else {
+            return answerHour + "时" + answerMinute + "分";
+        }
+    }
+
+    public static boolean validateStartEndTime(Calendar startTime, Calendar endTime) {
+        int hour1 = startTime.get(Calendar.HOUR_OF_DAY);
+        int hour2 = endTime.get(Calendar.HOUR_OF_DAY);
+        int minute1 = startTime.get(Calendar.MINUTE);
+        int minute2 = endTime.get(Calendar.MINUTE);
+
+        if (hour1 > hour2) {
+            return false;
+        } else if (hour1 == hour2) {
+            return minute1 < minute2;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * 递归压缩文件夹
      *
