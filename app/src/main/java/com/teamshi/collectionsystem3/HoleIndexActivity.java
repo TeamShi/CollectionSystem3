@@ -1,8 +1,8 @@
 package com.teamshi.collectionsystem3;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Hole;
+import com.teamshi.collectionsystem3.datastructure.Project;
 
 public class HoleIndexActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
@@ -43,8 +44,9 @@ public class HoleIndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole_index);
 
-        Log.d(TAG, "Project name: " + DataManager.project.getProjectName());
-        this.setTitle(DataManager.project.getProjectName());
+        String projectName = DataManager.getProject().getProjectName();
+        Log.d(TAG, "Project name: " + projectName);
+        this.setTitle(projectName);
 
         saveProjectButton = (Button) findViewById(R.id.button_save_project);
         newHoleButton = (Button) findViewById(R.id.button_add_hole);
@@ -56,6 +58,15 @@ public class HoleIndexActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO: Johnson. Save DataManager.getProject() to storage.
+                String projectName = DataManager.project.getProjectName();
+                Project project = new Project(projectName);
+                boolean isUpdated = IOManager.updateProject(project);
+                if(isUpdated == false){
+                    Toast.makeText(HoleIndexActivity.this, "保存失败.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(HoleIndexActivity.this, "保存成功.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

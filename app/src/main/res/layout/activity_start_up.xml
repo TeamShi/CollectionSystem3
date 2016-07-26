@@ -51,14 +51,45 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <Button
                 android:layout_width="150dp"
                 android:layout_height="80dp"
                 android:textSize="@dimen/default_text_size"
                 android:text="新建工程..."
                 android:id="@+id/button_new_project"/>
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:textSize="@dimen/default_text_size"
+                android:text="打开工程"
+                android:id="@+id/button_open_project"/>
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:textSize="@dimen/default_text_size"
+                android:text="删除工程"
+                android:id="@+id/button_delete_project"/>
+
         </LinearLayout>
+
+        <!-- Data Storage Path -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:id="@+id/textview_storage_path"
+                android:textSize="@dimen/default_text_size"
+                android:focusable="false">
+            </TextView>
+        </LinearLayout>
+
+
         <!-- Project List-->
 
         <LinearLayout
@@ -74,6 +105,7 @@
                 android:layout_height="fill_parent">
             </ListView>
         </LinearLayout>
+
 
     </LinearLayout>
 
