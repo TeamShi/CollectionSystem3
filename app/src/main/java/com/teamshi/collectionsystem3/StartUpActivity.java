@@ -2,12 +2,13 @@ package com.teamshi.collectionsystem3;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +19,7 @@ import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Project;
 
-import java.io.File;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.Set;
 
 public class StartUpActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
@@ -93,6 +92,7 @@ public class StartUpActivity extends AppCompatActivity {
                             Project project = new Project(projectName);
                             DataManager.loadProject(project);
                             IOManager.createProject(project);
+                            projectListView.invalidateViews();
                             Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
                             startActivity(intent);
                         }
@@ -122,18 +122,19 @@ public class StartUpActivity extends AppCompatActivity {
             validationStatusTextView.setText("未激活");
         }
 
-        String[] projectNames = (String[]) IOManager.getProjecs().keySet().toArray();
+        Set<String> names = IOManager.getProjecs().keySet();
+        String[] projectNames = names.toArray(new String[names.size()]);
         if (null == projectNames || projectNames.length == 0) {
             Toast.makeText(getApplicationContext(), "应用目录工程项目为空 请新建工程", Toast.LENGTH_LONG).show();
         } else {
             projectListView.setAdapter(new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_checked, projectNames));
             projectListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            projectListView.setOnClickListener(new View.OnClickListener() {
+            projectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
-                    startActivity(intent);
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+                startActivity(intent);
                 }
             });
         }

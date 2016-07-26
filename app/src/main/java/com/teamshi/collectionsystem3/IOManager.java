@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
@@ -21,7 +22,8 @@ import java.util.Map;
  */
 public class IOManager {
     private static final String TAG = "CollectionSystem3";
-    public static String APP_ROOT = Environment.getExternalStorageDirectory().getPath()+"/ZuanTan/";
+    public static String APP_NAME = "ZuanTan";
+    public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
     public static String APP_ROOT_DATA = APP_ROOT +"Data/";
 
 
@@ -42,7 +44,7 @@ public class IOManager {
             root.mkdirs();
         }
         File dateDir = new File(APP_ROOT_DATA);
-        if(!root.exists()){
+        if(!dateDir.exists()){
             dateDir.mkdirs();
         }
     }
@@ -53,14 +55,13 @@ public class IOManager {
             return null;
         }
 
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-
         Object object;
         FileInputStream fis;
         ObjectInputStream ois = null;
         try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);
             object = ois.readObject();
@@ -84,34 +85,42 @@ public class IOManager {
     }
 
 
-    public static boolean parseObjectToFile(Object object, File file) throws IOException {
-        if(null == file || file.getName().equals("")){
+    public static File parseObjectToFile(Object object, String fileName) {
+        if(null == fileName || fileName.equals("")){
             Log.e(TAG, "Invalid File Path.");
-            return false;
-        }
-
-        if (!file.exists()) {
-            file.mkdirs();
+            return null;
         }
 
         FileOutputStream fos;
         ObjectOutputStream oos = null;
+        File file;
         try {
+            file = new File(fileName);
+            // override ser file
+            if(!file.exists()){
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+
             fos = new FileOutputStream(file);
             oos = new ObjectOutputStream(fos);
             oos.writeObject(object);
-            return true;
+            return file;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             assert oos != null;
-            oos.flush();
-            oos.close();
+            try {
+                oos.flush();
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        return false;
+        return null;
     }
 
 
@@ -125,26 +134,24 @@ public class IOManager {
         // Scan app dir to list all exists valid projects
         File [] projectDirs = new File(APP_ROOT_DATA).listFiles();
         if(projectDirs != null && projectDirs.length  > 0){
-            for(File file: projectDirs){
-                Project project = (Project) parseFileToObject(file);
-                projects.put(file.getName(),project);
+            for(File dir: projectDirs){
+                // load *.ser file
+                String projectName = dir.getName();
+                File serFile = new File(dir,projectName+".ser");
+                Project project = (Project) parseFileToObject(serFile);
+                projects.put(projectName,project);
             }
         }
 
         return projects;
     }
 
-
     public static File createProject(Project project) {
         File projectDir = new File(APP_ROOT_DATA,project.getProjectName());
         projectDir.mkdirs();
-        File projectSer = new File(projectDir,project.getProjectName()+".ser");
-        try {
-            parseObjectToFile(project,projectSer);
-            return projectSer;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return projectSer;
+        String fileName = projectDir.getAbsolutePath()+File.separator+project.getProjectName()+".ser";
+        File projectFile = parseObjectToFile(project,fileName);
+        projects.put(project.getProjectName(),project);
+        return projectFile;
     }
 }
