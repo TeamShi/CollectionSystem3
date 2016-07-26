@@ -57,9 +57,8 @@ public class HoleIndexActivity extends AppCompatActivity {
         this.saveProjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Johnson. Save DataManager.getProject() to storage.
-                String projectName = DataManager.project.getProjectName();
-                Project project = new Project(projectName);
+                // Save DataManager.getProject() to storage.
+                Project project = DataManager.getProject();
                 boolean isUpdated = IOManager.updateProject(project);
                 if(isUpdated == false){
                     Toast.makeText(HoleIndexActivity.this, "保存失败.", Toast.LENGTH_SHORT).show();
