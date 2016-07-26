@@ -2,40 +2,32 @@ package com.teamshi.collectionsystem3;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Project;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class StartUpActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
-    private static String APP_ROOT = Environment.getExternalStorageDirectory().getPath()+"/ZuanTan/";
-    /**
-     * app file system overview
-     *
-     *           |- Project name - ...
-     * ZuanTan - |                 |- Hole id
-     *           |- Project name - |
-     *                             |- Hole id
-     *
-     */
-
-    private LinearLayout projectlistLinearLayout;
     private Button activeButton;
     private Button newProjectButton;
-
+    private ListView projectListView;
+    private LinearLayout projectListViewWrapper;
     private TextView validationStatusTextView;
 
     @Override
@@ -48,7 +40,10 @@ public class StartUpActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start_up);
 
-        projectlistLinearLayout = (LinearLayout) findViewById(R.id.linearlayout_project_list);
+        IOManager.initFileSystem();
+
+        projectListViewWrapper = (LinearLayout) findViewById(R.id.wrapper_project_list);
+        projectListView = (ListView) projectListViewWrapper.findViewById(R.id.lv_project_list);
 
         activeButton = (Button) findViewById(R.id.button_active_system);
         newProjectButton = (Button) findViewById(R.id.button_new_project);
@@ -85,15 +80,19 @@ public class StartUpActivity extends AppCompatActivity {
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "Confirm Button clicked.");
-                        Log.d(TAG, "Project name: \"" + input.getText().toString() + "\".");
+                        String projectName = input.getText().toString();
 
-                        if (input.getText().toString().equals("")) {
+                        Log.d(TAG, "Confirm Button clicked.");
+                        Log.d(TAG, "Project name: \"" + projectName + "\".");
+
+                        if (projectName.equals("")) {
                             Toast.makeText(getApplicationContext(), "项目名称不能为空.", Toast.LENGTH_LONG).show();
-                        } else if (false) {
-                            //TODO: Johnson, check if the project name exists on the sdcard.
+                        } else if (IOManager.getProjecs().containsKey(projectName)) {
+                            Toast.makeText(getApplicationContext(), "项目名称 '"+projectName+"' 已存在.", Toast.LENGTH_LONG).show();
                         } else {
-                            DataManager.loadProject(new Project(input.getText().toString()));
+                            Project project = new Project(projectName);
+                            DataManager.loadProject(project);
+                            IOManager.createProject(project);
                             Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
                             startActivity(intent);
                         }
@@ -106,7 +105,7 @@ public class StartUpActivity extends AppCompatActivity {
 
         if (ValidationManager.validate()) {
             Log.d(TAG, "Validation pass. Load normally.");
-            projectlistLinearLayout.setVisibility(View.VISIBLE);
+            projectListView.setVisibility(View.VISIBLE);
 
             activeButton.setEnabled(false);
             activeButton.setText("已激活");
@@ -115,7 +114,7 @@ public class StartUpActivity extends AppCompatActivity {
 
         } else {
             Log.d(TAG, "Validation failed. Load nothing.");
-            projectlistLinearLayout.setVisibility(View.GONE);
+            projectListView.setVisibility(View.GONE);
 
             activeButton.setEnabled(true);
             activeButton.setText("输入激活码");
@@ -123,12 +122,20 @@ public class StartUpActivity extends AppCompatActivity {
             validationStatusTextView.setText("未激活");
         }
 
-        //Scan app dir to list all exists valid projects
-        File[] projectFiles = new File(APP_ROOT).listFiles();
-        if (null == projectFiles || projectFiles.length == 0) {
-            Toast.makeText(getApplicationContext(), "应用目录工程项目为空 请新建工程", Toast.LENGTH_SHORT).show();
+        String[] projectNames = (String[]) IOManager.getProjecs().keySet().toArray();
+        if (null == projectNames || projectNames.length == 0) {
+            Toast.makeText(getApplicationContext(), "应用目录工程项目为空 请新建工程", Toast.LENGTH_LONG).show();
         } else {
-            //TODO: Johnson add file manager plugin
+            projectListView.setAdapter(new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_checked, projectNames));
+            projectListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+            projectListView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }
