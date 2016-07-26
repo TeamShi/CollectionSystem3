@@ -1,11 +1,12 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Alfred on 16/7/14.
  */
-public class Project {
+public class Project implements Serializable {
     private String projectName;
     private ArrayList<Hole> holeList;
 
