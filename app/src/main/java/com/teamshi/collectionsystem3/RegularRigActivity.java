@@ -12,12 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 
 import java.util.Calendar;
@@ -54,7 +52,7 @@ public class RegularRigActivity extends AppCompatActivity {
         confirmAddRigButton = (Button) findViewById(R.id.button_confirm_add_regular_rig);
         cancelAddRigButton = (Button) findViewById(R.id.button_cancel_add_regular_rig);
 
-        classPeopleCountTextView = (TextView) findViewById(R.id.textview_regular_rig_class_people_count);
+        classPeopleCountTextView = (TextView) findViewById(R.id.edittext_regular_rig_class_people_count);
         dateButton = (Button) findViewById(R.id.button_regular_rig_date);
         startTimeButton = (Button) findViewById(R.id.button_regular_rig_start_time);
         endTimeButton = (Button) findViewById(R.id.button_regular_rig_end_time);

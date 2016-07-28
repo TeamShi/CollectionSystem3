@@ -107,20 +107,20 @@ public class StartUpActivity extends AppCompatActivity {
                             DataManager.loadProject(project);
 
                             //Temp for developing
-                            Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+//                            startActivity(intent);
 
-                            // disabled for exception
-//                            boolean isUpdated = IOManager.updateProject(project);
-//                            if(isUpdated){
-//                                arrayAdapter.add(projectName);
-//                                projectListView.invalidateViews();
-//                                Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
-//                                startActivity(intent);
-//                                Toast.makeText(getApplicationContext(), "新建成功.", Toast.LENGTH_LONG).show();
-//                            }else{
-//                                Toast.makeText(getApplicationContext(), "新建失败.", Toast.LENGTH_LONG).show();
-//                            }
+//                             disabled for exception
+                            boolean isUpdated = IOManager.updateProject(project);
+                            if(isUpdated){
+                                arrayAdapter.add(projectName);
+                                projectListView.invalidateViews();
+                                Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "新建成功.", Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(), "新建失败.", Toast.LENGTH_LONG).show();
+                            }
 
                         }
                     }
