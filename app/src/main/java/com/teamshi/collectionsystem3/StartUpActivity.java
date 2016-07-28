@@ -104,20 +104,16 @@ public class StartUpActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "项目名称 '"+projectName+"' 已存在.", Toast.LENGTH_LONG).show();
                         } else {
                             Project project = new Project(projectName);
-                            DataManager.loadProject(project);
-
-                            //Temp for developing
-//                            Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
-//                            startActivity(intent);
-
-//                             disabled for exception
                             boolean isUpdated = IOManager.updateProject(project);
                             if(isUpdated){
+                                // refresh project names in ListView
                                 arrayAdapter.add(projectName);
                                 projectListView.invalidateViews();
+                                Toast.makeText(getApplicationContext(), "新建成功.", Toast.LENGTH_LONG).show();
+                                // load new Project and switch to HoleIndexActivity
+                                DataManager.loadProject(project);
                                 Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
                                 startActivity(intent);
-                                Toast.makeText(getApplicationContext(), "新建成功.", Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(getApplicationContext(), "新建失败.", Toast.LENGTH_LONG).show();
                             }
