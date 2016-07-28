@@ -32,6 +32,8 @@ public class RegularRigActivity extends AppCompatActivity {
     private Button confirmAddRigButton;
     private Button cancelAddRigButton;
 
+    private String holeId;
+
     private TextView classPeopleCountTextView;
     private TextView dateButton;
     private TextView startTimeButton;
@@ -76,6 +78,7 @@ public class RegularRigActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 rigViewModel.setClassPeopleCount(s.toString());
+                DataManager.setLastClassPeopleCount(holeId, s.toString());
             }
         });
 
@@ -202,9 +205,14 @@ public class RegularRigActivity extends AppCompatActivity {
 
         String requestCode = getIntent().getStringExtra("requestCode");
 
+        holeId = getIntent().getStringExtra("holeId");
+
         switch (requestCode) {
             case "ACTION_ADD_RIG":
-                rigViewModel = new RegularRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
+                Calendar start_time = Calendar.getInstance();
+                Calendar end_time = Calendar.getInstance();
+                end_time.add(Calendar.MINUTE, 1);
+                rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), start_time, start_time, end_time);
 
                 refreshInfo();
                 break;

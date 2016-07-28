@@ -66,6 +66,7 @@ public class NARigInfoActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 rigViewModel.setClassPeopleCount(s.toString());
+                DataManager.setLastClassPeopleCount(holeId, s.toString());
             }
         });
 
@@ -205,7 +206,10 @@ public class NARigInfoActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
-                rigViewModel = new NARig(DataManager.getHole(holeId).getLastClassPeopleCount(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
+                Calendar start_time = Calendar.getInstance();
+                Calendar end_time = Calendar.getInstance();
+                end_time.add(Calendar.MINUTE, 1);
+                rigViewModel = new NARig(DataManager.getHole(holeId).getLastClassPeopleCount(), start_time, start_time, end_time);
 
                 refreshInfo();
                 break;
