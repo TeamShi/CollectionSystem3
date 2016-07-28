@@ -89,6 +89,7 @@ public class StartUpActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
+
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -104,16 +105,22 @@ public class StartUpActivity extends AppCompatActivity {
                         } else {
                             Project project = new Project(projectName);
                             DataManager.loadProject(project);
-                            boolean isUpdated = IOManager.updateProject(project);
-                            if(isUpdated){
-                                arrayAdapter.add(projectName);
-                                projectListView.invalidateViews();
-                                Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
-                                startActivity(intent);
-                                Toast.makeText(getApplicationContext(), "新建成功.", Toast.LENGTH_LONG).show();
-                            }else{
-                                Toast.makeText(getApplicationContext(), "新建失败.", Toast.LENGTH_LONG).show();
-                            }
+
+                            //Temp for developing
+                            Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+                            startActivity(intent);
+
+                            // disabled for exception
+//                            boolean isUpdated = IOManager.updateProject(project);
+//                            if(isUpdated){
+//                                arrayAdapter.add(projectName);
+//                                projectListView.invalidateViews();
+//                                Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
+//                                startActivity(intent);
+//                                Toast.makeText(getApplicationContext(), "新建成功.", Toast.LENGTH_LONG).show();
+//                            }else{
+//                                Toast.makeText(getApplicationContext(), "新建失败.", Toast.LENGTH_LONG).show();
+//                            }
 
                         }
                     }
