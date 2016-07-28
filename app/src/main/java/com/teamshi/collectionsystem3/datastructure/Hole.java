@@ -1,12 +1,13 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
  * Created by Alfred on 16/7/14.
  */
-public class Hole {
+public class Hole implements Serializable {
     private String projectName;                     // 工程名称
 
     /* 钻探编号或者为五段部分, 或者为其他, 由用户编辑纯文本.*/

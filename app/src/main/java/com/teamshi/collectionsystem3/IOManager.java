@@ -9,9 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
@@ -126,7 +124,7 @@ public class IOManager {
 
     private static Map<String,Project> projects = null;
 
-    public static Map<String,Project> getProjecs() {
+    public static Map<String,Project> getProjects() {
         if(null != projects) {
             return projects;
         }
@@ -146,12 +144,37 @@ public class IOManager {
         return projects;
     }
 
-    public static File createProject(Project project) {
+    /**
+     * add or save the project instance to 'projects' and persist on disk
+     * @param project
+     * @return
+     */
+    public static boolean updateProject(Project project) {
         File projectDir = new File(APP_ROOT_DATA,project.getProjectName());
         projectDir.mkdirs();
         String fileName = projectDir.getAbsolutePath()+File.separator+project.getProjectName()+".ser";
         File projectFile = parseObjectToFile(project,fileName);
-        projects.put(project.getProjectName(),project);
-        return projectFile;
+        if(null == projectFile){
+            return false;
+        } else {
+            projects.put(project.getProjectName(),project);
+            return true;
+        }
+    }
+
+    public static boolean deleteProject(String projectName) {
+        Map<String,Project> projects = getProjects();
+        Project removedProject = projects.remove(projectName);
+        if(null == removedProject){
+            return false;
+        }
+
+        File projectDir = new File(APP_ROOT_DATA+File.separator+projectName);
+        if(!projectDir.exists()){
+            return false;
+        }else{
+            return Utility.deleteDir(projectDir);
+        }
+
     }
 }
