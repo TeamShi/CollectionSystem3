@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 public class RigIndexActivity extends AppCompatActivity {
     private static final String TAG = "Collectionsystem3";
+
     private static final int ACTION_ADD_RIG = 0;
     private static final int ACTION_EDIT_RIG = 1;
     private static final int ACTION_COPY_RIG = 2;
@@ -40,6 +41,7 @@ public class RigIndexActivity extends AppCompatActivity {
     private static final int CONTEXT_MENU_DELETE = 2;
 
     private Hole hole;
+    private String holeId;
 
     private TableLayout rigListTableLayout;
 
@@ -48,8 +50,6 @@ public class RigIndexActivity extends AppCompatActivity {
     private String[] holeListSpinnerOptions;
 
     private Button addRigButton;
-
-    private String selectedHoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +86,13 @@ public class RigIndexActivity extends AppCompatActivity {
                             case 0:
                                 intent = new Intent(RigIndexActivity.this, NARigInfoActivity.class);
                                 intent.putExtra("requestCode", "ACTION_ADD_RIG");
-                                intent.putExtra("holeId", selectedHoleId);
+                                intent.putExtra("holeId", holeId);
                                 startActivityForResult(intent, ACTION_ADD_RIG);
                                 break;
                             case 1:
                                 intent = new Intent(RigIndexActivity.this, RegularRigActivity.class);
                                 intent.putExtra("requestCode", "ACTION_ADD_RIG");
-                                intent.putExtra("holeId", selectedHoleId);
+                                intent.putExtra("holeId", holeId);
                                 startActivityForResult(intent, ACTION_ADD_RIG);
                                 break;
                         }
@@ -109,8 +109,8 @@ public class RigIndexActivity extends AppCompatActivity {
         holeListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedHoleId = holeListSpinnerOptions[position];
-                hole = DataManager.getHole(selectedHoleId);
+                holeId = holeListSpinnerOptions[position];
+                hole = DataManager.getHole(holeId);
                 refreshInfo();
             }
 
@@ -120,16 +120,16 @@ public class RigIndexActivity extends AppCompatActivity {
             }
         });
 
-        selectedHoleId = getIntent().getStringExtra("holeId");
+        holeId = getIntent().getStringExtra("holeId");
 
         for (int i = 0; i < holeListSpinnerOptions.length; i++) {
-            if (holeListSpinnerOptions[i].equals(selectedHoleId)) {
+            if (holeListSpinnerOptions[i].equals(holeId)) {
                 holeListSpinner.setSelection(i);
                 break;
             }
         }
 
-        hole = DataManager.getHole(selectedHoleId);
+        hole = DataManager.getHole(holeId);
 
         refreshInfo();
     }
@@ -148,22 +148,22 @@ public class RigIndexActivity extends AppCompatActivity {
         Intent intent = null;
 
         int selectedRigIndex = Integer.valueOf(getIntent().getStringExtra("selectedRigIndex"));
-        Rig rig = DataManager.queryRig(selectedHoleId, selectedRigIndex);
+        Rig rig = DataManager.queryRig(holeId, selectedRigIndex);
 
         switch (item.getItemId()) {
             case CONTEXT_MENU_QUERY:
-                Log.d(TAG, "EditRig of holeId: " + selectedHoleId + ", rig index: " + selectedRigIndex);
+                Log.d(TAG, "EditRig of holeId: " + holeId + ", rig index: " + selectedRigIndex);
 
                 if (rig instanceof NARig) {
                     intent = new Intent(RigIndexActivity.this, NARigInfoActivity.class);
                     intent.putExtra("requestCode", "ACTION_EDIT_RIG");
-                    intent.putExtra("holeId", selectedHoleId);
+                    intent.putExtra("holeId", holeId);
                     intent.putExtra("rigIndex", selectedRigIndex);
                     startActivityForResult(intent, ACTION_EDIT_RIG);
                 } else if (rig instanceof RegularRig) {
                     intent = new Intent(RigIndexActivity.this, RegularRigActivity.class);
                     intent.putExtra("requestCode", "ACTION_EDIT_RIG");
-                    intent.putExtra("holeId", selectedHoleId);
+                    intent.putExtra("holeId", holeId);
                     intent.putExtra("rigIndex", selectedRigIndex);
                     startActivityForResult(intent, ACTION_EDIT_RIG);
                 }
@@ -178,11 +178,11 @@ public class RigIndexActivity extends AppCompatActivity {
 //                startActivityForResult(intent, ACTION_COPY_HOLE);
                 break;
             case CONTEXT_MENU_DELETE:
-                Log.d(TAG, "DeleteRig of holeId: " + selectedHoleId + ", rig index: " + selectedRigIndex);
-                if (selectedRigIndex != DataManager.getHole(selectedHoleId).getRigList().size() - 1) {
+                Log.d(TAG, "DeleteRig of holeId: " + holeId + ", rig index: " + selectedRigIndex);
+                if (selectedRigIndex != DataManager.getHole(holeId).getRigList().size() - 1) {
                     Toast.makeText(RigIndexActivity.this, "只能删除最后一次的作业信息.", Toast.LENGTH_LONG).show();
                 } else {
-                    DataManager.removeRig(selectedHoleId);
+                    DataManager.removeRig(holeId);
                     Toast.makeText(RigIndexActivity.this, "删除成功.", Toast.LENGTH_LONG).show();
 
                     refreshInfo();

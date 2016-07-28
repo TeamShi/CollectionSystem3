@@ -106,4 +106,13 @@ public class DataManager {
             }
         }
     }
+
+    public static void setLastClassPeopleCount(String holeId, String classPeopleCount) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                hole.setLastClassPeopleCount(classPeopleCount);
+                break;
+            }
+        }
+    }
 }

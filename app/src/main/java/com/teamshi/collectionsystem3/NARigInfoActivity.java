@@ -23,6 +23,8 @@ import java.util.GregorianCalendar;
 public class NARigInfoActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
+    private String holeId;
+
     private NARig rigViewModel;
     private Button confirmAddRigButton;
     private Button cancelAddRigButton;
@@ -199,9 +201,11 @@ public class NARigInfoActivity extends AppCompatActivity {
 
         String requestCode = getIntent().getStringExtra("requestCode");
 
+        holeId = getIntent().getStringExtra("holeId");
+
         switch (requestCode) {
             case "ACTION_ADD_RIG":
-                rigViewModel = new NARig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
+                rigViewModel = new NARig(DataManager.getHole(holeId).getLastClassPeopleCount(), Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
 
                 refreshInfo();
                 break;

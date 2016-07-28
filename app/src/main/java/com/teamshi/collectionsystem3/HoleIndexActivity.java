@@ -202,7 +202,7 @@ public class HoleIndexActivity extends AppCompatActivity {
             row.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    setIntent(getIntent().putExtra("selectedHoleId", v.getTag().toString()));
+                    setIntent(getIntent().putExtra("holeId", v.getTag().toString()));
 
                     return false;
                 }

@@ -62,6 +62,8 @@ public class Hole {
 
     private ArrayList<Rig> rigList;
 
+    private String lastClassPeopleCount;
+
     public Hole() {
 
     }
@@ -119,6 +121,8 @@ public class Hole {
         this.machineMonitor = "";
 
         this.rigList = new ArrayList<>();
+
+        this.lastClassPeopleCount = "";
     }
 
     public String getProjectName() {
@@ -434,6 +438,14 @@ public class Hole {
 
     public void setRigList(ArrayList<Rig> rigList) {
         this.rigList = rigList;
+    }
+
+    public String getLastClassPeopleCount() {
+        return lastClassPeopleCount;
+    }
+
+    public void setLastClassPeopleCount(String lastClassPeopleCount) {
+        this.lastClassPeopleCount = lastClassPeopleCount;
     }
 
     public Hole deepCopy() {
