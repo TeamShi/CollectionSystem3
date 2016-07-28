@@ -22,7 +22,7 @@ public class IOManager {
     private static final String TAG = "CollectionSystem3";
     public static String APP_NAME = "ZuanTan";
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
-    public static String APP_ROOT_DATA = APP_ROOT +"Data/";
+    public static String APP_ROOT_DATA = APP_ROOT+File.separator +"Data/";
 
 
     public static void initFileSystem(){
