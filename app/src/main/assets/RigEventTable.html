@@ -14,10 +14,7 @@
         border:none;
         }
         .my-label{
-        margin-left:2.5em;
-        }
-        label {
-        //margin-left:0.1em
+         margin-left:0.5em;
         }
     </style>
 </head>
@@ -25,21 +22,21 @@
 <table border="1" cellspacing="0" style="border-collapse:collapse">
 
     <caption>
-        <p>中 铁 第 四 勘 察 设 计 院 集 团 有 限 公 司 钻 探 原 始 记 录 表</p>
+        <p style="font-size:large">铁 道 第 四 勘 察 设 计 院 </p>
+        <h1> 钻 探 原 始 记 录 表</h1>
 
-        <p style="text-align: start;">
+        <p style="text-align: start;position:absolute;left:10pxl;top:0">
             <label>工程名称：</label> <label id='projectName'>×××× </label>
         </p>
 
         <p style="text-align: start;">
-            <label>××××线<label id='position'>××</label>段</label>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;线<label id='position'>&nbsp;</label>段</label>
             <label class="my-label">里程：</label><label id='mileage'>Ckxx+xxx</label>
-            <label class='my-label'>左：</label><label id='leftPara'>××</label>米
-            <label  class="my-label">右：</label><label id='rightPara'>××</label>米
+            <label  class="my-label">右：</label><label id='offsetRight'>××</label>米
             <label  class="my-label">标高：</label><label id='holeElevation'>x</label>米
             <label  class="my-label">钻孔编号：</label><label id='holeId'>Jz-Ⅱ××-×</label>
-            <label  class="my-label"> 勘察单位：</label><label id='explorationUnit'>铁四院工勘院</label>
-            <label class="my-label">机组编号：</label><label  id='machineNumber'>4101</label>
+            <label  class="my-label"> 勘察单位：</label><label id='company'>铁四院工勘院</label>
+            <label class="my-label">包机组：</label><label  id='machineNumber'>4101</label>
             <label  class="my-label">钻机类型：</label><label id='rigType'>XY-100</label>
             <label  class="my-label">施钻时间：</label><label id='startDate'>200×年×年×日</label>
         </p>
@@ -50,8 +47,6 @@
         <th colspan="4">时间</th>
         <th rowspan="3">作业项目</th>
         <th colspan="8">钻具组成</th>
-
-
         <th colspan="4">进尺</th>
         <th colspan="5">护壁措施</th>
         <th rowspan="3">钻探过程孔内情况</th>

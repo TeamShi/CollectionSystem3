@@ -35,9 +35,11 @@ public class HtmlParser {
     public static String PROJECTNAME_LIST = "projectList";
     public static String POSITION_ID = "position";
     public static String MILEAGE_ID = "mileage";
+
     public static String HOLEELEVATION_ID = "holeElevation";
+    public static String HOLE_OFFSET = "offsetRight";
     public static String HOLE_ID = "holeId";
-    public static String EXPLORATIONUNIT_ID = "explorationUnit";
+    public static String EXPLORATIONUNIT_ID = "company";
     public static String MACHINENUMBER_ID = "machineNumber";
     public static String RIGTYPE_ID = "rigType";
     public static String STARTDATE_ID = "startDate";
@@ -85,6 +87,7 @@ public class HtmlParser {
     }
 
     public static String parse(String dirPath, Project project, AssetManager assetManager) {
+        //TODO  Johnson update convertion methods
 //        String[][] sptRigEventArray = convertSpt(hole);
 //        String[][] dstRigEventArray = convertDst(hole);
         List<Hole> holes = project.getHoleList();
@@ -118,15 +121,14 @@ public class HtmlParser {
         }
 
         for (Hole hole : holes) {
-//            try {
-////              parseHole(dirPath + "/hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+            try {
+              parseHole(dirPath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
 ////            write(dirPath + "/sptRig_" + hole.getHoleId() + ".html", sptRigEventArray, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
 ////            write(dirPath + "/dstRig_" + hole.getHoleId() + ".html", dstRigEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return null;
-////            }
-//            }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
 
@@ -316,9 +318,9 @@ public class HtmlParser {
             sb.append(rig.getDate()).append("#");
             sb.append(rig.getStartTime()).append("#");
             sb.append(rig.getEndTime()).append("#");
-//            sb.append(rig.getTimeInterval()).append("#");
+            sb.append(Utility.computeTimeInterval(rig.getStartTime(),rig.getEndTime())).append("#");
 //
-//            sb.append(hole.getProjectName()).append("#");
+            sb.append(hole.getProjectName()).append("#");
 //
 //            sb.append(rig.getDrillPipeId()).append("#");
 //            sb.append(rig.getDrillPipeLength()).append("#");
@@ -474,35 +476,38 @@ public class HtmlParser {
         String projectStage = hole.getHoleIdPart2();
         positionId.text(projectStage);
 
-//        Element mileageId = doc.getElementById(MILEAGE_ID);
-//        mileageId.text(Utility.formatNumber(hole.getMileage()));
-//
-//        Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
-//        holeElevation.text(String.valueOf(hole.getHoleElevation()));
+        Element mileageId = doc.getElementById(MILEAGE_ID);
+        mileageId.text(Utility.formatNumber(hole.getMileage()));
+
+        Element offset = doc.getElementById(HOLE_OFFSET);
+        offset.text(String.valueOf(hole.getOffset()));
+
+        Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
+        holeElevation.text(String.valueOf(hole.getHoleHeight()));
 
         Element holeId = doc.getElementById(HOLE_ID);
         holeId.text(hole.getHoleId());
 
-//        Element explorationUnit = doc.getElementById(EXPLORATIONUNIT_ID);
-//        explorationUnit.text(hole.getExplorationUnit() == null ? "铁四院工勘院" : hole.getExplorationUnit());
-//
-//        Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
-//        machineNumber.text(hole.getMachineNumber() == null ? "4101" : hole.getMachineNumber());
-//
-//        Element rigType = doc.getElementById(RIGTYPE_ID);
-//        rigType.text(hole == null ? "XY-100" : hole.getRigType());
-//
-//        Element startDate = doc.getElementById(STARTDATE_ID);
-//        startDate.text(Utility.formatCalendarDateString(hole.getStartDate()));
-//
-//        Element recorderName = doc.getElementById(RECORDER_ID);
-//        recorderName.text(hole.getRecorderName() == null ? "xxx" : hole.getRecorderName());
-//
-//        Element squName = doc.getElementById(SQUAD_ID);
-//        squName.text(hole.getSquadName() == null ? "xxx" : hole.getSquadName());
+        Element explorationUnit = doc.getElementById(EXPLORATIONUNIT_ID);
+        explorationUnit.text(hole.getCompany() == null ? "铁四院工勘院" : hole.getCompany());
 
-//        Element captainName = doc.getElementById(CAPTAIN_ID);
-//        captainName.text(hole.getCaptainName() == null ? "xxx" : hole.getCaptainName());
+        Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
+        machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
+
+        Element rigType = doc.getElementById(RIGTYPE_ID);
+        rigType.text(hole == null ? "XY-100" : hole.getRigMachineType());
+
+        Element startDate = doc.getElementById(STARTDATE_ID);
+        startDate.text(Utility.formatCalendarDateString(hole.getStartDate()));
+
+        Element recorderName = doc.getElementById(RECORDER_ID);
+        recorderName.text(hole.getRecorder() == null ? "xxx" : hole.getRecorder());
+
+        Element squName = doc.getElementById(SQUAD_ID);
+        squName.text(hole.getClassMonitor() == null ? "xxx" : hole.getClassMonitor());
+
+        Element captainName = doc.getElementById(CAPTAIN_ID);
+        captainName.text(hole.getMachineMonitor() == null ? "xxx" : hole.getMachineMonitor());
         FileWriter fileWriter = new FileWriter(outPath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(doc.outerHtml());
