@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -227,4 +228,33 @@ public class Utility {
         return dir.delete();
     }
 
+    /**
+     * create file if not exists
+     * @param path
+     * @return
+     */
+    public static File createFile(String path) throws IOException {
+
+        File file = new File(path);
+        if(!file.exists()){
+            File parent = file.getParentFile();
+            if(!file.isDirectory()) {
+                parent.mkdirs();
+                file.createNewFile();
+            }else{
+                file.mkdirs();
+            }
+        }
+
+        return file;
+    }
+
+    public static boolean verifySuffix(String file,String targetSuffix) {
+        String fileType = file.substring(file.lastIndexOf(".") + 1, file.length());
+        if (!fileType.equals(targetSuffix)) {
+            System.out.println("您的文档格式不正确(非"+targetSuffix+")！");
+            return false;
+        }
+        return true;
+    }
 }

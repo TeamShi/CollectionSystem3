@@ -1,9 +1,15 @@
 package com.teamshi.collectionsystem3;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.parser.HtmlParser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +18,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,9 +31,12 @@ public class IOManager {
     public static String APP_NAME = "ZuanTan";
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
     public static String APP_ROOT_DATA = APP_ROOT+File.separator +"Data/";
+    private static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
+    private static Context appContext = null;
 
 
-    public static void initFileSystem(){
+
+    public static void initFileSystem(Context applicationContext){
     /*
       app file system overview
 
@@ -45,6 +56,8 @@ public class IOManager {
         if(!dateDir.exists()){
             dateDir.mkdirs();
         }
+
+        appContext = applicationContext;
     }
 
     public static Object parseFileToObject(File file) {
@@ -84,7 +97,7 @@ public class IOManager {
 
 
     public static File parseObjectToFile(Object object, String fileName) {
-        if(null == fileName || fileName.equals("")){
+        if(null == fileName || fileName.trim().equals("")){
             Log.e(TAG, "Invalid File Path.");
             return null;
         }
@@ -176,5 +189,26 @@ public class IOManager {
             return Utility.deleteDir(projectDir);
         }
 
+    }
+
+    public static List<String> previewProject() {
+        Project project = DataManager.getProject();
+        if(project == null || project.getHoleList() == null || project.getHoleList().size() == 0) {
+            return null;
+        }
+
+        List<String> urls = new ArrayList<>();
+        AssetManager assetManager = appContext.getAssets();
+
+        String path = HtmlParser.parse(APP_TEMP,project,assetManager);
+        if(null == path) {
+            Log.d(TAG, "IOManager.previewProject: path isnull");
+            return null;
+        }else{
+            Uri uri = Uri.fromFile(new File(path));
+            urls.add(uri.toString());
+        }
+
+        return urls;
     }
 }
