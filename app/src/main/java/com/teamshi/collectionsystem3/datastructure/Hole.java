@@ -28,7 +28,7 @@ public class Hole implements Serializable {
     private String article;                         // 冠词, 默认值为DK. 取值范围为(K, DK, AK, ACK, CDK或其他)
 
     private double mileage;                         // 里程数
-    private double offset;                          // 偏移量
+    private double offset;                          // `偏移量
     private double holeHeight;                      // 孔口标高
     private double holeDepth;                       // 设计孔深
 
@@ -111,7 +111,7 @@ public class Hole implements Serializable {
         this.latitude = 0;
         this.longitude = 0;
 
-        this.company = "铁四院工勘院地址_队";
+        this.company = "铁四院工勘院地质_队";
         this.machineId = "4000";
 
         this.actualDepth = 0;

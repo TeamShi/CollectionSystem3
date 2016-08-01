@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
 
+import java.util.List;
+
 public class HoleIndexActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
@@ -83,7 +85,17 @@ public class HoleIndexActivity extends AppCompatActivity {
         this.previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Johnson. preview Datamanager.getProject(). No need to save to storage.
+                Project project = DataManager.getProject();
+                List holes = project.getHoleList();
+                if(null == holes || holes.size() == 0 ){
+                    Toast.makeText(HoleIndexActivity.this, "请先添加新孔.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Intent intent = new Intent(HoleIndexActivity.this, PreviewActivity.class);
+                intent.putExtra("projectName", project.getProjectName());
+                startActivity(intent);
+
             }
         });
 

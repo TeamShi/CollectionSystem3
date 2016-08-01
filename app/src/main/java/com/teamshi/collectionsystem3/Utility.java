@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -227,4 +228,70 @@ public class Utility {
         return dir.delete();
     }
 
+    /**
+     * create file if not exists
+     * @param path
+     * @return
+     */
+    public static File createFile(String path) throws IOException {
+
+        File file = new File(path);
+        if(!file.exists()){
+            File parent = file.getParentFile();
+            if(!file.isDirectory()) {
+                parent.mkdirs();
+                file.createNewFile();
+            }else{
+                file.mkdirs();
+            }
+        }
+
+        return file;
+    }
+
+    public static boolean verifySuffix(String file,String targetSuffix) {
+        String fileType = file.substring(file.lastIndexOf(".") + 1, file.length());
+        if (!fileType.equals(targetSuffix)) {
+            System.out.println("您的文档格式不正确(非"+targetSuffix+")！");
+            return false;
+        }
+        return true;
+    }
+
+    public static String computeTimeInterval(Calendar c1,Calendar c2) {
+
+        if(c1.getTimeInMillis() > c2.getTimeInMillis()) {
+            Calendar temp = c1;
+            c1 = c2;
+            c2 = temp;
+        }
+
+        int hour1 = c1.get(Calendar.HOUR_OF_DAY);
+        int hour2 = c2.get(Calendar.HOUR_OF_DAY);
+        int minute1 = c1.get(Calendar.MINUTE);
+        int minute2 = c2.get(Calendar.MINUTE);
+
+        int answerHour = 0;
+        int answerMinute = 0;
+
+        if (minute2 < minute1) {
+            answerMinute = minute2 + 60 - minute1;
+            answerHour = hour2 - hour1 - 1;
+        } else {
+            answerHour = hour2 - hour1;
+            answerMinute = minute2 - minute1;
+        }
+
+        if (answerMinute < 10) {
+            return answerHour + ":0" + answerMinute;
+        } else {
+            return answerHour + ":" + answerMinute;
+        }
+    }
+
+    public static String formatNumber(double number) {
+        int thousands = (int) (number / 1000);
+        String output = thousands > 0 ? thousands+"+"+ (number - 1000 * thousands) : String.valueOf(number);
+        return output ;
+    }
 }
