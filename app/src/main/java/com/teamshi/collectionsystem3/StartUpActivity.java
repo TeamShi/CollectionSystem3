@@ -114,7 +114,7 @@ public class StartUpActivity extends AppCompatActivity {
                                 DataManager.loadProject(project);
                                 Intent intent = new Intent(StartUpActivity.this, HoleIndexActivity.class);
                                 startActivity(intent);
-                            }else{
+                            } else {
                                 Toast.makeText(getApplicationContext(), "新建失败.", Toast.LENGTH_LONG).show();
                             }
 

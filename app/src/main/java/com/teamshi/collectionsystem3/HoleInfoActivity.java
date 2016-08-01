@@ -781,6 +781,9 @@ public class HoleInfoActivity extends AppCompatActivity {
                     case "ACTION_COPY_HOLE":
                         if (validateAdding()) {
                             DataManager.getProject().getHoleList().add(holeViewModel);
+
+                            IOManager.updateProject(DataManager.getProject());
+
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
                         }
@@ -790,6 +793,8 @@ public class HoleInfoActivity extends AppCompatActivity {
                             Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
 
                             DataManager.updateHole(oldHole.getHoleId(), holeViewModel);
+
+                            IOManager.updateProject(DataManager.getProject());
 
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();

@@ -65,6 +65,13 @@ public class Hole implements Serializable {
 
     private String lastClassPeopleCount;
 
+    private ArrayList<Double> pipeArray;
+
+    private Calendar lastRigEndTime;
+
+    private double lastAccumulatedMeterageLength;
+    private double lastRockCorePipeLength;
+
     public Hole() {
 
     }
@@ -124,6 +131,13 @@ public class Hole implements Serializable {
         this.rigList = new ArrayList<>();
 
         this.lastClassPeopleCount = "";
+
+        this.pipeArray = new ArrayList<>();
+
+        this.lastRigEndTime = Calendar.getInstance();
+
+        this.lastAccumulatedMeterageLength = 0;
+        this.lastRockCorePipeLength = 0;
     }
 
     public String getProjectName() {
@@ -449,6 +463,60 @@ public class Hole implements Serializable {
         this.lastClassPeopleCount = lastClassPeopleCount;
     }
 
+    public int getPipeCount() {
+        return pipeArray.size();
+    }
+
+    public double getPipeLength() {
+        return pipeArray.get(pipeArray.size() - 1);
+    }
+
+    public double getTotalPipeLength() {
+        double sum = 0;
+
+        for (Double length : pipeArray) {
+            sum += length;
+        }
+
+        return sum;
+    }
+
+    public ArrayList<Double> getPipeArray() {
+        return pipeArray;
+    }
+
+    public void setPipeArray(ArrayList<Double> pipeArray) {
+        this.pipeArray = pipeArray;
+    }
+
+    public Calendar getLastRigEndTime() {
+        return lastRigEndTime;
+    }
+
+    public void setLastRigEndTime(Calendar lastRigEndTime) {
+        this.lastRigEndTime = lastRigEndTime;
+    }
+
+    public double getLastAccumulatedMeterageLength() {
+        return lastAccumulatedMeterageLength;
+    }
+
+    public void setLastAccumulatedMeterageLength(double lastAccumulatedMeterageLength) {
+        this.lastAccumulatedMeterageLength = lastAccumulatedMeterageLength;
+    }
+
+    public void addPipe(double length) {
+        pipeArray.add(length);
+    }
+
+    public double getLastRockCorePipeLength() {
+        return lastRockCorePipeLength;
+    }
+
+    public void setLastRockCorePipeLength(double lastRockCorePipeLength) {
+        this.lastRockCorePipeLength = lastRockCorePipeLength;
+    }
+
     public Hole deepCopy() {
         Hole newHole = new Hole(getProjectName());
 
@@ -502,6 +570,20 @@ public class Hole implements Serializable {
             rigList.add(rig.deepCopy());
         }
 
+        newHole.setPipeArray(new ArrayList<Double>());
+
+        for (double pipeLength : getPipeArray()) {
+            newHole.getPipeArray().add(pipeLength);
+        }
+
+        newHole.setLastRigEndTime(getLastRigEndTime());
+
+        newHole.setLastAccumulatedMeterageLength(getLastAccumulatedMeterageLength());
+
+        newHole.setLastRockCorePipeLength(getLastRockCorePipeLength());
+
         return newHole;
     }
+
+
 }

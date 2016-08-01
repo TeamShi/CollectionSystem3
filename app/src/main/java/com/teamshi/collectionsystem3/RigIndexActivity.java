@@ -246,7 +246,25 @@ public class RigIndexActivity extends AppCompatActivity {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int selectedRigIndex = Integer.valueOf(getIntent().getStringExtra("selectedRigIndex"));
+                    Rig rig = DataManager.queryRig(holeId, selectedRigIndex);
+                    Intent intent = null;
 
+                    Log.d(TAG, "EditRig of holeId: " + holeId + ", rig index: " + selectedRigIndex);
+
+                    if (rig instanceof NARig) {
+                        intent = new Intent(RigIndexActivity.this, NARigInfoActivity.class);
+                        intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                        intent.putExtra("holeId", holeId);
+                        intent.putExtra("rigIndex", selectedRigIndex);
+                        startActivityForResult(intent, ACTION_EDIT_RIG);
+                    } else if (rig instanceof RegularRig) {
+                        intent = new Intent(RigIndexActivity.this, RegularRigActivity.class);
+                        intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                        intent.putExtra("holeId", holeId);
+                        intent.putExtra("rigIndex", selectedRigIndex);
+                        startActivityForResult(intent, ACTION_EDIT_RIG);
+                    }
                 }
             });
 
@@ -358,33 +376,33 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(rig.getRigType()));
 
+        result.add(generateRigInfoCell(String.valueOf(rig.getPipeNumber())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getPipeLength())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getPipeTotalLength())));
+
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCorePipeDiameter())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCorePipeLength())));
+
+        result.add(generateRigInfoCell(rig.getDrillBitType()));
+        result.add(generateRigInfoCell(String.valueOf(rig.getDrillBitDiameter())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getDrillBitLength())));
+
+        result.add(generateRigInfoCell(String.valueOf(rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getAccumulatedMeterageLength())));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreLength())));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getRockCorePickPercentage() * 100) + "%"));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

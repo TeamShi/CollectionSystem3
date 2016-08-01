@@ -172,6 +172,9 @@ public class NARigInfoActivity extends AppCompatActivity {
                             String holeId = getIntent().getStringExtra("holeId");
 
                             DataManager.addRig(holeId, rigViewModel);
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+
+                            IOManager.updateProject(DataManager.getProject());
 
                             NARigInfoActivity.this.setResult(RESULT_OK);
                             NARigInfoActivity.this.finish();
@@ -183,6 +186,9 @@ public class NARigInfoActivity extends AppCompatActivity {
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+
+                            IOManager.updateProject(DataManager.getProject());
 
                             NARigInfoActivity.this.setResult(RESULT_OK);
                             NARigInfoActivity.this.finish();
@@ -206,10 +212,10 @@ public class NARigInfoActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
-                Calendar start_time = Calendar.getInstance();
-                Calendar end_time = Calendar.getInstance();
-                end_time.add(Calendar.MINUTE, 1);
-                rigViewModel = new NARig(DataManager.getHole(holeId).getLastClassPeopleCount(), start_time, start_time, end_time);
+                Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
+                Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
+                endTime.add(Calendar.MINUTE, 1);
+                rigViewModel = new NARig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, endTime, endTime);
 
                 refreshInfo();
                 break;
