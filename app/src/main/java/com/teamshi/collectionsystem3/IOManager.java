@@ -141,8 +141,8 @@ public class IOManager {
         if(null != projects) {
             return projects;
         }
-        projects = new HashMap<String, Project>();
-        // Scan app dir to list all exists valid projects
+        projects = new HashMap<>();
+        // Scan app dir to listß all exists valid projects
         File [] projectDirs = new File(APP_ROOT_DATA).listFiles();
         if(projectDirs != null && projectDirs.length  > 0){
             for(File dir: projectDirs){
@@ -150,6 +150,10 @@ public class IOManager {
                 String projectName = dir.getName();
                 File serFile = new File(dir,projectName+".ser");
                 Project project = (Project) parseFileToObject(serFile);
+                // remove invalid files with invalid ser file
+                if(null == project) {
+                    Utility.deleteDir(dir);
+                }
                 projects.put(projectName,project);
             }
         }

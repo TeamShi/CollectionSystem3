@@ -150,14 +150,34 @@ public class StartUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                boolean isDeleted = IOManager.deleteProject(selectedProjectName);
-                if(isDeleted){
-                    Toast.makeText(getApplicationContext(), "删除成功", Toast.LENGTH_LONG).show();
-                    arrayAdapter.remove(selectedProjectName);
-                }else{
-                    Toast.makeText(getApplicationContext(), "删除失败", Toast.LENGTH_LONG).show();
-                }
+                Log.d(TAG, "deleteProjectedButton clicked.");
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(StartUpActivity.this);
+                builder.setTitle("删除");
+
+                builder.setMessage("确认删除工程\'"+selectedProjectName+"\'吗?");
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "Cancel button is clicked.");
+                        dialog.cancel();
+                    }
+                });
+
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean isDeleted = IOManager.deleteProject(selectedProjectName);
+                        if(isDeleted){
+                            Toast.makeText(getApplicationContext(), "删除成功", Toast.LENGTH_LONG).show();
+                            arrayAdapter.remove(selectedProjectName);
+                        }else{
+                            Toast.makeText(getApplicationContext(), "删除失败", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                builder.show();
             }
         });
 
@@ -182,7 +202,7 @@ public class StartUpActivity extends AppCompatActivity {
 
         Set<String> names = IOManager.getProjects().keySet();
         final ArrayList<String>  projectNames = new ArrayList<>(Arrays.asList(names.toArray(new String[names.size()])));
-        if (null == projectNames || projectNames.size() == 0) {
+        if (projectNames.size() == 0) {
             Toast.makeText(getApplicationContext(), "应用目录工程项目为空 请新建工程", Toast.LENGTH_LONG).show();
         }
 
@@ -202,7 +222,7 @@ public class StartUpActivity extends AppCompatActivity {
                 return false;
             }
         });
-        projectListView.setSelection(-1);
+//        projectListView.setSelection(-1);
 
 
         storagePathTextView.setFocusable(false);
@@ -212,5 +232,16 @@ public class StartUpActivity extends AppCompatActivity {
         storagePathTextView.setText("文件保存路径: "+IOManager.APP_ROOT);
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // reset selected items
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) projectListView.getAdapter();
+        int selectedProjectPosition = adapter.getPosition(selectedProjectName);
+        projectListView.setSelection(selectedProjectPosition);
+        projectListView.invalidateViews();
     }
 }
