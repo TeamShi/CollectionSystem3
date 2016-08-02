@@ -307,7 +307,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberDecimal|numberSigned"
                         android:nextFocusDown="@+id/edittext_pump_type"
                         android:singleLine="true"
                         />

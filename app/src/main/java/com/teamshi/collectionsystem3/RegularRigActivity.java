@@ -27,7 +27,7 @@ public class RegularRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
     private static final String [] rigTypeSpinnerOptions = {"干钻", "合水钻", "金刚石钻", "钢粒钻"};
-    private static final String [] rockCorePipeSpinnerOptions = {"73", "89", "108", "127", "146"};
+    private static final String [] rockCorePipeDiameterSpinnerOptions = {"73", "89", "108", "127", "146"};
     private static final String [] drillBitTypeSpinnerOptions = {"合金", "金刚石", "钢粒"};
 
     private boolean refreshLock = false;
@@ -85,6 +85,25 @@ public class RegularRigActivity extends AppCompatActivity {
     private EditText rockCoreLengthEditText;
     private TextView rockCorePickPercentageTextView;
 
+    private TextView startEndDepthTextView;
+    private Spinner rockTypeSpinner;
+    private ArrayAdapter<String> rockTypeSpinnerAdapter;
+    private Spinner rockColorSpinner;
+    private ArrayAdapter<String> rockColorSpinnerAdapter;
+
+    private Spinner rockDensitySpinner;
+    private ArrayAdapter<String> rockDensitySpinnerAdapter;
+    private Spinner rockSatuationSpinner;
+    private ArrayAdapter<String> rockSatuationSpinnerAdapter;
+    private Spinner rockWeatheringSpinner;
+    private ArrayAdapter<String> rockWeatheringSpinnerAdapter;
+
+    private Button generateRockDescriptionButton;
+    private Button loadRockDescriptionTemplateButton;
+    private EditText rockDescriptionEditText;
+    private EditText holeNoteEditText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Start RegularRigActivity.");
@@ -111,7 +130,7 @@ public class RegularRigActivity extends AppCompatActivity {
 
         rockCorePipeDiameterSpinner = (Spinner) findViewById(R.id.spinner_regular_rig_rock_core_pipe_diameter);
 
-        rockCorePipeDiameterAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, rockCorePipeSpinnerOptions);
+        rockCorePipeDiameterAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, rockCorePipeDiameterSpinnerOptions);
         rockCorePipeDiameterSpinner.setAdapter(rockCorePipeDiameterAdapter);
 
         rockCorePipeLengthEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_core_pipe_length);
@@ -392,17 +411,7 @@ public class RegularRigActivity extends AppCompatActivity {
         drillBitTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        rigViewModel.setDrillBitType("合金");
-                        break;
-                    case 1:
-                        rigViewModel.setDrillBitType("金刚石");
-                        break;
-                    case 2:
-                        rigViewModel.setDrillBitType("钢粒");
-                        break;
-                }
+                rigViewModel.setDrillBitType(drillBitTypeSpinnerOptions[position]);
             }
 
             @Override
@@ -471,20 +480,7 @@ public class RegularRigActivity extends AppCompatActivity {
         rigTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        rigViewModel.setRigType("干钻");
-                        break;
-                    case 1:
-                        rigViewModel.setRigType("合水钻");
-                        break;
-                    case 2:
-                        rigViewModel.setRigType("金刚石钻");
-                        break;
-                    case 3:
-                        rigViewModel.setRigType("钢粒钻");
-                        break;
-                }
+                rigViewModel.setRigType(rigTypeSpinnerOptions[position]);
 
                 rigViewModel.setDrillBitType(DRILL_BIT_TYPE_TEMPLATE[position]);
                 rigViewModel.setDrillBitLength(DRILL_BIT_LENGTH_TEMPLATE[position]);
@@ -636,19 +632,11 @@ public class RegularRigActivity extends AppCompatActivity {
         endTimeButton.setText(Utility.formatTimeString(rigViewModel.getEndTime()));
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
 
-        switch (rigViewModel.getRigType()) {
-            case "干钻":
-                rigTypeSpinner.setSelection(0);
+        for (int i = 0; i < rigTypeSpinnerOptions.length; i++) {
+            if (rigTypeSpinnerOptions[i].equals(rigViewModel.getRigType())) {
+                rigTypeSpinner.setSelection(i);
                 break;
-            case "合水钻":
-                rigTypeSpinner.setSelection(1);
-                break;
-            case "金刚石钻":
-                rigTypeSpinner.setSelection(2);
-                break;
-            case "钢粒钻":
-                rigTypeSpinner.setSelection(3);
-                break;
+            }
         }
 
         if (getCurrentFocus() != pipeNumberEditText) {
@@ -663,38 +651,22 @@ public class RegularRigActivity extends AppCompatActivity {
             pipeTotalLengthTextView.setText(String.valueOf(rigViewModel.getPipeTotalLength()));
         }
 
-        switch (rigViewModel.getRockCorePipeDiameter()) {
-            case 73:
-                rockCorePipeDiameterSpinner.setSelection(0);
+        for (int i = 0; i < rockCorePipeDiameterSpinnerOptions.length; i++) {
+            if (Double.parseDouble(rockCorePipeDiameterSpinnerOptions[i]) == rigViewModel.getRockCorePipeDiameter()) {
+                rockCorePipeDiameterSpinner.setSelection(i);
                 break;
-            case 89:
-                rockCorePipeDiameterSpinner.setSelection(1);
-                break;
-            case 108:
-                rockCorePipeDiameterSpinner.setSelection(2);
-                break;
-            case 127:
-                rockCorePipeDiameterSpinner.setSelection(3);
-                break;
-            case 146:
-                rockCorePipeDiameterSpinner.setSelection(4);
-                break;
+            }
         }
 
         if (getCurrentFocus() != rockCorePipeLengthEditText) {
             rockCorePipeLengthEditText.setText(String.valueOf(rigViewModel.getRockCorePipeLength()));
         }
 
-        switch (rigViewModel.getDrillBitType()) {
-            case "合金":
-                drillBitTypeSpinner.setSelection(0);
+        for (int i = 0; i < drillBitTypeSpinnerOptions.length; i++) {
+            if (rigViewModel.getDrillBitType().equals(drillBitTypeSpinnerOptions[i])) {
+                drillBitTypeSpinner.setSelection(i);
                 break;
-            case "金刚石":
-                drillBitTypeSpinner.setSelection(1);
-                break;
-            case "钢粒":
-                drillBitTypeSpinner.setSelection(2);
-                break;
+            }
         }
 
         if (getCurrentFocus() != drillBitDiameterEditText) {

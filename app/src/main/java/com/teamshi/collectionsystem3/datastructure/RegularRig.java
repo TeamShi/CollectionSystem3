@@ -27,6 +27,16 @@ public class RegularRig extends Rig {
     private double rockCoreLength;                  // 岩芯长度
     private double rockCorePickPercentage;          // 岩芯采取率
 
+    private String rigStartEndDepth;                // 本钻起止深度
+    private String rockType;                        // 岩土名称
+    private String rockColor;                       // 颜色
+    private String rockDensity;                     // 稠度/密实度
+    private String rockSatuation;                   // 饱和度
+    private String rockWeathering;                  // 风化程度
+    private String rockDescription;                 // 名称及岩性
+
+    private String note;                            // 备注
+
     public RegularRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                       int pipeNumber, double pipeLength, double pipeTotalLength,
                       int rockCorePipeDiameter, double rockCorePipeLength,
