@@ -182,8 +182,11 @@ public class RigIndexActivity extends AppCompatActivity {
                 if (selectedRigIndex != DataManager.getHole(holeId).getRigList().size() - 1) {
                     Toast.makeText(RigIndexActivity.this, "只能删除最后一次的作业信息.", Toast.LENGTH_LONG).show();
                 } else {
-                    DataManager.removeRig(holeId);
+
+                    DataManager.removeLastRig(holeId);
                     Toast.makeText(RigIndexActivity.this, "删除成功.", Toast.LENGTH_LONG).show();
+
+
 
                     refreshInfo();
                 }

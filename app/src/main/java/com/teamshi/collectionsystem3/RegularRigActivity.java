@@ -2,9 +2,12 @@ package com.teamshi.collectionsystem3;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -47,6 +51,14 @@ public class RegularRigActivity extends AppCompatActivity {
     private static final double[] DRILL_BIT_DIAMETER_TEMPLATE = {
             130, 110, 91, 75
     };
+
+    private static final CharSequence[] ROCK_TYPE_OPTIONS = {"黏土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
+            "块石", "卵石", "碎石", "粗圆砾", "粗角砾", "细圆砾", "细角砾", "泥岩", "砂岩", "灰岩", "花岗岩"};
+    private static final CharSequence[] ROCK_COLOR_OPTIONS = {"灰色", "青灰色", "深灰色", "紫色", "棕黄色", "浅黄色", "褐黄色", "红褐色", "棕红色", "棕色", "褐色", "黄褐色",
+            "青色","灰绿色","浅紫色", "暗红色", "黑色", "浅蓝色", "蓝色"};
+    private static final CharSequence[] ROCK_DENSITY_OPTIONS = {"坚硬", "硬塑", "软塑", "流塑", "稍密", "中密", "密实", "松散"};
+    private static final CharSequence[] ROCK_SATURATION_OPTIONS = {"稍湿", "潮湿", "饱和"};
+    private static final CharSequence[] ROCK_WEATHERING_OPTIONS = {"全风化", "强风化", "中风化", "弱风化", "微风化", "未风化"};
 
     private RegularRig rigViewModel;
     private Button confirmAddRigButton;
@@ -86,23 +98,23 @@ public class RegularRigActivity extends AppCompatActivity {
     private TextView rockCorePickPercentageTextView;
 
     private TextView startEndDepthTextView;
-    private Spinner rockTypeSpinner;
-    private ArrayAdapter<String> rockTypeSpinnerAdapter;
-    private Spinner rockColorSpinner;
-    private ArrayAdapter<String> rockColorSpinnerAdapter;
+    private EditText rockTypeEditText;
+    private Button rockTypeButton;
 
-    private Spinner rockDensitySpinner;
-    private ArrayAdapter<String> rockDensitySpinnerAdapter;
-    private Spinner rockSatuationSpinner;
-    private ArrayAdapter<String> rockSatuationSpinnerAdapter;
-    private Spinner rockWeatheringSpinner;
-    private ArrayAdapter<String> rockWeatheringSpinnerAdapter;
+    private EditText rockColorEditText;
+    private Button rockColorButton;
+    private EditText rockDensityEditText;
+    private Button rockDensityButton;
+
+    private EditText rockSaturationEditText;
+    private Button rockSaturationButton;
+    private EditText rockWeatheringEditText;
+    private Button rockWeatheringButton;
 
     private Button generateRockDescriptionButton;
     private Button loadRockDescriptionTemplateButton;
     private EditText rockDescriptionEditText;
-    private EditText holeNoteEditText;
-
+    private EditText rigNoteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +162,26 @@ public class RegularRigActivity extends AppCompatActivity {
         rockCoreIndexEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_core_index);
         rockCoreLengthEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_core_length);
         rockCorePickPercentageTextView = (TextView) findViewById(R.id.textview_regular_rig_rock_core_pick_percentage);
+
+        startEndDepthTextView = (TextView) findViewById(R.id.textview_regular_rig_start_end_depth);
+
+        rockTypeEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_type);
+        rockTypeButton = (Button) findViewById(R.id.button_regular_rig_rock_type);
+
+        rockColorEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_color);
+        rockColorButton = (Button) findViewById(R.id.button_regular_rig_rock_color);
+        rockDensityEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_density);
+        rockDensityButton = (Button) findViewById(R.id.button_regular_rig_rock_density);
+
+        rockSaturationEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_saturation);
+        rockSaturationButton = (Button) findViewById(R.id.button_regular_rig_rock_saturation);
+        rockWeatheringEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_weathering);
+        rockWeatheringButton = (Button) findViewById(R.id.button_regular_rig_rock_weathering);
+
+        generateRockDescriptionButton = (Button) findViewById(R.id.button_generate_rock_description);
+        loadRockDescriptionTemplateButton = (Button) findViewById(R.id.button_load_description_template);
+        rockDescriptionEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_description);
+        rigNoteEditText = (EditText) findViewById(R.id.edittext_regular_rig_note);
 
         classPeopleCountTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -338,6 +370,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                             rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
+                            rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
 
                             refreshInfo();
                         } catch (Exception e) {
@@ -399,6 +432,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
+                        rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -468,6 +502,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
+                        rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -519,6 +554,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
+                        rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -580,6 +616,381 @@ public class RegularRigActivity extends AppCompatActivity {
             }
         });
 
+        rockTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    rockColorEditText.setEnabled(true);
+                    rockColorButton.setEnabled(true);
+                    rigViewModel.setRockColor("灰色");
+                    rockDensityEditText.setEnabled(true);
+                    rockDensityButton.setEnabled(true);
+                    rigViewModel.setRockDensity("坚硬");
+                    rockSaturationEditText.setEnabled(true);
+                    rockSaturationButton.setEnabled(true);
+                    rigViewModel.setRockSaturation("稍湿");
+                    rockWeatheringEditText.setEnabled(true);
+                    rockWeatheringButton.setEnabled(true);
+                    rigViewModel.setRockWeathering("全风化");
+                    rigViewModel.setRockDescription("");
+
+                    rigViewModel.setRockType(s.toString());
+                }
+            }
+        });
+
+        rockTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockTypeDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegularRigActivity.this);
+
+                builder.setTitle("岩土名称");
+
+                builder.setSingleChoiceItems(ROCK_TYPE_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rigViewModel.setRockType(ROCK_TYPE_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[0]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1])) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            rigViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            rigViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(false);
+                            rockSaturationButton.setEnabled(false);
+                            rigViewModel.setRockSaturation("");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            rigViewModel.setRockWeathering("");
+                            rigViewModel.setRockDescription("");
+                        } else if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            rigViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            rigViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(true);
+                            rockSaturationButton.setEnabled(true);
+                            rigViewModel.setRockSaturation("稍湿");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            rigViewModel.setRockWeathering("");
+                            rigViewModel.setRockDescription("");
+                        } else if (rigViewModel.getRockType().endsWith("砂") || rigViewModel.getRockType().endsWith("石") || rigViewModel.getRockType().endsWith("砾")) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            rigViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            rigViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(true);
+                            rockSaturationButton.setEnabled(true);
+                            rigViewModel.setRockSaturation("稍湿");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            rigViewModel.setRockWeathering("");
+                            rigViewModel.setRockDescription("");
+                        } else if (rigViewModel.getRockType().equals("岩")) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            rigViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(false);
+                            rockDensityButton.setEnabled(false);
+                            rigViewModel.setRockDensity("");
+                            rockSaturationEditText.setEnabled(false);
+                            rockSaturationButton.setEnabled(false);
+                            rigViewModel.setRockSaturation("");
+                            rockWeatheringEditText.setEnabled(true);
+                            rockWeatheringButton.setEnabled(true);
+                            rigViewModel.setRockWeathering("全风化");
+                            rigViewModel.setRockDescription("");
+                        }
+
+                        refreshInfo();
+
+                        rockTypeButton.setFocusableInTouchMode(true);
+                        rockTypeButton.requestFocus();
+                    }
+                });
+
+                rockTypeDialog = builder.create();
+                rockTypeDialog.show();
+            }
+        });
+
+        rockColorEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                rigViewModel.setRockColor(s.toString());
+            }
+        });
+
+        rockColorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockColorDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegularRigActivity.this);
+
+                builder.setTitle("颜色");
+
+                builder.setSingleChoiceItems(ROCK_COLOR_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rigViewModel.setRockColor(ROCK_COLOR_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+
+                        rockColorButton.setFocusableInTouchMode(true);
+                        rockColorButton.requestFocus();
+                    }
+                });
+
+                rockColorDialog = builder.create();
+                rockColorDialog.show();
+
+            }
+        });
+
+        rockDensityEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                rigViewModel.setRockDensity(s.toString());
+            }
+        });
+
+        rockDensityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockDensityDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegularRigActivity.this);
+
+                builder.setTitle("稠度/密实度");
+
+                builder.setSingleChoiceItems(ROCK_DENSITY_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rigViewModel.setRockDensity(ROCK_DENSITY_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+
+                        rockDensityButton.setFocusableInTouchMode(true);
+                        rockDensityButton.requestFocus();
+                    }
+                });
+
+                rockDensityDialog = builder.create();
+                rockDensityDialog.show();
+
+            }
+        });
+
+        rockSaturationEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                rigViewModel.setRockSaturation(s.toString());
+            }
+        });
+
+        rockSaturationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockSaturationDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegularRigActivity.this);
+
+                builder.setTitle("饱和度");
+
+                builder.setSingleChoiceItems(ROCK_SATURATION_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rigViewModel.setRockSaturation(ROCK_SATURATION_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+
+                        rockSaturationButton.setFocusableInTouchMode(true);
+                        rockSaturationButton.requestFocus();
+                    }
+                });
+
+                rockSaturationDialog = builder.create();
+                rockSaturationDialog.show();
+
+            }
+        });
+
+        rockWeatheringEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                rigViewModel.setRockWeathering(s.toString());
+            }
+        });
+
+        rockWeatheringButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockWeatheringDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegularRigActivity.this);
+
+                builder.setTitle("岩石风化程度");
+
+                builder.setSingleChoiceItems(ROCK_WEATHERING_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rigViewModel.setRockWeathering(ROCK_WEATHERING_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+
+                        rockWeatheringButton.setFocusableInTouchMode(true);
+                        rockWeatheringButton.requestFocus();
+                    }
+                });
+
+                rockWeatheringDialog = builder.create();
+                rockWeatheringDialog.show();
+
+            }
+        });
+
+        generateRockDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> stringList = new ArrayList<String>();
+                stringList.add(rigViewModel.getRigStartEndDepth());
+                stringList.add(rigViewModel.getRockType());
+
+                if (!rigViewModel.getRockColor().equals("")) {
+                    stringList.add(rigViewModel.getRockColor());
+                }
+
+                if (!rigViewModel.getRockDensity().equals("")) {
+                    stringList.add(rigViewModel.getRockDensity());
+                }
+
+                if (!rigViewModel.getRockSaturation().equals("")) {
+                    stringList.add(rigViewModel.getRockSaturation());
+                }
+
+                if (!rigViewModel.getRockWeathering().equals("")) {
+                    stringList.add(rigViewModel.getRockWeathering());
+                }
+
+                rigViewModel.setRockDescription(TextUtils.join(", ", stringList));
+
+                refreshInfo();
+
+                generateRockDescriptionButton.setFocusableInTouchMode(true);
+                generateRockDescriptionButton.requestFocus();
+            }
+        });
+
+        loadRockDescriptionTemplateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Alfred load template.
+            }
+        });
+
+        rockDescriptionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    rigViewModel.setRockDescription(s.toString());
+                }
+            }
+        });
+
+        rigNoteEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    rigViewModel.setNote(s.toString());
+                }
+            }
+        });
+
         String requestCode = getIntent().getStringExtra("requestCode");
 
         holeId = getIntent().getStringExtra("holeId");
@@ -591,7 +1002,7 @@ public class RegularRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 0, 0, "合金", 0, 0, 0, 0, 0, 0, 1, 0, 0);
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 0, 0, "合金", 0, 0, 0, 0, 0, 0, 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "稍湿", "全风化", "", "");
                 } else {
                     //TODO: alfred rockcoreIndex handle;
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
@@ -601,8 +1012,9 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                            1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1
-                            );
+                            1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
+                            DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
+                            "黏土", "灰色", "坚硬", "稍湿", "全风化", "", "");
                 }
 
                 refreshInfo();
@@ -695,6 +1107,37 @@ public class RegularRigActivity extends AppCompatActivity {
         }
 
         rockCorePickPercentageTextView.setText(String.format("%.2f", rigViewModel.getRockCorePickPercentage() * 100) + "%");
+
+        startEndDepthTextView.setText(rigViewModel.getRigStartEndDepth());
+
+
+        if (getCurrentFocus() != rockTypeEditText) {
+            rockTypeEditText.setText(rigViewModel.getRockType());
+        }
+
+        if (getCurrentFocus() != rockColorEditText) {
+            rockColorEditText.setText(rigViewModel.getRockColor());
+        }
+
+        if (getCurrentFocus() != rockDensityEditText) {
+            rockDensityEditText.setText(rigViewModel.getRockDensity());
+        }
+
+        if (getCurrentFocus() != rockSaturationEditText) {
+            rockSaturationEditText.setText(rigViewModel.getRockSaturation());
+        }
+
+        if (getCurrentFocus() != rockWeatheringEditText) {
+            rockWeatheringEditText.setText(rigViewModel.getRockWeathering());
+        }
+
+        if (getCurrentFocus() != rockDescriptionEditText) {
+            rockDescriptionEditText.setText(rigViewModel.getRockDescription());
+        }
+
+        if (getCurrentFocus() != rigNoteEditText) {
+            rigNoteEditText.setText(rigViewModel.getNote());
+        }
 
         refreshLock = false;
     }

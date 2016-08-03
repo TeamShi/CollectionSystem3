@@ -89,7 +89,7 @@ public class DataManager {
         }
     }
 
-    public static void removeRig(String holeId) {
+    public static void removeLastRig(String holeId) {
         for (Hole hole : project.getHoleList()) {
             if (hole.getHoleId().equals(holeId)) {
                 hole.getRigList().remove(hole.getRigList().size() - 1);

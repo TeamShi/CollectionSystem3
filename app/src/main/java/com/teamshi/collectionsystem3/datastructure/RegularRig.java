@@ -31,7 +31,7 @@ public class RegularRig extends Rig {
     private String rockType;                        // 岩土名称
     private String rockColor;                       // 颜色
     private String rockDensity;                     // 稠度/密实度
-    private String rockSatuation;                   // 饱和度
+    private String rockSaturation;                   // 饱和度
     private String rockWeathering;                  // 风化程度
     private String rockDescription;                 // 名称及岩性
 
@@ -42,7 +42,8 @@ public class RegularRig extends Rig {
                       int rockCorePipeDiameter, double rockCorePipeLength,
                       String drillBitType, double drillBitDiameter, double drillBitLength,
                       double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
-                      int rockCoreIndex, double rockCoreLength, double rockCorePickPercentage) {
+                      int rockCoreIndex, double rockCoreLength, double rockCorePickPercentage,
+                      String rigStartEndDepth, String rockType, String rockColor, String rockDensity, String rockSaturation, String rockWeathering, String rockDescription, String note) {
         super(classPeopleCount, date, startTime, endTime);
 
         this.rigType = "干钻";
@@ -65,6 +66,17 @@ public class RegularRig extends Rig {
         this.rockCoreIndex = rockCoreIndex;
         this.rockCoreLength = rockCoreLength;
         this.rockCorePickPercentage = rockCorePickPercentage;
+
+        this.rigStartEndDepth = rigStartEndDepth;
+        this.rockType = rockType;
+        this.rockColor = rockColor;
+
+        this.rockDensity = rockDensity;
+        this.rockSaturation = rockSaturation;
+        this.rockWeathering = rockWeathering;
+        this.rockDescription = rockDescription;
+
+        this.note = note;
     }
     
     @Override
@@ -73,15 +85,8 @@ public class RegularRig extends Rig {
                 pipeNumber, pipeLength, pipeTotalLength,
                 rockCorePipeDiameter, rockCorePipeLength, drillBitType, drillBitDiameter, drillBitLength,
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
-                rockCoreIndex, rockCoreLength, rockCorePickPercentage);
-        temp.setRigType(rigType);
-
-        temp.setRockCorePipeDiameter(rockCorePipeDiameter);
-        temp.setRockCorePipeLength(rockCorePipeLength);
-
-        temp.setDrillBitType(drillBitType);
-        temp.setDrillBitDiameter(drillBitDiameter);
-        temp.setDrillBitLength(drillBitLength);
+                rockCoreIndex, rockCoreLength, rockCorePickPercentage,
+                rigStartEndDepth, rockType, rockColor, rockDensity, rockSaturation, rockWeathering, rockDescription, note);
 
         return temp;
     }
@@ -212,5 +217,69 @@ public class RegularRig extends Rig {
 
     public void setRockCorePickPercentage(double rockCorePickPercentage) {
         this.rockCorePickPercentage = rockCorePickPercentage;
+    }
+
+    public String getRigStartEndDepth() {
+        return rigStartEndDepth;
+    }
+
+    public void setRigStartEndDepth(String rigStartEndDepth) {
+        this.rigStartEndDepth = rigStartEndDepth;
+    }
+
+    public String getRockType() {
+        return rockType;
+    }
+
+    public void setRockType(String rockType) {
+        this.rockType = rockType;
+    }
+
+    public String getRockColor() {
+        return rockColor;
+    }
+
+    public void setRockColor(String rockColor) {
+        this.rockColor = rockColor;
+    }
+
+    public String getRockDensity() {
+        return rockDensity;
+    }
+
+    public void setRockDensity(String rockDensity) {
+        this.rockDensity = rockDensity;
+    }
+
+    public String getRockSaturation() {
+        return rockSaturation;
+    }
+
+    public void setRockSaturation(String rockSaturation) {
+        this.rockSaturation = rockSaturation;
+    }
+
+    public String getRockWeathering() {
+        return rockWeathering;
+    }
+
+    public void setRockWeathering(String rockWeathering) {
+        this.rockWeathering = rockWeathering;
+    }
+
+    public String getRockDescription() {
+        return rockDescription;
+    }
+
+    public void setRockDescription(String rockDescription) {
+        this.rockDescription = rockDescription;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
