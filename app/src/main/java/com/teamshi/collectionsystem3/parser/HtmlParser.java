@@ -94,7 +94,7 @@ public class HtmlParser {
         String projectPath = dirPath + "project_" + project.getProjectName() + ".html";
         InputStream inputStream;
         try {
-            File projectPreviewFile = Utility.createFile(projectPath);
+            File projectPreviewFile = Utility.createFile(projectPath,false);
             inputStream = assetManager.open(PROJECT_OVERVIEW_TEMPLATE);
             //读模版文件
             Document doc = Jsoup.parse(inputStream, "UTF-8", "./");

@@ -94,15 +94,17 @@ public class IOManager {
         return null;
     }
 
-    public static void loadConfiguration(){
-        File configFile = new File(APP_CONFIG + "/config.ser");
-        if (!configFile.exists()) {
-            try {
+    public static void loadConfiguration() {
+        File configFile = null;
+        try {
+            configFile = new File(APP_CONFIG + "/config.ser");
+            if (!configFile.exists()) {
+                Utility.createFile(configFile.getPath(), false);
                 InputStream configFileStream = appContext.getAssets().open("config.ser");
                 Utility.copyFile(configFileStream, configFile);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         ConfigurationManager.loadConfig(configFile);

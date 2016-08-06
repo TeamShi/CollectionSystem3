@@ -10,6 +10,8 @@ import java.util.Map;
 
 
 public class Configuration  implements Serializable {
+    private static final long serialVersionUID = 5060008608521544149L;
+
     private  double sptTable1Argument1 = 2;
     private  double sptTable1Argument2 = 4;
     private  double sptTable1Argument3 = 7;

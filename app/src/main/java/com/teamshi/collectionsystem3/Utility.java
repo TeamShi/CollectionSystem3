@@ -232,14 +232,15 @@ public class Utility {
     /**
      * create file if not exists
      * @param path
+     * @param isDir
      * @return
      */
-    public static File createFile(String path) throws IOException {
+    public static File createFile(String path, boolean isDir) throws IOException {
 
         File file = new File(path);
         if(!file.exists()){
-            File parent = file.getParentFile();
-            if(!file.isDirectory()) {
+            if(!isDir) {
+                File parent = file.getParentFile();
                 parent.mkdirs();
                 file.createNewFile();
             }else{
