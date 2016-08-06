@@ -1,6 +1,7 @@
 package com.teamshi.collectionsystem3;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -293,5 +294,19 @@ public class Utility {
         int thousands = (int) (number / 1000);
         String output = thousands > 0 ? thousands+"+"+ (number - 1000 * thousands) : String.valueOf(number);
         return output ;
+    }
+
+    public static void copyFile(InputStream is, File dest) throws IOException {
+        FileOutputStream fos = new FileOutputStream(dest);
+        byte[] buffer = new byte[1024];
+        while (true) {
+            int len = is.read(buffer);
+            if (len == -1) {
+                break;
+            }
+            fos.write(buffer, 0, len);
+        }
+        is.close();
+        fos.close();
     }
 }

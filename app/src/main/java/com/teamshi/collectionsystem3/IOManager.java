@@ -1,8 +1,6 @@
 package com.teamshi.collectionsystem3;
 
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Environment;
@@ -16,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -30,10 +29,10 @@ public class IOManager {
     private static final String TAG = "CollectionSystem3";
     public static String APP_NAME = "ZuanTan";
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
-    public static String APP_ROOT_DATA = APP_ROOT+File.separator +"Data/";
+    public static String APP_DATA = APP_ROOT+File.separator +"Data/";
+    private static final String APP_CONFIG = APP_ROOT+File.separator +"Config/";;
     private static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
     private static Context appContext = null;
-
 
 
     public static void initFileSystem(Context applicationContext){
@@ -52,7 +51,7 @@ public class IOManager {
         if(!root.exists()){
             root.mkdirs();
         }
-        File dateDir = new File(APP_ROOT_DATA);
+        File dateDir = new File(APP_DATA);
         if(!dateDir.exists()){
             dateDir.mkdirs();
         }
@@ -93,6 +92,21 @@ public class IOManager {
         }
 
         return null;
+    }
+
+    public static void loadConfiguration(){
+        File configFile = new File(APP_CONFIG + "/config.ser");
+        if (!configFile.exists()) {
+            try {
+                InputStream configFileStream = appContext.getAssets().open("config.ser");
+                Utility.copyFile(configFileStream, configFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ConfigurationManager.loadConfig(configFile);
+
     }
 
 
@@ -143,7 +157,7 @@ public class IOManager {
         }
         projects = new HashMap<>();
         // Scan app dir to listß all exists valid projects
-        File [] projectDirs = new File(APP_ROOT_DATA).listFiles();
+        File [] projectDirs = new File(APP_DATA).listFiles();
         if(projectDirs != null && projectDirs.length  > 0){
             for(File dir: projectDirs){
                 // load *.ser file
@@ -167,7 +181,7 @@ public class IOManager {
      * @return
      */
     public static boolean updateProject(Project project) {
-        File projectDir = new File(APP_ROOT_DATA,project.getProjectName());
+        File projectDir = new File(APP_DATA,project.getProjectName());
         projectDir.mkdirs();
         String fileName = projectDir.getAbsolutePath()+File.separator+project.getProjectName()+".ser";
         File projectFile = parseObjectToFile(project,fileName);
@@ -186,7 +200,7 @@ public class IOManager {
             return false;
         }
 
-        File projectDir = new File(APP_ROOT_DATA+File.separator+projectName);
+        File projectDir = new File(APP_DATA +File.separator+projectName);
         if(!projectDir.exists()){
             return false;
         }else{
