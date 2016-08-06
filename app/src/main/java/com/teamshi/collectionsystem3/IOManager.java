@@ -39,7 +39,9 @@ public class IOManager {
     /*
       app file system overview
 
-                     |- Project name - ...
+              |- Config - config.ser (copy from assets if not specified by user)
+              |
+              |      |- Project name - ...
       ZuanTan - Data |                 |- Hole id
                      |- Project name - |
                                        |- Hole id
