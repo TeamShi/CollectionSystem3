@@ -1082,7 +1082,7 @@ public class RegularRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != drillBitDiameterEditText) {
-            drillBitDiameterEditText.setText(String.format("%.2f", rigViewModel.getDrillBitDiameter()));
+            drillBitDiameterEditText.setText(String.valueOf(rigViewModel.getDrillBitDiameter()));
         }
 
         if (getCurrentFocus() != drillBitLengthEditText) {

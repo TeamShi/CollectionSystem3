@@ -11,8 +11,8 @@ public class RegularRig extends Rig {
     private double pipeLength;                      // 钻杆长度
     private double pipeTotalLength;                 // 累积长度
 
-    private int rockCorePipeDiameter;                   // 岩芯管直径
-    private double rockCorePipeLength;                  // 岩芯管长度
+    private int rockCorePipeDiameter;               // 岩芯管直径
+    private double rockCorePipeLength;              // 岩芯管长度
 
     private String drillBitType;                    // 钻头类型
     private double drillBitDiameter;                // 钻头直径
@@ -31,7 +31,7 @@ public class RegularRig extends Rig {
     private String rockType;                        // 岩土名称
     private String rockColor;                       // 颜色
     private String rockDensity;                     // 稠度/密实度
-    private String rockSaturation;                   // 饱和度
+    private String rockSaturation;                  // 饱和度
     private String rockWeathering;                  // 风化程度
     private String rockDescription;                 // 名称及岩性
 

@@ -249,7 +249,7 @@ public class RigIndexActivity extends AppCompatActivity {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int selectedRigIndex = Integer.parseInt(v.getTag().toString());
+                    int selectedRigIndex = (int) v.getTag();
                     Rig rig = DataManager.queryRig(holeId, selectedRigIndex);
                     Intent intent = null;
 
@@ -383,11 +383,11 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(String.format("%.2f", rig.getPipeLength())));
         result.add(generateRigInfoCell(String.format("%.2f", rig.getPipeTotalLength())));
 
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRockCorePipeDiameter())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCorePipeDiameter())));
         result.add(generateRigInfoCell(String.format("%.2f", rig.getRockCorePipeLength())));
 
         result.add(generateRigInfoCell(rig.getDrillBitType()));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillBitDiameter())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getDrillBitDiameter())));
         result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillBitLength())));
 
         result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillToolTotalLength())));
