@@ -1,11 +1,12 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by Alfred on 16/7/14.
  */
-public class Rig implements UIMethods{
+public class Rig implements UIMethods, Serializable{
     protected String classPeopleCount;
 
     protected Calendar date;
