@@ -370,7 +370,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                             rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                            rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
+                            rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
 
                             refreshInfo();
                         } catch (Exception e) {
@@ -432,7 +432,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                        rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
+                        rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -502,7 +502,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                        rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
+                        rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -554,7 +554,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                        rigViewModel.setRigStartEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + rigViewModel.getAccumulatedMeterageLength());
+                        rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -1071,7 +1071,7 @@ public class RegularRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != rockCorePipeLengthEditText) {
-            rockCorePipeLengthEditText.setText(String.valueOf(rigViewModel.getRockCorePipeLength()));
+            rockCorePipeLengthEditText.setText(String.format("%.2f", rigViewModel.getRockCorePipeLength()));
         }
 
         for (int i = 0; i < drillBitTypeSpinnerOptions.length; i++) {
@@ -1082,28 +1082,28 @@ public class RegularRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != drillBitDiameterEditText) {
-            drillBitDiameterEditText.setText(String.valueOf(rigViewModel.getDrillBitDiameter()));
+            drillBitDiameterEditText.setText(String.format("%.2f", rigViewModel.getDrillBitDiameter()));
         }
 
         if (getCurrentFocus() != drillBitLengthEditText) {
-            drillBitLengthEditText.setText(String.valueOf(rigViewModel.getDrillBitLength()));
+            drillBitLengthEditText.setText(String.format("%.2f", rigViewModel.getDrillBitLength()));
         }
 
-        drillToolTotalLengthTextView.setText(String.valueOf(rigViewModel.getDrillToolTotalLength()));
+        drillToolTotalLengthTextView.setText(String.format("%.2f", rigViewModel.getDrillToolTotalLength()));
 
         if (getCurrentFocus() != drillPipeRemainLengthEditText) {
-            drillPipeRemainLengthEditText.setText(String.valueOf(rigViewModel.getDrillPipeRemainLength()));
+            drillPipeRemainLengthEditText.setText(String.format("%.2f", rigViewModel.getDrillPipeRemainLength()));
         }
 
-        roundTripMeterageLengthTextView.setText(String.valueOf(rigViewModel.getRoundTripMeterageLength()));
-        accumulatedMeterageLengthTextView.setText(String.valueOf(rigViewModel.getAccumulatedMeterageLength()));
+        roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
+        accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()));
 
         if (getCurrentFocus() != rockCoreIndexEditText) {
             rockCoreIndexEditText.setText(String.valueOf(rigViewModel.getRockCoreIndex()));
         }
 
         if (getCurrentFocus() != rockCoreLengthEditText) {
-            rockCoreLengthEditText.setText(String.valueOf(rigViewModel.getRockCoreLength()));
+            rockCoreLengthEditText.setText(String.format("%.2f", rigViewModel.getRockCoreLength()));
         }
 
         rockCorePickPercentageTextView.setText(String.format("%.2f", rigViewModel.getRockCorePickPercentage() * 100) + "%");

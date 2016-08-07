@@ -282,4 +282,5 @@ public class RegularRig extends Rig {
     public void setNote(String note) {
         this.note = note;
     }
+
 }

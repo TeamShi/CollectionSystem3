@@ -192,10 +192,10 @@ public class HoleIndexActivity extends AppCompatActivity {
             }
 
             row.addView(generateHoleInfoCell(hole.getArticle()));
-            row.addView(generateHoleInfoCell(String.valueOf(hole.getMileage())));
-            row.addView(generateHoleInfoCell(String.valueOf(hole.getOffset())));
+            row.addView(generateHoleInfoCell(String.format("%.2f", hole.getMileage())));
+            row.addView(generateHoleInfoCell(String.format("%.2f", hole.getOffset())));
 
-            row.addView(generateHoleInfoCell(String.valueOf(hole.getHoleHeight())));
+            row.addView(generateHoleInfoCell(String.format("%.2f", hole.getHoleHeight())));
             row.addView(generateHoleInfoCell(String.valueOf(hole.getLongitude())));
             row.addView(generateHoleInfoCell(String.valueOf(hole.getLatitude())));
             row.addView(generateHoleInfoCell(hole.getPositionInformation()));
@@ -206,7 +206,7 @@ public class HoleIndexActivity extends AppCompatActivity {
             row.addView(generateHoleInfoCell(Utility.formatCalendarDateString(hole.getReviewDate())));
 
             row.addView(generateHoleInfoCell(hole.getNote()));
-            row.addView(generateHoleInfoCell(String.valueOf(hole.getHoleDepth())));
+            row.addView(generateHoleInfoCell(String.format("%.2f", hole.getHoleDepth())));
 
             row.setTag(hole.getHoleId());
 
