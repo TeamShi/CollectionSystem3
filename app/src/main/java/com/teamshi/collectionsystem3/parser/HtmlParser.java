@@ -4,7 +4,9 @@ import android.content.res.AssetManager;
 
 import com.teamshi.collectionsystem3.Utility;
 import com.teamshi.collectionsystem3.datastructure.Hole;
+import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
 
 import org.jsoup.Jsoup;
@@ -47,6 +49,18 @@ public class HtmlParser {
     public static String RECORDER_ID = "recorderName";
     public static String SQUAD_ID = "squadName";
     public static String CAPTAIN_ID = "captainName";
+
+    public static String[] convert2Array(String string) {
+
+        String[] row = string.replaceAll("##","# #").split("#");
+
+        for (int j = 0, colLen = row.length; j < colLen; j++) {
+            if (row[j].equals("null")) {
+                row[j] = "";
+            }
+        }
+        return row;
+    }
 
 
     public static boolean write(String outPath, String[][] data, InputStream inputStream) throws IOException {
@@ -308,45 +322,56 @@ public class HtmlParser {
         ArrayList<Rig> rigs = hole.getRigList();
         int rows = rigs.size();
         String[][] resultData = new String[rows][];
-        int groundNo = 1;
         for (int i = 0; i < rows; i++) {
             Rig rig = rigs.get(i);
+            boolean isNAType = rig instanceof NARig;
+            boolean isRegular = rig instanceof RegularRig;
+
             StringBuffer sb = new StringBuffer();
 
             sb.append(rig.getClassPeopleCount()).append("#");
 
-            sb.append(rig.getDate()).append("#");
-            sb.append(rig.getStartTime()).append("#");
-            sb.append(rig.getEndTime()).append("#");
-            sb.append(Utility.computeTimeInterval(rig.getStartTime(),rig.getEndTime())).append("#");
-//
+            sb.append(Utility.formatCalendarDateStringWithoutYear(rig.getDate())).append("#");
+            sb.append(Utility.formatTimeStringChinese(rig.getStartTime())).append("#");
+            sb.append(Utility.formatTimeStringChinese(rig.getEndTime())).append("#");
+            sb.append(Utility.calculateTimeSpanChinese(rig.getStartTime(),rig.getEndTime())).append("#");
+
             sb.append(hole.getProjectName()).append("#");
-//
-//            sb.append(rig.getDrillPipeId()).append("#");
-//            sb.append(rig.getDrillPipeLength()).append("#");
-//            sb.append(rig.getCumulativeLength()).append("#");
-//
-//            sb.append(rig.getCoreBarreliDiameter()).append("#");
-//            sb.append(rig.getCoreBarreliLength()).append("#");
-//
-//            sb.append(rig.getDrillType()).append("#");
-//            sb.append(rig.getDrillDiameter()).append("#");
-//            sb.append(rig.getDrillLength()).append("#");
-//
-//            //进尺
-//            sb.append(rig.getDrillToolTotalLength()).append("#");
-//            sb.append(rig.getDrillToolRemainLength()).append("#");
-//            sb.append(rig.getRoundTripMeterage()).append("#");
-//            sb.append(rig.getCumulativeMeterage()).append("#");
-//
-//            //护壁措施
+
+            if(isRegular){
+                RegularRig regularRig = (RegularRig)rigs.get(i);
+                //钻杆
+                sb.append(regularRig.getPipeNumber()).append("#");
+                sb.append(regularRig.getPipeLength()).append("#");
+                sb.append(regularRig.getPipeTotalLength()).append("#");
+
+                //岩芯管
+                sb.append(regularRig.getRockCorePipeDiameter()).append("#");
+                sb.append(regularRig.getRockCorePipeLength()).append("#");
+
+                //钻头
+                sb.append(regularRig.getDrillBitType()).append("#");
+                sb.append(regularRig.getDrillBitDiameter()).append("#");
+                sb.append(regularRig.getDrillBitLength()).append("#");
+
+                //进尺
+                sb.append(regularRig.getDrillToolTotalLength()).append("#");
+                sb.append(regularRig.getDrillPipeRemainLength()).append("#");
+                sb.append(regularRig.getRoundTripMeterageLength()).append("#");
+                sb.append(regularRig.getAccumulatedMeterageLength()).append("#");
+            }
+
+
+            //护壁措施
 //            sb.append(rig.getDadoType()).append("#");
 //            sb.append(rig.getCasedId()).append("#");
 //            sb.append(rig.getCasedDiameter()).append("#");
 //            sb.append(rig.getCasedLength()).append("#");
 //            sb.append(rig.getCasedTotalLength()).append("#");
-//            //孔内情况
+
+            //孔内情况
 //            sb.append(rig.getCasedSituation()).append("#");
+//
 //
 //            //岩心采取
 //            sb.append(rig.getRockCoreId()).append("#");
@@ -392,7 +417,7 @@ public class HtmlParser {
 
 //            sb.append(rig.getHoleNote()).append("#");
 //
-//            resultData[i] = convert2Array(sb.toString());
+            resultData[i] = convert2Array(sb.toString());
         }
 
         return resultData;
