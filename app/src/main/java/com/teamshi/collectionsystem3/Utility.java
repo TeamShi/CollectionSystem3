@@ -1,6 +1,7 @@
 package com.teamshi.collectionsystem3;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -231,14 +232,15 @@ public class Utility {
     /**
      * create file if not exists
      * @param path
+     * @param isDir
      * @return
      */
-    public static File createFile(String path) throws IOException {
+    public static File createFile(String path, boolean isDir) throws IOException {
 
         File file = new File(path);
         if(!file.exists()){
-            File parent = file.getParentFile();
-            if(!file.isDirectory()) {
+            if(!isDir) {
+                File parent = file.getParentFile();
                 parent.mkdirs();
                 file.createNewFile();
             }else{
@@ -293,5 +295,19 @@ public class Utility {
         int thousands = (int) (number / 1000);
         String output = thousands > 0 ? thousands+"+"+ (number - 1000 * thousands) : String.valueOf(number);
         return output ;
+    }
+
+    public static void copyFile(InputStream is, File dest) throws IOException {
+        FileOutputStream fos = new FileOutputStream(dest);
+        byte[] buffer = new byte[1024];
+        while (true) {
+            int len = is.read(buffer);
+            if (len == -1) {
+                break;
+            }
+            fos.write(buffer, 0, len);
+        }
+        is.close();
+        fos.close();
     }
 }

@@ -51,6 +51,8 @@ public class StartUpActivity extends AppCompatActivity {
 
         IOManager.initFileSystem(getApplicationContext());
 
+        IOManager.loadConfiguration();
+
         projectListViewWrapper = (LinearLayout) findViewById(R.id.wrapper_project_list);
         projectListView = (ListView) projectListViewWrapper.findViewById(R.id.lv_project_list);
 
