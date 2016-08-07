@@ -249,7 +249,7 @@ public class RigIndexActivity extends AppCompatActivity {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int selectedRigIndex = Integer.valueOf(getIntent().getStringExtra("selectedRigIndex"));
+                    int selectedRigIndex = Integer.parseInt(v.getTag().toString());
                     Rig rig = DataManager.queryRig(holeId, selectedRigIndex);
                     Intent intent = null;
 

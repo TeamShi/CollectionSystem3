@@ -1056,11 +1056,11 @@ public class RegularRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != pipeLengthEditText) {
-            pipeLengthEditText.setText(String.valueOf(rigViewModel.getPipeLength()));
+            pipeLengthEditText.setText(String.format("%.2f", rigViewModel.getPipeLength()));
         }
 
         if (getCurrentFocus() != pipeTotalLengthTextView) {
-            pipeTotalLengthTextView.setText(String.valueOf(rigViewModel.getPipeTotalLength()));
+            pipeTotalLengthTextView.setText(String.format("%.2f", rigViewModel.getPipeTotalLength()));
         }
 
         for (int i = 0; i < rockCorePipeDiameterSpinnerOptions.length; i++) {

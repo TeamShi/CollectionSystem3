@@ -571,7 +571,7 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center_vertical"/>
                     />
                     <TextView
                         android:text="placeholder"
