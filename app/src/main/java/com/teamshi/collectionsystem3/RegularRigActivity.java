@@ -1266,23 +1266,31 @@ public class RegularRigActivity extends AppCompatActivity {
         if (rigViewModel.getPipeNumber() != DataManager.getHole(holeId).getPipeCount() &&
                 rigViewModel.getPipeNumber() != DataManager.getHole(holeId).getPipeCount() + 1) {
             pipeNumberEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            pipeNumberEditText.setFocusableInTouchMode(true);
+            pipeNumberEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "钻杆编号只能不变或加1", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (rigViewModel.getPipeLength() <= 0) {
             pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            pipeLengthEditText.setFocusableInTouchMode(true);
+            pipeLengthEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "钻杆长度必须为正数", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (rigViewModel.getRockCoreIndex() < DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
             rockCoreIndexEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            rockCoreIndexEditText.setFocusableInTouchMode(true);
+            rockCoreIndexEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "岩芯采取编号不得小于前值", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (rigViewModel.getRockDescription().equals("")) {
+            rockDescriptionEditText.setFocusableInTouchMode(true);
+            rockDescriptionEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "名称及岩性不能为空", Toast.LENGTH_LONG).show();
             return false;
         }
