@@ -26,6 +26,9 @@ import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class RegularRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
@@ -66,7 +69,7 @@ public class RegularRigActivity extends AppCompatActivity {
 
     private String holeId;
 
-    private TextView classPeopleCountTextView;
+    private EditText classPeopleCountEditText;
     private TextView dateButton;
     private TextView startTimeButton;
     private TextView endTimeButton;
@@ -126,7 +129,7 @@ public class RegularRigActivity extends AppCompatActivity {
         confirmAddRigButton = (Button) findViewById(R.id.button_confirm_add_regular_rig);
         cancelAddRigButton = (Button) findViewById(R.id.button_cancel_add_regular_rig);
 
-        classPeopleCountTextView = (TextView) findViewById(R.id.edittext_regular_rig_class_people_count);
+        classPeopleCountEditText = (EditText) findViewById(R.id.edittext_regular_rig_class_people_count);
         dateButton = (Button) findViewById(R.id.button_regular_rig_date);
         startTimeButton = (Button) findViewById(R.id.button_regular_rig_start_time);
         endTimeButton = (Button) findViewById(R.id.button_regular_rig_end_time);
@@ -183,7 +186,7 @@ public class RegularRigActivity extends AppCompatActivity {
         rockDescriptionEditText = (EditText) findViewById(R.id.edittext_regular_rig_rock_description);
         rigNoteEditText = (EditText) findViewById(R.id.edittext_regular_rig_note);
 
-        classPeopleCountTextView.addTextChangedListener(new TextWatcher() {
+        classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -280,6 +283,10 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCorePipeLength());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
 
+                            if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
+                                DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
+                            }
+
                             IOManager.updateProject(DataManager.getProject());
                             RegularRigActivity.this.setResult(RESULT_OK);
                             RegularRigActivity.this.finish();
@@ -370,7 +377,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                             rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                            rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
+                            rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + "m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
 
                             refreshInfo();
                         } catch (Exception e) {
@@ -949,7 +956,40 @@ public class RegularRigActivity extends AppCompatActivity {
         loadRockDescriptionTemplateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Alfred load template.
+                final Map<String, String> configMap = ConfigurationManager.getTemplateDictionary();
+
+                AlertDialog typeDialog;
+
+                final CharSequence[] items = new CharSequence[configMap.size()];
+
+                Set set = configMap.keySet();
+
+                int i = 0;
+
+                for (Iterator iter = set.iterator(); iter.hasNext();)
+                {
+                    items[i] = (String) iter.next();
+                    i++;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegularRigActivity.this);
+
+                builder.setTitle("描述模版");
+
+                builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rigViewModel.setRockDescription(rigViewModel.getRockDescription() + ", " + configMap.get(items[which]));
+
+                        refreshInfo();
+
+                        dialog.dismiss();
+                    }
+                });
+
+                typeDialog = builder.create();
+                typeDialog.show();
+
             }
         });
 
@@ -1002,7 +1042,7 @@ public class RegularRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 0, 0, "合金", 0, 0, 0, 0, 0, 0, 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "稍湿", "全风化", "", "");
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 0, 0, "合金", 0, 0, 0, 0, 0, 0, 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
                 } else {
                     //TODO: alfred rockcoreIndex handle;
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
@@ -1014,18 +1054,55 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
                             1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
                             DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                            "黏土", "灰色", "坚硬", "稍湿", "全风化", "", "");
+                            "黏土", "灰色", "坚硬", "", "", "", "");
                 }
 
                 refreshInfo();
                 break;
             case "ACTION_COPY_RIG":
+                Calendar copiedStartTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
+                Calendar copiedEndTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
+                int selectedRigIndex = getIntent().getIntExtra("rigIndex", 0);
+
+                RegularRig oldRig = (RegularRig) DataManager.getRig(holeId, selectedRigIndex);
+
+                rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), copiedStartTime, copiedStartTime, copiedEndTime,
+                        oldRig.getPipeNumber(), oldRig.getPipeLength(), oldRig.getPipeTotalLength(),
+                        oldRig.getRockCorePipeDiameter(), oldRig.getRockCorePipeLength(),
+                        oldRig.getDrillBitType(), oldRig.getDrillBitDiameter(), oldRig.getDrillBitLength(),
+                        DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
+                        DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
+                        DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
+                        oldRig.getRockCoreIndex() + 1, 0, 1,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
+                        oldRig.getRockType(), oldRig.getRockColor(), oldRig.getRockDensity(), oldRig.getRockSaturation(), oldRig.getRockWeathering(), oldRig.getRockDescription(), oldRig.getNote()
+                        );
+
+                rigViewModel.setRigType(oldRig.getRigType());
+
+                refreshInfo();
                 break;
             case "ACTION_EDIT_RIG":
                 String holeId = getIntent().getStringExtra("holeId");
                 int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
-                rigViewModel = (RegularRig) DataManager.queryRig(holeId, rigIndex).deepCopy();
+                classPeopleCountEditText.setEnabled(false);
+                dateButton.setEnabled(false);
+                startTimeButton.setEnabled(false);
+                endTimeButton.setEnabled(false);
+                rigTypeSpinner.setEnabled(false);
+                pipeNumberEditText.setEnabled(false);
+                pipeLengthEditText.setEnabled(false);
+                rockCorePipeDiameterSpinner.setEnabled(false);
+                rockCorePipeLengthEditText.setEnabled(false);
+                drillBitTypeSpinner.setEnabled(false);
+                drillBitDiameterEditText.setEnabled(false);
+                drillBitLengthEditText.setEnabled(false);
+                drillPipeRemainLengthEditText.setEnabled(false);
+                rockCoreIndexEditText.setEnabled(false);
+                rockCoreLengthEditText.setEnabled(false);
+
+                rigViewModel = (RegularRig) DataManager.getRig(holeId, rigIndex).deepCopy();
 
                 refreshInfo();
                 break;
@@ -1035,8 +1112,8 @@ public class RegularRigActivity extends AppCompatActivity {
     private void refreshInfo() {
         refreshLock = true;
 
-        if (getCurrentFocus() != classPeopleCountTextView) {
-            classPeopleCountTextView.setText(rigViewModel.getClassPeopleCount());
+        if (getCurrentFocus() != classPeopleCountEditText) {
+            classPeopleCountEditText.setText(rigViewModel.getClassPeopleCount());
         }
 
         dateButton.setText(Utility.formatCalendarDateString(rigViewModel.getDate()));
@@ -1139,6 +1216,44 @@ public class RegularRigActivity extends AppCompatActivity {
             rigNoteEditText.setText(rigViewModel.getNote());
         }
 
+        if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[0]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1])) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (rigViewModel.getRockType().endsWith("砂") || rigViewModel.getRockType().endsWith("石") || rigViewModel.getRockType().endsWith("砾")) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (rigViewModel.getRockType().equals("岩")) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(false);
+            rockDensityButton.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(true);
+            rockWeatheringButton.setEnabled(true);
+        }
+
         refreshLock = false;
     }
 
@@ -1158,6 +1273,17 @@ public class RegularRigActivity extends AppCompatActivity {
         if (rigViewModel.getPipeLength() <= 0) {
             pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
             Toast.makeText(RegularRigActivity.this, "钻杆长度必须为正数", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (rigViewModel.getRockCoreIndex() < DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
+            rockCoreIndexEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            Toast.makeText(RegularRigActivity.this, "岩芯采取编号不得小于前值", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (rigViewModel.getRockDescription().equals("")) {
+            Toast.makeText(RegularRigActivity.this, "名称及岩性不能为空", Toast.LENGTH_LONG).show();
             return false;
         }
 

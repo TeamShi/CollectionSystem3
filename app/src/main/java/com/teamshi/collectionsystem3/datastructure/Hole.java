@@ -61,6 +61,8 @@ public class Hole implements Serializable {
     private String classMonitor;                    // 班长
     private String machineMonitor;                  // 机长
 
+    private int maxRigRockCoreIndex;
+
     private ArrayList<Rig> rigList;
 
     private String lastClassPeopleCount;
@@ -138,6 +140,8 @@ public class Hole implements Serializable {
 
         this.lastAccumulatedMeterageLength = 0;
         this.lastRockCorePipeLength = 0;
+
+        this.maxRigRockCoreIndex = 0;
     }
 
     public String getProjectName() {
@@ -517,6 +521,14 @@ public class Hole implements Serializable {
         this.lastRockCorePipeLength = lastRockCorePipeLength;
     }
 
+    public int getMaxRigRockCoreIndex() {
+        return maxRigRockCoreIndex;
+    }
+
+    public void setMaxRigRockCoreIndex(int maxRigRockCoreIndex) {
+        this.maxRigRockCoreIndex = maxRigRockCoreIndex;
+    }
+
     public Hole deepCopy() {
         Hole newHole = new Hole(getProjectName());
 
@@ -581,6 +593,8 @@ public class Hole implements Serializable {
         newHole.setLastAccumulatedMeterageLength(getLastAccumulatedMeterageLength());
 
         newHole.setLastRockCorePipeLength(getLastRockCorePipeLength());
+
+        newHole.setMaxRigRockCoreIndex(getMaxRigRockCoreIndex());
 
         return newHole;
     }

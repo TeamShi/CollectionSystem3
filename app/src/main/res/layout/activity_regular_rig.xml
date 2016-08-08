@@ -57,7 +57,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_pipe_number"/>
                     <TextView
                         android:text="日期"
                         android:textColor="@android:color/black"
@@ -190,7 +190,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:nextFocusDown="@+id/edittext_regular_rig_pipe_length"/>
                     <TextView
                         android:text="钻杆长度(m)"
                         android:textColor="@android:color/black"
@@ -208,7 +209,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_pipe_length"/>
                     <TextView
                         android:text="累计长度(m)"
                         android:textColor="@android:color/black"
@@ -230,7 +232,7 @@
 
                 <TableRow>
                     <TextView
-                        android:text="岩芯"
+                        android:text="岩芯管"
                         android:textColor="@android:color/black"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
@@ -275,7 +277,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_drill_bit_diameter"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -322,7 +324,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_drill_bit_length"/>
                     <TextView
                         android:text="长度(m)"
                         android:textColor="@android:color/black"
@@ -340,7 +342,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_drill_pipe_remain_length"/>
                 </TableRow>
 
                 <TableRow>
@@ -403,7 +405,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_index"/>
                 </TableRow>
 
                 <TableRow>
@@ -454,8 +456,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
-                        android:inputType="numberDecimal"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:inputType="numberDecimal"/>
                 </TableRow>
 
                 <TableRow>
@@ -486,7 +487,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:inputType="numberDecimal"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_length"/>
                     <TextView
                         android:text="长度(m)"
                         android:textColor="@android:color/black"
@@ -505,7 +506,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:inputType="numberDecimal"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_type"/>
                     <TextView
                         android:text="采取率"
                         android:textColor="@android:color/black"
@@ -577,6 +578,7 @@
                         android:layout_width="0dp"
                         android:id="@+id/edittext_regular_rig_rock_type"
                         android:singleLine="true"
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_description"
                         />
                     <Button
                         android:layout_width="0dp"
@@ -767,7 +769,7 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:inputType="numberDecimal"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_note"/>
                 </TableRow>
 
                 <TableRow>
@@ -786,8 +788,7 @@
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="300dp"
-                        android:layout_width="0dp"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:layout_width="0dp"/>
                 </TableRow>
 
             </TableLayout>

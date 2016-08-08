@@ -225,7 +225,7 @@ public class NARigInfoActivity extends AppCompatActivity {
                 String holeId = getIntent().getStringExtra("holeId");
                 int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
-                rigViewModel = (NARig) DataManager.queryRig(holeId, rigIndex).deepCopy();
+                rigViewModel = (NARig) DataManager.getRig(holeId, rigIndex).deepCopy();
 
                 refreshInfo();
                 break;

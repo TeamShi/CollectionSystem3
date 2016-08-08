@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * Created by Alfred on 16/7/26.
  */
-public class RegularRig extends Rig {
+public class RegularRig extends CalculatingRig {
     private String rigType;                         // 作业项目
     private int pipeNumber;                         // 钻杆编号
     private double pipeLength;                      // 钻杆长度
@@ -17,11 +17,6 @@ public class RegularRig extends Rig {
     private String drillBitType;                    // 钻头类型
     private double drillBitDiameter;                // 钻头直径
     private double drillBitLength;                  // 钻头长度
-
-    private double drillToolTotalLength;            // 钻具总长
-    private double drillPipeRemainLength;           // 钻杆余长
-    private double roundTripMeterageLength;         // 回次进尺
-    private double accumulatedMeterageLength;       // 累积进尺
 
     private int rockCoreIndex;                      // 岩芯采取编号
     private double rockCoreLength;                  // 岩芯长度
@@ -44,7 +39,8 @@ public class RegularRig extends Rig {
                       double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
                       int rockCoreIndex, double rockCoreLength, double rockCorePickPercentage,
                       String rigStartEndDepth, String rockType, String rockColor, String rockDensity, String rockSaturation, String rockWeathering, String rockDescription, String note) {
-        super(classPeopleCount, date, startTime, endTime);
+        super(classPeopleCount, date, startTime, endTime,
+                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
 
         this.rigType = "干钻";
         this.pipeNumber = pipeNumber;
@@ -57,11 +53,6 @@ public class RegularRig extends Rig {
         this.drillBitType = drillBitType;
         this.drillBitDiameter = drillBitDiameter;
         this.drillBitLength = drillBitLength;
-
-        this.drillToolTotalLength = drillToolTotalLength;
-        this.drillPipeRemainLength = drillPipeRemainLength;
-        this.roundTripMeterageLength = roundTripMeterageLength;
-        this.accumulatedMeterageLength = accumulatedMeterageLength;
 
         this.rockCoreIndex = rockCoreIndex;
         this.rockCoreLength = rockCoreLength;
@@ -161,38 +152,6 @@ public class RegularRig extends Rig {
 
     public void setDrillBitLength(double drillBitLength) {
         this.drillBitLength = drillBitLength;
-    }
-
-    public double getDrillToolTotalLength() {
-        return drillToolTotalLength;
-    }
-
-    public void setDrillToolTotalLength(double drillToolTotalLength) {
-        this.drillToolTotalLength = drillToolTotalLength;
-    }
-
-    public double getDrillPipeRemainLength() {
-        return drillPipeRemainLength;
-    }
-
-    public void setDrillPipeRemainLength(double drillPipeRemainLength) {
-        this.drillPipeRemainLength = drillPipeRemainLength;
-    }
-
-    public double getRoundTripMeterageLength() {
-        return roundTripMeterageLength;
-    }
-
-    public void setRoundTripMeterageLength(double roundTripMeterageLength) {
-        this.roundTripMeterageLength = roundTripMeterageLength;
-    }
-
-    public double getAccumulatedMeterageLength() {
-        return accumulatedMeterageLength;
-    }
-
-    public void setAccumulatedMeterageLength(double accumulatedMeterageLength) {
-        this.accumulatedMeterageLength = accumulatedMeterageLength;
     }
 
     public int getRockCoreIndex() {

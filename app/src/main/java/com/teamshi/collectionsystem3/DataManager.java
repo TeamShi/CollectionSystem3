@@ -1,7 +1,9 @@
 package com.teamshi.collectionsystem3;
 
+import com.teamshi.collectionsystem3.datastructure.CalculatingRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
 
 import java.lang.reflect.Array;
@@ -70,7 +72,7 @@ public class DataManager {
         return resultArray.toArray(resultStringArray);
     }
 
-    public static Rig queryRig(String holeId, int selectedRigIndex) {
+    public static Rig getRig(String holeId, int selectedRigIndex) {
         for (Hole hole : project.getHoleList()) {
             if (hole.getHoleId().equals(holeId)) {
                 return hole.getRigList().get(selectedRigIndex);
@@ -96,6 +98,30 @@ public class DataManager {
                 break;
             }
         }
+    }
+
+    public static Rig getLastRig(String holeId) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                return hole.getRigList().get(hole.getRigList().size() - 1);
+            }
+        }
+
+        return null;
+    }
+
+    public static CalculatingRig getLastCaculatingRig(String holeId) {
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                for (int i = hole.getRigList().size() - 2; i >= 0; i--) {
+                    if (hole.getRigList().get(i) instanceof CalculatingRig) {
+                        return (CalculatingRig) hole.getRigList().get(i);
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     public static void updateRig(String holeId, int index, Rig newRig) {

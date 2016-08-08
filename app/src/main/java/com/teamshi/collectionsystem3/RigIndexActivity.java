@@ -148,7 +148,7 @@ public class RigIndexActivity extends AppCompatActivity {
         Intent intent = null;
 
         int selectedRigIndex = Integer.valueOf(getIntent().getStringExtra("selectedRigIndex"));
-        Rig rig = DataManager.queryRig(holeId, selectedRigIndex);
+        Rig rig = DataManager.getRig(holeId, selectedRigIndex);
 
         switch (item.getItemId()) {
             case CONTEXT_MENU_QUERY:
@@ -171,22 +171,49 @@ public class RigIndexActivity extends AppCompatActivity {
             case CONTEXT_MENU_COPY_NEW:
                 Log.d(TAG, "Copy rig clicked.");
 
-//                if (rig instanceof  NARig)
-//                intent = new Intent(RigInde.this, HoleInfoActivity.class);
-//                intent.putExtra("requestCode", "ACTION_COPY_HOLE");
-//                intent.putExtra("holeId", holeId);
-//                startActivityForResult(intent, ACTION_COPY_HOLE);
+                if (rig instanceof NARig) {
+                    intent = new Intent(RigIndexActivity.this, NARig.class);
+                    intent.putExtra("requestCode", "ACTION_COPY_RIG");
+                    intent.putExtra("rigIndex", selectedRigIndex);
+                    intent.putExtra("holeId", holeId);
+                    startActivityForResult(intent, ACTION_COPY_RIG);
+                } else if (rig instanceof RegularRig) {
+                    Log.d(TAG, "Copy hole clicked.");
+                    intent = new Intent(RigIndexActivity.this, RegularRigActivity.class);
+                    intent.putExtra("requestCode", "ACTION_COPY_RIG");
+                    intent.putExtra("rigIndex", selectedRigIndex);
+                    intent.putExtra("holeId", holeId);
+                    startActivityForResult(intent, ACTION_COPY_RIG);
+                }
+
                 break;
             case CONTEXT_MENU_DELETE:
                 Log.d(TAG, "DeleteRig of holeId: " + holeId + ", rig index: " + selectedRigIndex);
                 if (selectedRigIndex != DataManager.getHole(holeId).getRigList().size() - 1) {
                     Toast.makeText(RigIndexActivity.this, "只能删除最后一次的作业信息.", Toast.LENGTH_LONG).show();
                 } else {
+                    Rig deletingRig = DataManager.getLastRig(holeId);
 
+//                    if (deletingRig instanceof CalculatingRig) {
+//                        CalculatingRig lastCalculatingRig = DataManager.getLastCaculatingRig(holeId);
+//
+//                        if (lastCalculatingRig == null) {
+//                            DataManager.getHole(holeId).setLastRockCorePipeLength(0);
+//                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(0);
+//                        }
+//
+//                        DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+//                        DataManager.getHole(holeId).setLastRockCorePipeLength(lastCalculatingRig.getRockCorePipeLength());
+//                        DataManager.getHole(holeId).setLastAccumulatedMeterageLength(lastCalculatingRig.getAccumulatedMeterageLength());
+//                    }
+//
+//                    if (deletingRig.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
+//                        DataManager.getHole(holeId).addPipe(deletingRig.getPipeLength());
+//                    }
+                    // TODO: delete logic
                     DataManager.removeLastRig(holeId);
+
                     Toast.makeText(RigIndexActivity.this, "删除成功.", Toast.LENGTH_LONG).show();
-
-
 
                     refreshInfo();
                 }
@@ -250,7 +277,7 @@ public class RigIndexActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int selectedRigIndex = (int) v.getTag();
-                    Rig rig = DataManager.queryRig(holeId, selectedRigIndex);
+                    Rig rig = DataManager.getRig(holeId, selectedRigIndex);
                     Intent intent = null;
 
                     Log.d(TAG, "EditRig of holeId: " + holeId + ", rig index: " + selectedRigIndex);

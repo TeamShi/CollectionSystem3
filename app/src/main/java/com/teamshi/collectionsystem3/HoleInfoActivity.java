@@ -698,7 +698,7 @@ public class HoleInfoActivity extends AppCompatActivity {
         takeHolePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Alfred take photo.
+                //TODO: take photo.
             }
         });
 
