@@ -52,7 +52,7 @@ public class HtmlParser {
 
     public static String[] convert2Array(String string) {
 
-        String[] row = string.replaceAll("##","# #").split("#");
+        String[] row = string.replaceAll("##", "# #").split("#");
 
         for (int j = 0, colLen = row.length; j < colLen; j++) {
             if (row[j].equals("null")) {
@@ -108,7 +108,7 @@ public class HtmlParser {
         String projectPath = dirPath + "project_" + project.getProjectName() + ".html";
         InputStream inputStream;
         try {
-            File projectPreviewFile = Utility.createFile(projectPath,false);
+            File projectPreviewFile = Utility.createFile(projectPath, false);
             inputStream = assetManager.open(PROJECT_OVERVIEW_TEMPLATE);
             //读模版文件
             Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
@@ -136,7 +136,7 @@ public class HtmlParser {
 
         for (Hole hole : holes) {
             try {
-              parseHole(dirPath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+                parseHole(dirPath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
 ////            write(dirPath + "/sptRig_" + hole.getHoleId() + ".html", sptRigEventArray, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
 ////            write(dirPath + "/dstRig_" + hole.getHoleId() + ".html", dstRigEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
             } catch (IOException e) {
@@ -222,36 +222,36 @@ public class HtmlParser {
      * sb.append(formatCalendarDateString(sptRigEvent.getEndTime(), "hh时mm分")).append("#");
      * sb.append(sptRigEvent.getPenetration1DepthFrom()).append("#");
      * sb.append(sptRigEvent.getPenetration1DepthTo()).append("#");
-     * <p>
+     * <p/>
      * sb.append(sptRigEvent.getPenetration1DepthFrom()).append("#");
      * sb.append(sptRigEvent.getPenetration1DepthTo()).append("#");
      * sb.append(sptRigEvent.getPenetration1Count()).append("#");
      * sb.append(sptRigEvent.getRig1DepthFrom()).append("#");
      * sb.append(sptRigEvent.getRig1DepthTo()).append("#");
-     * <p>
+     * <p/>
      * sb.append(sptRigEvent.getPenetration2DepthFrom()).append("#");
      * sb.append(sptRigEvent.getPenetration2DepthTo()).append("#");
      * sb.append(sptRigEvent.getPenetration2Count()).append("#");
      * sb.append(sptRigEvent.getRig2DepthFrom()).append("#");
      * sb.append(sptRigEvent.getRig2DepthTo()).append("#");
-     * <p>
+     * <p/>
      * sb.append(sptRigEvent.getPenetration3DepthFrom()).append("#");
      * sb.append(sptRigEvent.getPenetration3DepthTo()).append("#");
      * sb.append(sptRigEvent.getPenetration3Count()).append("#");
      * sb.append(sptRigEvent.getRig3DepthFrom()).append("#");
      * sb.append(sptRigEvent.getRig3DepthTo()).append("#");
-     * <p>
+     * <p/>
      * sb.append(sptRigEvent.getGroundName()).append("#");
      * sb.append(sptRigEvent.getGroundColor()).append("#");
      * sb.append(sptRigEvent.getGroundSaturation()).append("#");
      * sb.append(sptRigEvent.getCumulativeCount()).append("#");
      * sb.append(sptRigEvent.getSpecialNote()).append("#");
-     * <p>
+     * <p/>
      * resultData[i] = convert2Array(sb.toString());
      * }
      * return resultData;
      * }
-     * <p>
+     * <p/>
      * private static String[][] convertSmpl(Hole hole) {
      * ArrayList<SamplingRig> smplRigEvents = new ArrayList<>();
      * for(RigEvent rigEvent : hole.getRigList()){
@@ -268,7 +268,7 @@ public class HtmlParser {
      * sb.append(formatCalendarDateString(samplingRig.getDate(), "yyyy年MM月dd日")).append("#");
      * sb.append(formatCalendarDateString(samplingRig.getStartTime(), "hh时mm分")).append("#");
      * sb.append(formatCalendarDateString(samplingRig.getEndTime(), "hh时mm分")).append("#");
-     * <p>
+     * <p/>
      * sb.append(samplingRig.getSampleStatus()).append("#");
      * sb.append(samplingRig.getSamplerType()).append("#");
      * sb.append(samplingRig.getSampleId()).append("#");
@@ -276,12 +276,12 @@ public class HtmlParser {
      * sb.append(samplingRig.getSampleStartDepth()).append("#");
      * sb.append(samplingRig.getSampleEndDepth()).append("#");
      * sb.append(samplingRig.getSampleCount()).append("#");
-     * <p>
+     * <p/>
      * resultData[i] = convert2Array(sb.toString());
      * }
      * return resultData;
      * }
-     * <p>
+     * <p/>
      * private static String[][] convertDst(Hole hole) {
      * ArrayList<DSTRig> dstRigEvents = new ArrayList<>();
      * for(RigEvent rigEvent : hole.getRigList()){
@@ -305,7 +305,7 @@ public class HtmlParser {
      * sb.append(event.getPenetration()).append("#");
      * sb.append(event.getHammeringCount()).append("#");
      * sb.append(dstRig.getGroundName()).append("#");
-     * <p>
+     * <p/>
      * records.add(sb.toString());
      * }
      * }
@@ -314,7 +314,7 @@ public class HtmlParser {
      * for (int i = 0; i < rows; i++) {
      * resultData[i] = convert2Array(records.get(i));
      * }
-     * <p>
+     * <p/>
      * return resultData;
      * }
      **/
@@ -333,12 +333,12 @@ public class HtmlParser {
             sb.append(Utility.formatCalendarDateString(rig.getDate(), "MM月dd日")).append("#");
             sb.append(Utility.formatCalendarDateString(rig.getStartTime(), "hh时mm分")).append("#");
             sb.append(Utility.formatCalendarDateString(rig.getEndTime(), "hh时mm分")).append("#");
-            sb.append(Utility.calculateTimeSpanChinese(rig.getStartTime(),rig.getEndTime())).append("#");
+            sb.append(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())).append("#");
 
             sb.append(hole.getProjectName()).append("#");
 
-            if(isRegular){
-                RegularRig regularRig = (RegularRig)rigs.get(i);
+            if (isRegular) {
+                RegularRig regularRig = (RegularRig) rigs.get(i);
                 //钻杆
                 sb.append(regularRig.getPipeNumber()).append("#");
                 sb.append(regularRig.getPipeLength()).append("#");
@@ -358,64 +358,54 @@ public class HtmlParser {
                 sb.append(regularRig.getDrillPipeRemainLength()).append("#");
                 sb.append(regularRig.getRoundTripMeterageLength()).append("#");
                 sb.append(regularRig.getAccumulatedMeterageLength()).append("#");
+                //护壁措施
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //孔内情况
+                sb.append("").append("#");
+
+                //岩心采取
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //土样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //水样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //地层
+                if (rig.getRigType().equals("Normal")) {
+                    sb.append(groundNo++).append("#");//编号, 四类普通钻,编号加1
+                } else {
+                    sb.append("").append("#");
+                }
+                sb.append(rig.getGroundDepth()).append("#"); //底层深度 本次累计进尺
+                sb.append(rig.getGroundDepthDiff()).append("#");//层厚 本次累计进尺 -上次累计进尺
+                sb.append(rig.getGroundNote()).append("#"); // 名称及岩性
+                sb.append(rig.getGroundClass()).append("#"); //岩层等级
+
+                //地下水 只填第一行
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append(regularRig.getNote()).append("#");
+
+            }else if(isNAType){
+
             }
 
-
-            //护壁措施
-//            sb.append(rig.getDadoType()).append("#");
-//            sb.append(rig.getCasedId()).append("#");
-//            sb.append(rig.getCasedDiameter()).append("#");
-//            sb.append(rig.getCasedLength()).append("#");
-//            sb.append(rig.getCasedTotalLength()).append("#");
-
-            //孔内情况
-//            sb.append(rig.getCasedSituation()).append("#");
-//
-//
-//            //岩心采取
-//            sb.append(rig.getRockCoreId()).append("#");
-//            sb.append(rig.getRockCoreLength()).append("#");
-//            sb.append(rig.getRockCoreRecovery()).append("#");
-//
-//            //土样
-//            sb.append(rig.getEarthNo()).append("#");
-//            sb.append(rig.getEarthDiameter()).append("#");
-//            sb.append(rig.getEarthDepth()).append("#");
-//            sb.append(rig.getEarthCount()).append("#");
-//
-//            //水样
-//            sb.append(rig.getWaterNo()).append("#");
-//            sb.append(rig.getWaterDepth()).append("#");
-//            sb.append(rig.getWaterCount()).append("#");
-//
-//            //地层
-//            if(rig.getRigType().equals("Normal")){
-//                sb.append(groundNo++).append("#");//编号, 四类普通钻,编号加1
-//            }else{
-//                sb.append("").append("#");
-//            }
-//            sb.append(rig.getGroundDepth()).append("#"); //底层深度 本次累计进尺
-//            double prevGroundDepth = i > 0 ? rigEvents.get(i-1).getCumulativeMeterage(): 0;
-//            double currGroundDepth = rigEvent.getCumulativeMeterage();
-//            sb.append(rig.getGroundDepthDiff()).append("#");//层厚 本次累计进尺 -上次累计进尺
-//            sb.append(rig.getGroundNote()).append("#"); // 名称及岩性
-//            sb.append(rig.getGroundClass()).append("#"); //岩层等级
-
-            //地下水 只填第一行
-            if (i > 0) {
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-            } else {
-//                sb.append(rig.getMeasureDatesInterval()).append("#"); //观测时间 - 观测水位日期差 * 24
-//                sb.append(rig.getInitialLevel()).append("#");
-//                sb.append(rig.getStableLevel()).append("#");
-//                sb.append(rig.getLevelChange()).append("#");
-            }
-
-//            sb.append(rig.getHoleNote()).append("#");
-//
             resultData[i] = convert2Array(sb.toString());
         }
 
