@@ -330,10 +330,9 @@ public class HtmlParser {
             StringBuffer sb = new StringBuffer();
 
             sb.append(rig.getClassPeopleCount()).append("#");
-
-            sb.append(Utility.formatCalendarDateStringWithoutYear(rig.getDate())).append("#");
-            sb.append(Utility.formatTimeStringChinese(rig.getStartTime())).append("#");
-            sb.append(Utility.formatTimeStringChinese(rig.getEndTime())).append("#");
+            sb.append(Utility.formatCalendarDateString(rig.getDate(), "MM月dd日")).append("#");
+            sb.append(Utility.formatCalendarDateString(rig.getStartTime(), "hh时mm分")).append("#");
+            sb.append(Utility.formatCalendarDateString(rig.getEndTime(), "hh时mm分")).append("#");
             sb.append(Utility.calculateTimeSpanChinese(rig.getStartTime(),rig.getEndTime())).append("#");
 
             sb.append(hole.getProjectName()).append("#");

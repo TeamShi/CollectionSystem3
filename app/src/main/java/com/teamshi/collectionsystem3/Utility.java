@@ -2,6 +2,7 @@ package com.teamshi.collectionsystem3;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -279,4 +280,11 @@ public class Utility {
         is.close();
         fos.close();
     }
+
+    public static String formatCalendarDateString(Calendar calendar ,String simpleDateFormat) {
+        SimpleDateFormat fmt = new SimpleDateFormat(simpleDateFormat);// example "yyyy年MM月dd日"
+        String dateStr = fmt.format(calendar.getTime());
+        return dateStr;
+    }
+
 }
