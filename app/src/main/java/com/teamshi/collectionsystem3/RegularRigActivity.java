@@ -1102,6 +1102,13 @@ public class RegularRigActivity extends AppCompatActivity {
                 rockCoreIndexEditText.setEnabled(false);
                 rockCoreLengthEditText.setEnabled(false);
 
+                timeDurationTextView.setEnabled(false);
+                drillToolTotalLengthTextView.setEnabled(false);
+                roundTripMeterageLengthTextView.setEnabled(false);
+                accumulatedMeterageLengthTextView.setEnabled(false);
+                rockCorePickPercentageTextView.setEnabled(false);
+                startEndDepthTextView.setEnabled(false);
+
                 rigViewModel = (RegularRig) DataManager.getRig(holeId, rigIndex).deepCopy();
 
                 refreshInfo();

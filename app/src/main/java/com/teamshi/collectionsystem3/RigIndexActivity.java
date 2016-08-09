@@ -443,10 +443,10 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
