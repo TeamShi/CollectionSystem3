@@ -384,16 +384,16 @@ public class HtmlParser {
                 sb.append("").append("#");
                 sb.append("").append("#");
 
-                //地层
-                if (rig.getRigType().equals("Normal")) {
-                    sb.append(groundNo++).append("#");//编号, 四类普通钻,编号加1
-                } else {
-                    sb.append("").append("#");
-                }
-                sb.append(rig.getGroundDepth()).append("#"); //底层深度 本次累计进尺
-                sb.append(rig.getGroundDepthDiff()).append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(rig.getGroundNote()).append("#"); // 名称及岩性
-                sb.append(rig.getGroundClass()).append("#"); //岩层等级
+//                //地层
+//                if (rig.getRigType().equals("Normal")) {
+//                    sb.append(groundNo++).append("#");//编号, 四类普通钻,编号加1
+//                } else {
+//                    sb.append("").append("#");
+//                }
+//                sb.append(rig.getGroundDepth()).append("#"); //底层深度 本次累计进尺
+//                sb.append(rig.getGroundDepthDiff()).append("#");//层厚 本次累计进尺 -上次累计进尺
+//                sb.append(rig.getGroundNote()).append("#"); // 名称及岩性
+//                sb.append(rig.getGroundClass()).append("#"); //岩层等级
 
                 //地下水 只填第一行
                 sb.append("").append("#");
@@ -402,7 +402,9 @@ public class HtmlParser {
                 sb.append("").append("#");
                 sb.append(regularRig.getNote()).append("#");
 
-            }else if(isNAType){
+            } else if (isNAType) {
+
+            } else {
 
             }
 
