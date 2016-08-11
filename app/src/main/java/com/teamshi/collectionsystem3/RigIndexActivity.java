@@ -26,6 +26,7 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
+import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,7 @@ public class RigIndexActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "newRigButton clicked.");
                 AlertDialog typeDialog;
-                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻"};
+                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RigIndexActivity.this);
 
@@ -91,6 +92,12 @@ public class RigIndexActivity extends AppCompatActivity {
                                 break;
                             case 1:
                                 intent = new Intent(RigIndexActivity.this, RegularRigActivity.class);
+                                intent.putExtra("requestCode", "ACTION_ADD_RIG");
+                                intent.putExtra("holeId", holeId);
+                                startActivityForResult(intent, ACTION_ADD_RIG);
+                                break;
+                            case 2:
+                                intent = new Intent(RigIndexActivity.this, SPTRigActivity.class);
                                 intent.putExtra("requestCode", "ACTION_ADD_RIG");
                                 intent.putExtra("holeId", holeId);
                                 startActivityForResult(intent, ACTION_ADD_RIG);
@@ -267,6 +274,12 @@ public class RigIndexActivity extends AppCompatActivity {
                 RegularRig rig = (RegularRig) hole.getRigList().get(i);
 
                 for (TextView tv : generateRegularRigRowContent(rig)) {
+                    row.addView(tv);
+                }
+            } else if (hole.getRigList().get(i) instanceof SPTRig) {
+                SPTRig rig = (SPTRig) hole.getRigList().get(i);
+
+                for (TextView tv : generateSPTRigRowContent(rig)) {
                     row.addView(tv);
                 }
             }
@@ -447,6 +460,71 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(String.format("%.2f", rig.getAccumulatedMeterageLength())));
         result.add(generateRigInfoCell(String.format("%.2f", rig.getRoundTripMeterageLength())));
         result.add(generateRigInfoCell(rig.getRockDescription()));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        return result;
+    }
+
+    private ArrayList<TextView> generateSPTRigRowContent(SPTRig rig) {
+        ArrayList<TextView> result = new ArrayList<>();
+
+        result.add(generateRigInfoCell(rig.getClassPeopleCount()));
+
+        result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
+        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
+
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
