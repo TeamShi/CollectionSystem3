@@ -173,6 +173,12 @@ public class RigIndexActivity extends AppCompatActivity {
                     intent.putExtra("holeId", holeId);
                     intent.putExtra("rigIndex", selectedRigIndex);
                     startActivityForResult(intent, ACTION_EDIT_RIG);
+                } else if (rig instanceof SPTRig) {
+                    intent = new Intent(RigIndexActivity.this, SPTRigActivity.class);
+                    intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                    intent.putExtra("holeId", holeId);
+                    intent.putExtra("rigIndex", selectedRigIndex);
+                    startActivityForResult(intent, ACTION_EDIT_RIG);
                 }
                 break;
             case CONTEXT_MENU_COPY_NEW:
@@ -185,12 +191,13 @@ public class RigIndexActivity extends AppCompatActivity {
                     intent.putExtra("holeId", holeId);
                     startActivityForResult(intent, ACTION_COPY_RIG);
                 } else if (rig instanceof RegularRig) {
-                    Log.d(TAG, "Copy hole clicked.");
                     intent = new Intent(RigIndexActivity.this, RegularRigActivity.class);
                     intent.putExtra("requestCode", "ACTION_COPY_RIG");
                     intent.putExtra("rigIndex", selectedRigIndex);
                     intent.putExtra("holeId", holeId);
                     startActivityForResult(intent, ACTION_COPY_RIG);
+                } else if (rig instanceof SPTRig) {
+                    Toast.makeText(RigIndexActivity.this, "标准贯入试验不能复制新增.", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -307,6 +314,12 @@ public class RigIndexActivity extends AppCompatActivity {
                         intent.putExtra("holeId", holeId);
                         intent.putExtra("rigIndex", selectedRigIndex);
                         startActivityForResult(intent, ACTION_EDIT_RIG);
+                    } else if (rig instanceof SPTRig) {
+                        intent = new Intent(RigIndexActivity.this, SPTRigActivity.class);
+                        intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                        intent.putExtra("holeId", holeId);
+                        intent.putExtra("rigIndex", selectedRigIndex);
+                        startActivityForResult(intent, ACTION_EDIT_RIG);
                     }
                 }
             });
@@ -335,6 +348,11 @@ public class RigIndexActivity extends AppCompatActivity {
 
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_height) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
         TableRow.LayoutParams param = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, height, 0f);
+
+        int paddingInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_padding) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
+
+        tv.setPadding(paddingInDp, paddingInDp, paddingInDp, paddingInDp);
+        
         tv.setLayoutParams(param);
 
         tv.setGravity(Gravity.CENTER);
@@ -482,7 +500,7 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
         result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
 
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell("标准贯入试验"));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
