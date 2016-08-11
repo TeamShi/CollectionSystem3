@@ -11,11 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -38,6 +41,13 @@ public class SPTRigActivity extends AppCompatActivity {
     private TextView endTimeButton;
     private TextView timeDurationTextView;
 
+    private TextView injectionToolDialameterTextView;
+    private TextView injectionToolLengthTextView;
+
+    private EditText probeTypeEditText;
+    private EditText probeDiameterEditText;
+    private EditText probeLengthEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Start SPTRigActivity.");
@@ -53,6 +63,13 @@ public class SPTRigActivity extends AppCompatActivity {
         startTimeButton = (Button) findViewById(R.id.button_spt_rig_start_time);
         endTimeButton = (Button) findViewById(R.id.button_spt_rig_end_time);
         timeDurationTextView = (TextView) findViewById(R.id.textview_spt_rig_duration);
+
+        injectionToolDialameterTextView = (TextView) findViewById(R.id.textview_spt_rig_injection_tool_diameter);
+        injectionToolLengthTextView = (TextView) findViewById(R.id.textview_spt_rig_injection_tool_length);
+
+        probeTypeEditText = (EditText) findViewById(R.id.edittext_spt_rig_probe_type);
+        probeDiameterEditText = (EditText) findViewById(R.id.edittext_spt_rig_probe_diameter);
+        probeLengthEditText = (EditText) findViewById(R.id.edittext_spt_rig_probe_length);
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -190,6 +207,68 @@ public class SPTRigActivity extends AppCompatActivity {
             }
         });
 
+        probeTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                rigViewModel.setProbeType(s.toString());
+            }
+        });
+
+        probeLengthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    rigViewModel.setProbeLength(Double.parseDouble(s.toString()));
+                    probeLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    probeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+            }
+        });
+
+        probeDiameterEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    rigViewModel.setProbeDiameter(Integer.parseInt(s.toString()));
+                    probeDiameterEditText.setTextColor(getResources().getColor(android.R.color.black));
+                } catch (Exception e) {
+                    probeDiameterEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+
+            }
+        });
+
         String requestCode = getIntent().getStringExtra("requestCode");
 
         holeId = getIntent().getStringExtra("holeId");
@@ -202,14 +281,21 @@ public class SPTRigActivity extends AppCompatActivity {
 
                 rigViewModel = new SPTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
                         0, 0, 0, 0,
-                        0, 0,
-                        "",0, 0);
+                        51, 0.5,
+                        "管靴",0, 0);
                 
                 refreshInfo();
                 break;
             case "ACTION_COPY_RIG":
                 break;
             case "ACTION_EDIT_RIG":
+                String holeId = getIntent().getStringExtra("holeId");
+                int rigIndex = getIntent().getIntExtra("rigIndex", 0);
+
+                rigViewModel = (SPTRig) DataManager.getRig(holeId, rigIndex).deepCopy();
+
+                refreshInfo();
+
                 break;
         }
 
@@ -227,6 +313,13 @@ public class SPTRigActivity extends AppCompatActivity {
         startTimeButton.setText(Utility.formatTimeString(rigViewModel.getStartTime()));
         endTimeButton.setText(Utility.formatTimeString(rigViewModel.getEndTime()));
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
+
+        injectionToolDialameterTextView.setText(String.valueOf(rigViewModel.getInjectionToolDiameter()));
+        injectionToolLengthTextView.setText(String.format("%.2f", rigViewModel.getInjectionToolLength()));
+
+        probeTypeEditText.setText(rigViewModel.getProbeType());
+        probeDiameterEditText.setText(String.valueOf(rigViewModel.getProbeDiameter()));
+        probeLengthEditText.setText(String.format("%.2f", rigViewModel.getProbeLength()));
 
         refreshLock = false;
     }

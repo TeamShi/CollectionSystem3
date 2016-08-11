@@ -352,7 +352,7 @@ public class RigIndexActivity extends AppCompatActivity {
         int paddingInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_padding) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
 
         tv.setPadding(paddingInDp, paddingInDp, paddingInDp, paddingInDp);
-        
+
         tv.setLayoutParams(param);
 
         tv.setGravity(Gravity.CENTER);
