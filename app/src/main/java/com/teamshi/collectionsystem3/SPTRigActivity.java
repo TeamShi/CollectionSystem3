@@ -48,12 +48,19 @@ public class SPTRigActivity extends AppCompatActivity {
     private EditText probeDiameterEditText;
     private EditText probeLengthEditText;
 
+    private TextView drillToolTotalLengthTextView;
+    private EditText drillPipeRemainLengthEditText;
+    private TextView roundTripMeterageLengthTextView;
+    private TextView accumulatedMeterageLengthTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Start SPTRigActivity.");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sptrig);
+
+        this.setTitle("标准贯入试验原始数据录入");
 
         confirmAddRigButton = (Button) findViewById(R.id.button_confirm_add_spt_rig);
         cancelAddRigButton = (Button) findViewById(R.id.button_cancel_add_spt_rig);
@@ -70,6 +77,11 @@ public class SPTRigActivity extends AppCompatActivity {
         probeTypeEditText = (EditText) findViewById(R.id.edittext_spt_rig_probe_type);
         probeDiameterEditText = (EditText) findViewById(R.id.edittext_spt_rig_probe_diameter);
         probeLengthEditText = (EditText) findViewById(R.id.edittext_spt_rig_probe_length);
+
+        drillToolTotalLengthTextView = (TextView) findViewById(R.id.textview_spt_rig_drill_tool_total_length);
+        drillPipeRemainLengthEditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_pipe_remain_length);
+        roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_regular_spt_round_trip_meterage_length);
+        accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_regular_spt_round_trip_meterage_length);
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -269,6 +281,37 @@ public class SPTRigActivity extends AppCompatActivity {
             }
         });
 
+        drillPipeRemainLengthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        rigViewModel.setDrillPipeRemainLength(Double.parseDouble(s.toString()));
+                        drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        //rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
+                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                        //rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
+
+                        refreshInfo();
+                    } catch (Exception e) {
+                        drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+                }
+            }
+        });
+
+
         String requestCode = getIntent().getStringExtra("requestCode");
 
         holeId = getIntent().getStringExtra("holeId");
@@ -282,7 +325,20 @@ public class SPTRigActivity extends AppCompatActivity {
                 rigViewModel = new SPTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
                         0, 0, 0, 0,
                         51, 0.5,
-                        "管靴",0, 0);
+                        "管靴",0, 0,
+                        0, 0, 0,
+                        0, 0,
+                        0, 0,
+                        0, 0,
+                        0, 0,
+                        0, 0,
+                        0, 0,
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                );
                 
                 refreshInfo();
                 break;
