@@ -919,7 +919,7 @@
                         android:gravity="center"/>
                     <TextView
                         android:text="0"
-                        android:id="@+id/textview_spt_rig_accumulate_hit_count"
+                        android:id="@+id/textview_spt_rig_accumulated_hit_count"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_input"
@@ -977,7 +977,6 @@
                         android:layout_weight="1"
                         android:text="表格查看"
                         android:id="@+id/button_spt_rig_view_table"
-                        android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"

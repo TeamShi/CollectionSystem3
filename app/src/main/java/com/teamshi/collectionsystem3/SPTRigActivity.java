@@ -53,6 +53,39 @@ public class SPTRigActivity extends AppCompatActivity {
     private TextView roundTripMeterageLengthTextView;
     private TextView accumulatedMeterageLengthTextView;
 
+    private EditText penetrationStartDepthEditText;
+    private EditText penetrationEndDepthEditText;
+
+    private EditText countStartDepth1EditText;
+    private EditText countEndDepth1EditText;
+    private EditText countStartDepth2EditText;
+    private EditText countEndDepth2EditText;
+    private EditText countStartDepth3EditText;
+    private EditText countEndDepth3EditText;
+
+    private EditText hitCount1EditText;
+    private EditText hitCount2EditText;
+    private EditText hitCount3EditText;
+
+    private EditText drillStartDepth1EditText;
+    private EditText drillEndDepth1EditText;
+    private EditText drillStartDepth2EditText;
+    private EditText drillEndDepth2EditText;
+    private EditText drillStartDepth3EditText;
+    private EditText drillEndDepth3EditText;
+
+    private Button rockParameterButton;
+
+    private EditText rockNameEditText;
+    private EditText rockColorEditText;
+    private EditText rockDensityEditText;
+    private EditText rockSaturationEditText;
+    private TextView accumulatedHitCountTextView;
+
+    private EditText otherDescriptionEditText;
+
+    private Button rigViewTableButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Start SPTRigActivity.");
@@ -82,6 +115,38 @@ public class SPTRigActivity extends AppCompatActivity {
         drillPipeRemainLengthEditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_pipe_remain_length);
         roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_regular_spt_round_trip_meterage_length);
         accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_regular_spt_round_trip_meterage_length);
+
+        penetrationStartDepthEditText = (EditText) findViewById(R.id.edittext_spt_rig_penetration_start_depth);
+        penetrationEndDepthEditText = (EditText) findViewById(R.id.edittext_spt_rig_penetration_end_depth);
+
+        countStartDepth1EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_start_depth_1);
+        countEndDepth1EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_end_depth_1);
+        countStartDepth2EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_start_depth_2);
+        countEndDepth2EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_end_depth_2);
+        countStartDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_start_depth_2);
+        countEndDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_end_depth_3);
+
+        hitCount1EditText = (EditText) findViewById(R.id.edittext_spt_rig_hit_count_1);
+        hitCount2EditText = (EditText) findViewById(R.id.edittext_spt_rig_hit_count_2);
+        hitCount3EditText = (EditText) findViewById(R.id.edittext_spt_rig_hit_count_3);
+
+        drillStartDepth1EditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_start_depth_1);
+        drillEndDepth1EditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_end_depth_1);
+        drillStartDepth2EditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_start_depth_2);
+        drillEndDepth2EditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_end_depth_2);
+        drillStartDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_start_depth_3);
+        drillEndDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_end_depth_3);
+
+        rockParameterButton = (Button) findViewById(R.id.button_spt_rig_rock_parameter_table);
+
+        rockNameEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_name);
+        rockColorEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_color);
+        rockDensityEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_density);
+        rockSaturationEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_saturation);
+        accumulatedHitCountTextView = (TextView) findViewById(R.id.textview_spt_rig_accumulated_hit_count);
+
+        otherDescriptionEditText = (EditText) findViewById(R.id.edittext_spt_rig_other_description);
+
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -376,6 +441,15 @@ public class SPTRigActivity extends AppCompatActivity {
         probeTypeEditText.setText(rigViewModel.getProbeType());
         probeDiameterEditText.setText(String.valueOf(rigViewModel.getProbeDiameter()));
         probeLengthEditText.setText(String.format("%.2f", rigViewModel.getProbeLength()));
+
+        drillToolTotalLengthTextView.setText(String.format("%.2f", rigViewModel.getDrillToolTotalLength()));
+
+        if (getCurrentFocus() != drillPipeRemainLengthEditText) {
+            drillPipeRemainLengthEditText.setText(String.format("%.2f", rigViewModel.getDrillPipeRemainLength()));
+        }
+
+        roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
+        accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
 
         refreshLock = false;
     }
