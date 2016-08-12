@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class IOManager {
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
     public static String APP_DATA = APP_ROOT+File.separator +"Data/";
     private static final String APP_CONFIG = APP_ROOT+File.separator +"Config/";;
-    private static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
+    public static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
     private static Context appContext = null;
 
 
@@ -39,14 +40,23 @@ public class IOManager {
     /*
       app file system overview
 
+              |- Temp - html preview files
+              |
+              |
               |- Config - config.ser (copy from assets if not specified by user)
               |
+              |
               |      |- Project name - ...
-      ZuanTan - Data |                 |- Hole id
+              |      |
+      ZuanTan - Data |                 |- projectName.ser
                      |- Project name - |
-                                       |- Hole id
+                                       |- Hole id - ...
                                        |
-                                       |- projectName.ser
+                                       |- Hole id - ...
+                                       |
+                                       |- Hole id - |- holeId.jpg
+                                                    |
+                                                    |- holeId.xls
 
      */
         File root = new File(APP_ROOT);
@@ -233,4 +243,18 @@ public class IOManager {
 
         return urls;
     }
+
+    public static File getImageFile() {
+        File temp = new File(IOManager.APP_TEMP);
+        String path =  IOManager.APP_TEMP + new Date().getTime()+ ".jpg";
+        File file = new File(path);
+        try {
+            Utility.deleteDir(temp);
+            Utility.createFile(path,false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
 }
