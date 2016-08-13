@@ -20,11 +20,7 @@
         <activity android:name=".RigIndexActivity" />
         <activity android:name=".NARigInfoActivity" />
         <activity android:name=".RegularRigActivity" />
-        <activity android:name=".PreviewActivity" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity android:name=".PreviewActivity" />
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

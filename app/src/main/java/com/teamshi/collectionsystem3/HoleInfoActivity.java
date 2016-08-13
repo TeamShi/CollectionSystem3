@@ -23,9 +23,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 
 import java.io.File;
@@ -104,10 +101,6 @@ public class HoleInfoActivity extends AppCompatActivity {
     private static final int TAKE_PHOTO = 0;
     private static final int CROP_PHOTO = 1;
 
-    private GoogleApiClient client;
-    private Uri uri;
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -115,7 +108,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             case TAKE_PHOTO:
                 Intent intent = new Intent("com.android.camera.action.CROP");
 
-
+                Uri uri = Uri.fromFile(IOManager.getTempImageFile());
                 intent.setDataAndType(uri, "image/*");
                 intent.putExtra("scale", true);
 
@@ -130,6 +123,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                 break;
             case CROP_PHOTO:
                 Bitmap bitmap = null;
+                uri = Uri.fromFile(IOManager.getTempImageFile());
                 try {
                     bitmap = BitmapFactory.decodeStream(
                             getContentResolver().openInputStream(uri));
@@ -761,9 +755,8 @@ public class HoleInfoActivity extends AppCompatActivity {
         takeHolePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo johnson alfred load image when view a hole
-                File file = IOManager.getImageFile();
-                uri = Uri.fromFile(file);
+                File file = IOManager.getTempImageFile();
+                Uri uri = Uri.fromFile(file);
                 //拍照
                 Intent photoIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 //指定图片输出地址
@@ -853,7 +846,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                             DataManager.getProject().getHoleList().add(holeViewModel);
 
                             IOManager.updateProject(DataManager.getProject());
-
+                            IOManager.copyImageFile(holeViewModel);
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
                         }
@@ -921,15 +914,29 @@ public class HoleInfoActivity extends AppCompatActivity {
                 break;
             case "ACTION_EDIT_HOLE":
                 holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
+                File image = IOManager.getHoleImage(holeViewModel);
+                if(image.exists()){
+                    Bitmap bitmap = null;
+                    Uri uri = Uri.fromFile(image);
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(uri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Drawable background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        imageView.setText("");
+                        imageView.setBackground(background);
+                    }
+                }
+
                 break;
             default:
                 break;
         }
 
         refreshInfo();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void refreshInfo() {
@@ -1226,39 +1233,11 @@ public class HoleInfoActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "HoleInfo Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.teamshi.collectionsystem3/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "HoleInfo Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.teamshi.collectionsystem3/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
     }
 }

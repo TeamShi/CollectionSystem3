@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
+import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.parser.HtmlParser;
 
@@ -244,10 +245,16 @@ public class IOManager {
         return urls;
     }
 
-    public static File getImageFile() {
+    private static File tempImageFile;
+
+    public static File getTempImageFile() {
+        if(tempImageFile != null){
+            return tempImageFile;
+        }
         File temp = new File(IOManager.APP_TEMP);
         String path =  IOManager.APP_TEMP + new Date().getTime()+ ".jpg";
         File file = new File(path);
+        tempImageFile = file;
         try {
             Utility.deleteDir(temp);
             Utility.createFile(path,false);
@@ -257,4 +264,27 @@ public class IOManager {
         return file;
     }
 
+    public static File getHoleImage(Hole hole){
+        String holeImagePath =APP_DATA+hole.getProjectName()+File.separator+hole.getHoleId()+File.separator+hole.getHoleId()+".jpg";
+        File file = null;
+        try {
+             file = Utility.createFile(holeImagePath, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    public static void copyImageFile(Hole hole) {
+       File temp = getTempImageFile();
+        InputStream inputstream = null;
+        try {
+            inputstream = new FileInputStream(temp);
+            File dest =getHoleImage(hole);
+            Utility.copyFile(inputstream,dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
