@@ -353,6 +353,7 @@ public class SPTRigActivity extends AppCompatActivity {
             }
 
             @Override
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
@@ -449,7 +450,9 @@ public class SPTRigActivity extends AppCompatActivity {
         }
 
         roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
-        accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
+        accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()));
+
+        
 
         refreshLock = false;
     }
