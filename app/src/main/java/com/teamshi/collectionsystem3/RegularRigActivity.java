@@ -275,6 +275,12 @@ public class RegularRigActivity extends AppCompatActivity {
                         if (validate()) {
                             String holeId = getIntent().getStringExtra("holeId");
 
+                            rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
+                            rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
+                            rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
+                            rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
+
                             DataManager.addRig(holeId, rigViewModel);
 
                             if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
@@ -379,7 +385,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
 
                             rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                            rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + "m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + "m");
+                            rigViewModel.setRigStartEndDepth(String.format("%.2f", DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()) + " m");
 
                             refreshInfo();
                         } catch (Exception e) {
@@ -1055,7 +1061,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
                             1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
-                            DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
+                            DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength()) + " m",
                             "黏土", "灰色", "坚硬", "", "", "", "");
                 }
 

@@ -513,6 +513,10 @@ public class Hole implements Serializable {
         pipeArray.add(length);
     }
 
+    public void removeLastPipe() {
+        pipeArray.remove(pipeArray.size() - 1);
+    }
+
     public double getLastRockCorePipeLength() {
         return lastRockCorePipeLength;
     }

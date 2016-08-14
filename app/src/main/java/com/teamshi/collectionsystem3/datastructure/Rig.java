@@ -13,12 +13,24 @@ public class Rig implements UIMethods, Serializable{
     protected Calendar startTime;
     protected Calendar endTime;
 
+    protected int lastPipeNumber;
+    protected Calendar lastRigEndTime;
+    protected double lastRockCorePipeLength;
+    protected double lastAccumulatedMeterageLength;
+    protected int lastMaxRigRockCoreIndex;
+
     public Rig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
         this.classPeopleCount = classPeopleCount;
 
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+
+        this.lastPipeNumber = 0;
+        this.lastRigEndTime = Calendar.getInstance();
+        this.lastRockCorePipeLength = 0;
+        this.lastAccumulatedMeterageLength = 0;
+        this.lastMaxRigRockCoreIndex = 0;
     }
 
     @Override
@@ -56,6 +68,46 @@ public class Rig implements UIMethods, Serializable{
 
     public void setEndTime(Calendar endTime) {
         this.endTime = endTime;
+    }
+
+    public int getLastPipeNumber() {
+        return lastPipeNumber;
+    }
+
+    public void setLastPipeNumber(int lastPipeNumber) {
+        this.lastPipeNumber = lastPipeNumber;
+    }
+
+    public Calendar getLastRigEndTime() {
+        return lastRigEndTime;
+    }
+
+    public void setLastRigEndTime(Calendar lastRigEndTime) {
+        this.lastRigEndTime = lastRigEndTime;
+    }
+
+    public double getLastRockCorePipeLength() {
+        return lastRockCorePipeLength;
+    }
+
+    public void setLastRockCorePipeLength(double lastRockCorePipeLength) {
+        this.lastRockCorePipeLength = lastRockCorePipeLength;
+    }
+
+    public double getLastAccumulatedMeterageLength() {
+        return lastAccumulatedMeterageLength;
+    }
+
+    public void setLastAccumulatedMeterageLength(double lastAccumulatedMeterageLength) {
+        this.lastAccumulatedMeterageLength = lastAccumulatedMeterageLength;
+    }
+
+    public int getLastMaxRigRockCoreIndex() {
+        return lastMaxRigRockCoreIndex;
+    }
+
+    public void setLastMaxRigRockCoreIndex(int lastMaxRigRockCoreIndex) {
+        this.lastMaxRigRockCoreIndex = lastMaxRigRockCoreIndex;
     }
 }
 

@@ -581,7 +581,8 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:id="@+id/image_view"/>
                     <Button
                         android:layout_weight="1"
                         android:layout_height="300dp"

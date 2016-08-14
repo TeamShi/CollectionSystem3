@@ -1,7 +1,14 @@
 package com.teamshi.collectionsystem3;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +25,8 @@ import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Hole;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 
 public class HoleInfoActivity extends AppCompatActivity {
@@ -75,6 +84,7 @@ public class HoleInfoActivity extends AppCompatActivity {
     private EditText companyEditText;
     private EditText machineIdEditText;
 
+    private TextView imageView;
     private Button takeHolePhotoButton;
 
     private EditText noteEditText;
@@ -87,6 +97,52 @@ public class HoleInfoActivity extends AppCompatActivity {
 
     private EditText classMonitorEditText;
     private EditText machineMonitorEditText;
+
+    private static final int TAKE_PHOTO = 0;
+    private static final int CROP_PHOTO = 1;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case TAKE_PHOTO:
+                Intent intent = new Intent("com.android.camera.action.CROP");
+
+                Uri uri = Uri.fromFile(IOManager.getTempImageFile());
+                intent.setDataAndType(uri, "image/*");
+                intent.putExtra("scale", true);
+
+                intent.putExtra("aspectX", 1);
+                intent.putExtra("aspectY", 1);
+                intent.putExtra("outputX", 800);
+                intent.putExtra("outputY", 600);
+
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                startActivityForResult(intent, CROP_PHOTO);
+                break;
+            case CROP_PHOTO:
+                Bitmap bitmap = null;
+                uri = Uri.fromFile(IOManager.getTempImageFile());
+                try {
+                    bitmap = BitmapFactory.decodeStream(
+                            getContentResolver().openInputStream(uri));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                Drawable background = new BitmapDrawable(bitmap);
+                if (null != background) {
+                    Toast.makeText(this, "照片保存成功", Toast.LENGTH_SHORT).show();
+                    imageView.setText("");
+                    imageView.setBackground(background);
+                } else {
+                    Toast.makeText(this, "照片保存失败", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +202,7 @@ public class HoleInfoActivity extends AppCompatActivity {
         companyEditText = (EditText) findViewById(R.id.edittext_company);
         machineIdEditText = (EditText) findViewById(R.id.edittext_machine_id);
 
+        imageView = (TextView) findViewById(R.id.image_view);
         takeHolePhotoButton = (Button) findViewById(R.id.button_take_hole_photo);
 
         noteEditText = (EditText) findViewById(R.id.edittext_note);
@@ -700,7 +757,13 @@ public class HoleInfoActivity extends AppCompatActivity {
         takeHolePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: take photo.
+                File file = IOManager.getTempImageFile();
+                Uri uri = Uri.fromFile(file);
+                //拍照
+                Intent photoIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                //指定图片输出地址
+                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(photoIntent, TAKE_PHOTO);
             }
         });
 
@@ -785,7 +848,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                             DataManager.getProject().getHoleList().add(holeViewModel);
 
                             IOManager.updateProject(DataManager.getProject());
-
+                            IOManager.copyImageFile(holeViewModel);
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
                         }
@@ -853,6 +916,23 @@ public class HoleInfoActivity extends AppCompatActivity {
                 break;
             case "ACTION_EDIT_HOLE":
                 holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
+                File image = IOManager.getHoleImage(holeViewModel);
+                if(image.exists()){
+                    Bitmap bitmap = null;
+                    Uri uri = Uri.fromFile(image);
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(uri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Drawable background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        imageView.setText("");
+                        imageView.setBackground(background);
+                    }
+                }
+
                 break;
             default:
                 break;
@@ -1151,4 +1231,15 @@ public class HoleInfoActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+    }
 }

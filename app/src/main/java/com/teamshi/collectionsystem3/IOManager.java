@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
+import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.parser.HtmlParser;
 
@@ -18,6 +19,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +33,7 @@ public class IOManager {
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
     public static String APP_DATA = APP_ROOT+File.separator +"Data/";
     private static final String APP_CONFIG = APP_ROOT+File.separator +"Config/";;
-    private static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
+    public static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
     private static Context appContext = null;
 
 
@@ -39,14 +41,23 @@ public class IOManager {
     /*
       app file system overview
 
+              |- Temp - html preview files
+              |
+              |
               |- Config - config.ser (copy from assets if not specified by user)
               |
+              |
               |      |- Project name - ...
-      ZuanTan - Data |                 |- Hole id
+              |      |
+      ZuanTan - Data |                 |- projectName.ser
                      |- Project name - |
-                                       |- Hole id
+                                       |- Hole id - ...
                                        |
-                                       |- projectName.ser
+                                       |- Hole id - ...
+                                       |
+                                       |- Hole id - |- holeId.jpg
+                                                    |
+                                                    |- holeId.xls
 
      */
         File root = new File(APP_ROOT);
@@ -232,5 +243,48 @@ public class IOManager {
         }
 
         return urls;
+    }
+
+    private static File tempImageFile;
+
+    public static File getTempImageFile() {
+        if(tempImageFile != null){
+            return tempImageFile;
+        }
+        File temp = new File(IOManager.APP_TEMP);
+        String path =  IOManager.APP_TEMP + new Date().getTime()+ ".jpg";
+        File file = new File(path);
+        tempImageFile = file;
+        try {
+            Utility.deleteDir(temp);
+            Utility.createFile(path,false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    public static File getHoleImage(Hole hole){
+        String holeImagePath =APP_DATA+hole.getProjectName()+File.separator+hole.getHoleId()+File.separator+hole.getHoleId()+".jpg";
+        File file = null;
+        try {
+             file = Utility.createFile(holeImagePath, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    public static void copyImageFile(Hole hole) {
+       File temp = getTempImageFile();
+        InputStream inputstream = null;
+        try {
+            inputstream = new FileInputStream(temp);
+            File dest =getHoleImage(hole);
+            Utility.copyFile(inputstream,dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
