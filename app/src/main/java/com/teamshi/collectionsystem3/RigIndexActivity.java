@@ -194,23 +194,18 @@ public class RigIndexActivity extends AppCompatActivity {
                 } else {
                     Rig deletingRig = DataManager.getLastRig(holeId);
 
-//                    if (deletingRig instanceof CalculatingRig) {
-//                        CalculatingRig lastCalculatingRig = DataManager.getLastCaculatingRig(holeId);
-//
-//                        if (lastCalculatingRig == null) {
-//                            DataManager.getHole(holeId).setLastRockCorePipeLength(0);
-//                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(0);
-//                        }
-//
-//                        DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-//                        DataManager.getHole(holeId).setLastRockCorePipeLength(lastCalculatingRig.getRockCorePipeLength());
-//                        DataManager.getHole(holeId).setLastAccumulatedMeterageLength(lastCalculatingRig.getAccumulatedMeterageLength());
-//                    }
-//
-//                    if (deletingRig.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
-//                        DataManager.getHole(holeId).addPipe(deletingRig.getPipeLength());
-//                    }
-                    // TODO: delete logic
+                    DataManager.getHole(holeId).setLastRigEndTime(deletingRig.getLastRigEndTime());
+                    DataManager.getHole(holeId).setLastRockCorePipeLength(deletingRig.getLastRockCorePipeLength());
+                    DataManager.getHole(holeId).setLastAccumulatedMeterageLength(deletingRig.getLastAccumulatedMeterageLength());
+
+                    if (deletingRig.getLastPipeNumber() != DataManager.getHole(holeId).getPipeCount()) {
+                        DataManager.getHole(holeId).removeLastPipe();
+                    }
+
+                    if (deletingRig.getLastMaxRigRockCoreIndex() != DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
+                        DataManager.getHole(holeId).setMaxRigRockCoreIndex(deletingRig.getLastMaxRigRockCoreIndex());
+                    }
+
                     DataManager.removeLastRig(holeId);
 
                     Toast.makeText(RigIndexActivity.this, "删除成功.", Toast.LENGTH_LONG).show();

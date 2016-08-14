@@ -171,6 +171,12 @@ public class NARigInfoActivity extends AppCompatActivity {
                         if (validate()) {
                             String holeId = getIntent().getStringExtra("holeId");
 
+                            rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
+                            rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
+                            rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
+                            rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
+
                             DataManager.addRig(holeId, rigViewModel);
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 

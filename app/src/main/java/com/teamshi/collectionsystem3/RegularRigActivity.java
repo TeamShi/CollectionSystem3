@@ -126,6 +126,8 @@ public class RegularRigActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regular_rig);
 
+        this.setTitle("钻进原始数据录入");
+
         confirmAddRigButton = (Button) findViewById(R.id.button_confirm_add_regular_rig);
         cancelAddRigButton = (Button) findViewById(R.id.button_cancel_add_regular_rig);
 
@@ -272,6 +274,12 @@ public class RegularRigActivity extends AppCompatActivity {
                     case "ACTION_COPY_RIG":
                         if (validate()) {
                             String holeId = getIntent().getStringExtra("holeId");
+
+                            rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
+                            rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
+                            rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
+                            rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
 
                             DataManager.addRig(holeId, rigViewModel);
 
