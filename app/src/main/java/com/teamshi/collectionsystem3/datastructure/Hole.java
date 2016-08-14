@@ -3,6 +3,7 @@ package com.teamshi.collectionsystem3.datastructure;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Alfred on 16/7/14.
@@ -582,6 +583,7 @@ public class Hole implements Serializable {
         newHole.setClassMonitor(getClassMonitor());
         newHole.setMachineMonitor(getMachineMonitor());
 
+        List rigList = newHole.getRigList();
         for (Rig rig : getRigList()) {
             rigList.add(rig.deepCopy());
         }
