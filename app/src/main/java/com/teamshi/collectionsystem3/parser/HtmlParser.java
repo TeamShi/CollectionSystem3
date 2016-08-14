@@ -25,6 +25,7 @@ import java.util.List;
 
 public class HtmlParser {
 
+    private static final String NA = "NA";
     public static String PROJECT_OVERVIEW_TEMPLATE = "Project.html";
     public static String BASIC_RIG_EVENT_TEMPLATE = "RigEventTable.html";
     public static String SPT_RIG_EVENT_TEMPLATE = "SPTRigEventTable.html";
@@ -55,7 +56,7 @@ public class HtmlParser {
         String[] row = string.replaceAll("##", "# #").split("#");
 
         for (int j = 0, colLen = row.length; j < colLen; j++) {
-            if (row[j].equals("null")) {
+            if (row[j].equals(NA)) {
                 row[j] = "";
             }
         }
@@ -384,25 +385,86 @@ public class HtmlParser {
                 sb.append("").append("#");
                 sb.append("").append("#");
 
-//                //地层
-//                if (rig.getRigType().equals("Normal")) {
-//                    sb.append(groundNo++).append("#");//编号, 四类普通钻,编号加1
-//                } else {
-//                    sb.append("").append("#");
-//                }
-//                sb.append(rig.getGroundDepth()).append("#"); //底层深度 本次累计进尺
-//                sb.append(rig.getGroundDepthDiff()).append("#");//层厚 本次累计进尺 -上次累计进尺
-//                sb.append(rig.getGroundNote()).append("#"); // 名称及岩性
-//                sb.append(rig.getGroundClass()).append("#"); //岩层等级
+                //地层
+                sb.append("").append("#");//编号, 四类普通钻,编号加1
+                sb.append("").append("#"); //底层深度 本次累计进尺
+                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+                sb.append("").append("#"); // 名称及岩性
+                sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
-                sb.append(regularRig.getNote()).append("#");
+
+                //特殊情况记录 最后一个string 特殊处理
+                sb.append(regularRig.getNote().trim().equals("") ? NA : regularRig.getNote()).append("#");
 
             } else if (isNAType) {
+                NARig naRig = (NARig) rigs.get(i);
+
+                //钻杆
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //岩芯管
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //钻头
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //进尺
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //护壁措施
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //孔内情况
+                sb.append("").append("#");
+
+                //岩心采取
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //土样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //水样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //地层
+                sb.append("").append("#");//编号, 四类普通钻,编号加1
+                sb.append("").append("#"); //底层深度 本次累计进尺
+                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+                sb.append("").append("#"); // 名称及岩性
+                sb.append("").append("#"); //岩层等级
+
+                //地下水 只填第一行
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //特殊情况记录 最后一个string 特殊处理
+                sb.append(naRig.getNaType().trim().equals("") ? NA : naRig.getNaType()).append("#");
 
             } else {
 
