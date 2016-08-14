@@ -41,7 +41,7 @@ public class IOManager {
     /*
       app file system overview
 
-              |- Temp - html preview files
+              |- Temp - html preview files (钻探表 岩样表 土样表 标贯表 动力触探表 临时图片)
               |
               |
               |- Config - config.ser (copy from assets if not specified by user)

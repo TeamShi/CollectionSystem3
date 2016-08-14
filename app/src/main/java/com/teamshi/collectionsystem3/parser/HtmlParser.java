@@ -30,7 +30,7 @@ public class HtmlParser {
     public static String BASIC_RIG_EVENT_TEMPLATE = "RigEventTable.html";
     public static String SPT_RIG_EVENT_TEMPLATE = "SPTRigEventTable.html";
     public static String SMPL_RIG_EVENT_TEMPLATE = "SMPLRigEventTable.html";
-    public static String DST_RIG_EVENT_TEMPLATE = "DSTRigEventTable.html";
+    public static String DST_RIG_EVENT_TEMPLATE = "DSTRigEventTable.html"; // 动力触探
 
 
     public static String TBODY_ID = "tableBody";

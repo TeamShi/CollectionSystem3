@@ -3,11 +3,45 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>钻探助手-标准贯入试验</title>
+    <style>
+        body {
+        font-weight:bold;
+        }
+        table {
+        margin:auto;
+        }
+        .no-border{
+        border:none;
+        }
+        .my-label{
+        margin-left:0.5em;
+        }
+    </style>
 </head>
 <body>
-<table border="1" cellspacing="0" style="margin: auto">
+<table border="1" cellspacing="0" style="margin: auto" class="no-border">
 
-    <caption>标贯信息表</caption>
+    <caption>
+        <p style="font-size:large">铁 道 第 四 勘 察 设 计 院 </p>
+        <div style="position:relative">
+            <h1> 标 贯 贯 入 试 验 原 始 记 录 表</h1>
+
+            <div style="text-align: start;float:right">
+                <label>工程名称：</label> <label id='projectName'>×××× </label>
+                <label class="my-label">钻孔位置：</label><label id="">×××</label>
+                <label class="my-label">钻孔编号：</label><label id='holeId'>Jz-Ⅱ××-×</label>
+                <br/>
+                <label class="">钻孔直径：</label><label id=''>x</label>米
+                <label class="my-label">钻孔标高：</label><label id='holeElevation'>x</label>米
+                <label class="my-label">孔口：</label><label id=''>x</label>米
+                <label class="my-label">开工日期：</label><label id='startDate'>200×年×年×日</label>
+                <br/>
+                <div style="text-align:right">
+                    <label class="my-label">孔底：</label><label id=''>x</label>米
+                    <label class="my-label">竣工日期：</label><label id=''>200×年×年×日</label>
+                </div>
+            </div>
+    </caption>
     <thead>
     <tr>
         <th rowspan="4">班次/人数</th>
@@ -81,6 +115,15 @@
 
     </thead>
     <tbody id="tableBody">
+        <tr>
+            <td colspan="3" class="no-border"></td>
+            <td colspan="2" class="no-border">记录：<label id='recorderName'>×××</label></td>
+            <td colspan="2" class="no-border"></td>
+            <td colspan="2" class="no-border">班长：<label id='squadName'>×××</label></td>
+            <td colspan="2" class="no-border"></td>
+            <td colspan="2" class="no-border">机长：<label id='captainName'>×××</label></td>
+            <td colspan="2" class="no-border"></td>
+        </tr>
 
     </tbody>
 
