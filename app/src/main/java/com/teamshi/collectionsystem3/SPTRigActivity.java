@@ -2,6 +2,7 @@ package com.teamshi.collectionsystem3;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -377,6 +378,24 @@ public class SPTRigActivity extends AppCompatActivity {
             }
         });
 
+        rockParameterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SPTRigActivity.this, SPTConfigurationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        rigViewTableButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Johnson preview
+//                Intent intent = new Intent(RigIndexActivity.this, NARigInfoActivity.class);
+//                intent.putExtra("requestCode", "");
+//                intent.putExtra("holeId", holeId);
+//                startActivityForResult(intent, ACTION_EDIT_RIG);
+            }
+        });
 
         String requestCode = getIntent().getStringExtra("requestCode");
 
@@ -392,10 +411,11 @@ public class SPTRigActivity extends AppCompatActivity {
                         0, 0, 0, 0,
                         51, 0.5,
                         "管靴",0, 0,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         0, 0, 0,
-                        0, 0,
-                        0, 0,
-                        0, 0,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.15, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         0, 0,
                         0, 0,
                         0, 0,
@@ -452,7 +472,13 @@ public class SPTRigActivity extends AppCompatActivity {
         roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
         accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()));
 
-        
+        if (getCurrentFocus() != penetrationStartDepthEditText) {
+            penetrationStartDepthEditText.setText(String.format("%.2f", rigViewModel.getPenetrationStartDepth()));
+        }
+
+        if (getCurrentFocus() != penetrationEndDepthEditText) {
+            penetrationEndDepthEditText.setText(String.format("%.2f", rigViewModel.getPenetrationEndDepth()));
+        }
 
         refreshLock = false;
     }

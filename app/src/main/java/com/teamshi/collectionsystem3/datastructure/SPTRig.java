@@ -44,7 +44,8 @@ public class SPTRig extends CalculatingRig {
                   double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
                   int injectionToolDiameter, double injectionToolLength,
                   String probeType, int probeDiameter, double probeLength,
-                  int hitCount1, int hitCount2, int hitcount3,
+                  double penetrationStartDepth, double penetrationEndDepth,
+                  int hitCount1, int hitCount2, int hitCount3,
                   double countStartDepth1, double countEndDepth1,
                   double countStartDepth2, double countEndDepth2,
                   double countStartDepth3, double countEndDepth3,
@@ -65,11 +66,14 @@ public class SPTRig extends CalculatingRig {
         this.probeDiameter = probeDiameter;
         this.probeLength = probeLength;
 
+        this.penetrationStartDepth = penetrationStartDepth;
+        this.penetrationEndDepth = penetrationEndDepth;
+
         this.hitCount1 = hitCount1;
         this.hitCount2 = hitCount2;
-        this.hitCount3 = hitcount3;
+        this.hitCount3 = hitCount3;
 
-        this.accumulatehHitCount = hitCount1 + hitCount2 + hitcount3;
+        this.accumulatehHitCount = hitCount1 + hitCount2 + hitCount3;
 
         this.countStartDepth1 = countStartDepth1;
         this.countStartDepth2 = countStartDepth2;
@@ -82,6 +86,10 @@ public class SPTRig extends CalculatingRig {
         this.drillStartDepth1 = drillStartDepth1;
         this.drillStartDepth2 = drillStartDepth2;
         this.drillStartDepth3 = drillStartDepth3;
+
+        this.drillEndDepth1 = drillEndDepth1;
+        this.drillEndDepth2 = drillEndDepth2;
+        this.drillEndDepth3 = drillEndDepth3;
 
         this.rockName = rockName;
         this.rockColor = rockColor;
@@ -320,6 +328,7 @@ public class SPTRig extends CalculatingRig {
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
                 injectionToolDiameter, injectionToolLength,
                 probeType, probeDiameter, probeLength,
+                penetrationStartDepth, penetrationEndDepth,
                 hitCount1, hitCount2, hitCount3,
                 countStartDepth1, countEndDepth1,
                 countStartDepth2, countStartDepth2,
