@@ -42,6 +42,8 @@ public class NARigInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_narig_info);
 
+        this.setTitle("原始数据录入");
+
         confirmAddRigButton = (Button) findViewById(R.id.button_confirm_add_narig);
         cancelAddRigButton = (Button) findViewById(R.id.button_cancel_add_narig);
 

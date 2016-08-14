@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -29,6 +30,8 @@
         <activity android:name=".RegularRigActivity" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".DSTRigActivity"></activity>
+        <activity android:name=".SPTRigActivity" />
+        <activity android:name=".SPTConfigurationActivity"></activity>
     </application>
 
 </manifest>

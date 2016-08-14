@@ -150,6 +150,8 @@ public class HoleInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole_info);
 
+        this.setTitle("作业点原始数据录入");
+
         confirmAddHoleButton = (Button) findViewById(R.id.button_confirm_add_hole);
         cancelAddHoleButton = (Button) findViewById(R.id.button_cancel_add_hole);
 
