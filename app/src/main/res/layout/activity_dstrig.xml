@@ -171,6 +171,23 @@
                         android:layout_width="0dp"
                         android:gravity="center"/>
                     <TextView
+                        android:text="类型"
+                        android:gravity="center"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_gravity="center_vertical" />
+                    <EditText
+                        android:id="@+id/edittext_dst_rig_probe_type"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_gravity="center_vertical" />
+                    <TextView
                         android:text="直径(mm)"
                         android:gravity="center"
                         android:layout_weight="2"
@@ -179,9 +196,8 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/textview_dst_rig_injection_tool_diameter"
-                        android:gravity="center"
+                    <EditText
+                        android:id="@+id/edittext_dst_rig_probe_diameter"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
@@ -197,15 +213,126 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/textview_dst_rig_injection_tool_length"
-                        android:gravity="center"
-                        android:layout_weight="6"
+                    <EditText
+                        android:id="@+id/edittext_dst_rig_probe_length"
+                        android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="说明：（钻具总长）-（钻杆余长）=累计进尺；（累计进尺）-（上一钻累计进尺）=回次进尺"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="48sp"
+                        android:layout_width="0dp"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="20dp"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="进尺"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:text="钻具总长(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_weight="2"
+                        android:id="@+id/textview_dst_rig_drill_tool_total_length"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"/>
+                    <TextView
+                        android:text="钻杆余长(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <EditText
+                        android:layout_weight="2"
+                        android:id="@+id/edittext_dst_rig_drill_pipe_remain_length"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:text="回次进尺(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_weight="2"
+                        android:id="@+id/textview_dst_round_trip_meterage_length"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"/>
+                    <TextView
+                        android:text="累积进尺(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_weight="2"
+                        android:id="@+id/textview_dst_accumulated_meterage_length"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"/>
                 </TableRow>
             </TableLayout>
         </ScrollView>

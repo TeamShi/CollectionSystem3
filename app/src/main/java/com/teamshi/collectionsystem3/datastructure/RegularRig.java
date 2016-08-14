@@ -71,7 +71,7 @@ public class RegularRig extends CalculatingRig {
     }
     
     @Override
-    public Rig deepCopy() {
+    public RegularRig deepCopy() {
         RegularRig temp = new RegularRig(classPeopleCount, date, startTime, endTime,
                 pipeNumber, pipeLength, pipeTotalLength,
                 rockCorePipeDiameter, rockCorePipeLength, drillBitType, drillBitDiameter, drillBitLength,

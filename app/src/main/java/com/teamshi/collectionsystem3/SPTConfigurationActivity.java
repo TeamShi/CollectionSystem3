@@ -62,8 +62,5 @@ public class SPTConfigurationActivity extends AppCompatActivity {
         sptConfigurationTable3Value2TextView.setText(String.valueOf((int) ConfigurationManager.getSptTable3Argument1() + " < N <= " + String.valueOf((int) ConfigurationManager.getSptTable3Argument2())));
         sptConfigurationTable3Value3TextView.setText(String.valueOf((int) ConfigurationManager.getSptTable3Argument2() + " < N <= " + String.valueOf((int) ConfigurationManager.getSptTable3Argument3())));
         sptConfigurationTable3Value4TextView.setText(String.valueOf("N > " + String.valueOf((int) ConfigurationManager.getSptTable3Argument3())));
-
-
-
     }
 }

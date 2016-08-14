@@ -114,8 +114,8 @@ public class SPTRigActivity extends AppCompatActivity {
 
         drillToolTotalLengthTextView = (TextView) findViewById(R.id.textview_spt_rig_drill_tool_total_length);
         drillPipeRemainLengthEditText = (EditText) findViewById(R.id.edittext_spt_rig_drill_pipe_remain_length);
-        roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_regular_spt_round_trip_meterage_length);
-        accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_regular_spt_round_trip_meterage_length);
+        roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_spt_round_trip_meterage_length);
+        accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_spt_accumulated_meterage_length);
 
         penetrationStartDepthEditText = (EditText) findViewById(R.id.edittext_spt_rig_penetration_start_depth);
         penetrationEndDepthEditText = (EditText) findViewById(R.id.edittext_spt_rig_penetration_end_depth);

@@ -82,6 +82,12 @@ public class DSTRig extends CalculatingRig  {
         public void setSaturationDescription(String saturationDescription) {
             this.saturationDescription = saturationDescription;
         }
+
+        public DSTDetailInfo deepCopy() {
+            DSTDetailInfo temp = new DSTDetailInfo(pipeLength, depth, length, hitCount, saturationDescription);
+
+            return temp;
+        }
     }
 
     public String getProbeType() {
@@ -108,5 +114,24 @@ public class DSTRig extends CalculatingRig  {
         this.probeLength = probeLength;
     }
 
+    public ArrayList<DSTDetailInfo> getDstDetailInfos() {
+        return dstDetailInfos;
+    }
 
+    public void setDstDetailInfos(ArrayList<DSTDetailInfo> dstDetailInfos) {
+        this.dstDetailInfos = dstDetailInfos;
+    }
+
+    @Override
+    public DSTRig deepCopy() {
+        DSTRig temp = new DSTRig(classPeopleCount, date, startTime, endTime,
+                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
+                probeType, probeDiameter, probeLength);
+
+        for (DSTDetailInfo info : dstDetailInfos) {
+            temp.getDstDetailInfos().add(info.deepCopy());
+        }
+
+        return temp;
+    }
 }

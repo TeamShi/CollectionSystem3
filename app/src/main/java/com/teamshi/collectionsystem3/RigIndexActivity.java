@@ -22,6 +22,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
@@ -73,7 +74,7 @@ public class RigIndexActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "newRigButton clicked.");
                 AlertDialog typeDialog;
-                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验"};
+                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RigIndexActivity.this);
 
@@ -98,6 +99,12 @@ public class RigIndexActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 intent = new Intent(RigIndexActivity.this, SPTRigActivity.class);
+                                intent.putExtra("requestCode", "ACTION_ADD_RIG");
+                                intent.putExtra("holeId", holeId);
+                                startActivityForResult(intent, ACTION_ADD_RIG);
+                                break;
+                            case 3:
+                                intent = new Intent(RigIndexActivity.this, DSTRigActivity.class);
                                 intent.putExtra("requestCode", "ACTION_ADD_RIG");
                                 intent.putExtra("holeId", holeId);
                                 startActivityForResult(intent, ACTION_ADD_RIG);
@@ -284,6 +291,11 @@ public class RigIndexActivity extends AppCompatActivity {
                 for (TextView tv : generateSPTRigRowContent(rig)) {
                     row.addView(tv);
                 }
+            } else if (hole.getRigList().get(i) instanceof DSTRig) {
+                DSTRig rig = (DSTRig) hole.getRigList().get(i);
+                for (TextView tv : generateDSTRigRowContent(rig)) {
+                    row.addView(tv);
+                }
             }
 
             row.setTag(i);
@@ -311,6 +323,12 @@ public class RigIndexActivity extends AppCompatActivity {
                         startActivityForResult(intent, ACTION_EDIT_RIG);
                     } else if (rig instanceof SPTRig) {
                         intent = new Intent(RigIndexActivity.this, SPTRigActivity.class);
+                        intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                        intent.putExtra("holeId", holeId);
+                        intent.putExtra("rigIndex", selectedRigIndex);
+                        startActivityForResult(intent, ACTION_EDIT_RIG);
+                    } else if (rig instanceof DSTRig) {
+                        intent = new Intent(RigIndexActivity.this, DSTRigActivity.class);
                         intent.putExtra("requestCode", "ACTION_EDIT_RIG");
                         intent.putExtra("holeId", holeId);
                         intent.putExtra("rigIndex", selectedRigIndex);
@@ -550,6 +568,70 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
+    private ArrayList<TextView> generateDSTRigRowContent(DSTRig rig) {
+        ArrayList<TextView> result = new ArrayList<>();
+
+        result.add(generateRigInfoCell(rig.getClassPeopleCount()));
+
+        result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
+        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
+
+        result.add(generateRigInfoCell("动力触探试验"));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        return result;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -572,4 +654,5 @@ public class RigIndexActivity extends AppCompatActivity {
                 }
         }
     }
+
 }
