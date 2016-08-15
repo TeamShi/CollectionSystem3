@@ -375,6 +375,7 @@
                         android:text="贯入深度(m)"
                         android:layout_weight="1"
                         android:background="@drawable/cell_hint"
+                        android:textColor="@android:color/black"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
@@ -391,9 +392,10 @@
                         android:layout_width="0dp"
                         android:gravity="center"/>
                     <TextView
-                        android:layout_weight="1"
+                        android:layout_weight="3"
                         android:text="密实度判断"
                         android:background="@drawable/cell_hint"
+                        android:textColor="@android:color/black"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"

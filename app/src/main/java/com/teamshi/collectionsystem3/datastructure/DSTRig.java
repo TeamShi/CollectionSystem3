@@ -28,7 +28,7 @@ public class DSTRig extends CalculatingRig  {
         dstDetailInfos.add(new DSTDetailInfo(0, 0, 0, 0, ""));
     }
 
-    public class DSTDetailInfo {
+    public static class DSTDetailInfo {
         private int pipeLength;
         private int depth;
         private int length;

@@ -52,30 +52,15 @@ public class DSTRigActivity extends AppCompatActivity {
     private TextView roundTripMeterageLengthTextView;
     private TextView accumulatedMeterageLengthTextView;
 
-    private TableRow detailedInfo1TableRow;
-    private TableRow detailedInfo2TableRow;
-
-    private TextView detailedInfo1PipeLengthTextView;
-    private TextView detailedInfo2PipeLengthTextView;
-
-    private TextView detailedInfo1DepthEditText;
-    private TextView detailedInfo2DepthEditText;
-
-    private EditText detailedInfo1LengthEditText;
-    private EditText detailedInfo2LengthEditText;
-
-    private EditText detailedInfo1HitCountEditText;
-    private EditText edtailedInfo2HitCountEditText;
-
-    private TextView detailedInfo1SaturationDescriptionTextView;
-    private TextView detailedInfo2SaturationDescriptionTextView;
-
     private TableRow[] detailedInfoTableRows = new TableRow[20];
     private TextView[] detailedInfoPipeLengthTextViews = new TextView[20];
     private TextView[] detailedInfoDepthTextViews = new TextView[20];
     private EditText[] detailedInfoLengthEditTexts = new EditText[20];
-    private EditText[] detaieldInfoHitCountEditTexts = new EditText[20];
-    private TextView[] detailedInfoSaturationDescription = new TextView[20];
+    private EditText[] detailedInfoHitCountEditTexts = new EditText[20];
+    private TextView[] detailedInfoSaturationDescriptions = new TextView[20];
+
+    private Button addDstDetailButton;
+    private Button deleteDstDetailButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,19 +89,46 @@ public class DSTRigActivity extends AppCompatActivity {
         roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_dst_round_trip_meterage_length);
         accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_dst_accumulated_meterage_length);
 
+        addDstDetailButton = (Button) findViewById(R.id.button_add_dst_detail);
+        deleteDstDetailButton = (Button) findViewById(R.id.button_delete_dst_detail);
+
         for (int i = 1; i <= 20; i++) {
-            try {
-                Field f = this.getClass().getDeclaredField("detailedInfo" + i + "TableRow");
-                f.setAccessible(true);
-                TableRow tr = (TableRow) f.get(this);
-                tr = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
-                detailedInfoTableRows[i - 1] = tr;
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            TableRow detailedInfoTableRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
+            detailedInfoTableRows[i - 1] = detailedInfoTableRow;
+
+            TextView detailedInfoPipeLengthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_pipe_length", "id", getPackageName()));
+            detailedInfoPipeLengthTextViews[i - 1] = detailedInfoPipeLengthTextView;
+
+            TextView detailedInfoDepthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_depth", "id", getPackageName()));
+            detailedInfoDepthTextViews[i - 1] = detailedInfoDepthTextView;
+
+            EditText detailedInfoLengthEditText = (EditText) findViewById(getResources().getIdentifier("edittext_dst_detail_" + i + "_length", "id", getPackageName()));
+            detailedInfoLengthEditTexts[i - 1] = detailedInfoLengthEditText;
+
+            EditText detailedInfoHitCountEditText = (EditText) findViewById(getResources().getIdentifier("edittext_dst_detail_" + i + "_hit_count", "id", getPackageName()));
+            detailedInfoHitCountEditTexts[i - 1] = detailedInfoHitCountEditText;
+
+            TextView detailedInfoSaturationDescription = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_saturation_description", "id", getPackageName()));
+            detailedInfoSaturationDescriptions[i - 1] = detailedInfoSaturationDescription;
         }
+
+        addDstDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rigViewModel.getDstDetailInfos().add(new DSTRig.DSTDetailInfo(0, 0, 0, 0, ""));
+
+                refreshInfo();
+            }
+        });
+
+        deleteDstDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rigViewModel.getDstDetailInfos().remove(rigViewModel.getDstDetailInfos().size() - 1);
+
+                refreshInfo();
+            }
+        });
 
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
@@ -403,6 +415,27 @@ public class DSTRigActivity extends AppCompatActivity {
 
         roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
         accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()));
+
+        if (rigViewModel.getDstDetailInfos().size() == 1) {
+            deleteDstDetailButton.setEnabled(false);
+        } else {
+            deleteDstDetailButton.setEnabled(true);
+        }
+
+        if (rigViewModel.getDstDetailInfos().size() == 20) {
+            addDstDetailButton.setEnabled(false);
+        } else {
+            addDstDetailButton.setEnabled(true);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            if (i < rigViewModel.getDstDetailInfos().size()) {
+                detailedInfoTableRows[i].setVisibility(View.VISIBLE);
+
+            } else {
+                detailedInfoTableRows[i].setVisibility(View.GONE);
+            }
+        }
 
         refreshLock = false;
     }
