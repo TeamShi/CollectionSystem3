@@ -11,12 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -47,6 +52,31 @@ public class DSTRigActivity extends AppCompatActivity {
     private TextView roundTripMeterageLengthTextView;
     private TextView accumulatedMeterageLengthTextView;
 
+    private TableRow detailedInfo1TableRow;
+    private TableRow detailedInfo2TableRow;
+
+    private TextView detailedInfo1PipeLengthTextView;
+    private TextView detailedInfo2PipeLengthTextView;
+
+    private TextView detailedInfo1DepthEditText;
+    private TextView detailedInfo2DepthEditText;
+
+    private EditText detailedInfo1LengthEditText;
+    private EditText detailedInfo2LengthEditText;
+
+    private EditText detailedInfo1HitCountEditText;
+    private EditText edtailedInfo2HitCountEditText;
+
+    private TextView detailedInfo1SaturationDescriptionTextView;
+    private TextView detailedInfo2SaturationDescriptionTextView;
+
+    private TableRow[] detailedInfoTableRows = new TableRow[20];
+    private TextView[] detailedInfoPipeLengthTextViews = new TextView[20];
+    private TextView[] detailedInfoDepthTextViews = new TextView[20];
+    private EditText[] detailedInfoLengthEditTexts = new EditText[20];
+    private EditText[] detaieldInfoHitCountEditTexts = new EditText[20];
+    private TextView[] detailedInfoSaturationDescription = new TextView[20];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Start DSTRigActivity.");
@@ -73,6 +103,21 @@ public class DSTRigActivity extends AppCompatActivity {
         drillPipeRemainLengthEditText = (EditText) findViewById(R.id.edittext_dst_rig_drill_pipe_remain_length);
         roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_dst_round_trip_meterage_length);
         accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_dst_accumulated_meterage_length);
+
+        for (int i = 1; i <= 20; i++) {
+            try {
+                Field f = this.getClass().getDeclaredField("detailedInfo" + i + "TableRow");
+                f.setAccessible(true);
+                TableRow tr = (TableRow) f.get(this);
+                tr = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
+                detailedInfoTableRows[i - 1] = tr;
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
