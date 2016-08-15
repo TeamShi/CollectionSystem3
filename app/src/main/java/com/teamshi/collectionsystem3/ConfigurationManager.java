@@ -292,7 +292,7 @@ public class ConfigurationManager {
     }
 
     public static void setTemplateDictionary(Map<String, String> templateDictionary) {
-        templateDictionary = templateDictionary;
+        ConfigurationManager.templateDictionary = templateDictionary;
     }
 
     public static String getSPTDestiny(int selectionIndex, int hit) {
