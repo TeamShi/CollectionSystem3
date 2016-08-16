@@ -26,106 +26,92 @@
         <div style="position:relative">
             <h1> 标 贯 贯 入 试 验 原 始 记 录 表</h1>
 
-            <div style="text-align: start;float:right">
+            <div style="text-align: right">
                 <label>工程名称：</label> <label id='projectName'>×××× </label>
-                <label class="my-label">钻孔位置：</label><label id="">×××</label>
+                <label class="my-label">钻孔位置：</label><label id="d">×××</label>
                 <label class="my-label">钻孔编号：</label><label id='holeId'>Jz-Ⅱ××-×</label>
-                <br/>
+            </div>
+            <div style="text-align: right">
+
                 <label class="">钻孔直径：</label><label id=''>x</label>米
                 <label class="my-label">钻孔标高：</label><label id='holeElevation'>x</label>米
                 <label class="my-label">孔口：</label><label id=''>x</label>米
                 <label class="my-label">开工日期：</label><label id='startDate'>200×年×年×日</label>
-                <br/>
-                <div style="text-align:right">
-                    <label class="my-label">孔底：</label><label id=''>x</label>米
-                    <label class="my-label">竣工日期：</label><label id=''>200×年×年×日</label>
-                </div>
             </div>
+            <div style="text-align:right">
+                <label class="my-label">孔底：</label><label id=''>x</label>米
+                <label class="my-label">竣工日期：</label><label id=''>200×年×年×日</label>
+            </div>
+        </div>
     </caption>
     <thead>
     <tr>
-        <th rowspan="4">班次/人数</th>
-        <th colspan="3">时间</th>
-        <th colspan="17">进尺</th>
-        <th colspan="5">野外描述</th>
-
+        <th rowspan="3">顺序号</th>
+        <th colspan="5">工作时间</th>
+        <th colspan="1"  rowspan="3">分层</th>
+        <th colspan="6">进尺</th>
+        <th colspan="9">野外描述</th>
+        <th colspan="1"  rowspan="3"> 其他特征及包含</th>
+        <th colspan="1"  rowspan="3"> 贯入击数</th>
+        <th colspan="2"  rowspan="1"> 地下水位</th>
+        <th colspan="1"  rowspan="3"> 备考</th>
     </tr>
 
     <tr>
 
-        <th rowspan="3">日期</th>
-        <th rowspan="3">开始时间</th>
-        <th rowspan="3">结束时间</th>
+        <th rowspan="2">月</th>
+        <th rowspan="2">日</th>
+        <th rowspan="2">班次</th>
+        <th rowspan="2"> 自(时分)</th>
+        <th rowspan="2"> 至(时分)</th>
 
         <th colspan="2">贯入深度</th>
-        <th colspan="5">第一贯击</th>
-        <th colspan="5">第二贯击</th>
-        <th colspan="5">第三贯击</th>
+        <th colspan="2">计数深度</th>
+        <th colspan="2">钻进深度</th>
 
-        <th rowspan="3">名称</th>
-        <th rowspan="3">颜色</th>
-        <th rowspan="3">饱和度</th>
-        <th rowspan="3">累计击数</th>
-        <th rowspan="3">其他特征</th>
+        <th rowspan="2">分类</th>
+        <th rowspan="2">颜色</th>
+        <th rowspan="2">密度</th>
+        <th rowspan="2">深度</th>
+        <th rowspan="1" colspan="2">粘性土</th>
+        <th rowspan="2">光泽</th>
+        <th rowspan="2">夹杂物</th>
+        <th rowspan="2">气味</th>
 
+        <th rowspan="2">初见</th>
+        <th rowspan="2">静止</th>
 
     </tr>
 
     <tr>
 
-        <th rowspan="2">自</th>
-        <th rowspan="2">至</th>
+        <th rowspan="1">自</th>
+        <th rowspan="1">至</th>
+        <th rowspan="1">自</th>
+        <th rowspan="1">至</th>
+        <th rowspan="1">自</th>
+        <th rowspan="1">至</th>
 
-        <th colspan="3">计数深度</th>
-        <th colspan="2">钻进深度</th>
-
-        <th colspan="3">计数深度</th>
-        <th colspan="2">钻进深度</th>
-
-        <th colspan="3">计数深度</th>
-        <th colspan="2">钻进深度</th>
-
-    </tr>
-
-    <tr>
-
-        <th>自</th>
-        <th>至</th>
-        <th>贯入击数</th>
-
-        <th>自</th>
-        <th>至</th>
-
-        <th>自</th>
-        <th>至</th>
-        <th>贯入击数</th>
-
-        <th>自</th>
-        <th>至</th>
-
-        <th>自</th>
-        <th>至</th>
-        <th>贯入击数</th>
-
-        <th>自</th>
-        <th>至</th>
-
+        <th colspan="1">等级</th>
+        <th colspan="1">状态</th>
 
     </tr>
 
     </thead>
     <tbody id="tableBody">
-        <tr>
-            <td colspan="3" class="no-border"></td>
-            <td colspan="2" class="no-border">记录：<label id='recorderName'>×××</label></td>
-            <td colspan="2" class="no-border"></td>
-            <td colspan="2" class="no-border">班长：<label id='squadName'>×××</label></td>
-            <td colspan="2" class="no-border"></td>
-            <td colspan="2" class="no-border">机长：<label id='captainName'>×××</label></td>
-            <td colspan="2" class="no-border"></td>
-        </tr>
 
     </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5" class="no-border"></td>
+        <td colspan="3" class="no-border">记录：<label id='recorderName'>×××</label></td>
+        <td colspan="1" class="no-border"></td>
+        <td colspan="1" class="no-border">班长：<label id='squadName'>×××</label></td>
+        <td colspan="1" class="no-border"></td>
+        <td colspan="3" class="no-border">机长：<label id='captainName'>×××</label></td>
+    </tr>
+
+    </tfoot>
 
 </table>
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
@@ -24,6 +25,7 @@ import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class SPTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
@@ -148,8 +150,7 @@ public class SPTRigActivity extends AppCompatActivity {
         accumulatedHitCountTextView = (TextView) findViewById(R.id.textview_spt_rig_accumulated_hit_count);
 
         otherDescriptionEditText = (EditText) findViewById(R.id.edittext_spt_rig_other_description);
-
-        rigViewTableButton = (Button) findViewById(R.id.button_spt_rig_view_table);
+        rigViewTableButton =  (Button) findViewById(R.id.button_preview_spt);
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -472,10 +473,12 @@ public class SPTRigActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO: Johnson preview
-//                Intent intent = new Intent(RigIndexActivity.this, NARigInfoActivity.class);
-//                intent.putExtra("requestCode", "");
-//                intent.putExtra("holeId", holeId);
-//                startActivityForResult(intent, ACTION_EDIT_RIG);
+                Project project = DataManager.getProject();
+
+                PreviewActivity.setUrls(IOManager.previewSPTRig(rigViewModel));
+                Intent intent = new Intent(SPTRigActivity.this, PreviewActivity.class);
+                intent.putExtra("projectName", project.getProjectName());
+                startActivity(intent);
             }
         });
 

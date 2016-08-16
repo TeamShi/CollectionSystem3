@@ -91,11 +91,10 @@ public class HoleIndexActivity extends AppCompatActivity {
                     Toast.makeText(HoleIndexActivity.this, "请先添加新孔.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                PreviewActivity.setUrls(IOManager.previewProject());
                 Intent intent = new Intent(HoleIndexActivity.this, PreviewActivity.class);
                 intent.putExtra("projectName", project.getProjectName());
                 startActivity(intent);
-
             }
         });
 

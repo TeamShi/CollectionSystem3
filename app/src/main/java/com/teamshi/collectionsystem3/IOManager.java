@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.parser.HtmlParser;
 
 import java.io.File;
@@ -236,6 +237,26 @@ public class IOManager {
         String path = HtmlParser.parse(APP_TEMP,project,assetManager);
         if(null == path) {
             Log.d(TAG, "IOManager.previewProject: path isnull");
+            return null;
+        }else{
+            Uri uri = Uri.fromFile(new File(path));
+            urls.add(uri.toString());
+        }
+
+        return urls;
+    }
+
+    public static List<String> previewSPTRig(SPTRig sptRig) {
+        if( null == sptRig || sptRig instanceof  SPTRig == false) {
+            return null;
+        }
+
+        List<String> urls = new ArrayList<>();
+        AssetManager assetManager = appContext.getAssets();
+
+        String path = HtmlParser.parseSptRig(APP_TEMP,sptRig,assetManager);
+        if(null == path) {
+            Log.d(TAG, "IOManager.previewSPTRig: path isnull");
             return null;
         }else{
             Uri uri = Uri.fromFile(new File(path));

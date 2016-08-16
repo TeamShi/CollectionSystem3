@@ -22,7 +22,12 @@
                 android:textSize="@dimen/default_text_size"
                 android:text="提交"
                 android:id="@+id/button_confirm_add_spt_rig"/>
-
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:textSize="@dimen/default_text_size"
+                android:text="预览"
+                android:id="@+id/button_preview_spt"/>
             <Button
                 android:layout_width="150dp"
                 android:layout_height="80dp"

@@ -9,6 +9,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PreviewActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,8 +23,8 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
         return urls;
     }
 
-    public static void setUrls(List<String> urls) {
-        urls = urls;
+    public static void setUrls(List<String> url_list) {
+        urls = url_list;
     }
 
     private static List<String> urls;
@@ -38,8 +39,7 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        List<String> urls = IOManager.previewProject();
-        PreviewActivity.setUrls(urls);
+        assert urls != null;
         String indexURL = urls.get(0);
         webView.loadUrl(indexURL);
 

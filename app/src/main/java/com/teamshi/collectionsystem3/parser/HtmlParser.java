@@ -8,6 +8,7 @@ import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
+import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
 
 public class HtmlParser {
@@ -91,7 +94,7 @@ public class HtmlParser {
             }
         }
 
-        FileWriter fileWriter = new FileWriter(outPath);
+        FileWriter fileWriter = new FileWriter(outPath,false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(doc.outerHtml());
         bufferedWriter.close();
@@ -151,22 +154,22 @@ public class HtmlParser {
     }
 
 
-    public static boolean parseSptRig(String dirPath, Hole hole, AssetManager assetManager) {
-        if (hole == null) {
-            return false;
+    public static String parseSptRig(String dirPath, SPTRig sptRig, AssetManager assetManager) {
+        if (sptRig == null) {
+            return null;
         }
 
+        String[][] sptEventArray = convertSpt(sptRig);
+        String path = dirPath + "sptRigEvent.html";
 
-//        String[][] sptEventArray = convertSpt(hole);
-//
-//        try {
-//            write(dirPath + "sptRigEvent.html", sptEventArray, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
+        try {
+            write(path, sptEventArray, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
 
-        return true;
+        return path;
     }
 
     public static boolean parseSmplRig(String dirPath, Hole hole, AssetManager assetManager) {
@@ -204,121 +207,125 @@ public class HtmlParser {
         return true;
     }
 
-    /**
-     * private static String[][] convertSpt(Hole hole) {
-     * ArrayList<SPTRig> sptRigEvents = new ArrayList<>();
-     * for(RigEvent rigEvent : hole.getRigList()){
-     * if(rigEvent instanceof  SPTRig) {
-     * sptRigEvents.add((SPTRig) rigEvent);
-     * }
-     * }
-     * int rows = sptRigEvents.size();
-     * String[][] resultData = new String[rows][];
-     * for (int i = 0; i < rows; i++) {
-     * SPTRig sptRigEvent = sptRigEvents.get(i);
-     * StringBuffer sb = new StringBuffer();
-     * sb.append(sptRigEvent.getClassPeopleCount()).append("#");
-     * sb.append(formatCalendarDateString(sptRigEvent.getDate(), "yyyy年MM月dd日")).append("#");
-     * sb.append(formatCalendarDateString(sptRigEvent.getStartTime(), "hh时mm分")).append("#");
-     * sb.append(formatCalendarDateString(sptRigEvent.getEndTime(), "hh时mm分")).append("#");
-     * sb.append(sptRigEvent.getPenetration1DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getPenetration1DepthTo()).append("#");
-     * <p/>
-     * sb.append(sptRigEvent.getPenetration1DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getPenetration1DepthTo()).append("#");
-     * sb.append(sptRigEvent.getPenetration1Count()).append("#");
-     * sb.append(sptRigEvent.getRig1DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getRig1DepthTo()).append("#");
-     * <p/>
-     * sb.append(sptRigEvent.getPenetration2DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getPenetration2DepthTo()).append("#");
-     * sb.append(sptRigEvent.getPenetration2Count()).append("#");
-     * sb.append(sptRigEvent.getRig2DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getRig2DepthTo()).append("#");
-     * <p/>
-     * sb.append(sptRigEvent.getPenetration3DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getPenetration3DepthTo()).append("#");
-     * sb.append(sptRigEvent.getPenetration3Count()).append("#");
-     * sb.append(sptRigEvent.getRig3DepthFrom()).append("#");
-     * sb.append(sptRigEvent.getRig3DepthTo()).append("#");
-     * <p/>
-     * sb.append(sptRigEvent.getGroundName()).append("#");
-     * sb.append(sptRigEvent.getGroundColor()).append("#");
-     * sb.append(sptRigEvent.getGroundSaturation()).append("#");
-     * sb.append(sptRigEvent.getCumulativeCount()).append("#");
-     * sb.append(sptRigEvent.getSpecialNote()).append("#");
-     * <p/>
-     * resultData[i] = convert2Array(sb.toString());
-     * }
-     * return resultData;
-     * }
-     * <p/>
-     * private static String[][] convertSmpl(Hole hole) {
-     * ArrayList<SamplingRig> smplRigEvents = new ArrayList<>();
-     * for(RigEvent rigEvent : hole.getRigList()){
-     * if(rigEvent instanceof SamplingRig) {
-     * smplRigEvents.add((SamplingRig) rigEvent);
-     * }
-     * }
-     * int rows = smplRigEvents.size();
-     * String[][] resultData = new String[rows][];
-     * for (int i = 0; i < rows; i++) {
-     * SamplingRig samplingRig = smplRigEvents.get(i);
-     * StringBuffer sb = new StringBuffer();
-     * sb.append(samplingRig.getClassPeopleCount()).append("#");
-     * sb.append(formatCalendarDateString(samplingRig.getDate(), "yyyy年MM月dd日")).append("#");
-     * sb.append(formatCalendarDateString(samplingRig.getStartTime(), "hh时mm分")).append("#");
-     * sb.append(formatCalendarDateString(samplingRig.getEndTime(), "hh时mm分")).append("#");
-     * <p/>
-     * sb.append(samplingRig.getSampleStatus()).append("#");
-     * sb.append(samplingRig.getSamplerType()).append("#");
-     * sb.append(samplingRig.getSampleId()).append("#");
-     * sb.append(samplingRig.getSampleDiameter()).append("#");
-     * sb.append(samplingRig.getSampleStartDepth()).append("#");
-     * sb.append(samplingRig.getSampleEndDepth()).append("#");
-     * sb.append(samplingRig.getSampleCount()).append("#");
-     * <p/>
-     * resultData[i] = convert2Array(sb.toString());
-     * }
-     * return resultData;
-     * }
-     * <p/>
-     * private static String[][] convertDst(Hole hole) {
-     * ArrayList<DSTRig> dstRigEvents = new ArrayList<>();
-     * for(RigEvent rigEvent : hole.getRigList()){
-     * if(rigEvent instanceof  DSTRig) {
-     * dstRigEvents.add((DSTRig) rigEvent);
-     * }
-     * }
-     * ArrayList<String> records = new ArrayList<>();
-     * for (int i = 0, len = dstRigEvents.size(); i < len; i++) {
-     * DSTRig dstRig = dstRigEvents.get(i);
-     * ArrayList<DSTRig.DynamicSoundingEvent> events = dstRig.getDynamicSoundingEvents();
-     * for (int j = 0, size = events.size(); j < size; j++) {
-     * DSTRig.DynamicSoundingEvent event = events.get(j);
-     * StringBuffer sb = new StringBuffer();
-     * sb.append(dstRig.getClassPeopleCount()).append("#");
-     * sb.append(formatCalendarDateString(dstRig.getDate(), "yyyy年MM月dd日")).append("#");
-     * sb.append(formatCalendarDateString(dstRig.getStartTime(), "hh时mm分")).append("#");
-     * sb.append(formatCalendarDateString(dstRig.getEndTime(), "hh时mm分")).append("#");
-     * sb.append(event.getTotalLength()).append("#");
-     * sb.append(event.getDigDepth()).append("#");
-     * sb.append(event.getPenetration()).append("#");
-     * sb.append(event.getHammeringCount()).append("#");
-     * sb.append(dstRig.getGroundName()).append("#");
-     * <p/>
-     * records.add(sb.toString());
-     * }
-     * }
-     * int rows = records.size();
-     * String[][] resultData = new String[rows][];
-     * for (int i = 0; i < rows; i++) {
-     * resultData[i] = convert2Array(records.get(i));
-     * }
-     * <p/>
-     * return resultData;
-     * }
-     **/
+    private static String[][] convertSpt(SPTRig sptRig) {
+        String[][] resultData = new String[1][];
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("1").append("#");
+
+        sb.append(formatCalendarDateString(sptRig.getDate(), "MM月")).append("#");
+        sb.append(formatCalendarDateString(sptRig.getDate(), "dd日")).append("#");
+        sb.append(sptRig.getClassPeopleCount()).append("#");
+        sb.append(formatCalendarDateString(sptRig.getStartTime(), "hh时mm分")).append("#");
+        sb.append(formatCalendarDateString(sptRig.getEndTime(), "hh时mm分")).append("#");
+
+        //分层
+        sb.append(NA).append("#");
+
+        //进尺
+        sb.append(sptRig.getPenetrationStartDepth()).append("#");
+        sb.append(sptRig.getPenetrationEndDepth()).append("#");
+
+        sb.append(sptRig.getCountStartDepth1() + "," + sptRig.getCountStartDepth2() + "," + sptRig.getCountStartDepth3()).append("#");
+        sb.append(sptRig.getCountEndDepth1() + "," + sptRig.getCountEndDepth2() + "," + sptRig.getCountEndDepth3()).append("#");
+
+        //todo
+        sb.append(sptRig.getDrillStartDepth1() + "," + sptRig.getDrillStartDepth2() + "," + sptRig.getDrillStartDepth3()).append("#");
+        sb.append(sptRig.getDrillEndDepth1() + "," + sptRig.getDrillEndDepth2() + "," + sptRig.getDrillEndDepth3()).append("#");
+
+        //分类
+        sb.append(NA).append("#");
+
+        //野外描述
+        sb.append(sptRig.getRockColor()).append("#");
+        sb.append(sptRig.getRockDensity()).append("#");
+        sb.append(NA).append("#");
+        sb.append(sptRig.getRockName()).append("#");
+        sb.append(sptRig.getRockSaturation()).append("#");
+        //光泽
+        sb.append(NA).append("#");
+        sb.append(NA).append("#");
+        sb.append(NA).append("#");
+
+        sb.append(sptRig.getOtherDescription()).append("#");
+
+        sb.append(sptRig.getHitCount1() + "," + sptRig.getHitCount2() + "," + sptRig.getHitCount3()).append("#");
+
+        sb.append(NA).append("#");
+        sb.append(NA).append("#");
+        sb.append(NA).append("#");
+
+        resultData[0] = convert2Array(sb.toString());
+
+        return resultData;
+    }
+
+//    private static String[][] convertSmpl(Hole hole) {
+//        ArrayList<SamplingRig> smplRigEvents = new ArrayList<>();
+//        for (RigEvent rigEvent : hole.getRigList()) {
+//            if (rigEvent instanceof SamplingRig) {
+//                smplRigEvents.add((SamplingRig) rigEvent);
+//            }
+//        }
+//        int rows = smplRigEvents.size();
+//        String[][] resultData = new String[rows][];
+//        for (int i = 0; i < rows; i++) {
+//            SamplingRig samplingRig = smplRigEvents.get(i);
+//            StringBuffer sb = new StringBuffer();
+//            sb.append(samplingRig.getClassPeopleCount()).append("#");
+//            sb.append(formatCalendarDateString(samplingRig.getDate(), "yyyy年MM月dd日")).append("#");
+//            sb.append(formatCalendarDateString(samplingRig.getStartTime(), "hh时mm分")).append("#");
+//            sb.append(formatCalendarDateString(samplingRig.getEndTime(), "hh时mm分")).append("#");
+//
+//            sb.append(samplingRig.getSampleStatus()).append("#");
+//            sb.append(samplingRig.getSamplerType()).append("#");
+//            sb.append(samplingRig.getSampleId()).append("#");
+//            sb.append(samplingRig.getSampleDiameter()).append("#");
+//            sb.append(samplingRig.getSampleStartDepth()).append("#");
+//            sb.append(samplingRig.getSampleEndDepth()).append("#");
+//            sb.append(samplingRig.getSampleCount()).append("#");
+//
+//            resultData[i] = convert2Array(sb.toString());
+//        }
+//        return resultData;
+//    }
+
+//    private static String[][] convertDst(Hole hole) {
+//        ArrayList<DSTRig> dstRigEvents = new ArrayList<>();
+//        for (RigEvent rigEvent : hole.getRigList()) {
+//            if (rigEvent instanceof DSTRig) {
+//                dstRigEvents.add((DSTRig) rigEvent);
+//            }
+//        }
+//        ArrayList<String> records = new ArrayList<>();
+//        for (int i = 0, len = dstRigEvents.size(); i < len; i++) {
+//            DSTRig dstRig = dstRigEvents.get(i);
+//            ArrayList<DSTRig.DynamicSoundingEvent> events = dstRig.getDynamicSoundingEvents();
+//            for (int j = 0, size = events.size(); j < size; j++) {
+//                DSTRig.DynamicSoundingEvent event = events.get(j);
+//                StringBuffer sb = new StringBuffer();
+//                sb.append(dstRig.getClassPeopleCount()).append("#");
+//                sb.append(formatCalendarDateString(dstRig.getDate(), "yyyy年MM月dd日")).append("#");
+//                sb.append(formatCalendarDateString(dstRig.getStartTime(), "hh时mm分")).append("#");
+//                sb.append(formatCalendarDateString(dstRig.getEndTime(), "hh时mm分")).append("#");
+//                sb.append(event.getTotalLength()).append("#");
+//                sb.append(event.getDigDepth()).append("#");
+//                sb.append(event.getPenetration()).append("#");
+//                sb.append(event.getHammeringCount()).append("#");
+//                sb.append(dstRig.getGroundName()).append("#");
+//
+//                records.add(sb.toString());
+//            }
+//        }
+//        int rows = records.size();
+//        String[][] resultData = new String[rows][];
+//        for (int i = 0; i < rows; i++) {
+//            resultData[i] = convert2Array(records.get(i));
+//        }
+//
+//        return resultData;
+//    }
+     
     private static String[][] convertHole(Hole hole) {
         ArrayList<Rig> rigs = hole.getRigList();
         int rows = rigs.size();
@@ -331,9 +338,9 @@ public class HtmlParser {
             StringBuffer sb = new StringBuffer();
 
             sb.append(rig.getClassPeopleCount()).append("#");
-            sb.append(Utility.formatCalendarDateString(rig.getDate(), "MM月dd日")).append("#");
-            sb.append(Utility.formatCalendarDateString(rig.getStartTime(), "hh时mm分")).append("#");
-            sb.append(Utility.formatCalendarDateString(rig.getEndTime(), "hh时mm分")).append("#");
+            sb.append(formatCalendarDateString(rig.getDate(), "MM月dd日")).append("#");
+            sb.append(formatCalendarDateString(rig.getStartTime(), "hh时mm分")).append("#");
+            sb.append(formatCalendarDateString(rig.getEndTime(), "hh时mm分")).append("#");
             sb.append(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())).append("#");
 
             sb.append(hole.getProjectName()).append("#");
@@ -576,7 +583,7 @@ public class HtmlParser {
         rigType.text(hole == null ? "XY-100" : hole.getRigMachineType());
 
         Element startDate = doc.getElementById(STARTDATE_ID);
-        startDate.text(Utility.formatCalendarDateString(hole.getStartDate()));
+        startDate.text(formatCalendarDateString(hole.getStartDate()));
 
         Element recorderName = doc.getElementById(RECORDER_ID);
         recorderName.text(hole.getRecorder() == null ? "xxx" : hole.getRecorder());
