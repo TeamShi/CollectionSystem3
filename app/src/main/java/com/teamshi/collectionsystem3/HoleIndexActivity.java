@@ -115,7 +115,7 @@ public class HoleIndexActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         Intent intent = null;
-        String holeId = getIntent().getStringExtra("holeId");//TODO alfred please comfirm;
+        String holeId = getIntent().getStringExtra("holeId");
 
         switch (item.getItemId()) {
             case CONTEXT_MENU_QUERY:
