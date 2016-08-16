@@ -186,6 +186,12 @@ public class RigIndexActivity extends AppCompatActivity {
                     intent.putExtra("holeId", holeId);
                     intent.putExtra("rigIndex", selectedRigIndex);
                     startActivityForResult(intent, ACTION_EDIT_RIG);
+                } else if (rig instanceof DSTRig) {
+                    intent = new Intent(RigIndexActivity.this, SPTRigActivity.class);
+                    intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                    intent.putExtra("holeId", holeId);
+                    intent.putExtra("rigIndex", selectedRigIndex);
+                    startActivityForResult(intent, ACTION_EDIT_RIG);
                 }
                 break;
             case CONTEXT_MENU_COPY_NEW:

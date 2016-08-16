@@ -25,17 +25,17 @@ public class DSTRig extends CalculatingRig  {
 
         dstDetailInfos = new ArrayList<>();
 
-        dstDetailInfos.add(new DSTDetailInfo(0, 0, 0, 0, ""));
+        dstDetailInfos.add(new DSTDetailInfo(drillToolTotalLength + 2, drillToolTotalLength + 0.1, 0.1, 10, ""));
     }
 
     public static class DSTDetailInfo {
-        private int pipeLength;
-        private int depth;
-        private int length;
+        private double pipeLength;
+        private double depth;
+        private double length;
         private int hitCount;
         private String saturationDescription;
 
-        public DSTDetailInfo(int pipeLength, int depth, int length, int hitCount, String saturationDescription) {
+        public DSTDetailInfo(double pipeLength, double depth, double length, int hitCount, String saturationDescription) {
             this.pipeLength = pipeLength;
             this.depth = depth;
             this.length = length;
@@ -43,27 +43,27 @@ public class DSTRig extends CalculatingRig  {
             this.saturationDescription = saturationDescription;
         }
 
-        public int getPipeLength() {
+        public double getPipeLength() {
             return pipeLength;
         }
 
-        public void setPipeLength(int pipeLength) {
+        public void setPipeLength(double pipeLength) {
             this.pipeLength = pipeLength;
         }
 
-        public int getDepth() {
+        public double getDepth() {
             return depth;
         }
 
-        public void setDepth(int depth) {
+        public void setDepth(double depth) {
             this.depth = depth;
         }
 
-        public int getLength() {
+        public double getLength() {
             return length;
         }
 
-        public void setLength(int length) {
+        public void setLength(double length) {
             this.length = length;
         }
 

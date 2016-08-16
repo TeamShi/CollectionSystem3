@@ -172,6 +172,7 @@
                         android:gravity="center"/>
                     <TextView
                         android:text="类型"
+                        android:textColor="@android:color/black"
                         android:gravity="center"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
@@ -179,8 +180,8 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
-                    <EditText
-                        android:id="@+id/edittext_dst_rig_probe_type"
+                    <Spinner
+                        android:id="@+id/spinner_dst_rig_probe_type"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
@@ -189,6 +190,7 @@
                         android:layout_gravity="center_vertical" />
                     <TextView
                         android:text="直径(mm)"
+                        android:textColor="@android:color/black"
                         android:gravity="center"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
@@ -196,14 +198,15 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
-                    <EditText
-                        android:id="@+id/edittext_dst_rig_probe_diameter"
+                    <TextView
+                        android:id="@+id/textview_dst_rig_probe_diameter"
                         android:layout_weight="2"
+                        android:gravity="center"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center" />
                     <TextView
                         android:text="长度(m)"
                         android:gravity="center"
@@ -213,19 +216,20 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
-                    <EditText
-                        android:id="@+id/edittext_dst_rig_probe_length"
+                    <TextView
+                        android:id="@+id/textview_dst_rig_probe_length"
+                        android:gravity="center"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center" />
                 </TableRow>
 
                 <TableRow>
                     <TextView
-                        android:text="说明：（钻具总长）-（钻杆余长）=累计进尺；（累计进尺）-（上一钻累计进尺）=回次进尺"
+                        android:text="说明：（钻具总长）-（钻杆余长）= 累计进尺；（累计进尺）-（上一钻累计进尺）= 回次进尺"
                         android:textColor="@android:color/black"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
@@ -274,9 +278,9 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"/>
-                    <EditText
+                    <TextView
                         android:layout_weight="2"
-                        android:id="@+id/edittext_dst_rig_drill_pipe_remain_length"
+                        android:id="@+id/textview_dst_rig_drill_pipe_remain_length"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -431,6 +435,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_1_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -441,6 +446,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_1_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -488,6 +494,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_2_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -498,6 +505,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_2_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -545,6 +553,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_3_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -555,6 +564,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_3_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -602,6 +612,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_4_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -612,6 +623,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_4_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -659,6 +671,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_5_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -669,6 +682,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_5_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -716,6 +730,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_6_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -726,6 +741,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_6_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -773,6 +789,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_7_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -783,6 +800,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_7_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -830,6 +848,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_8_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -840,6 +859,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_8_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -887,6 +907,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_9_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -897,6 +918,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_9_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -944,6 +966,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_10_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -954,6 +977,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_10_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1000,6 +1024,7 @@
                     android:inputType="numberDecimal"/>
                 <EditText
                     android:id="@+id/edittext_dst_detail_11_length"
+                    android:gravity="center"
                     android:layout_weight="1"
                     android:text=""
                     android:background="@drawable/cell_input"
@@ -1010,6 +1035,7 @@
                     android:inputType="numberDecimal"/>
                 <EditText
                     android:id="@+id/edittext_dst_detail_11_hit_count"
+                    android:gravity="center"
                     android:layout_weight="1"
                     android:text=""
                     android:background="@drawable/cell_input"
@@ -1057,6 +1083,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_12_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1067,6 +1094,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_12_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1114,6 +1142,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_13_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1124,6 +1153,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_13_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1171,6 +1201,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_14_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1181,6 +1212,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_14_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1228,6 +1260,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_15_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1238,6 +1271,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_15_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1285,6 +1319,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_16_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1295,6 +1330,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_16_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1331,6 +1367,7 @@
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_17_depth"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1338,10 +1375,10 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_17_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1352,6 +1389,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_17_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1399,6 +1437,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_18_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1409,6 +1448,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_18_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1456,6 +1496,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_19_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1466,6 +1507,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_19_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1513,6 +1555,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_20_length"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1523,6 +1566,7 @@
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_20_hit_count"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1542,6 +1586,46 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="岩土名称"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"/>
+                    <TextView
+                        android:id="@+id/textview_dst_rig_rock_name"
+                        android:layout_weight="4"
+                        android:text=""
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:inputType="numberDecimal"/>
+                    <Button
+                        android:id="@+id/button_dst_rig_preview"
+                        android:layout_weight="1"
+                        android:text="表格查看"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
+                    <Button
+                        android:id="@+id/button_dst_rig_configuration"
+                        android:layout_weight="1"
+                        android:text="判断参数表"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"/>
                 </TableRow>
             </TableLayout>
         </ScrollView>

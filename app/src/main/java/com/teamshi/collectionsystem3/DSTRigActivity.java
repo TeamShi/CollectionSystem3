@@ -2,31 +2,32 @@ package com.teamshi.collectionsystem3;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
-import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class DSTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
+
+    private static final String[] PROBE_TYPE_SPINNER_OPTIONS = {"重型", "超重型"};
 
     private boolean refreshLock = false;
 
@@ -43,12 +44,13 @@ public class DSTRigActivity extends AppCompatActivity {
     private TextView endTimeButton;
     private TextView timeDurationTextView;
 
-    private EditText probeTypeEditText;
-    private EditText probeDiameterEditText;
-    private EditText probeLengthEditText;
+    private Spinner probeTypeSpinner;
+    private ArrayAdapter<String> probeTypeSpinnerAdapter;
+    private TextView probeDiameterTextView;
+    private TextView probeLengthTextView;
 
     private TextView drillToolTotalLengthTextView;
-    private EditText drillPipeRemainLengthEditText;
+    private TextView drillPipeRemainLengthEditText;
     private TextView roundTripMeterageLengthTextView;
     private TextView accumulatedMeterageLengthTextView;
 
@@ -61,6 +63,8 @@ public class DSTRigActivity extends AppCompatActivity {
 
     private Button addDstDetailButton;
     private Button deleteDstDetailButton;
+    private Button dstTablePreviewButton;
+    private Button dstConfigurationPreviewButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +84,21 @@ public class DSTRigActivity extends AppCompatActivity {
         endTimeButton = (Button) findViewById(R.id.button_dst_rig_end_time);
         timeDurationTextView = (TextView) findViewById(R.id.textview_dst_rig_duration);
 
-        probeTypeEditText = (EditText) findViewById(R.id.edittext_dst_rig_probe_type);
-        probeDiameterEditText = (EditText) findViewById(R.id.edittext_dst_rig_probe_diameter);
-        probeLengthEditText = (EditText) findViewById(R.id.edittext_dst_rig_probe_length);
+        probeTypeSpinner = (Spinner) findViewById(R.id.spinner_dst_rig_probe_type);
+        probeTypeSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, PROBE_TYPE_SPINNER_OPTIONS);
+        probeTypeSpinner.setAdapter(probeTypeSpinnerAdapter);
+        probeDiameterTextView = (TextView) findViewById(R.id.textview_dst_rig_probe_diameter);
+        probeLengthTextView = (TextView) findViewById(R.id.textview_dst_rig_probe_length);
 
         drillToolTotalLengthTextView = (TextView) findViewById(R.id.textview_dst_rig_drill_tool_total_length);
-        drillPipeRemainLengthEditText = (EditText) findViewById(R.id.edittext_dst_rig_drill_pipe_remain_length);
+        drillPipeRemainLengthEditText = (TextView) findViewById(R.id.textview_dst_rig_drill_pipe_remain_length);
         roundTripMeterageLengthTextView = (TextView) findViewById(R.id.textview_dst_round_trip_meterage_length);
         accumulatedMeterageLengthTextView = (TextView) findViewById(R.id.textview_dst_accumulated_meterage_length);
 
         addDstDetailButton = (Button) findViewById(R.id.button_add_dst_detail);
         deleteDstDetailButton = (Button) findViewById(R.id.button_delete_dst_detail);
+        dstTablePreviewButton = (Button) findViewById(R.id.button_dst_rig_preview);
+        dstConfigurationPreviewButton = (Button) findViewById(R.id.button_dst_rig_configuration);
 
         for (int i = 1; i <= 20; i++) {
             TableRow detailedInfoTableRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
@@ -99,13 +107,82 @@ public class DSTRigActivity extends AppCompatActivity {
             TextView detailedInfoPipeLengthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_pipe_length", "id", getPackageName()));
             detailedInfoPipeLengthTextViews[i - 1] = detailedInfoPipeLengthTextView;
 
-            TextView detailedInfoDepthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_depth", "id", getPackageName()));
+            final TextView detailedInfoDepthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_depth", "id", getPackageName()));
             detailedInfoDepthTextViews[i - 1] = detailedInfoDepthTextView;
 
-            EditText detailedInfoLengthEditText = (EditText) findViewById(getResources().getIdentifier("edittext_dst_detail_" + i + "_length", "id", getPackageName()));
+            final EditText detailedInfoLengthEditText = (EditText) findViewById(getResources().getIdentifier("edittext_dst_detail_" + i + "_length", "id", getPackageName()));
+            detailedInfoLengthEditText.setTag(i);
+            detailedInfoLengthEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        try {
+                            rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setLength(Double.parseDouble(s.toString()));
+
+                            double afterDepth = rigViewModel.getDstDetailInfos().get(0).getDepth() + 0.1 * ((int) detailedInfoLengthEditText.getTag() - 1) + Double.parseDouble(s.toString());
+                            rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setDepth(afterDepth);
+                            rigViewModel.setAccumulatedMeterageLength(afterDepth);
+                            rigViewModel.setRoundTripMeterageLength(0.1 * ((int) detailedInfoLengthEditText.getTag() - 1) + Double.parseDouble(s.toString()));
+                            rigViewModel.setDrillPipeRemainLength(rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).getPipeLength() - rigViewModel.getAccumulatedMeterageLength());
+                            rigViewModel.setDrillToolTotalLength(rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).getPipeLength());
+
+                            if (Double.parseDouble(s.toString()) <= 0.1 && Double.parseDouble(s.toString()) > 0) {
+                                detailedInfoLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
+                            } else {
+                                detailedInfoLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            }
+
+                            refreshInfo();
+                        } catch (Exception e) {
+                            detailedInfoLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                        }
+                    }
+                }
+            });
             detailedInfoLengthEditTexts[i - 1] = detailedInfoLengthEditText;
 
-            EditText detailedInfoHitCountEditText = (EditText) findViewById(getResources().getIdentifier("edittext_dst_detail_" + i + "_hit_count", "id", getPackageName()));
+            final EditText detailedInfoHitCountEditText = (EditText) findViewById(getResources().getIdentifier("edittext_dst_detail_" + i + "_hit_count", "id", getPackageName()));
+            detailedInfoHitCountEditText.setTag(i);
+            detailedInfoHitCountEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        try {
+                            rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setHitCount(Integer.parseInt(s.toString()));
+                            detailedInfoHitCountEditText.setTextColor(getResources().getColor(android.R.color.black));
+                            if (Integer.parseInt(s.toString()) <= 51 && Integer.parseInt(s.toString()) > 0) {
+                                detailedInfoHitCountEditText.setTextColor(getResources().getColor(android.R.color.black));
+                            } else {
+                                detailedInfoHitCountEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            }
+
+                            refreshInfo();
+                        } catch (Exception e) {
+                            detailedInfoHitCountEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                        }
+                    }
+                }
+            });
             detailedInfoHitCountEditTexts[i - 1] = detailedInfoHitCountEditText;
 
             TextView detailedInfoSaturationDescription = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_saturation_description", "id", getPackageName()));
@@ -115,7 +192,9 @@ public class DSTRigActivity extends AppCompatActivity {
         addDstDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rigViewModel.getDstDetailInfos().add(new DSTRig.DSTDetailInfo(0, 0, 0, 0, ""));
+                DSTRig.DSTDetailInfo lastInfo = rigViewModel.getDstDetailInfos().get(rigViewModel.getDstDetailInfos().size() - 1);
+
+                rigViewModel.getDstDetailInfos().add(new DSTRig.DSTDetailInfo(lastInfo.getPipeLength(), lastInfo.getDepth() + 0.1, 0.1, 10, ""));
 
                 refreshInfo();
             }
@@ -127,6 +206,22 @@ public class DSTRigActivity extends AppCompatActivity {
                 rigViewModel.getDstDetailInfos().remove(rigViewModel.getDstDetailInfos().size() - 1);
 
                 refreshInfo();
+            }
+        });
+
+        dstTablePreviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Johnson
+                // Preview dst
+            }
+        });
+
+        dstConfigurationPreviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DSTRigActivity.this, DSTConfiurationActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -267,24 +362,19 @@ public class DSTRigActivity extends AppCompatActivity {
             }
         });
 
-        probeTypeEditText.addTextChangedListener(new TextWatcher() {
+        probeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                rigViewModel.setProbeType(PROBE_TYPE_SPINNER_OPTIONS[position]);
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                rigViewModel.setProbeType(s.toString());
             }
         });
 
-        probeLengthEditText.addTextChangedListener(new TextWatcher() {
+        probeLengthTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -299,14 +389,14 @@ public class DSTRigActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 try {
                     rigViewModel.setProbeLength(Double.parseDouble(s.toString()));
-                    probeLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
+                    probeLengthTextView.setTextColor(getResources().getColor(android.R.color.black));
                 } catch (Exception e) {
-                    probeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    probeLengthTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }
             }
         });
 
-        probeDiameterEditText.addTextChangedListener(new TextWatcher() {
+        probeDiameterTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -321,9 +411,9 @@ public class DSTRigActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 try {
                     rigViewModel.setProbeDiameter(Integer.parseInt(s.toString()));
-                    probeDiameterEditText.setTextColor(getResources().getColor(android.R.color.black));
+                    probeDiameterTextView.setTextColor(getResources().getColor(android.R.color.black));
                 } catch (Exception e) {
-                    probeDiameterEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    probeDiameterTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }
 
             }
@@ -371,8 +461,8 @@ public class DSTRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 rigViewModel = new DSTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
-                        0, 0, 0, 0,
-                        "重型",74, 0.25
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1, 10, 10,
+                        "重型", 74, 0.25
                 );
 
                 refreshInfo();
@@ -403,9 +493,14 @@ public class DSTRigActivity extends AppCompatActivity {
         endTimeButton.setText(Utility.formatTimeString(rigViewModel.getEndTime()));
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
 
-        probeTypeEditText.setText(rigViewModel.getProbeType());
-        probeDiameterEditText.setText(String.valueOf(rigViewModel.getProbeDiameter()));
-        probeLengthEditText.setText(String.format("%.2f", rigViewModel.getProbeLength()));
+        for (int i = 0; i < PROBE_TYPE_SPINNER_OPTIONS.length; i++) {
+            if (PROBE_TYPE_SPINNER_OPTIONS[i].equals(rigViewModel.getProbeType())) {
+                probeTypeSpinner.setSelection(i);
+                break;
+            }
+        }
+        probeDiameterTextView.setText(String.valueOf(rigViewModel.getProbeDiameter()));
+        probeLengthTextView.setText(String.format("%.2f", rigViewModel.getProbeLength()));
 
         drillToolTotalLengthTextView.setText(String.format("%.2f", rigViewModel.getDrillToolTotalLength()));
 
@@ -431,6 +526,30 @@ public class DSTRigActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             if (i < rigViewModel.getDstDetailInfos().size()) {
                 detailedInfoTableRows[i].setVisibility(View.VISIBLE);
+                detailedInfoPipeLengthTextViews[i].setText(String.format("%.2f", rigViewModel.getDstDetailInfos().get(i).getPipeLength()));
+                detailedInfoDepthTextViews[i].setText(String.format("%.2f", rigViewModel.getDstDetailInfos().get(i).getDepth()));
+
+                if (getCurrentFocus() != detailedInfoLengthEditTexts[i]) {
+                    detailedInfoLengthEditTexts[i].setText(String.format("%.2f", rigViewModel.getDstDetailInfos().get(i).getLength()));
+                }
+
+                if (getCurrentFocus() != detailedInfoHitCountEditTexts[i]) {
+                    detailedInfoHitCountEditTexts[i].setText(String.valueOf(rigViewModel.getDstDetailInfos().get(i).getHitCount()));
+                }
+
+                if (i == rigViewModel.getDstDetailInfos().size() - 1) {
+                    detailedInfoLengthEditTexts[i].setEnabled(true);
+                    detailedInfoHitCountEditTexts[i].setEnabled(true);
+
+                    if (rigViewModel.getDstDetailInfos().get(i).getLength() == 0.1 && rigViewModel.getDstDetailInfos().get(i).getHitCount() <= 51) {
+                        addDstDetailButton.setEnabled(true);
+                    } else {
+                        addDstDetailButton.setEnabled(false);
+                    }
+                } else {
+                    detailedInfoLengthEditTexts[i].setEnabled(false);
+                    detailedInfoHitCountEditTexts[i].setEnabled(false);
+                }
 
             } else {
                 detailedInfoTableRows[i].setVisibility(View.GONE);

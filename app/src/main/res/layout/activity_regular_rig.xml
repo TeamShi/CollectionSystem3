@@ -347,7 +347,7 @@
 
                 <TableRow>
                     <TextView
-                        android:text="说明：（钻具总长）-（钻杆余长）=累计进尺；（累计进尺）-（上一钻累计进尺）=回次进尺"
+                        android:text="说明：（钻具总长）-（钻杆余长）= 累计进尺；（累计进尺）-（上一钻累计进尺）= 回次进尺"
                         android:textColor="@android:color/black"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
