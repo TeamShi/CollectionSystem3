@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -338,69 +339,81 @@ public class ConfigurationManager {
         return "";
     }
 
-    public static String getDSTDestiny(int selectionIndex, int hit) {
-        switch (selectionIndex) {
-            case 0:
-                if (hit <= dstTable1_63_5_Argument2) {
-                    return "松散";
-                } else if (hit <= dstTable1_63_5_Argument3) {
-                    return "稍密";
-                } else if (hit <= dstTable1_63_5_Argument4) {
-                    return "中密";
-                } else if (hit > dstTable1_63_5_Argument4) {
-                    return "密实";
-                }
-                break;
-            case 1:
-                if (hit <= dstTable1_120_Argument2) {
-                    return "松散";
-                } else if (hit <= dstTable1_120_Argument3) {
-                    return "稍密";
-                } else if (hit <= dstTable1_120_Argument4) {
-                    return "中密";
-                } else if (hit <= dstTable1_120_Argument5) {
-                    return "密实";
-                } else if (hit > dstTable1_120_Argument5) {
-                    return "很密";
-                }
-                break;
-            case 2:
-                if (hit <= dstTable2_63_6_Argument1) {
-                    return "松散";
-                } else if (hit <= dstTable2_63_6_Argument2) {
-                    return "稍密";
-                } else if (hit <= dstTable2_63_6_Argument3) {
-                    return "中密";
-                } else if (hit > dstTable2_63_6_Argument3) {
-                    return "密实";
-                }
-                break;
-            case 3:
-                if (hit <= dstTable2_63_7_Argument1) {
-                    return "松散";
-                } else if (hit <= dstTable2_63_7_Argument2) {
-                    return "稍密";
-                } else if (hit <= dstTable2_63_7_Argument3) {
-                    return "中密";
-                } else if (hit > dstTable2_63_7_Argument3) {
-                    return "密实";
-                }
-                break;
-            case 4:
-                if (hit <= dstTable2_63_8_Argument1) {
-                    return "松散";
-                } else if (hit <= dstTable2_63_8_Argument2) {
-                    return "稍密";
-                } else if (hit <= dstTable2_63_8_Argument3) {
-                    return "中密";
-                } else if (hit > dstTable2_63_8_Argument3) {
-                    return "密实";
-                }
-                break;
+    public static String parseDSTSaturationDescription(String rockName, int hitCount) {
+        if (rockName.equals("砾砂")) {
+            if (hitCount > 0 && hitCount <= dstTable2_63_6_Argument1) {
+                return "松散";
+            } else if (hitCount > dstTable2_63_6_Argument1 && hitCount <= dstTable2_63_6_Argument2) {
+                return "稍密";
+            } else if (hitCount > dstTable2_63_6_Argument2 && hitCount <= dstTable2_63_6_Argument3) {
+                return "中密";
+            } else if (hitCount > dstTable2_63_6_Argument3) {
+                return "密实";
+            } else {
+                return "";
+            }
         }
-        return "";
-    }
 
+        if (rockName.equals("粗砂")) {
+            if (hitCount > 0 && hitCount <= dstTable2_63_7_Argument1) {
+                return "松散";
+            } else if (hitCount > dstTable2_63_7_Argument1 && hitCount <= dstTable2_63_7_Argument2) {
+                return "稍密";
+            } else if (hitCount > dstTable2_63_7_Argument2 && hitCount <= dstTable2_63_7_Argument3) {
+                return "中密";
+            } else if (hitCount > dstTable2_63_7_Argument3) {
+                return "密实";
+            } else {
+                return "";
+            }
+        }
+
+        if (rockName.equals("中砂")) {
+            if (hitCount > 0 && hitCount <= dstTable2_63_8_Argument1) {
+                return "松散";
+            } else if (hitCount > dstTable2_63_8_Argument1 && hitCount <= dstTable2_63_8_Argument2) {
+                return "稍密";
+            } else if (hitCount > dstTable2_63_8_Argument2 && hitCount <= dstTable2_63_8_Argument3) {
+                return "中密";
+            } else if (hitCount > dstTable2_63_8_Argument3) {
+                return "密实";
+            } else {
+                return "";
+            }
+        }
+
+        final String[] ROCK120 = {"细圆砾土", "粗圆砾土", "细角砾土", "粗角砾土", "碎石", "卵石", "块石", "漂石"};
+
+        if (Arrays.asList(ROCK120).contains(rockName)) {
+            if (hitCount > 0 && hitCount <= dstTable1_120_Argument2) {
+                return "松散";
+            } else if (hitCount > dstTable1_120_Argument2 && hitCount <= dstTable1_120_Argument3) {
+                return "稍密";
+            } else if (hitCount > dstTable1_120_Argument3 && hitCount <= dstTable1_120_Argument4) {
+                return "中密";
+            } else if (hitCount > dstTable1_120_Argument4 && hitCount <= dstTable1_120_Argument5) {
+                return "密实";
+            } else if (hitCount > dstTable1_120_Argument5) {
+                return "很密";
+            } else {
+                return "";
+            }
+        } else if (rockName.equals("")) {
+            return "";
+        } else {
+            if (hitCount > 0 && hitCount <= dstTable1_63_5_Argument2) {
+                return "松散";
+            } else if (hitCount > dstTable1_63_5_Argument2 && hitCount <= dstTable1_63_5_Argument3) {
+                return "稍密";
+            } else if (hitCount > dstTable1_63_5_Argument3 && hitCount <= dstTable1_63_5_Argument4) {
+                return "中密";
+            } else if (hitCount > dstTable1_63_5_Argument4) {
+                return "密实";
+            } else {
+                return "";
+            }
+        }
+    }
 
     public static boolean exportConfig(Configuration configuration,String path) {
         try {

@@ -15,19 +15,26 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.teamshi.collectionsystem3.datastructure.Configuration;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class DSTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
-    private static final String[] PROBE_TYPE_SPINNER_OPTIONS = {"重型", "超重型"};
+    private static final String[] ROCK_NAME_OPTIONS = {"", "黏土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
+            "块石", "卵石", "碎石", "粗圆砾土", "细角砾土", "细圆砾土", "粗角砾土", "泥岩", "砂岩", "灰岩", "花岗岩"};
+
+    private static final String[] ROCK120 = {"细圆砾土", "粗圆砾土", "细角砾土", "粗角砾土", "碎石", "卵石", "块石", "漂石"};
 
     private boolean refreshLock = false;
 
@@ -44,8 +51,7 @@ public class DSTRigActivity extends AppCompatActivity {
     private TextView endTimeButton;
     private TextView timeDurationTextView;
 
-    private Spinner probeTypeSpinner;
-    private ArrayAdapter<String> probeTypeSpinnerAdapter;
+    private TextView probeTypeTextView;
     private TextView probeDiameterTextView;
     private TextView probeLengthTextView;
 
@@ -66,6 +72,9 @@ public class DSTRigActivity extends AppCompatActivity {
     private Button dstTablePreviewButton;
     private Button dstConfigurationPreviewButton;
 
+    private Spinner rockNameSpinner;
+    private SpinnerAdapter rockNameSpinnerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Start DSTRigActivity.");
@@ -84,9 +93,7 @@ public class DSTRigActivity extends AppCompatActivity {
         endTimeButton = (Button) findViewById(R.id.button_dst_rig_end_time);
         timeDurationTextView = (TextView) findViewById(R.id.textview_dst_rig_duration);
 
-        probeTypeSpinner = (Spinner) findViewById(R.id.spinner_dst_rig_probe_type);
-        probeTypeSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, PROBE_TYPE_SPINNER_OPTIONS);
-        probeTypeSpinner.setAdapter(probeTypeSpinnerAdapter);
+        probeTypeTextView = (TextView) findViewById(R.id.textview_dst_rig_probe_type);
         probeDiameterTextView = (TextView) findViewById(R.id.textview_dst_rig_probe_diameter);
         probeLengthTextView = (TextView) findViewById(R.id.textview_dst_rig_probe_length);
 
@@ -99,6 +106,10 @@ public class DSTRigActivity extends AppCompatActivity {
         deleteDstDetailButton = (Button) findViewById(R.id.button_delete_dst_detail);
         dstTablePreviewButton = (Button) findViewById(R.id.button_dst_rig_preview);
         dstConfigurationPreviewButton = (Button) findViewById(R.id.button_dst_rig_configuration);
+
+        rockNameSpinner = (Spinner) findViewById(R.id.spinner_dst_rig_rock_name);
+        rockNameSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ROCK_NAME_OPTIONS);
+        rockNameSpinner.setAdapter(rockNameSpinnerAdapter);
 
         for (int i = 1; i <= 20; i++) {
             TableRow detailedInfoTableRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
@@ -169,6 +180,8 @@ public class DSTRigActivity extends AppCompatActivity {
                     if (!refreshLock) {
                         try {
                             rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setHitCount(Integer.parseInt(s.toString()));
+                            rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setSaturationDescription(ConfigurationManager.parseDSTSaturationDescription(rigViewModel.getRockName(),Integer.parseInt(s.toString())));
+
                             detailedInfoHitCountEditText.setTextColor(getResources().getColor(android.R.color.black));
                             if (Integer.parseInt(s.toString()) <= 51 && Integer.parseInt(s.toString()) > 0) {
                                 detailedInfoHitCountEditText.setTextColor(getResources().getColor(android.R.color.black));
@@ -362,10 +375,23 @@ public class DSTRigActivity extends AppCompatActivity {
             }
         });
 
-        probeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        rockNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                rigViewModel.setProbeType(PROBE_TYPE_SPINNER_OPTIONS[position]);
+                // set probe type
+                rigViewModel.setRockName(ROCK_NAME_OPTIONS[position]);
+
+                if (Arrays.asList(ROCK120).contains(rigViewModel.getRockName())) {
+                    rigViewModel.setProbeType("超重型");
+                } else {
+                    rigViewModel.setProbeType("重型");
+                }
+
+                for (DSTRig.DSTDetailInfo info : rigViewModel.getDstDetailInfos()) {
+                    info.setSaturationDescription(ConfigurationManager.parseDSTSaturationDescription(rigViewModel.getRockName(), info.getHitCount()));
+                }
+
+                refreshInfo();
             }
 
             @Override
@@ -493,12 +519,7 @@ public class DSTRigActivity extends AppCompatActivity {
         endTimeButton.setText(Utility.formatTimeString(rigViewModel.getEndTime()));
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
 
-        for (int i = 0; i < PROBE_TYPE_SPINNER_OPTIONS.length; i++) {
-            if (PROBE_TYPE_SPINNER_OPTIONS[i].equals(rigViewModel.getProbeType())) {
-                probeTypeSpinner.setSelection(i);
-                break;
-            }
-        }
+        probeTypeTextView.setText(rigViewModel.getProbeType());
         probeDiameterTextView.setText(String.valueOf(rigViewModel.getProbeDiameter()));
         probeLengthTextView.setText(String.format("%.2f", rigViewModel.getProbeLength()));
 
@@ -551,8 +572,18 @@ public class DSTRigActivity extends AppCompatActivity {
                     detailedInfoHitCountEditTexts[i].setEnabled(false);
                 }
 
+                detailedInfoSaturationDescriptions[i].setText(rigViewModel.getDstDetailInfos().get(i).getSaturationDescription());
+
             } else {
                 detailedInfoTableRows[i].setVisibility(View.GONE);
+            }
+        }
+
+
+        for (int i = 0; i < ROCK_NAME_OPTIONS.length; i++) {
+            if (ROCK_NAME_OPTIONS[i].equals(rigViewModel.getRockName())) {
+                rockNameSpinner.setSelection(i);
+                break;
             }
         }
 

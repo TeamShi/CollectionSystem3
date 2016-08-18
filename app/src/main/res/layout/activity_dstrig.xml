@@ -180,8 +180,11 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical" />
-                    <Spinner
-                        android:id="@+id/spinner_dst_rig_probe_type"
+                    <TextView
+                        android:text=""
+                        android:id="@+id/textview_dst_rig_probe_type"
+                        android:textColor="@android:color/black"
+                        android:gravity="center"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
@@ -286,6 +289,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:gravity="center"
                         />
                 </TableRow>
 
@@ -1599,8 +1603,8 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:inputType="numberDecimal"/>
-                    <TextView
-                        android:id="@+id/textview_dst_rig_rock_name"
+                    <Spinner
+                        android:id="@+id/spinner_dst_rig_rock_name"
                         android:layout_weight="4"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1608,8 +1612,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:gravity="center"
-                        android:inputType="numberDecimal"/>
+                        android:gravity="center"/>
                     <Button
                         android:id="@+id/button_dst_rig_preview"
                         android:layout_weight="1"

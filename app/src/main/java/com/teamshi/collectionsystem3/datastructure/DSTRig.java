@@ -13,6 +13,8 @@ public class DSTRig extends CalculatingRig  {
 
     private ArrayList<DSTDetailInfo> dstDetailInfos;    // 动力触探具体信息
 
+    private String rockName;
+
     public DSTRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                   double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
                   String probeType, int probeDiameter, double probeLength) {
@@ -120,6 +122,14 @@ public class DSTRig extends CalculatingRig  {
 
     public void setDstDetailInfos(ArrayList<DSTDetailInfo> dstDetailInfos) {
         this.dstDetailInfos = dstDetailInfos;
+    }
+
+    public String getRockName() {
+        return rockName;
+    }
+
+    public void setRockName(String rockName) {
+        this.rockName = rockName;
     }
 
     @Override

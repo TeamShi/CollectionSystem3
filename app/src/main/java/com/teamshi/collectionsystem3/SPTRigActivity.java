@@ -148,6 +148,7 @@ public class SPTRigActivity extends AppCompatActivity {
 
         otherDescriptionEditText = (EditText) findViewById(R.id.edittext_spt_rig_other_description);
 
+        rigViewTableButton = (Button) findViewById(R.id.button_spt_rig_view_table);
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
