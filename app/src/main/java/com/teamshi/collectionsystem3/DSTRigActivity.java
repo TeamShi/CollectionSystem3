@@ -19,11 +19,10 @@ import android.widget.SpinnerAdapter;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
-import com.teamshi.collectionsystem3.datastructure.Configuration;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -138,14 +137,14 @@ public class DSTRigActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     if (!refreshLock) {
                         try {
-                            rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setLength(Double.parseDouble(s.toString()));
+                            rigViewModel.getDstDetailInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setLength(Double.parseDouble(s.toString()));
 
-                            double afterDepth = rigViewModel.getDstDetailInfos().get(0).getDepth() + 0.1 * ((int) detailedInfoLengthEditText.getTag() - 1) + Double.parseDouble(s.toString());
+                            double afterDepth = rigViewModel.getDrillToolTotalLength() - 2 + 0.1 * ((Integer) detailedInfoLengthEditText.getTag() - 1) + Double.parseDouble(s.toString());
                             rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).setDepth(afterDepth);
                             rigViewModel.setAccumulatedMeterageLength(afterDepth);
                             rigViewModel.setRoundTripMeterageLength(0.1 * ((int) detailedInfoLengthEditText.getTag() - 1) + Double.parseDouble(s.toString()));
-                            rigViewModel.setDrillPipeRemainLength(rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).getPipeLength() - rigViewModel.getAccumulatedMeterageLength());
-                            rigViewModel.setDrillToolTotalLength(rigViewModel.getDstDetailInfos().get((int) detailedInfoLengthEditText.getTag() - 1).getPipeLength());
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+                            rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
 
                             if (Double.parseDouble(s.toString()) <= 0.1 && Double.parseDouble(s.toString()) > 0) {
                                 detailedInfoLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
@@ -209,6 +208,10 @@ public class DSTRigActivity extends AppCompatActivity {
 
                 rigViewModel.getDstDetailInfos().add(new DSTRig.DSTDetailInfo(lastInfo.getPipeLength(), lastInfo.getDepth() + 0.1, 0.1, 10, ""));
 
+                rigViewModel.setAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength() + 0.1);
+                rigViewModel.setRoundTripMeterageLength(rigViewModel.getRoundTripMeterageLength() + 0.1);
+                rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillPipeRemainLength() - 0.1);
+
                 refreshInfo();
             }
         });
@@ -216,6 +219,12 @@ public class DSTRigActivity extends AppCompatActivity {
         deleteDstDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DSTRig.DSTDetailInfo info = rigViewModel.getDstDetailInfos().get(rigViewModel.getDstDetailInfos().size() - 1);
+
+                rigViewModel.setAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength() - info.getLength());
+                rigViewModel.setRoundTripMeterageLength(rigViewModel.getRoundTripMeterageLength() - info.getLength());
+                rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillPipeRemainLength() + info.getLength());
+
                 rigViewModel.getDstDetailInfos().remove(rigViewModel.getDstDetailInfos().size() - 1);
 
                 refreshInfo();
@@ -326,19 +335,17 @@ public class DSTRigActivity extends AppCompatActivity {
                         if (validate()) {
                             String holeId = getIntent().getStringExtra("holeId");
 
+                            rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
+                            rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
+                            rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
+                            rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
+
                             DataManager.addRig(holeId, rigViewModel);
 
-//                            if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
-//                                DataManager.getHole(holeId).addPipe(rigViewModel.getPipeLength());
-//                            }
-//
-//                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-//                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCorePipeLength());
-//                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
-//
-//                            if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
-//                                DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
-//                            }
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastRockCorePipeLength(0);
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
 
                             IOManager.updateProject(DataManager.getProject());
                             DSTRigActivity.this.setResult(RESULT_OK);
@@ -351,10 +358,6 @@ public class DSTRigActivity extends AppCompatActivity {
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
-
-//                            if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
-//                                DataManager.getHole(holeId).addPipe(rigViewModel.getPipeLength());
-//                            }
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
@@ -400,82 +403,6 @@ public class DSTRigActivity extends AppCompatActivity {
             }
         });
 
-        probeLengthTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                try {
-                    rigViewModel.setProbeLength(Double.parseDouble(s.toString()));
-                    probeLengthTextView.setTextColor(getResources().getColor(android.R.color.black));
-                } catch (Exception e) {
-                    probeLengthTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-                }
-            }
-        });
-
-        probeDiameterTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                try {
-                    rigViewModel.setProbeDiameter(Integer.parseInt(s.toString()));
-                    probeDiameterTextView.setTextColor(getResources().getColor(android.R.color.black));
-                } catch (Exception e) {
-                    probeDiameterTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-                }
-
-            }
-        });
-
-        drillPipeRemainLengthEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!refreshLock) {
-                    try {
-                        rigViewModel.setDrillPipeRemainLength(Double.parseDouble(s.toString()));
-                        drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
-
-                        //rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
-                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                        //rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
-
-                        refreshInfo();
-                    } catch (Exception e) {
-                        drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-                    }
-                }
-            }
-        });
-
         String requestCode = getIntent().getStringExtra("requestCode");
 
         holeId = getIntent().getStringExtra("holeId");
@@ -487,13 +414,12 @@ public class DSTRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 rigViewModel = new DSTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1, 10, 10,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.9,
+                        0.1, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         "重型", 74, 0.25
                 );
 
                 refreshInfo();
-                break;
-            case "ACTION_COPY_RIG":
                 break;
             case "ACTION_EDIT_RIG":
                 String holeId = getIntent().getStringExtra("holeId");
@@ -502,6 +428,24 @@ public class DSTRigActivity extends AppCompatActivity {
                 rigViewModel = (DSTRig) DataManager.getRig(holeId, rigIndex).deepCopy();
 
                 refreshInfo();
+
+                for (EditText et : detailedInfoLengthEditTexts) {
+                    et.setEnabled(false);
+                }
+
+                for (EditText et : detailedInfoHitCountEditTexts) {
+                    et.setEnabled(false);
+                }
+
+                classPeopleCountEditText.setEnabled(false);
+                dateButton.setEnabled(false);
+                startTimeButton.setEnabled(false);
+                endTimeButton.setEnabled(false);
+                probeTypeTextView.setEnabled(false);
+                probeDiameterTextView.setEnabled(false);
+                probeLengthTextView.setEnabled(false);
+                addDstDetailButton.setEnabled(false);
+                deleteDstDetailButton.setEnabled(false);
 
                 break;
         }
@@ -544,6 +488,12 @@ public class DSTRigActivity extends AppCompatActivity {
             addDstDetailButton.setEnabled(true);
         }
 
+        String requestCode = getIntent().getStringExtra("requestCode");
+        if (requestCode.equals("ACTION_EDIT_RIG")) {
+            addDstDetailButton.setEnabled(false);
+            deleteDstDetailButton.setEnabled(false);
+        }
+
         for (int i = 0; i < 20; i++) {
             if (i < rigViewModel.getDstDetailInfos().size()) {
                 detailedInfoTableRows[i].setVisibility(View.VISIBLE);
@@ -579,6 +529,14 @@ public class DSTRigActivity extends AppCompatActivity {
             }
         }
 
+        for (int i = 0;i < 20; i++) {
+            if (requestCode.equals("ACTION_EDIT_RIG")) {
+                detailedInfoLengthEditTexts[i].setEnabled(false);
+                detailedInfoHitCountEditTexts[i].setEnabled(false);
+            }
+
+        }
+
 
         for (int i = 0; i < ROCK_NAME_OPTIONS.length; i++) {
             if (ROCK_NAME_OPTIONS[i].equals(rigViewModel.getRockName())) {
@@ -591,6 +549,18 @@ public class DSTRigActivity extends AppCompatActivity {
     }
 
     private boolean validate() {
+        DSTRig.DSTDetailInfo info = rigViewModel.getDstDetailInfos().get(rigViewModel.getDstDetailInfos().size() - 1);
+
+        if (info.getLength() > 0.1) {
+            Toast.makeText(DSTRigActivity.this, "贯入深度必须小于等于0.1m.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (info.getHitCount() > 52) {
+            Toast.makeText(DSTRigActivity.this, "锤击数不得大于51.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         return true;
     }
 }

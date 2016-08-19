@@ -532,10 +532,10 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(String.format("%.2f", rig.getAccumulatedMeterageLength())));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

@@ -27,7 +27,7 @@ public class DSTRig extends CalculatingRig  {
 
         dstDetailInfos = new ArrayList<>();
 
-        dstDetailInfos.add(new DSTDetailInfo(drillToolTotalLength + 2, drillToolTotalLength + 0.1, 0.1, 10, ""));
+        dstDetailInfos.add(new DSTDetailInfo(drillToolTotalLength, drillToolTotalLength - 1.9, 0.1, 10, ""));
     }
 
     public static class DSTDetailInfo {
@@ -137,6 +137,8 @@ public class DSTRig extends CalculatingRig  {
         DSTRig temp = new DSTRig(classPeopleCount, date, startTime, endTime,
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
                 probeType, probeDiameter, probeLength);
+
+        temp.dstDetailInfos.clear();
 
         for (DSTDetailInfo info : dstDetailInfos) {
             temp.getDstDetailInfos().add(info.deepCopy());
