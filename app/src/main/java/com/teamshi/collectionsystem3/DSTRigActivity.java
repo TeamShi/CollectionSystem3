@@ -537,7 +537,6 @@ public class DSTRigActivity extends AppCompatActivity {
 
         }
 
-
         for (int i = 0; i < ROCK_NAME_OPTIONS.length; i++) {
             if (ROCK_NAME_OPTIONS[i].equals(rigViewModel.getRockName())) {
                 rockNameSpinner.setSelection(i);

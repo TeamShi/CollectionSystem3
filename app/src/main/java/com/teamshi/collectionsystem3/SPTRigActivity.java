@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
@@ -124,7 +125,7 @@ public class SPTRigActivity extends AppCompatActivity {
         countEndDepth1EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_end_depth_1);
         countStartDepth2EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_start_depth_2);
         countEndDepth2EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_end_depth_2);
-        countStartDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_start_depth_2);
+        countStartDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_start_depth_3);
         countEndDepth3EditText = (EditText) findViewById(R.id.edittext_spt_rig_count_end_depth_3);
 
         hitCount1EditText = (EditText) findViewById(R.id.edittext_spt_rig_hit_count_1);
@@ -379,6 +380,86 @@ public class SPTRigActivity extends AppCompatActivity {
             }
         });
 
+        penetrationEndDepthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        double penetrationEndDepth = Double.parseDouble(s.toString());
+
+                        if (penetrationEndDepth < rigViewModel.getPenetrationStartDepth() + 0.15) {
+                            rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
+                            rigViewModel.setOtherDescription("贯入深度自 " + rigViewModel.getPenetrationStartDepth() + "m 至 " + String.format("%.2f", rigViewModel.getPenetrationEndDepth()) + "m 反弹51击");
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setCountStartDepth2(-1);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(penetrationEndDepth);
+                            rigViewModel.setCountEndDepth2(-1);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(-1);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(penetrationEndDepth);
+                            rigViewModel.setDrillEndDepth2(-1);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(51);
+                            rigViewModel.setHitCount2(-1);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(51);
+                        } else {
+                            rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
+                            rigViewModel.setOtherDescription("");
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setCountEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountEndDepth2(rigViewModel.getPenetrationStartDepth() + 0.35);
+                            rigViewModel.setCountEndDepth3(penetrationEndDepth);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setDrillEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillEndDepth2(rigViewModel.getPenetrationStartDepth() + 0.35);
+                            rigViewModel.setDrillEndDepth3(penetrationEndDepth);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(0);
+                            rigViewModel.setHitCount3(0);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+                        }
+
+                        penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        refreshInfo();
+                    } catch (Exception e) {
+                        penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+                }
+
+            }
+        });
+
         rockParameterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -417,9 +498,9 @@ public class SPTRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.15, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
-                        0, 0,
-                        0, 0,
-                        0, 0,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         "",
                         "",
                         "",
@@ -481,10 +562,88 @@ public class SPTRigActivity extends AppCompatActivity {
             penetrationEndDepthEditText.setText(String.format("%.2f", rigViewModel.getPenetrationEndDepth()));
         }
 
+        if (getCurrentFocus() != hitCount1EditText) {
+            hitCount1EditText.setText(rigViewModel.getHitCount1() < 0? "": String.valueOf(rigViewModel.getHitCount1()));
+            hitCount1EditText.setEnabled(rigViewModel.getHitCount1() >= 0 && rigViewModel.getHitCount1() != 51);
+        }
+
+        if (getCurrentFocus() != hitCount2EditText) {
+            hitCount2EditText.setText(rigViewModel.getHitCount2() < 0? "": String.valueOf(rigViewModel.getHitCount2()));
+            hitCount2EditText.setEnabled(rigViewModel.getHitCount2() >= 0);
+        }
+
+        if (getCurrentFocus() != hitCount3EditText) {
+            hitCount3EditText.setText(rigViewModel.getHitCount3() < 0? "": String.valueOf(rigViewModel.getHitCount3()));
+            hitCount3EditText.setEnabled(rigViewModel.getHitCount3() >= 0);
+        }
+
+        if (getCurrentFocus() != countStartDepth1EditText) {
+            countStartDepth1EditText.setText(rigViewModel.getCountStartDepth1() < 0? "": String.format("%.2f", rigViewModel.getCountStartDepth1()));
+        }
+
+        if (getCurrentFocus() != countEndDepth1EditText) {
+            countEndDepth1EditText.setText(rigViewModel.getCountEndDepth1() < 0? "": String.format("%.2f", rigViewModel.getCountEndDepth1()));
+            countEndDepth1EditText.setEnabled(rigViewModel.getCountEndDepth1() >= 0 && rigViewModel.getHitCount1() != 51);
+        }
+
+        if (getCurrentFocus() != countStartDepth2EditText) {
+            countStartDepth2EditText.setText(rigViewModel.getCountStartDepth2() < 0? "": String.format("%.2f", rigViewModel.getCountStartDepth2()));
+        }
+
+        if (getCurrentFocus() != countEndDepth2EditText) {
+            countEndDepth2EditText.setText(rigViewModel.getCountEndDepth2() < 0? "": String.format("%.2f", rigViewModel.getCountEndDepth2()));
+            countEndDepth2EditText.setEnabled(rigViewModel.getCountEndDepth2() >= 0);
+        }
+
+        if (getCurrentFocus() != countStartDepth3EditText) {
+            countStartDepth3EditText.setText(rigViewModel.getCountStartDepth3() < 0? "": String.format("%.2f", rigViewModel.getCountStartDepth3()));
+        }
+
+        if (getCurrentFocus() != countEndDepth3EditText) {
+            countEndDepth3EditText.setText(rigViewModel.getCountEndDepth3() < 0? "": String.format("%.2f", rigViewModel.getCountEndDepth3()));
+            countEndDepth3EditText.setEnabled(rigViewModel.getCountEndDepth3() >= 0);
+        }
+
+        if (getCurrentFocus() != drillStartDepth1EditText) {
+            drillStartDepth1EditText.setText(rigViewModel.getDrillStartDepth1() < 0? "": String.format("%.2f", rigViewModel.getDrillStartDepth1()));
+        }
+
+        if (getCurrentFocus() != drillEndDepth1EditText) {
+            drillEndDepth1EditText.setText(rigViewModel.getDrillEndDepth1() < 0? "": String.format("%.2f", rigViewModel.getDrillEndDepth1()));
+        }
+
+        if (getCurrentFocus() != drillStartDepth2EditText) {
+            drillStartDepth2EditText.setText(rigViewModel.getDrillStartDepth2() < 0? "": String.format("%.2f", rigViewModel.getDrillStartDepth2()));
+        }
+
+        if (getCurrentFocus() != drillEndDepth2EditText) {
+            drillEndDepth2EditText.setText(rigViewModel.getDrillEndDepth2() < 0? "": String.format("%.2f", rigViewModel.getDrillEndDepth2()));
+        }
+
+        if (getCurrentFocus() != drillStartDepth3EditText) {
+            drillStartDepth3EditText.setText(rigViewModel.getDrillStartDepth3() < 0? "": String.format("%.2f", rigViewModel.getDrillStartDepth3()));
+        }
+
+        if (getCurrentFocus() != drillEndDepth3EditText) {
+            drillEndDepth3EditText.setText(rigViewModel.getDrillEndDepth3() < 0? "": String.format("%.2f", rigViewModel.getDrillEndDepth3()));
+        }
+
+        if (getCurrentFocus() != otherDescriptionEditText) {
+            otherDescriptionEditText.setText(rigViewModel.getOtherDescription());
+        }
+
+        accumulatedHitCountTextView.setText(rigViewModel.getAccumulatehHitCount() < 0? "": String.valueOf(rigViewModel.getAccumulatehHitCount()));
+
         refreshLock = false;
     }
 
     private boolean validate() {
+
+        if (!Utility.validateStartEndTime(rigViewModel.getStartTime(), rigViewModel.getEndTime())) {
+            Toast.makeText(SPTRigActivity.this, "开始时间不得大于等于结束时间", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         return true;
     }
 }
