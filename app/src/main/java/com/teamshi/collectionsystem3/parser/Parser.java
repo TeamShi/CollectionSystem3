@@ -7,6 +7,7 @@ import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
+import com.teamshi.collectionsystem3.datastructure.TRRig;
 
 import java.util.ArrayList;
 
@@ -116,6 +117,7 @@ public class Parser {
             boolean isRegular = rig instanceof RegularRig;
             boolean isSpt = rig instanceof SPTRig;
             boolean isDst = rig instanceof DSTRig;
+            boolean isTrr = rig instanceof TRRig;
 
             StringBuffer sb = new StringBuffer();
 
@@ -125,10 +127,11 @@ public class Parser {
             sb.append(formatCalendarDateString(rig.getEndTime(), "hh时mm分")).append("#");
             sb.append(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())).append("#");
 
-            sb.append(hole.getProjectName()).append("#");
 
             if (isRegular) {
                 RegularRig regularRig = (RegularRig) rigs.get(i);
+
+                sb.append(regularRig.getRigType()).append("#");
                 //钻杆
                 sb.append(regularRig.getPipeNumber()).append("#");
                 sb.append(regularRig.getPipeLength()).append("#");
@@ -192,6 +195,8 @@ public class Parser {
 
             } else if (isNAType) {
                 NARig naRig = (NARig) rigs.get(i);
+
+                sb.append(naRig.getNaType()).append("#");
 
                 //钻杆
                 sb.append("").append("#");
@@ -257,6 +262,9 @@ public class Parser {
 
             } else if(isSpt){
                 SPTRig sptRig = (SPTRig) rigs.get(i);
+
+                sb.append("标 贯").append("#");
+
                 //钻杆
                 sb.append(sptRig.getProbeType()).append("#");
                 sb.append(sptRig.getProbeLength()).append("#");
@@ -320,6 +328,8 @@ public class Parser {
 
             }else if(isDst){
                 DSTRig dstRig = (DSTRig) rigs.get(i);
+
+                sb.append("动 探").append("#");
                 //钻杆
                 sb.append(dstRig.getProbeType()).append("#");
                 sb.append(dstRig.getProbeLength()).append("#");
@@ -381,6 +391,72 @@ public class Parser {
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append( NA).append("#");
 
+            }else if(isTrr){
+                TRRig trRig = (TRRig) rigs.get(i);
+
+                sb.append("下套管").append("#");
+
+                //钻杆
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append("").append("#");
+
+                //岩芯管
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //钻头
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //进尺
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+
+                //护壁措施
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //孔内情况
+                sb.append("").append("#");
+
+                //岩心采取
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //土样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //水样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //地层
+                sb.append("").append("#");//编号, 四类普通钻,编号加1
+                sb.append("").append("#"); //底层深度 本次累计进尺
+                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+                sb.append("").append("#"); // 名称及岩性
+                sb.append("").append("#"); //岩层等级
+
+                //地下水 只填第一行
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //特殊情况记录 最后一个string 特殊处理
+                sb.append( trRig.getSpecialDescription().trim().equals("") ? NA : trRig.getSpecialDescription()).append("#");
             }
 
             resultData[i] = convert2Array(sb.toString());
