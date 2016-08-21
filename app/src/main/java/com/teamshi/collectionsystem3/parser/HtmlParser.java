@@ -1,8 +1,10 @@
 package com.teamshi.collectionsystem3.parser;
 
 import android.content.res.AssetManager;
+import android.net.NetworkInfo;
 
 import com.teamshi.collectionsystem3.Utility;
+import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.NARig;
 import com.teamshi.collectionsystem3.datastructure.Project;
@@ -23,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.teamshi.collectionsystem3.Utility.deleteDir;
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
 
@@ -190,21 +193,22 @@ public class HtmlParser {
         return true;
     }
 
-    public static boolean parseDstRig(String dirPath, Hole hole, AssetManager assetManager) {
-        if (hole == null) {
-            return false;
+    public static String parseDstRig(String dirPath, DSTRig dstRig, AssetManager assetManager) {
+        if (dstRig == null) {
+            return null;
         }
 
-//        String[][] dstEventArray = convertDst(hole);
-//
-//        try {
-//            write(dirPath + "dstRigEvent.html", dstEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
+        String[][] dstEventArray = convertDst(dstRig);
+        String path = dirPath + "dstRigEvent.html";
 
-        return true;
+        try {
+            write(path, dstEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
     }
 
     private static String[][] convertSpt(SPTRig sptRig) {
@@ -290,41 +294,27 @@ public class HtmlParser {
 //        return resultData;
 //    }
 
-//    private static String[][] convertDst(Hole hole) {
-//        ArrayList<DSTRig> dstRigEvents = new ArrayList<>();
-//        for (RigEvent rigEvent : hole.getRigList()) {
-//            if (rigEvent instanceof DSTRig) {
-//                dstRigEvents.add((DSTRig) rigEvent);
-//            }
-//        }
-//        ArrayList<String> records = new ArrayList<>();
-//        for (int i = 0, len = dstRigEvents.size(); i < len; i++) {
-//            DSTRig dstRig = dstRigEvents.get(i);
-//            ArrayList<DSTRig.DynamicSoundingEvent> events = dstRig.getDynamicSoundingEvents();
-//            for (int j = 0, size = events.size(); j < size; j++) {
-//                DSTRig.DynamicSoundingEvent event = events.get(j);
-//                StringBuffer sb = new StringBuffer();
-//                sb.append(dstRig.getClassPeopleCount()).append("#");
-//                sb.append(formatCalendarDateString(dstRig.getDate(), "yyyy年MM月dd日")).append("#");
-//                sb.append(formatCalendarDateString(dstRig.getStartTime(), "hh时mm分")).append("#");
-//                sb.append(formatCalendarDateString(dstRig.getEndTime(), "hh时mm分")).append("#");
-//                sb.append(event.getTotalLength()).append("#");
-//                sb.append(event.getDigDepth()).append("#");
-//                sb.append(event.getPenetration()).append("#");
-//                sb.append(event.getHammeringCount()).append("#");
-//                sb.append(dstRig.getGroundName()).append("#");
-//
-//                records.add(sb.toString());
-//            }
-//        }
-//        int rows = records.size();
-//        String[][] resultData = new String[rows][];
-//        for (int i = 0; i < rows; i++) {
-//            resultData[i] = convert2Array(records.get(i));
-//        }
-//
-//        return resultData;
-//    }
+    private static String[][] convertDst(DSTRig dstRig) {
+        ArrayList<DSTRig.DSTDetailInfo> details = dstRig.getDstDetailInfos();
+
+        StringBuffer sb ;
+        String[][] resultData = new String[details.size()][];
+
+        for (int index = 0; index < details.size(); index++) {
+            sb = new StringBuffer();
+            DSTRig.DSTDetailInfo detailInfo = details.get(index);
+            sb.append(detailInfo.getPipeLength()).append("#");
+            sb.append(detailInfo.getDepth()).append("#");
+            sb.append(detailInfo.getLength()).append("#");
+            sb.append(detailInfo.getHitCount()).append("#");
+            sb.append(NA).append("#");
+            sb.append(NA).append("#");
+            sb.append(detailInfo.getSaturationDescription().equals("") ? NA : detailInfo.getSaturationDescription()).append("#");
+            resultData[index] = convert2Array(sb.toString());
+        }
+
+        return resultData;
+    }
      
     private static String[][] convertHole(Hole hole) {
         ArrayList<Rig> rigs = hole.getRigList();

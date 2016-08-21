@@ -26,12 +26,6 @@
                 android:layout_width="150dp"
                 android:layout_height="80dp"
                 android:textSize="@dimen/default_text_size"
-                android:text="预览"
-                android:id="@+id/button_preview_spt"/>
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="80dp"
-                android:textSize="@dimen/default_text_size"
                 android:text="取消"
                 android:id="@+id/button_cancel_add_spt_rig"/>
             </LinearLayout>
@@ -1010,7 +1004,7 @@
                     <Button
                         android:layout_weight="1"
                         android:text="表格查看"
-                        android:id="@+id/button_spt_rig_view_table"
+                        android:id="@+id/button_preview_spt"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"

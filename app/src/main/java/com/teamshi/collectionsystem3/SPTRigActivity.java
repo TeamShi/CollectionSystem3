@@ -472,9 +472,7 @@ public class SPTRigActivity extends AppCompatActivity {
         rigViewTableButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Johnson preview
                 Project project = DataManager.getProject();
-
                 PreviewActivity.setUrls(IOManager.previewSPTRig(rigViewModel));
                 Intent intent = new Intent(SPTRigActivity.this, PreviewActivity.class);
                 intent.putExtra("projectName", project.getProjectName());
