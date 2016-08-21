@@ -111,10 +111,10 @@ public class DSTRigActivity extends AppCompatActivity {
         rockNameSpinner.setAdapter(rockNameSpinnerAdapter);
 
         for (int i = 1; i <= 20; i++) {
-            TableRow detailedInfoTableRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
+            final TableRow detailedInfoTableRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_dst_detail_" + i, "id", getPackageName()));
             detailedInfoTableRows[i - 1] = detailedInfoTableRow;
 
-            TextView detailedInfoPipeLengthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_pipe_length", "id", getPackageName()));
+            final TextView detailedInfoPipeLengthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_pipe_length", "id", getPackageName()));
             detailedInfoPipeLengthTextViews[i - 1] = detailedInfoPipeLengthTextView;
 
             final TextView detailedInfoDepthTextView = (TextView) findViewById(getResources().getIdentifier("textview_dst_detail_" + i + "_depth", "id", getPackageName()));

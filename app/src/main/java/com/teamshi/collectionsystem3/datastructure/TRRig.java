@@ -8,6 +8,8 @@ import java.util.Calendar;
  */
 public class TRRig extends Rig {
     private ArrayList<TRInfo> trInfos;
+    private String holeSaturation;
+    private String specialDescription;
 
     public TRRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
         super(classPeopleCount, date, startTime, endTime);
@@ -77,6 +79,22 @@ public class TRRig extends Rig {
         }
     };
 
+    public String getSpecialDescription() {
+        return specialDescription;
+    }
+
+    public void setSpecialDescription(String specialDescription) {
+        this.specialDescription = specialDescription;
+    }
+
+    public String getHoleSaturation() {
+        return holeSaturation;
+    }
+
+    public void setHoleSaturation(String holeSaturation) {
+        this.holeSaturation = holeSaturation;
+    }
+
     public ArrayList<TRInfo> getTrInfos() {
         return trInfos;
     }
@@ -93,6 +111,10 @@ public class TRRig extends Rig {
         for (TRInfo info : trInfos) {
             temp.getTrInfos().add(info.deepCopy());
         }
+
+        temp.setSpecialDescription(specialDescription);
+
+        temp.setHoleSaturation(holeSaturation);
 
         return temp;
     }
