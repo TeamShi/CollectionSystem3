@@ -57,8 +57,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:singleLine="true"
-                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                        android:singleLine="true"/>
                     <TextView
                         android:text="日期"
                         android:textColor="@android:color/black"
@@ -157,6 +156,8 @@
                     <EditText
                         android:layout_weight="7"
                         android:text="下套管试验"
+                        android:gravity="center"
+                        android:enabled="false"
                         android:id="@+id/edittext_tr_rig_type"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"

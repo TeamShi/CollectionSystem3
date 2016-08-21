@@ -240,7 +240,7 @@ public class RegularRigActivity extends AppCompatActivity {
 
                         refreshInfo();
                     }
-                }, rigStartTime.get(Calendar.HOUR), rigStartTime.get(Calendar.MINUTE), true);
+                }, rigStartTime.get(Calendar.HOUR_OF_DAY), rigStartTime.get(Calendar.MINUTE), true);
                 dialog.show();
             }
         });
@@ -259,7 +259,7 @@ public class RegularRigActivity extends AppCompatActivity {
 
                         refreshInfo();
                     }
-                }, rigEndTime.get(Calendar.HOUR), rigEndTime.get(Calendar.MINUTE), true);
+                }, rigEndTime.get(Calendar.HOUR_OF_DAY), rigEndTime.get(Calendar.MINUTE), true);
                 dialog.show();
             }
         });
