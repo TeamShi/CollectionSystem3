@@ -324,6 +324,8 @@ public class HtmlParser {
             Rig rig = rigs.get(i);
             boolean isNAType = rig instanceof NARig;
             boolean isRegular = rig instanceof RegularRig;
+            boolean isSpt = rig instanceof SPTRig;
+            boolean isDst = rig instanceof DSTRig;
 
             StringBuffer sb = new StringBuffer();
 
@@ -463,7 +465,131 @@ public class HtmlParser {
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(naRig.getNaType().trim().equals("") ? NA : naRig.getNaType()).append("#");
 
-            } else {
+            } else if(isSpt){
+                SPTRig sptRig = (SPTRig) rigs.get(i);
+                //钻杆
+                sb.append(sptRig.getProbeType()).append("#");
+                sb.append(sptRig.getProbeLength()).append("#");
+                sb.append(NA).append("#");
+
+                //岩芯管
+                sb.append(sptRig.getInjectionToolDiameter()).append("#");
+                sb.append(sptRig.getInjectionToolLength()).append("#");
+
+                //钻头
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //进尺
+                sb.append(sptRig.getDrillToolTotalLength()).append("#");
+                sb.append(sptRig.getDrillPipeRemainLength()).append("#");
+                sb.append(sptRig.getRoundTripMeterageLength()).append("#");
+                sb.append(sptRig.getAccumulatedMeterageLength()).append("#");
+                //护壁措施
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //孔内情况
+                sb.append("").append("#");
+
+                //岩心采取
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //土样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //水样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //地层
+                sb.append("").append("#");//编号, 四类普通钻,编号加1
+                sb.append("").append("#"); //底层深度 本次累计进尺
+                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+                sb.append("").append("#"); // 名称及岩性
+                sb.append("").append("#"); //岩层等级
+
+                //地下水 只填第一行
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //特殊情况记录 最后一个string 特殊处理
+                sb.append(sptRig.getOtherDescription().trim().equals("") ? NA : sptRig.getOtherDescription()).append("#");
+
+            }else if(isDst){
+                DSTRig dstRig = (DSTRig) rigs.get(i);
+                //钻杆
+                sb.append(dstRig.getProbeType()).append("#");
+                sb.append(dstRig.getProbeLength()).append("#");
+                sb.append("").append("#");
+
+                //岩芯管
+                sb.append("动").append("#");
+                sb.append("").append("#");
+
+                //钻头
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //进尺
+                sb.append(dstRig.getDrillToolTotalLength()).append("#");
+                sb.append(dstRig.getDrillPipeRemainLength()).append("#");
+                sb.append(dstRig.getRoundTripMeterageLength()).append("#");
+                sb.append(dstRig.getAccumulatedMeterageLength()).append("#");
+                //护壁措施
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //孔内情况
+                sb.append("").append("#");
+
+                //岩心采取
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //土样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //水样
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //地层
+                sb.append("").append("#");//编号, 四类普通钻,编号加1
+                sb.append("").append("#"); //底层深度 本次累计进尺
+                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+                sb.append("").append("#"); // 名称及岩性
+                sb.append("").append("#"); //岩层等级
+
+                //地下水 只填第一行
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+                sb.append("").append("#");
+
+                //特殊情况记录 最后一个string 特殊处理
+                sb.append( NA).append("#");
 
             }
 
