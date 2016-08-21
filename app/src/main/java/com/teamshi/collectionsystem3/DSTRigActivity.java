@@ -22,6 +22,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
+import com.teamshi.collectionsystem3.datastructure.Project;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -234,8 +235,11 @@ public class DSTRigActivity extends AppCompatActivity {
         dstTablePreviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Johnson
-                // Preview dst
+                Project project = DataManager.getProject();
+                PreviewActivity.setUrls(IOManager.previewDSTRig(rigViewModel));
+                Intent intent = new Intent(DSTRigActivity.this, PreviewActivity.class);
+                intent.putExtra("projectName", project.getProjectName());
+                startActivity(intent);
             }
         });
 
