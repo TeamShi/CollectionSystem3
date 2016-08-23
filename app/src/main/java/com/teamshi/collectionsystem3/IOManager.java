@@ -11,6 +11,7 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.parser.HtmlParser;
+import com.teamshi.collectionsystem3.parser.XlsParser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -205,6 +206,16 @@ public class IOManager {
         if(null == projectFile){
             return false;
         } else {
+            // todo update hole xls files
+//            ArrayList<Hole> holes = project.getHoleList();
+//            if(holes != null && holes.size() > 0 ){
+//                String projectDirPath = APP_DATA +File.separator+project.getProjectName();
+//                for(int i = 0;i<holes.size();i++) {
+//                    Hole hole = holes.get(i);
+//                    XlsParser.parse(projectDirPath+File.separator+hole.getHoleId()+File.separator,hole);
+//                }
+//            }
+
             projects.put(project.getProjectName(),project);
             return true;
         }
