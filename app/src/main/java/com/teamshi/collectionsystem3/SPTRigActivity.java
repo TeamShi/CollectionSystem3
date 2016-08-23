@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
+import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
 import org.w3c.dom.Text;
@@ -398,11 +400,69 @@ public class SPTRigActivity extends AppCompatActivity {
                     try {
                         double penetrationEndDepth = Double.parseDouble(s.toString());
 
-                        if (penetrationEndDepth < rigViewModel.getPenetrationStartDepth() + 0.15) {
+                        if (penetrationEndDepth < rigViewModel.getPenetrationStartDepth()) {
+                            rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
+                            rigViewModel.setOtherDescription("");
+
+                            rigViewModel.setCountStartDepth1(-1);
+                            rigViewModel.setCountStartDepth2(-1);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(-1);
+                            rigViewModel.setCountEndDepth2(-1);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(-1);
+                            rigViewModel.setDrillStartDepth2(-1);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(-1);
+                            rigViewModel.setDrillEndDepth2(-1);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(-1);
+                            rigViewModel.setHitCount2(-1);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+
+                            penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            Toast.makeText(SPTRigActivity.this, "钻进深度至不得小于钻进深度自.", Toast.LENGTH_LONG).show();
+
+                            refreshInfo();
+                        } else if (penetrationEndDepth < rigViewModel.getPenetrationStartDepth() + 0.15) {
                             rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
                             rigViewModel.setOtherDescription("贯入深度自 " + rigViewModel.getPenetrationStartDepth() + "m 至 " + String.format("%.2f", rigViewModel.getPenetrationEndDepth()) + "m 反弹51击");
 
-                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setCountStartDepth1(-1);
+                            rigViewModel.setCountStartDepth2(-1);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(-1);
+                            rigViewModel.setCountEndDepth2(-1);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(-1);
+                            rigViewModel.setDrillStartDepth2(-1);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(-1);
+                            rigViewModel.setDrillEndDepth2(-1);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(-1);
+                            rigViewModel.setHitCount2(-1);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(51);
+                            penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+                        } else if (penetrationEndDepth <= rigViewModel.getPenetrationStartDepth() + 0.25) {
+                            rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
+                            rigViewModel.setOtherDescription("");
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
                             rigViewModel.setCountStartDepth2(-1);
                             rigViewModel.setCountStartDepth3(-1);
 
@@ -418,15 +478,48 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setDrillEndDepth2(-1);
                             rigViewModel.setDrillEndDepth3(-1);
 
-                            rigViewModel.setHitCount1(51);
+                            rigViewModel.setHitCount1(0);
                             rigViewModel.setHitCount2(-1);
                             rigViewModel.setHitCount3(-1);
 
-                            rigViewModel.setAccumulatehHitCount(51);
-                        } else {
+                            rigViewModel.setAccumulatehHitCount(0);
+                            penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+
+                        } else if (penetrationEndDepth <= rigViewModel.getPenetrationStartDepth() + 0.35) {
                             rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
                             rigViewModel.setOtherDescription("");
 
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountEndDepth2(penetrationEndDepth);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillEndDepth2(penetrationEndDepth);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(0);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+                            penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+
+                        } else if (penetrationEndDepth <= rigViewModel.getPenetrationStartDepth() + 0.45) {
+                            rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
+                            rigViewModel.setOtherDescription("");
+                            
                             rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
                             rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
                             rigViewModel.setCountStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);
@@ -448,16 +541,428 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount3(0);
 
                             rigViewModel.setAccumulatehHitCount(0);
+                            penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+                        } else {
+                            rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
+                            rigViewModel.setOtherDescription("");
+
+                            rigViewModel.setCountStartDepth1(-1);
+                            rigViewModel.setCountStartDepth2(-1);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(-1);
+                            rigViewModel.setCountEndDepth2(-1);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(-1);
+                            rigViewModel.setDrillStartDepth2(-1);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(-1);
+                            rigViewModel.setDrillEndDepth2(-1);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(-1);
+                            rigViewModel.setHitCount2(-1);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+
+                            penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            Toast.makeText(SPTRigActivity.this, "钻进深度至不得大于钻进深度自+0.45m.", Toast.LENGTH_LONG).show();
+
+                            refreshInfo();
                         }
-
-                        penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
-
-                        refreshInfo();
                     } catch (Exception e) {
                         penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                     }
                 }
 
+            }
+        });
+
+        countEndDepth1EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        double countEndDepth1 = Double.parseDouble(s.toString());
+
+                        if (countEndDepth1 <= rigViewModel.getPenetrationStartDepth() + 0.25 && countEndDepth1 > rigViewModel.getPenetrationStartDepth() + 0.15) {
+                            rigViewModel.setPenetrationEndDepth(countEndDepth1);
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(-1);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(countEndDepth1);
+                            rigViewModel.setCountEndDepth2(-1);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(-1);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(countEndDepth1);
+                            rigViewModel.setDrillEndDepth2(-1);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(-1);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+                            countEndDepth1EditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+                        } else {
+                            Toast.makeText(SPTRigActivity.this, "计数深度至1的取值范围为0.15 < 贯入深度自 <= 0.25.", Toast.LENGTH_SHORT).show();
+                            countEndDepth1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(-1);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth2(-1);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(-1);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth2(-1);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(-1);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+
+                            refreshInfo();
+                        }
+                    } catch (Exception e) {
+                        countEndDepth1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+                }
+            }
+        });
+
+        countEndDepth2EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        double countEndDepth2 = Double.parseDouble(s.toString());
+
+                        if (countEndDepth2 <= rigViewModel.getPenetrationStartDepth() + 0.35 && countEndDepth2 > rigViewModel.getPenetrationStartDepth() + 0.25) {
+                            rigViewModel.setPenetrationEndDepth(countEndDepth2);
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountEndDepth2(countEndDepth2);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillEndDepth2(countEndDepth2);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(0);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+                            countEndDepth2EditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+                        } else {
+                            Toast.makeText(SPTRigActivity.this, "计数深度至2的取值范围为0.25 < 贯入深度自 <= 0.35.", Toast.LENGTH_SHORT).show();
+                            countEndDepth2EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountStartDepth3(-1);
+
+                            rigViewModel.setCountEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountEndDepth3(-1);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillStartDepth3(-1);
+
+                            rigViewModel.setDrillEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillEndDepth3(-1);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(0);
+                            rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+
+                        }
+                    } catch (Exception e) {
+                        countEndDepth2EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+                }
+            }
+        });
+
+        countEndDepth3EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        double countEndDepth3 = Double.parseDouble(s.toString());
+
+                        if (countEndDepth3 <= rigViewModel.getPenetrationStartDepth() + 0.45 && countEndDepth3 > rigViewModel.getPenetrationStartDepth() + 0.35) {
+                            rigViewModel.setPenetrationEndDepth(countEndDepth3);
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setCountEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountEndDepth2(rigViewModel.getPenetrationStartDepth() + 0.35);
+                            rigViewModel.setCountEndDepth3(countEndDepth3);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setDrillEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillEndDepth2(rigViewModel.getPenetrationStartDepth() + 0.35);
+                            rigViewModel.setDrillEndDepth3(countEndDepth3);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(0);
+                            rigViewModel.setHitCount3(0);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+                            countEndDepth3EditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            refreshInfo();
+                        } else {
+                            Toast.makeText(SPTRigActivity.this, "计数深度至3的取值范围为0.35 < 贯入深度自 <= 0.45.", Toast.LENGTH_SHORT).show();
+                            countEndDepth3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+
+
+                            rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
+                            rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setCountEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setCountEndDepth2(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setDrillStartDepth1(rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setDrillStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
+
+                            rigViewModel.setDrillEndDepth1(rigViewModel.getPenetrationStartDepth() + 0.25);
+                            rigViewModel.setDrillEndDepth2(rigViewModel.getPenetrationStartDepth() + 0.35);
+
+                            rigViewModel.setHitCount1(0);
+                            rigViewModel.setHitCount2(0);
+                            rigViewModel.setHitCount3(0);
+
+                            rigViewModel.setAccumulatehHitCount(0);
+                        }
+                    } catch (Exception e) {
+                        countEndDepth3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+                }
+
+            }
+        });
+
+        hitCount1EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        int hitCount1 = Integer.parseInt(s.toString());
+
+                        rigViewModel.setHitCount1(hitCount1);
+                        int totalHitCount = hitCount1;
+                        if (rigViewModel.getHitCount2() != -1) {
+                            totalHitCount += rigViewModel.getHitCount2();
+                        }
+
+                        if (rigViewModel.getHitCount3() != -1) {
+                            totalHitCount += rigViewModel.getHitCount3();
+                        }
+
+                        rigViewModel.setAccumulatehHitCount(totalHitCount);
+
+                        if (totalHitCount > 50) {
+                            hitCount1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            hitCount2EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            hitCount3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            Toast.makeText(SPTRigActivity.this, "累计击数超过50.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            hitCount1EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            hitCount2EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            hitCount3EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
+                        }
+
+                        refreshInfo();
+                    } catch (Exception e) {
+                        hitCount1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+
+                }
+            }
+        });
+
+        hitCount2EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        int hitCount2 = Integer.parseInt(s.toString());
+
+                        rigViewModel.setHitCount2(hitCount2);
+                        int totalHitCount = hitCount2;
+                        if (rigViewModel.getHitCount1() != -1) {
+                            totalHitCount += rigViewModel.getHitCount1();
+                        }
+
+                        if (rigViewModel.getHitCount3() != -1) {
+                            totalHitCount += rigViewModel.getHitCount3();
+                        }
+
+                        rigViewModel.setAccumulatehHitCount(totalHitCount);
+
+                        if (totalHitCount > 50) {
+                            hitCount1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            hitCount2EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            hitCount3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            Toast.makeText(SPTRigActivity.this, "累计击数超过50.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            hitCount1EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            hitCount2EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            hitCount3EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
+                        }
+
+                        refreshInfo();
+                    } catch (Exception e) {
+                        hitCount2EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+
+                }
+            }
+        });
+
+        hitCount3EditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        int hitCount3 = Integer.parseInt(s.toString());
+
+                        rigViewModel.setHitCount1(hitCount3);
+                        int totalHitCount = hitCount3;
+                        if (rigViewModel.getHitCount2() != -1) {
+                            totalHitCount += rigViewModel.getHitCount2();
+                        }
+
+                        if (rigViewModel.getHitCount1() != -1) {
+                            totalHitCount += rigViewModel.getHitCount1();
+                        }
+
+                        rigViewModel.setAccumulatehHitCount(totalHitCount);
+
+                        if (totalHitCount > 50) {
+                            hitCount1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            hitCount2EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            hitCount3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                            Toast.makeText(SPTRigActivity.this, "累计击数超过50.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            hitCount1EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            hitCount2EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            hitCount3EditText.setTextColor(getResources().getColor(android.R.color.black));
+                            accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
+                        }
+
+                        refreshInfo();
+                    } catch (Exception e) {
+                        hitCount3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+
+                }
             }
         });
 
