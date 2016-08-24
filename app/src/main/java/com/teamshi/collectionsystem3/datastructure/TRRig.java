@@ -116,6 +116,15 @@ public class TRRig extends Rig {
 
         temp.setHoleSaturation(holeSaturation);
 
+        temp.setLastPipeNumber(lastPipeNumber);
+        temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
+        temp.setLastRockCorePipeLength(lastRockCorePipeLength);
+        temp.setLastMaxRigRockCoreIndex(lastMaxRigRockCoreIndex);
+
+        temp.setLastRockName(lastRockName);
+        temp.setLastRockColor(lastRockColor);
+        temp.setLastRockSaturation(lastRockSaturation);
+
         return temp;
     }
 }

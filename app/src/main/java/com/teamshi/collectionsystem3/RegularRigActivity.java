@@ -281,6 +281,10 @@ public class RegularRigActivity extends AppCompatActivity {
                             rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                             rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
 
+                            rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
+                            rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
+                            rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+
                             DataManager.addRig(holeId, rigViewModel);
 
                             if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
@@ -294,6 +298,10 @@ public class RegularRigActivity extends AppCompatActivity {
                             if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
                                 DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
                             }
+
+                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockType());
+                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
+                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
 
                             IOManager.updateProject(DataManager.getProject());
                             RegularRigActivity.this.setResult(RESULT_OK);

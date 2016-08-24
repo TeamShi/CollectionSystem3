@@ -19,6 +19,10 @@ public class Rig implements UIMethods, Serializable{
     protected double lastAccumulatedMeterageLength;
     protected int lastMaxRigRockCoreIndex;
 
+    protected String lastRockName;
+    protected String lastRockColor;
+    protected String lastRockSaturation;
+
     public Rig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
         this.classPeopleCount = classPeopleCount;
 
@@ -108,6 +112,30 @@ public class Rig implements UIMethods, Serializable{
 
     public void setLastMaxRigRockCoreIndex(int lastMaxRigRockCoreIndex) {
         this.lastMaxRigRockCoreIndex = lastMaxRigRockCoreIndex;
+    }
+
+    public String getLastRockName() {
+        return lastRockName;
+    }
+
+    public void setLastRockName(String lastRockName) {
+        this.lastRockName = lastRockName;
+    }
+
+    public String getLastRockColor() {
+        return lastRockColor;
+    }
+
+    public void setLastRockColor(String lastRockColor) {
+        this.lastRockColor = lastRockColor;
+    }
+
+    public String getLastRockSaturation() {
+        return lastRockSaturation;
+    }
+
+    public void setLastRockSaturation(String lastRockSaturation) {
+        this.lastRockSaturation = lastRockSaturation;
     }
 }
 

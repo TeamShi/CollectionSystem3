@@ -179,7 +179,12 @@ public class NARigInfoActivity extends AppCompatActivity {
                             rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                             rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
 
+                            rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
+                            rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
+                            rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+
                             DataManager.addRig(holeId, rigViewModel);
+                            
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());

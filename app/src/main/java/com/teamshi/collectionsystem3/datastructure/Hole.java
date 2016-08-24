@@ -3,7 +3,6 @@ package com.teamshi.collectionsystem3.datastructure;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 /**
  * Created by Alfred on 16/7/14.
@@ -74,6 +73,10 @@ public class Hole implements Serializable {
 
     private double lastAccumulatedMeterageLength;
     private double lastRockCorePipeLength;
+
+    private String lastRockName;
+    private String lastRockColor;
+    private String lastRockSaturation;
 
     public Hole() {
 
@@ -534,76 +537,104 @@ public class Hole implements Serializable {
         this.maxRigRockCoreIndex = maxRigRockCoreIndex;
     }
 
+    public String getLastRockName() {
+        return lastRockName;
+    }
+
+    public void setLastRockName(String lastRockName) {
+        this.lastRockName = lastRockName;
+    }
+
+    public String getLastRockColor() {
+        return lastRockColor;
+    }
+
+    public void setLastRockColor(String lastRockColor) {
+        this.lastRockColor = lastRockColor;
+    }
+
+    public String getLastRockSaturation() {
+        return lastRockSaturation;
+    }
+
+    public void setLastRockSaturation(String lastRockSaturation) {
+        this.lastRockSaturation = lastRockSaturation;
+    }
+
     public Hole deepCopy() {
-        Hole newHole = new Hole(getProjectName());
+        Hole newHole = new Hole(projectName);
 
-        newHole.setSpecialHoleId(isSpecialHoleId());
-        newHole.setHoleIdPart1(getHoleIdPart1());
-        newHole.setHoleIdPart2(getHoleIdPart2());
-        newHole.setHoleIdPart3(getHoleIdPart3());
-        newHole.setHoleIdPart4(getHoleIdPart4());
-        newHole.setHoleIdPart5(getHoleIdPart5());
+        newHole.setSpecialHoleId(isSpecialHoleId);
+        newHole.setHoleIdPart1(holeIdPart1);
+        newHole.setHoleIdPart2(holeIdPart2);
+        newHole.setHoleIdPart3(holeIdPart3);
+        newHole.setHoleIdPart4(holeIdPart4);
+        newHole.setHoleIdPart5(holeIdPart5);
 
-        newHole.setSpecialHoleId(getSpecialHoleId());
+        newHole.setSpecialHoleId(specialHoleId);
 
-        newHole.setStartDate(getStartDate());
-        newHole.setEndDate(getEndDate());
+        newHole.setStartDate((Calendar) startDate.clone());
+        newHole.setEndDate((Calendar) endDate.clone());
 
-        newHole.setSpecialArticle(isSpecialArticle());
-        newHole.setArticle(getArticle());
+        newHole.setSpecialArticle(isSpecialArticle);
+        newHole.setArticle(article);
 
-        newHole.setMileage(getMileage());
-        newHole.setOffset(getOffset());
-        newHole.setHoleHeight(getHoleHeight());
-        newHole.setHoleDepth(getHoleDepth());
+        newHole.setMileage(mileage);
+        newHole.setOffset(offset);
+        newHole.setHoleHeight(holeHeight);
+        newHole.setHoleDepth(holeDepth);
 
-        newHole.setRigMachineType(getRigMachineType());
-        newHole.setEngineType(getEngineType());
-        newHole.setPumpType(getPumpType());
+        newHole.setRigMachineType(rigMachineType);
+        newHole.setEngineType(engineType);
+        newHole.setPumpType(pumpType);
 
-        newHole.setInitialWaterDepth(getInitialWaterDepth());
-        newHole.setFinalWaterDepth(getFinalWaterDepth());
-        newHole.setInitialWaterDepthLoggedDate(getInitialWaterDepthLoggedDate());
-        newHole.setFinalWaterDepthLoggedDate(getFinalWaterDepthLoggedDate());
+        newHole.setInitialWaterDepth(initialWaterDepth);
+        newHole.setFinalWaterDepth(finalWaterDepth);
+        newHole.setInitialWaterDepthLoggedDate(initialWaterDepthLoggedDate);
+        newHole.setFinalWaterDepthLoggedDate(finalWaterDepthLoggedDate);
 
-        newHole.setLongitude(getLongitude());
-        newHole.setLatitude(getLatitude());
+        newHole.setLongitude(longitude);
+        newHole.setLatitude(latitude);
 
-        newHole.setCompany(getCompany());
-        newHole.setMachineId(getMachineId());
+        newHole.setCompany(company);
+        newHole.setMachineId(machineId);
 
-        newHole.setActualDepth(getActualDepth());
+        newHole.setActualDepth(actualDepth);
 
-        newHole.setNote(getNote());
-        newHole.setPositionInformation(getPositionInformation());
+        newHole.setNote(note);
+        newHole.setPositionInformation(positionInformation);
 
-        newHole.setRecorder(getRecorder());
-        newHole.setReviewer(getReviewer());
+        newHole.setRecorder(recorder);
+        newHole.setReviewer(reviewer);
 
-        newHole.setClassMonitor(getClassMonitor());
-        newHole.setMachineMonitor(getMachineMonitor());
+        newHole.setClassMonitor(classMonitor);
+        newHole.setMachineMonitor(machineMonitor);
 
-        List rigList = newHole.getRigList();
-        for (Rig rig : getRigList()) {
+        ArrayList<Rig> rigList = newHole.getRigList();
+        for (Rig rig : rigList) {
             rigList.add(rig.deepCopy());
         }
 
         newHole.setPipeArray(new ArrayList<Double>());
 
-        for (double pipeLength : getPipeArray()) {
+        for (double pipeLength : pipeArray) {
             newHole.getPipeArray().add(pipeLength);
         }
 
-        newHole.setLastRigEndTime(getLastRigEndTime());
+        newHole.setLastRigEndTime((Calendar) lastRigEndTime.clone());
 
-        newHole.setLastAccumulatedMeterageLength(getLastAccumulatedMeterageLength());
+        newHole.setLastAccumulatedMeterageLength(lastAccumulatedMeterageLength);
 
-        newHole.setLastRockCorePipeLength(getLastRockCorePipeLength());
+        newHole.setLastRockCorePipeLength(lastRockCorePipeLength);
 
-        newHole.setMaxRigRockCoreIndex(getMaxRigRockCoreIndex());
+        newHole.setMaxRigRockCoreIndex(maxRigRockCoreIndex);
+
+        newHole.setLastRockName(lastRockName);
+
+        newHole.setLastRockColor(lastRockColor);
+
+        newHole.setLastRockSaturation(lastRockSaturation);
 
         return newHole;
     }
-
-
 }

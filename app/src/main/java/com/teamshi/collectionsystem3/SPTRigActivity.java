@@ -519,7 +519,7 @@ public class SPTRigActivity extends AppCompatActivity {
                         } else if (penetrationEndDepth <= rigViewModel.getPenetrationStartDepth() + 0.45) {
                             rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
                             rigViewModel.setOtherDescription("");
-                            
+
                             rigViewModel.setCountStartDepth1(rigViewModel.getPenetrationStartDepth() + 0.15);
                             rigViewModel.setCountStartDepth2(rigViewModel.getPenetrationStartDepth() + 0.25);
                             rigViewModel.setCountStartDepth3(rigViewModel.getPenetrationStartDepth() + 0.35);

@@ -250,6 +250,10 @@ public class RigIndexActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).setMaxRigRockCoreIndex(deletingRig.getLastMaxRigRockCoreIndex());
                     }
 
+                    DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
+                    DataManager.getHole(holeId).setLastRockColor(deletingRig.getLastRockColor());
+                    DataManager.getHole(holeId).setLastRockSaturation(deletingRig.getLastRockSaturation());
+
                     DataManager.removeLastRig(holeId);
 
                     Toast.makeText(RigIndexActivity.this, "删除成功.", Toast.LENGTH_LONG).show();

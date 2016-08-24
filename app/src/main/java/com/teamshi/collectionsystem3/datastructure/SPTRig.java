@@ -340,6 +340,15 @@ public class SPTRig extends CalculatingRig {
                 rockDensity, rockSaturation,
                 otherDescription);
 
+        temp.setLastPipeNumber(lastPipeNumber);
+        temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
+        temp.setLastRockCorePipeLength(lastRockCorePipeLength);
+        temp.setLastMaxRigRockCoreIndex(lastMaxRigRockCoreIndex);
+
+        temp.setLastRockName(lastRockName);
+        temp.setLastRockColor(lastRockColor);
+        temp.setLastRockSaturation(lastRockSaturation);
+
         return temp;
     }
 }

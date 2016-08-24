@@ -79,6 +79,15 @@ public class RegularRig extends CalculatingRig {
                 rockCoreIndex, rockCoreLength, rockCorePickPercentage,
                 rigStartEndDepth, rockType, rockColor, rockDensity, rockSaturation, rockWeathering, rockDescription, note);
 
+        temp.setLastPipeNumber(lastPipeNumber);
+        temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
+        temp.setLastRockCorePipeLength(lastRockCorePipeLength);
+        temp.setLastMaxRigRockCoreIndex(lastMaxRigRockCoreIndex);
+
+        temp.setLastRockName(lastRockName);
+        temp.setLastRockColor(lastRockColor);
+        temp.setLastRockSaturation(lastRockSaturation);
+
         return temp;
     }
 

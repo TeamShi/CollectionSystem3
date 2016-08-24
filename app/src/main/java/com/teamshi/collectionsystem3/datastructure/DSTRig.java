@@ -144,6 +144,15 @@ public class DSTRig extends CalculatingRig  {
             temp.getDstDetailInfos().add(info.deepCopy());
         }
 
+        temp.setLastPipeNumber(lastPipeNumber);
+        temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
+        temp.setLastRockCorePipeLength(lastRockCorePipeLength);
+        temp.setLastMaxRigRockCoreIndex(lastMaxRigRockCoreIndex);
+
+        temp.setLastRockName(lastRockName);
+        temp.setLastRockColor(lastRockColor);
+        temp.setLastRockSaturation(lastRockSaturation);
+
         return temp;
     }
 }
