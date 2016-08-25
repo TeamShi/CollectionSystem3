@@ -972,7 +972,7 @@ public class SPTRigActivity extends AppCompatActivity {
                     try {
                         int hitCount3 = Integer.parseInt(s.toString());
 
-                        rigViewModel.setHitCount1(hitCount3);
+                        rigViewModel.setHitCount3(hitCount3);
                         int totalHitCount = hitCount3;
                         if (rigViewModel.getHitCount2() != -1) {
                             totalHitCount += rigViewModel.getHitCount2();
@@ -1100,6 +1100,18 @@ public class SPTRigActivity extends AppCompatActivity {
                 int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                 rigViewModel = (SPTRig) DataManager.getRig(holeId, rigIndex).deepCopy();
+
+                classPeopleCountEditText.setEnabled(false);
+                dateButton.setEnabled(false);
+                startTimeButton.setEnabled(false);
+                endTimeButton.setEnabled(false);
+                probeTypeEditText.setEnabled(false);
+                probeLengthEditText.setEnabled(false);
+                probeDiameterEditText.setEnabled(false);
+                penetrationEndDepthEditText.setEnabled(false);
+                countEndDepth1EditText.setEnabled(false);
+                countEndDepth2EditText.setEnabled(false);
+                countEndDepth3EditText.setEnabled(false);
 
                 refreshInfo();
 
@@ -1240,12 +1252,57 @@ public class SPTRigActivity extends AppCompatActivity {
     }
 
     private boolean validate() {
+        String requestCode = getIntent().getStringExtra("requestCode");
 
-        if (!Utility.validateStartEndTime(rigViewModel.getStartTime(), rigViewModel.getEndTime())) {
-            Toast.makeText(SPTRigActivity.this, "开始时间不得大于等于结束时间", Toast.LENGTH_LONG).show();
-            return false;
+        if (requestCode.equals("ACTION_ADD_RIG")) {
+            if (!Utility.validateStartEndTime(rigViewModel.getStartTime(), rigViewModel.getEndTime())) {
+                Toast.makeText(SPTRigActivity.this, "开始时间不得大于等于结束时间", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (rigViewModel.getProbeDiameter() == 0) {
+                Toast.makeText(SPTRigActivity.this, "探头直径不能为0.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (rigViewModel.getProbeDiameter() == 0) {
+                Toast.makeText(SPTRigActivity.this, "探头长度不能为0.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (penetrationEndDepthEditText.getCurrentTextColor() == getResources().getColor(android.R.color.holo_red_light)) {
+                Toast.makeText(SPTRigActivity.this, "贯入深度至数值非法.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (countEndDepth1EditText.getCurrentTextColor() == getResources().getColor(android.R.color.holo_red_light)) {
+                Toast.makeText(SPTRigActivity.this, "计数深度1至数值非法.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (countEndDepth2EditText.getCurrentTextColor() == getResources().getColor(android.R.color.holo_red_light)) {
+                Toast.makeText(SPTRigActivity.this, "计数深度2至数值非法.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (countEndDepth3EditText.getCurrentTextColor() == getResources().getColor(android.R.color.holo_red_light)) {
+                Toast.makeText(SPTRigActivity.this, "计数深度3至数值非法.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            if (rigViewModel.getAccumulatehHitCount() > 51) {
+                Toast.makeText(SPTRigActivity.this, "累计击数大于51.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            return true;
+        } else {
+            if (rigViewModel.getAccumulatehHitCount() > 51) {
+                Toast.makeText(SPTRigActivity.this, "累计击数大于51.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+
+            return true;
         }
-
-        return true;
     }
 }

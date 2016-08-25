@@ -38,7 +38,9 @@
                 android:layout_height="wrap_content">
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
                     <TextView
                         android:text="班次/人数"
                         android:textColor="@android:color/black"
@@ -47,7 +49,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="3"
                         android:id="@+id/edittext_spt_rig_class_people_count"
@@ -56,7 +59,9 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/edittext_regular_rig_pipe_number"/>
+                        android:nextFocusDown="@+id/edittext_spt_rig_probe_type"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
                     <TextView
                         android:text="日期"
                         android:textColor="@android:color/black"
@@ -65,7 +70,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:layout_weight="3"
                         android:id="@+id/button_spt_rig_date"
@@ -73,7 +79,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -86,7 +93,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自"
                         android:textColor="@android:color/black"
@@ -95,7 +103,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
 
                     <Button
                         android:layout_weight="3"
@@ -104,7 +113,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="至"
                         android:textColor="@android:color/black"
@@ -113,7 +123,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:layout_weight="3"
                         android:id="@+id/button_spt_rig_end_time"
@@ -121,7 +132,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="计时分"
                         android:textColor="@android:color/black"
@@ -130,7 +142,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_spt_rig_duration"
@@ -138,7 +151,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -149,7 +163,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="标准贯入试验"
                         android:gravity="center"
@@ -169,7 +184,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="直径(mm)"
                         android:gravity="center"
@@ -187,7 +203,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center" />
                     <TextView
                         android:text="长度(m)"
                         android:gravity="center"
@@ -216,7 +232,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="类型"
                         android:gravity="center"
@@ -234,7 +251,8 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:nextFocusDown="@+id/edittext_spt_rig_probe_diameter"/>
                     <TextView
                         android:text="直径(mm)"
                         android:gravity="center"
@@ -252,7 +270,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:inputType="number"
+                        android:nextFocusDown="@+id/edittext_spt_rig_probe_length"/>
                     <TextView
                         android:text="长度(m)"
                         android:gravity="center"
@@ -270,7 +290,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_spt_rig_penetration_end_depth"/>
                 </TableRow>
 
                 <TableRow>
@@ -283,7 +305,8 @@
                         android:layout_height="48sp"
                         android:layout_width="0dp"
                         android:gravity="left|center_vertical"
-                        android:paddingLeft="20dp"/>
+                        android:paddingLeft="20dp"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
                 <TableRow>
@@ -295,7 +318,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="钻具总长(m)"
                         android:textColor="@android:color/black"
@@ -304,7 +328,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_spt_rig_drill_tool_total_length"
@@ -314,6 +339,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:text="钻杆余长(m)"
@@ -323,7 +349,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_spt_rig_drill_pipe_remain_length"
@@ -332,7 +359,9 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:singleLine="true"
+                        android:enabled="false"
                         />
                 </TableRow>
 
@@ -345,7 +374,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="回次进尺(m)"
                         android:textColor="@android:color/black"
@@ -354,7 +384,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_spt_round_trip_meterage_length"
@@ -364,6 +395,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:text="累积进尺(m)"
@@ -373,7 +405,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_spt_accumulated_meterage_length"
@@ -383,6 +416,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow>
@@ -394,7 +428,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="贯入深度"
                         android:textColor="@android:color/black"
@@ -403,7 +438,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -412,7 +448,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_penetration_start_depth"
                         android:layout_weight="1"
@@ -431,7 +468,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_penetration_end_depth"
                         android:layout_weight="1"
@@ -441,7 +479,9 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_spt_rig_count_end_depth_1"/>
                     <TextView
                         android:text="贯入击数"
                         android:textColor="@android:color/black"
@@ -450,7 +490,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -461,7 +502,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="计数深度"
                         android:textColor="@android:color/black"
@@ -470,7 +512,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -479,7 +522,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_count_start_depth_1"
                         android:enabled="false"
@@ -498,7 +542,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_count_end_depth_1"
                         android:layout_weight="1"
@@ -507,7 +552,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_spt_rig_hit_count_1"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_hit_count_1"
                         android:layout_weight="1"
@@ -516,7 +563,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nextFocusDown="@+id/edittext_spt_rig_count_end_depth_2"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -527,7 +576,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text=""
                         android:textColor="@android:color/black"
@@ -536,7 +586,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -545,7 +596,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_count_start_depth_2"
                         android:enabled="false"
@@ -564,7 +616,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_count_end_depth_2"
                         android:layout_weight="1"
@@ -573,7 +626,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_spt_rig_hit_count_2"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_hit_count_2"
                         android:layout_weight="1"
@@ -582,7 +637,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nextFocusDown="@+id/edittext_spt_rig_count_end_depth_3"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -593,7 +650,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text=""
                         android:textColor="@android:color/black"
@@ -602,7 +660,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -611,7 +670,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_count_start_depth_3"
                         android:enabled="false"
@@ -631,7 +691,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_count_end_depth_3"
                         android:layout_weight="1"
@@ -640,7 +701,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_spt_rig_hit_count_3"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_hit_count_3"
                         android:layout_weight="1"
@@ -649,7 +712,9 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:nextFocusDown="@+id/edittext_spt_rig_other_description"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -660,7 +725,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="钻进深度"
                         android:textColor="@android:color/black"
@@ -669,7 +735,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -678,7 +745,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_drill_start_depth_1"
                         android:layout_weight="1"
@@ -697,7 +765,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_drill_end_depth_1"
                         android:layout_weight="1"
@@ -725,7 +794,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text=""
                         android:textColor="@android:color/black"
@@ -734,7 +804,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -743,7 +814,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_drill_start_depth_2"
                         android:layout_weight="1"
@@ -762,7 +834,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_drill_end_depth_2"
                         android:layout_weight="1"
@@ -781,6 +854,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                 </TableRow>
                 <TableRow>
@@ -792,7 +866,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text=""
                         android:textColor="@android:color/black"
@@ -801,7 +876,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自(m)"
                         android:textColor="@android:color/black"
@@ -810,7 +886,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_drill_start_depth_3"
                         android:layout_weight="1"
@@ -829,7 +906,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_drill_end_depth_3"
                         android:layout_weight="1"
@@ -848,7 +926,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -859,7 +938,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="岩土名称"
                         android:textColor="@android:color/black"
@@ -868,7 +948,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Spinner
                         android:id="@+id/spinner_spt_rig_rock_name"
                         android:layout_weight="1"
@@ -876,6 +957,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                     <TextView
                         android:text="颜色"
@@ -885,6 +967,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center_vertical"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_rock_color"
@@ -904,6 +987,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_rock_density"
@@ -933,6 +1017,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_rock_saturation"
@@ -951,6 +1036,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <TextView
                         android:text="0"
@@ -961,6 +1047,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <TextView
                         android:text=""
@@ -970,6 +1057,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <TextView
                         android:text=""
@@ -979,6 +1067,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                 </TableRow>
                 <TableRow>
@@ -990,6 +1079,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <TextView
                         android:text="其它特征"
@@ -999,6 +1089,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_other_description"
@@ -1007,6 +1098,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                     <Button
                         android:layout_weight="1"
@@ -1015,6 +1107,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:layout_gravity="center"
                         android:gravity="center" />
                 </TableRow>
             </TableLayout>
