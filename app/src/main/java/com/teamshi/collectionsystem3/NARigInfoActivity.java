@@ -184,7 +184,7 @@ public class NARigInfoActivity extends AppCompatActivity {
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
 
                             DataManager.addRig(holeId, rigViewModel);
-                            
+
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());

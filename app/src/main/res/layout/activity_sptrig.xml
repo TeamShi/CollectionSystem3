@@ -233,6 +233,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                     <TextView
                         android:text="直径(mm)"
@@ -250,6 +251,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                     <TextView
                         android:text="长度(m)"
@@ -267,6 +269,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                 </TableRow>
 
@@ -328,6 +331,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:gravity="center"
                         android:singleLine="true"
                         />
                 </TableRow>
@@ -865,8 +869,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"/>
-                    <EditText
-                        android:id="@+id/edittext_spt_rig_rock_name"
+                    <Spinner
+                        android:id="@+id/spinner_spt_rig_rock_name"
                         android:layout_weight="1"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
@@ -881,7 +885,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center_vertical"/>
                     <EditText
                         android:id="@+id/edittext_spt_rig_rock_color"
                         android:layout_weight="1"
@@ -889,7 +893,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
 
                     <TextView
                         android:text="稠度/密实度"
@@ -907,6 +912,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                 </TableRow>
                 <TableRow>
@@ -935,6 +941,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                     <TextView
                         android:text="累计击数"

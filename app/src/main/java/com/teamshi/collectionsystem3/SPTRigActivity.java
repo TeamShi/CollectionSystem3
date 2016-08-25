@@ -10,14 +10,18 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.teamshi.collectionsystem3.datastructure.Configuration;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
@@ -27,10 +31,14 @@ import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SPTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
+    private static final String[] ROCK_NAME_OPTIONS = {"黏性土", "砂类土", "粉土", "其它"};
+    private static final HashMap<String, String> rockNameMap;
 
     private boolean refreshLock = false;
 
@@ -82,7 +90,8 @@ public class SPTRigActivity extends AppCompatActivity {
 
     private Button rockParameterButton;
 
-    private EditText rockNameEditText;
+    private Spinner rockNameSpinner;
+    private ArrayAdapter<String> rockNameSpinnerAdapter;
     private EditText rockColorEditText;
     private EditText rockDensityEditText;
     private EditText rockSaturationEditText;
@@ -91,6 +100,17 @@ public class SPTRigActivity extends AppCompatActivity {
     private EditText otherDescriptionEditText;
 
     private Button rigViewTableButton;
+
+    static {
+        rockNameMap = new HashMap<>();
+        rockNameMap.put("黏土", "黏性土");
+        rockNameMap.put("粉质黏土", "黏性土");
+        rockNameMap.put("粗砂", "砂类土");
+        rockNameMap.put("中砂", "砂类土");
+        rockNameMap.put("细砂", "砂类土");
+        rockNameMap.put("粉土", "砂类土");
+        rockNameMap.put("粉土", "粉土");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +165,14 @@ public class SPTRigActivity extends AppCompatActivity {
 
         rockParameterButton = (Button) findViewById(R.id.button_spt_rig_rock_parameter_table);
 
-        rockNameEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_name);
+        rockNameSpinner = (Spinner) findViewById(R.id.spinner_spt_rig_rock_name);
+        rockNameSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ROCK_NAME_OPTIONS);
+        rockNameSpinner.setAdapter(rockNameSpinnerAdapter);
+
+        rockColorEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_color);
+        rockDensityEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_density);
+        rockSaturationEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_density);
+
         rockColorEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_color);
         rockDensityEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_density);
         rockSaturationEditText = (EditText) findViewById(R.id.edittext_spt_rig_rock_saturation);
@@ -352,37 +379,6 @@ public class SPTRigActivity extends AppCompatActivity {
             }
         });
 
-        drillPipeRemainLengthEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!refreshLock) {
-                    try {
-                        rigViewModel.setDrillPipeRemainLength(Double.parseDouble(s.toString()));
-                        drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
-
-                        //rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
-                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                        //rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
-
-                        refreshInfo();
-                    } catch (Exception e) {
-                        drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-                    }
-                }
-            }
-        });
-
         penetrationEndDepthEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -426,6 +422,10 @@ public class SPTRigActivity extends AppCompatActivity {
 
                             rigViewModel.setAccumulatehHitCount(0);
 
+                            rigViewModel.setRoundTripMeterageLength(penetrationEndDepth - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(penetrationEndDepth);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                             Toast.makeText(SPTRigActivity.this, "钻进深度至不得小于钻进深度自.", Toast.LENGTH_LONG).show();
 
@@ -455,6 +455,11 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount3(-1);
 
                             rigViewModel.setAccumulatehHitCount(51);
+
+                            rigViewModel.setRoundTripMeterageLength(penetrationEndDepth - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(penetrationEndDepth);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                             refreshInfo();
@@ -481,6 +486,10 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount1(0);
                             rigViewModel.setHitCount2(-1);
                             rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setRoundTripMeterageLength(penetrationEndDepth - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(penetrationEndDepth);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
 
                             rigViewModel.setAccumulatehHitCount(0);
                             penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
@@ -511,6 +520,10 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount2(0);
                             rigViewModel.setHitCount3(-1);
 
+                            rigViewModel.setRoundTripMeterageLength(penetrationEndDepth - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(penetrationEndDepth);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             rigViewModel.setAccumulatehHitCount(0);
                             penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
@@ -540,6 +553,10 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount2(0);
                             rigViewModel.setHitCount3(0);
 
+                            rigViewModel.setRoundTripMeterageLength(penetrationEndDepth - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(penetrationEndDepth);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             rigViewModel.setAccumulatehHitCount(0);
                             penetrationEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
@@ -567,6 +584,10 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount1(-1);
                             rigViewModel.setHitCount2(-1);
                             rigViewModel.setHitCount3(-1);
+
+                            rigViewModel.setRoundTripMeterageLength(penetrationEndDepth - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(penetrationEndDepth);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
 
                             rigViewModel.setAccumulatehHitCount(0);
 
@@ -624,6 +645,11 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount3(-1);
 
                             rigViewModel.setAccumulatehHitCount(0);
+
+                            rigViewModel.setRoundTripMeterageLength(countEndDepth1 - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(countEndDepth1);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             countEndDepth1EditText.setTextColor(getResources().getColor(android.R.color.black));
 
                             refreshInfo();
@@ -702,6 +728,11 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount3(-1);
 
                             rigViewModel.setAccumulatehHitCount(0);
+
+                            rigViewModel.setRoundTripMeterageLength(countEndDepth2 - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(countEndDepth2);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             countEndDepth2EditText.setTextColor(getResources().getColor(android.R.color.black));
 
                             refreshInfo();
@@ -778,6 +809,11 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setHitCount3(0);
 
                             rigViewModel.setAccumulatehHitCount(0);
+
+                            rigViewModel.setRoundTripMeterageLength(countEndDepth3 - rigViewModel.getPenetrationStartDepth());
+                            rigViewModel.setAccumulatedMeterageLength(countEndDepth3);
+                            rigViewModel.setDrillPipeRemainLength(2 - rigViewModel.getRoundTripMeterageLength());
+
                             countEndDepth3EditText.setTextColor(getResources().getColor(android.R.color.black));
 
                             refreshInfo();
@@ -855,6 +891,8 @@ public class SPTRigActivity extends AppCompatActivity {
                             accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
                         }
 
+                        rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+
                         refreshInfo();
                     } catch (Exception e) {
                         hitCount1EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
@@ -905,6 +943,8 @@ public class SPTRigActivity extends AppCompatActivity {
                             hitCount3EditText.setTextColor(getResources().getColor(android.R.color.black));
                             accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
                         }
+
+                        rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -957,12 +997,30 @@ public class SPTRigActivity extends AppCompatActivity {
                             accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
                         }
 
+                        rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+
                         refreshInfo();
                     } catch (Exception e) {
                         hitCount3EditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                     }
 
                 }
+            }
+        });
+
+        rockNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                rigViewModel.setRockName(ROCK_NAME_OPTIONS[position]);
+
+                rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+
+                refreshInfo();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -985,6 +1043,25 @@ public class SPTRigActivity extends AppCompatActivity {
             }
         });
 
+        otherDescriptionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    rigViewModel.setOtherDescription(s.toString());
+                }
+            }
+        });
+
         String requestCode = getIntent().getStringExtra("requestCode");
 
         holeId = getIntent().getStringExtra("holeId");
@@ -995,8 +1072,10 @@ public class SPTRigActivity extends AppCompatActivity {
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
 
+                String rockName = rockNameMap.containsKey(DataManager.getHole(holeId).getLastRockName())?rockNameMap.get(DataManager.getHole(holeId).getLastRockName()): "其它";
+
                 rigViewModel = new SPTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
-                        0, 0, 0, 0,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1.55, 0.45, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         51, 0.5,
                         "管靴",0, 0,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
@@ -1007,16 +1086,14 @@ public class SPTRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.35, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
-                        "",
-                        "",
-                        "",
-                        "",
+                        rockName,
+                        DataManager.getHole(holeId).getLastRockColor(),
+                        DataManager.getHole(holeId).getLastRockSaturation(),
+                        ConfigurationManager.parseSPTSaturationDescription(rockName, 0),
                         ""
                 );
-                
+
                 refreshInfo();
-                break;
-            case "ACTION_COPY_RIG":
                 break;
             case "ACTION_EDIT_RIG":
                 String holeId = getIntent().getStringExtra("holeId");
@@ -1139,6 +1216,25 @@ public class SPTRigActivity extends AppCompatActivity {
         }
 
         accumulatedHitCountTextView.setText(rigViewModel.getAccumulatehHitCount() < 0? "": String.valueOf(rigViewModel.getAccumulatehHitCount()));
+
+        for (int i = 0; i < ROCK_NAME_OPTIONS.length; i++) {
+            if (rigViewModel.getRockName().equals(ROCK_NAME_OPTIONS[i])) {
+                rockNameSpinner.setSelection(i);
+                break;
+            }
+        }
+
+        if (getCurrentFocus() != rockColorEditText) {
+            rockColorEditText.setText(rigViewModel.getRockColor());
+        }
+
+        if (getCurrentFocus() != rockDensityEditText) {
+            rockDensityEditText.setText(rigViewModel.getRockDensity());
+        }
+
+        if (getCurrentFocus() != rockSaturationEditText) {
+            rockSaturationEditText.setText(rigViewModel.getRockSaturation());
+        }
 
         refreshLock = false;
     }

@@ -339,6 +339,47 @@ public class ConfigurationManager {
         return "";
     }
 
+    public static String parseSPTSaturationDescription(String rockName, int hitCount) {
+        if (rockName.equals("黏性土")) {
+            if (hitCount > 0 && hitCount <= sptTable1Argument1) {
+                return "流动";
+            } else if (hitCount > sptTable1Argument1 && hitCount <= sptTable1Argument2) {
+                return "软塑";
+            } else if (hitCount > sptTable1Argument2 && hitCount <= sptTable1Argument3) {
+                return "软可塑";
+            } else if (hitCount > sptTable1Argument3 && hitCount <= sptTable1Argument4) {
+                return "硬可塑";
+            } else if (hitCount > sptTable1Argument4 && hitCount <= sptTable1Argument5) {
+                return "硬塑";
+            } else {
+                return "坚硬";
+            }
+        } else if (rockName.equals("砂类土")) {
+            if (hitCount > 0 && hitCount <= sptTable2Argument1) {
+                return "松散";
+            } else if (hitCount > sptTable2Argument1 && hitCount <= sptTable2Argument2) {
+                return "稍密";
+            } else if (hitCount > sptTable2Argument2 && hitCount <= sptTable2Argument3) {
+                return "中密";
+            }  else {
+                return "密实";
+            }
+        } else if (rockName.equals("粉土")) {
+            if (hitCount > 0 && hitCount <= sptTable3Argument1) {
+                return "松散";
+            } else if (hitCount > sptTable3Argument1 && hitCount <= sptTable3Argument2) {
+                return "稍密";
+            } else if (hitCount > sptTable3Argument2 && hitCount <= sptTable3Argument3) {
+                return "中密";
+            } else {
+                return "密实";
+            }
+        } else {
+            return "";
+        }
+
+    }
+
     public static String parseDSTSaturationDescription(String rockName, int hitCount) {
         if (rockName.equals("砾砂")) {
             if (hitCount > 0 && hitCount <= dstTable2_63_6_Argument1) {
