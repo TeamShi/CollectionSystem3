@@ -87,12 +87,6 @@ public class DataManager {
         for (Hole hole : project.getHoleList()) {
             if (hole.getHoleId().equals(holeId)) {
 
-                hole.setEndDate(Calendar.getInstance());
-
-                Calendar c = Calendar.getInstance();
-                c.add(Calendar.DATE, 2);
-                hole.setReviewDate(c);
-
                 hole.getRigList().add(rig);
 
                 break;

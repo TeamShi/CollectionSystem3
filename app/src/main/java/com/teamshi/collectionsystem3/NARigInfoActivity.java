@@ -185,6 +185,13 @@ public class NARigInfoActivity extends AppCompatActivity {
 
                             DataManager.addRig(holeId, rigViewModel);
 
+                            Calendar now = Calendar.getInstance();
+                            DataManager.getHole(holeId).setEndDate(now);
+
+                            now.add(Calendar.DATE, 2);
+
+                            DataManager.getHole(holeId).setReviewDate(now);
+
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());

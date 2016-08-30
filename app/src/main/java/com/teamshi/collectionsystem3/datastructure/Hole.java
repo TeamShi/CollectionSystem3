@@ -607,6 +607,9 @@ public class Hole implements Serializable {
         newHole.setRecorder(recorder);
         newHole.setReviewer(reviewer);
 
+        newHole.setReviewDate((Calendar) reviewDate.clone());
+        newHole.setRecordDate((Calendar) recordDate.clone());
+
         newHole.setClassMonitor(classMonitor);
         newHole.setMachineMonitor(machineMonitor);
 
