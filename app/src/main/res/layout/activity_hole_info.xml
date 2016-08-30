@@ -50,7 +50,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="project_name"
                         android:layout_weight="7"
@@ -59,7 +60,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
                 <TableRow
@@ -74,12 +76,14 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Spinner
                         android:id="@+id/spinner_hole_id_part1"
                         android:textColor="@android:color/black"
                         android:layout_weight="3"
                         android:background="@drawable/cell_input"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp">
@@ -92,6 +96,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical">
                     </Spinner>
                     <EditText
@@ -101,6 +106,7 @@
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:textSize="@dimen/default_text_size"
                         android:inputType="numberDecimal"
@@ -114,6 +120,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical">
                     </Spinner>
                     <EditText
@@ -125,6 +132,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_rig_machine_type"
                         android:singleLine="true"/>
@@ -137,6 +145,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:visibility="gone"
                         android:singleLine="true"/>
@@ -152,6 +161,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
 
                     <TextView
@@ -161,6 +171,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                     <TextView
                         android:text="完工日期"
@@ -180,6 +191,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
                 </TableRow>
 
@@ -192,6 +204,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:layout_gravity="center"
                         android:gravity="center"/>
 
                     <Spinner
@@ -201,6 +214,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical" />
                     <EditText
                         android:id="@+id/edittext_article"
@@ -209,6 +223,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:visibility="gone"
                         android:singleLine="true"
@@ -229,7 +244,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
 
                     <EditText
                         android:id="@+id/edittext_rig_machine_type"
@@ -239,6 +255,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_mileage"
                         android:singleLine="true"/>
@@ -254,7 +271,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_mileage"
                         android:layout_weight="3"
@@ -262,6 +280,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_engine_type"
@@ -275,7 +294,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_engine_type"
                         android:layout_weight="3"
@@ -283,6 +303,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_offset"
                         android:singleLine="true"
@@ -298,7 +319,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_offset"
                         android:layout_weight="3"
@@ -306,6 +328,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal|numberSigned"
                         android:nextFocusDown="@+id/edittext_pump_type"
@@ -319,7 +342,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_pump_type"
                         android:layout_weight="3"
@@ -327,6 +351,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_hole_height"
                         android:singleLine="true"
@@ -342,7 +367,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_hole_height"
                         android:layout_weight="3"
@@ -350,6 +376,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_hole_depth"
@@ -362,7 +389,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_hole_depth"
                         android:layout_weight="3"
@@ -370,6 +398,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_initial_water_depth"
@@ -385,7 +414,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <CheckBox
                         android:text="未见"
                         android:layout_weight="1"
@@ -402,6 +432,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_final_water_depth"
@@ -414,7 +445,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:id="@+id/textview_initial_water_depth_date"
                         android:layout_weight="3"
@@ -422,7 +454,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
                 <TableRow>
@@ -434,7 +467,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <CheckBox
                         android:text="未见"
                         android:layout_weight="1"
@@ -451,7 +485,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_longtitude"
                         android:singleLine="true"/>
@@ -463,7 +498,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:id="@+id/textview_final_water_depth_date"
                         android:layout_weight="3"
@@ -471,7 +507,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
 
@@ -485,7 +522,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_longtitude"
                         android:layout_weight="3"
@@ -493,7 +531,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_latitude"
                         android:inputType="numberDecimal"
                         android:singleLine="true"/>
@@ -505,7 +544,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_latitude"
                         android:layout_weight="3"
@@ -513,6 +553,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_company"
                         android:inputType="numberDecimal"
@@ -528,7 +569,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                         />
                     <EditText
                         android:id="@+id/edittext_company"
@@ -537,6 +579,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_machine_id"
                         android:singleLine="true"/>
@@ -549,7 +592,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_machine_id"
                         android:layout_weight="3"
@@ -557,6 +601,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_note"
                         android:singleLine="true"/>
@@ -571,7 +616,8 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center_vertical"/>
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
                     />
                     <TextView
                         android:text="placeholder"
@@ -582,6 +628,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:id="@+id/image_view"/>
                     <Button
                         android:layout_weight="1"
@@ -601,7 +648,8 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_note"
                         android:layout_weight="3"
@@ -609,6 +657,7 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_position_information"
                         android:singleLine="true"/>
@@ -620,7 +669,8 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_position_information"
                         android:layout_weight="3"
@@ -628,7 +678,8 @@
                         android:layout_height="300dp"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_recorder"
                         android:singleLine="true"/>
                 </TableRow>
@@ -642,7 +693,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_recorder"
                         android:layout_weight="3"
@@ -650,6 +702,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:nextFocusDown="@+id/edittext_reviewer"
                         android:singleLine="true"/>
@@ -661,7 +714,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:id="@+id/textview_record_date"
                         android:layout_weight="3"
@@ -669,7 +723,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
                 <TableRow>
@@ -681,7 +736,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_reviewer"
                         android:layout_weight="3"
@@ -689,7 +745,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_class_monitor"
                         android:singleLine="true"/>
                     <TextView
@@ -700,7 +757,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:id="@+id/textview_review_date"
                         android:layout_weight="3"
@@ -708,7 +766,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
                 <TableRow>
@@ -720,7 +779,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_class_monitor"
                         android:layout_weight="3"
@@ -728,7 +788,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_machine_monitor"
                         android:singleLine="true"/>
                     <TextView
@@ -739,7 +800,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edittext_machine_monitor"
                         android:layout_weight="3"
@@ -747,6 +809,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:singleLine="true"/>
                 </TableRow>
