@@ -8,6 +8,7 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Alfred on 16/7/14.
@@ -85,10 +86,20 @@ public class DataManager {
     public static void addRig(String holeId, Rig rig) {
         for (Hole hole : project.getHoleList()) {
             if (hole.getHoleId().equals(holeId)) {
+
+                hole.setEndDate(Calendar.getInstance());
+
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.DATE, 2);
+                hole.setReviewDate(c);
+
                 hole.getRigList().add(rig);
+
                 break;
             }
         }
+
+
     }
 
     public static void removeLastRig(String holeId) {
