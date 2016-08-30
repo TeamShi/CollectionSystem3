@@ -3,6 +3,7 @@ package com.teamshi.collectionsystem3;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -302,6 +303,16 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockType());
                             DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
                             DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+
+                            Calendar now = Calendar.getInstance();
+                            DataManager.getHole(holeId).setEndDate(now);
+
+                            now.add(Calendar.DATE, 2);
+
+                            DataManager.getHole(holeId).setReviewDate(now);
+
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
                             IOManager.updateProject(DataManager.getProject());
                             RegularRigActivity.this.setResult(RESULT_OK);

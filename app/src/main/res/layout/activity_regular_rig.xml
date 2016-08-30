@@ -48,7 +48,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="3"
                         android:id="@+id/edittext_regular_rig_class_people_count"
@@ -57,6 +58,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_pipe_number"/>
                     <TextView
                         android:text="日期"
@@ -66,7 +69,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:layout_weight="3"
                         android:id="@+id/button_regular_rig_date"
@@ -74,7 +78,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -87,7 +92,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自"
                         android:textColor="@android:color/black"
@@ -96,7 +102,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
 
                     <Button
                         android:layout_weight="3"
@@ -105,7 +112,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="至"
                         android:textColor="@android:color/black"
@@ -114,7 +122,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:layout_weight="3"
                         android:id="@+id/button_regular_rig_end_time"
@@ -122,7 +131,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="计时分"
                         android:textColor="@android:color/black"
@@ -131,7 +141,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_regular_rig_duration"
@@ -139,7 +150,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
 
@@ -152,7 +164,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Spinner
                         android:id="@+id/spinner_regular_rig_type"
                         android:layout_weight="7"
@@ -160,7 +173,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:gravity="center"
+                        android:layout_gravity="center" />
                 </TableRow>
 
                 <TableRow>
@@ -172,7 +186,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="钻杆编号"
                         android:textColor="@android:color/black"
@@ -181,7 +196,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_pipe_number"
@@ -191,6 +207,8 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:inputType="number"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_pipe_length"/>
                     <TextView
                         android:text="钻杆长度(m)"
@@ -200,7 +218,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_pipe_length"
@@ -210,6 +229,8 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:inputType="numberDecimal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_rock_core_pipe_length"/>
                     <TextView
                         android:text="累计长度(m)"
@@ -219,7 +240,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_regular_rig_pipe_total_length"
@@ -227,7 +249,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
 
                 <TableRow>
@@ -239,7 +262,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="直径(mm)"
                         android:textColor="@android:color/black"
@@ -248,7 +272,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Spinner
                         android:layout_weight="2"
                         android:id="@+id/spinner_regular_rig_rock_core_pipe_diameter"
@@ -258,7 +283,8 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:nextFocusDown="@+id/textview_na_rig_type"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center"
+                        android:gravity="center" />
 
                     <TextView
                         android:text="长度(m)"
@@ -268,7 +294,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="6"
                         android:id="@+id/edittext_regular_rig_rock_core_pipe_length"
@@ -277,6 +304,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_drill_bit_diameter"/>
                 </TableRow>
                 <TableRow>
@@ -297,7 +326,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Spinner
                         android:id="@+id/spinner_regular_rig_drill_bit_type"
                         android:layout_weight="2"
@@ -305,7 +335,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
-                        android:layout_gravity="center_vertical" />
+                        android:gravity="center"
+                        android:layout_gravity="center" />
                     <TextView
                         android:text="直径(mm)"
                         android:textColor="@android:color/black"
@@ -314,7 +345,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_drill_bit_diameter"
@@ -333,7 +365,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_drill_bit_length"
@@ -355,6 +388,7 @@
                         android:layout_height="48sp"
                         android:layout_width="0dp"
                         android:gravity="left|center_vertical"
+                        android:layout_gravity="center"
                         android:paddingLeft="20dp"/>
                 </TableRow>
 
@@ -367,7 +401,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="钻具总长(m)"
                         android:textColor="@android:color/black"
@@ -376,7 +411,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_regular_rig_drill_tool_total_length"
@@ -386,6 +422,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/textview_na_rig_type"/>
                     <TextView
@@ -396,7 +433,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_drill_pipe_remain_length"
@@ -405,6 +443,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_rock_core_index"/>
                 </TableRow>
 
@@ -417,7 +457,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="回次进尺(m)"
                         android:textColor="@android:color/black"
@@ -426,7 +467,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_regular_rig_round_trip_meterage_length"
@@ -436,6 +478,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/textview_na_rig_type"/>
                     <TextView
@@ -446,7 +489,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_regular_rig_accumulated_meterage_length"
@@ -456,6 +500,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
 
@@ -468,7 +513,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="编号"
                         android:textColor="@android:color/black"
@@ -477,7 +523,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_rock_core_index"
@@ -486,6 +533,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_regular_rig_rock_core_length"/>
                     <TextView
@@ -496,7 +545,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_rock_core_length"
@@ -506,6 +556,8 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:inputType="numberDecimal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_rock_type"/>
                     <TextView
                         android:text="采取率"
@@ -515,7 +567,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_regular_rig_rock_core_pick_percentage"
@@ -525,6 +578,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/textview_na_rig_type"/>
                 </TableRow>
 
@@ -537,7 +591,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="本钻起止深度(m)"
                         android:textColor="@android:color/black"
@@ -547,7 +602,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center" />
                     <TextView
                         android:layout_weight="3"
                         android:id="@+id/textview_regular_rig_start_end_depth"
@@ -558,7 +613,7 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:nextFocusDown="@+id/textview_na_rig_type"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center" />
                     <TextView
                         android:text="岩土名称"
                         android:textColor="@android:color/black"
@@ -567,9 +622,12 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:text="黏土"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:textColor="@android:color/black"
                         android:layout_weight="2"
                         android:background="@drawable/cell_input"
@@ -598,7 +656,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="颜色"
                         android:textColor="@android:color/black"
@@ -607,7 +666,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:text="灰色"
                         android:textColor="@android:color/black"
@@ -616,6 +676,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:id="@+id/edittext_regular_rig_rock_color"
                         android:singleLine="true"
                         />
@@ -635,7 +697,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center" />
                     <EditText
                         android:text="坚硬"
                         android:textColor="@android:color/black"
@@ -644,6 +706,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:id="@+id/edittext_regular_rig_rock_density"
                         android:singleLine="true"
                         />
@@ -664,7 +728,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="饱和度"
                         android:textColor="@android:color/black"
@@ -673,7 +738,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:text="稍湿"
                         android:textColor="@android:color/black"
@@ -684,6 +750,8 @@
                         android:layout_width="0dp"
                         android:id="@+id/edittext_regular_rig_rock_saturation"
                         android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         />
                     <Button
                         android:layout_width="0dp"
@@ -712,6 +780,8 @@
                         android:layout_width="0dp"
                         android:id="@+id/edittext_regular_rig_rock_weathering"
                         android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         />
                     <Button
                         android:layout_width="0dp"
@@ -731,7 +801,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="名称及岩性"
                         android:textColor="@android:color/black"
@@ -740,13 +811,15 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="300dp"
                         android:layout_weight="2"
                         android:orientation="vertical"
-                        android:gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:background="@drawable/cell_input">
                         <Button
                             android:layout_width="fill_parent"
@@ -781,7 +854,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="7"
                         android:id="@+id/edittext_regular_rig_note"
