@@ -47,7 +47,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="3"
                         android:id="@+id/edittext_dst_rig_class_people_count"
@@ -56,6 +57,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_dst_rig_pipe_number"/>
                     <TextView
                         android:text="日期"
@@ -65,7 +68,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:layout_weight="3"
                         android:id="@+id/button_dst_rig_date"
@@ -73,7 +77,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow
                     android:layout_width="match_parent"
@@ -86,7 +91,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="自"
                         android:textColor="@android:color/black"
@@ -95,7 +101,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
 
                     <Button
                         android:layout_weight="3"
@@ -104,7 +111,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="至"
                         android:textColor="@android:color/black"
@@ -113,7 +121,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:layout_weight="3"
                         android:id="@+id/button_dst_rig_end_time"
@@ -121,7 +130,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="计时分"
                         android:textColor="@android:color/black"
@@ -130,7 +140,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_dst_rig_duration"
@@ -138,7 +149,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -149,7 +161,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="动力触探试验"
                         android:gravity="center"
@@ -169,7 +182,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="类型"
                         android:textColor="@android:color/black"
@@ -241,6 +255,7 @@
                         android:layout_height="48sp"
                         android:layout_width="0dp"
                         android:gravity="left|center_vertical"
+                        android:layout_gravity="center"
                         android:paddingLeft="20dp"/>
                 </TableRow>
 
@@ -253,7 +268,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="钻具总长(m)"
                         android:textColor="@android:color/black"
@@ -262,7 +278,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_dst_rig_drill_tool_total_length"
@@ -272,6 +289,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:text="钻杆余长(m)"
@@ -281,7 +299,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_dst_rig_drill_pipe_remain_length"
@@ -291,6 +310,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         />
                 </TableRow>
 
@@ -303,7 +323,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="回次进尺(m)"
                         android:textColor="@android:color/black"
@@ -312,7 +333,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_dst_round_trip_meterage_length"
@@ -322,6 +344,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:text="累积进尺(m)"
@@ -331,7 +354,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
                         android:id="@+id/textview_dst_accumulated_meterage_length"
@@ -341,6 +365,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
 
@@ -370,7 +395,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="入土深度(m)"
                         android:textColor="@android:color/black"
@@ -379,7 +405,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:text="贯入深度(m)"
                         android:layout_weight="1"
@@ -390,6 +417,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:text="垂击数(击)"
@@ -399,7 +427,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="3"
                         android:text="密实度判断"
@@ -410,6 +439,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
 
@@ -426,6 +456,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_1_depth"
@@ -437,10 +468,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_1_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -452,6 +485,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_1_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -470,6 +504,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -485,6 +520,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_2_depth"
@@ -496,10 +532,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_2_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -511,6 +549,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_2_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -529,6 +568,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -544,6 +584,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_3_depth"
@@ -555,10 +596,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_3_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -570,6 +613,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_3_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -588,6 +632,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -603,6 +648,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_4_depth"
@@ -614,10 +660,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_4_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -629,6 +677,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_4_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -647,6 +696,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -662,6 +712,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_5_depth"
@@ -673,10 +724,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_5_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -688,6 +741,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_5_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -706,6 +760,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -721,6 +776,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_6_depth"
@@ -732,10 +788,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_6_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -747,6 +805,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_6_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -765,6 +824,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -780,6 +840,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_7_depth"
@@ -791,10 +852,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_7_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -806,6 +869,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_7_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -824,6 +888,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -839,6 +904,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_8_depth"
@@ -850,10 +916,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_8_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -865,6 +933,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_8_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -883,6 +952,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -898,6 +968,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_9_depth"
@@ -909,10 +980,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_9_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -924,6 +997,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_9_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -942,6 +1016,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -957,6 +1032,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_10_depth"
@@ -968,10 +1044,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_10_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -983,6 +1061,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_10_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1001,6 +1080,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow><TableRow
                 android:id="@+id/tablerow_dst_detail_11"
@@ -1015,6 +1095,7 @@
                     android:layout_width="0dp"
                     android:singleLine="true"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:inputType="numberDecimal"/>
                 <TextView
                     android:id="@+id/textview_dst_detail_11_depth"
@@ -1026,10 +1107,12 @@
                     android:layout_width="0dp"
                     android:singleLine="true"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:inputType="numberDecimal"/>
                 <EditText
                     android:id="@+id/edittext_dst_detail_11_length"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text=""
                     android:background="@drawable/cell_input"
@@ -1041,6 +1124,7 @@
                 <EditText
                     android:id="@+id/edittext_dst_detail_11_hit_count"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text=""
                     android:background="@drawable/cell_input"
@@ -1059,6 +1143,7 @@
                     android:layout_width="0dp"
                     android:singleLine="true"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:inputType="numberDecimal"/>
             </TableRow>
                 <TableRow
@@ -1074,6 +1159,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_12_depth"
@@ -1085,10 +1171,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_12_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1100,6 +1188,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_12_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1118,6 +1207,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1133,6 +1223,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_13_depth"
@@ -1144,10 +1235,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_13_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1159,6 +1252,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_13_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1177,6 +1271,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1192,6 +1287,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_14_depth"
@@ -1203,10 +1299,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_14_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1218,6 +1316,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_14_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1236,6 +1335,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1251,6 +1351,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_15_depth"
@@ -1262,10 +1363,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_15_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1277,6 +1380,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_15_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1295,6 +1399,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1310,6 +1415,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_16_depth"
@@ -1321,10 +1427,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_16_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1336,6 +1444,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_16_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1354,6 +1463,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1369,10 +1479,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_17_depth"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1384,6 +1496,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_17_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1395,6 +1508,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_17_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1413,6 +1527,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1428,6 +1543,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_18_depth"
@@ -1439,10 +1555,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_18_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1454,6 +1572,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_18_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1472,6 +1591,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1487,6 +1607,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_19_depth"
@@ -1498,10 +1619,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_19_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1513,6 +1636,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_19_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1531,6 +1655,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
                 <TableRow
@@ -1546,6 +1671,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <TextView
                         android:id="@+id/textview_dst_detail_20_depth"
@@ -1557,10 +1683,12 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <EditText
                         android:id="@+id/edittext_dst_detail_20_length"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1572,6 +1700,7 @@
                     <EditText
                         android:id="@+id/edittext_dst_detail_20_hit_count"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text=""
                         android:background="@drawable/cell_input"
@@ -1590,6 +1719,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                 </TableRow>
 
@@ -1603,6 +1733,7 @@
                         android:layout_width="0dp"
                         android:singleLine="true"
                         android:gravity="center"
+                        android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
                     <Spinner
                         android:id="@+id/spinner_dst_rig_rock_name"
@@ -1613,7 +1744,8 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:id="@+id/button_dst_rig_preview"
                         android:layout_weight="1"
@@ -1621,7 +1753,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                     <Button
                         android:id="@+id/button_dst_rig_configuration"
                         android:layout_weight="1"
@@ -1629,7 +1762,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
             </TableLayout>
         </ScrollView>

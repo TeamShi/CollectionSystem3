@@ -26,7 +26,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -39,7 +40,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实度"
                     android:textColor="@android:color/black"
@@ -48,7 +50,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="重型圆锥动力触探锤击数N120"
                     android:textColor="@android:color/black"
@@ -57,7 +60,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实度"
                     android:textColor="@android:color/black"
@@ -66,7 +70,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -80,7 +85,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="松散"
                     android:textColor="@android:color/black"
@@ -89,7 +95,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_1_120_cell_1"
@@ -99,7 +106,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="松散"
                     android:textColor="@android:color/black"
@@ -108,7 +116,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -122,7 +131,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="稍密"
                     android:textColor="@android:color/black"
@@ -131,7 +141,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_1_120_cell_2"
@@ -141,7 +152,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="稍密"
                     android:textColor="@android:color/black"
@@ -150,7 +162,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -164,7 +177,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="中密"
                     android:textColor="@android:color/black"
@@ -173,7 +187,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_1_120_cell_3"
@@ -183,7 +198,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="中密"
                     android:textColor="@android:color/black"
@@ -192,7 +208,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -206,7 +223,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实"
                     android:textColor="@android:color/black"
@@ -215,7 +233,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_1_120_cell_4"
@@ -225,7 +244,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实"
                     android:textColor="@android:color/black"
@@ -234,7 +254,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -247,7 +268,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:textColor="@android:color/black"
@@ -256,7 +278,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_1_120_cell_5"
@@ -266,7 +289,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="很密"
                     android:textColor="@android:color/black"
@@ -275,7 +299,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -288,7 +313,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -301,7 +327,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="重型圆锥动力触探锤击数N63.6"
                     android:textColor="@android:color/black"
@@ -310,7 +337,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实度"
                     android:textColor="@android:color/black"
@@ -319,7 +347,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -332,7 +361,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_6_cell_1"
@@ -342,7 +372,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="松散"
                     android:textColor="@android:color/black"
@@ -351,7 +382,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -364,7 +396,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_6_cell_2"
@@ -374,7 +407,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="稍密"
                     android:textColor="@android:color/black"
@@ -383,7 +417,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -396,7 +431,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_6_cell_3"
@@ -406,7 +442,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="中密"
                     android:textColor="@android:color/black"
@@ -415,7 +452,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -428,7 +466,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_6_cell_4"
@@ -438,7 +477,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实"
                     android:textColor="@android:color/black"
@@ -447,7 +487,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
 
             <TableRow>
@@ -459,7 +500,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="重型圆锥动力触探击数N63.7"
                     android:textColor="@android:color/black"
@@ -468,7 +510,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实度"
                     android:textColor="@android:color/black"
@@ -477,7 +520,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -490,7 +534,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_7_cell_1"
@@ -500,7 +545,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="松散"
                     android:textColor="@android:color/black"
@@ -509,7 +555,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -522,7 +569,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_7_cell_2"
@@ -532,7 +580,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="稍密"
                     android:textColor="@android:color/black"
@@ -541,7 +590,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -554,7 +604,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_7_cell_3"
@@ -564,7 +615,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="中密"
                     android:textColor="@android:color/black"
@@ -573,7 +625,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -586,7 +639,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_7_cell_4"
@@ -596,7 +650,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实"
                     android:textColor="@android:color/black"
@@ -605,7 +660,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
 
             <TableRow>
@@ -617,7 +673,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="重型圆锥动力触探击数N63.8"
                     android:textColor="@android:color/black"
@@ -626,7 +683,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实度"
                     android:textColor="@android:color/black"
@@ -635,7 +693,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -648,7 +707,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_8_cell_1"
@@ -658,7 +718,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="松散"
                     android:textColor="@android:color/black"
@@ -667,7 +728,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -680,7 +742,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_8_cell_2"
@@ -690,7 +753,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="稍密"
                     android:textColor="@android:color/black"
@@ -699,7 +763,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -712,7 +777,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_8_cell_3"
@@ -722,7 +788,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="中密"
                     android:textColor="@android:color/black"
@@ -731,7 +798,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -744,7 +812,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text=""
                     android:id="@+id/textview_dst_rig_configuration_table_2_63_8_cell_4"
@@ -754,7 +823,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:text="密实"
                     android:textColor="@android:color/black"
@@ -763,7 +833,8 @@
                     android:textSize="@dimen/default_text_size"
                     android:layout_height="@dimen/default_table_height"
                     android:layout_width="0dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
             </TableRow>
         </TableLayout>
     </ScrollView>
