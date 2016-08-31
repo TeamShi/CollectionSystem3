@@ -351,8 +351,18 @@ public class DSTRigActivity extends AppCompatActivity {
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-                            DataManager.getHole(holeId).setLastRockCorePipeLength(0);
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
+
+                            Calendar now = Calendar.getInstance();
+                            DataManager.getHole(holeId).setEndDate(now);
+
+                            now.add(Calendar.DATE, 2);
+
+                            DataManager.getHole(holeId).setReviewDate(now);
+
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
                             IOManager.updateProject(DataManager.getProject());
                             DSTRigActivity.this.setResult(RESULT_OK);

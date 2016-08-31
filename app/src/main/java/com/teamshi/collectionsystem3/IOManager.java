@@ -206,7 +206,7 @@ public class IOManager {
         if(null == projectFile){
             return false;
         } else {
-            // todo update hole xls files
+            // todo: Johnson update hole xls files
 //            ArrayList<Hole> holes = project.getHoleList();
 //            if(holes != null && holes.size() > 0 ){
 //                String projectDirPath = APP_DATA +File.separator+project.getProjectName();

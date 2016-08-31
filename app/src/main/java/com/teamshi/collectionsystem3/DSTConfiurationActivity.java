@@ -81,7 +81,6 @@ public class DSTConfiurationActivity extends AppCompatActivity {
         dstConfigurationTable2636Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument2()) + " < N63.6 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument3()));
         dstConfigurationTable2636Cell4TextView.setText("N63.6 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument3()));
 
-        // TODO: confirm why hit count is a double
         dstConfigurationTable2637Cell1TextView.setText("N63.7 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument1()));
         dstConfigurationTable2637Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument1()) + " < N63.7 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument2()));
         dstConfigurationTable2637Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument2()) + " < N63.7 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument3()));

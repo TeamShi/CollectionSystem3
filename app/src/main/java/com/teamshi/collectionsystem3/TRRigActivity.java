@@ -295,12 +295,22 @@ public class TRRigActivity extends AppCompatActivity {
                             rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                             rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
 
+                            rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
+                            rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
+                            rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-                            DataManager.getHole(holeId).setLastRockCorePipeLength(0);
                             // TODO: Alfred set TRRig lastAccumulated
                             // DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
+
+                            Calendar now = Calendar.getInstance();
+                            DataManager.getHole(holeId).setEndDate(now);
+
+                            now.add(Calendar.DATE, 2);
+
+                            DataManager.getHole(holeId).setReviewDate(now);
 
                             IOManager.updateProject(DataManager.getProject());
                             TRRigActivity.this.setResult(RESULT_OK);
@@ -313,7 +323,6 @@ public class TRRigActivity extends AppCompatActivity {
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());
                             TRRigActivity.this.setResult(RESULT_OK);
