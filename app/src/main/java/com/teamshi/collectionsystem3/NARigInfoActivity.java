@@ -206,7 +206,6 @@ public class NARigInfoActivity extends AppCompatActivity {
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());
 

@@ -326,12 +326,6 @@ public class RegularRigActivity extends AppCompatActivity {
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
 
-                            if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
-                                DataManager.getHole(holeId).addPipe(rigViewModel.getPipeLength());
-                            }
-
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-
                             IOManager.updateProject(DataManager.getProject());
                             RegularRigActivity.this.setResult(RESULT_OK);
                             RegularRigActivity.this.finish();

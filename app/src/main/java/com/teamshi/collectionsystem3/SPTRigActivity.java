@@ -268,19 +268,33 @@ public class SPTRigActivity extends AppCompatActivity {
                         if (validate()) {
                             String holeId = getIntent().getStringExtra("holeId");
 
+                            rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
+                            rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
+                            rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
+                            rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
+
+                            rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
+                            rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
+                            rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+
                             DataManager.addRig(holeId, rigViewModel);
 
-//                            if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
-//                                DataManager.getHole(holeId).addPipe(rigViewModel.getPipeLength());
-//                            }
-//
-//                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-//                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCorePipeLength());
-//                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
-//
-//                            if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
-//                                DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
-//                            }
+                            DataManager.getHole(holeId).setLastRigEndTime((Calendar) rigViewModel.getEndTime().clone());
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
+                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
+                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+
+                            Calendar now = Calendar.getInstance();
+                            DataManager.getHole(holeId).setEndDate(now);
+
+                            now.add(Calendar.DATE, 2);
+
+                            DataManager.getHole(holeId).setReviewDate(now);
+
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
                             IOManager.updateProject(DataManager.getProject());
                             SPTRigActivity.this.setResult(RESULT_OK);
@@ -293,12 +307,6 @@ public class SPTRigActivity extends AppCompatActivity {
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
-
-//                            if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount() + 1) {
-//                                DataManager.getHole(holeId).addPipe(rigViewModel.getPipeLength());
-//                            }
-
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());
                             SPTRigActivity.this.setResult(RESULT_OK);
