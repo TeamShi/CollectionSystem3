@@ -16,24 +16,16 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.teamshi.collectionsystem3.datastructure.Configuration;
 import com.teamshi.collectionsystem3.datastructure.Project;
-import com.teamshi.collectionsystem3.datastructure.RegularRig;
-import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SPTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
@@ -1109,18 +1101,6 @@ public class SPTRigActivity extends AppCompatActivity {
 
                 rigViewModel = (SPTRig) DataManager.getRig(holeId, rigIndex).deepCopy();
 
-                classPeopleCountEditText.setEnabled(false);
-                dateButton.setEnabled(false);
-                startTimeButton.setEnabled(false);
-                endTimeButton.setEnabled(false);
-                probeTypeEditText.setEnabled(false);
-                probeLengthEditText.setEnabled(false);
-                probeDiameterEditText.setEnabled(false);
-                penetrationEndDepthEditText.setEnabled(false);
-                countEndDepth1EditText.setEnabled(false);
-                countEndDepth2EditText.setEnabled(false);
-                countEndDepth3EditText.setEnabled(false);
-
                 refreshInfo();
 
                 break;
@@ -1131,6 +1111,8 @@ public class SPTRigActivity extends AppCompatActivity {
 
     private void refreshInfo() {
         refreshLock = true;
+
+        String requestCode = getIntent().getStringExtra("requestCode");
 
         if (getCurrentFocus() != classPeopleCountEditText) {
             classPeopleCountEditText.setText(rigViewModel.getClassPeopleCount());
@@ -1254,6 +1236,20 @@ public class SPTRigActivity extends AppCompatActivity {
 
         if (getCurrentFocus() != rockSaturationEditText) {
             rockSaturationEditText.setText(rigViewModel.getRockSaturation());
+        }
+
+        if (requestCode.equals("ACTION_EDIT_RIG")) {
+            classPeopleCountEditText.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            probeTypeEditText.setEnabled(false);
+            probeLengthEditText.setEnabled(false);
+            probeDiameterEditText.setEnabled(false);
+            penetrationEndDepthEditText.setEnabled(false);
+            countEndDepth1EditText.setEnabled(false);
+            countEndDepth2EditText.setEnabled(false);
+            countEndDepth3EditText.setEnabled(false);
         }
 
         refreshLock = false;

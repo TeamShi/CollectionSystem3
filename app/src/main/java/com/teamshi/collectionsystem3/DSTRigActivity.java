@@ -335,7 +335,6 @@ public class DSTRigActivity extends AppCompatActivity {
 
                 switch (requestCode) {
                     case "ACTION_ADD_RIG":
-                    case "ACTION_COPY_RIG":
                         if (validate()) {
                             String holeId = getIntent().getStringExtra("holeId");
 
@@ -344,6 +343,10 @@ public class DSTRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
                             rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                             rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
+
+                            rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
+                            rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
+                            rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
 
                             DataManager.addRig(holeId, rigViewModel);
 
@@ -362,8 +365,6 @@ public class DSTRigActivity extends AppCompatActivity {
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
-
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
 
                             IOManager.updateProject(DataManager.getProject());
                             DSTRigActivity.this.setResult(RESULT_OK);
