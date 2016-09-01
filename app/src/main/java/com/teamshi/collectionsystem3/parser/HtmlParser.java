@@ -90,9 +90,6 @@ public class HtmlParser extends Parser{
     }
 
     public static String parse(String dirPath, Project project, AssetManager assetManager) {
-        //TODO  Johnson update convertion methods
-//        String[][] sptRigEventArray = convertSpt(hole);
-//        String[][] dstRigEventArray = convertDst(hole);
         List<Hole> holes = project.getHoleList();
         String projectPath = dirPath + "project_" + project.getProjectName() + ".html";
         InputStream inputStream;

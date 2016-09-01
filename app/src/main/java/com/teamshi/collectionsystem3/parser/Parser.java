@@ -54,7 +54,7 @@ public class Parser {
         sb.append(sptRig.getCountStartDepth1() + "," + sptRig.getCountStartDepth2() + "," + sptRig.getCountStartDepth3()).append("#");
         sb.append(sptRig.getCountEndDepth1() + "," + sptRig.getCountEndDepth2() + "," + sptRig.getCountEndDepth3()).append("#");
 
-        //todo
+        //todo need confirmation , currentlly data separated by comma
         sb.append(sptRig.getDrillStartDepth1() + "," + sptRig.getDrillStartDepth2() + "," + sptRig.getDrillStartDepth3()).append("#");
         sb.append(sptRig.getDrillEndDepth1() + "," + sptRig.getDrillEndDepth2() + "," + sptRig.getDrillEndDepth3()).append("#");
 

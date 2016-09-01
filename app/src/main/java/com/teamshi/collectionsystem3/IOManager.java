@@ -206,16 +206,15 @@ public class IOManager {
         if(null == projectFile){
             return false;
         } else {
-            // todo: Johnson update hole xls files
-//            ArrayList<Hole> holes = project.getHoleList();
-//            if(holes != null && holes.size() > 0 ){
-//                String projectDirPath = APP_DATA +File.separator+project.getProjectName();
-//                for(int i = 0;i<holes.size();i++) {
-//                    Hole hole = holes.get(i);
-//                    XlsParser.parse(projectDirPath+File.separator+hole.getHoleId()+File.separator,hole);
-//                }
-//            }
-
+            ArrayList<Hole> holes = project.getHoleList();
+            if (holes != null && holes.size() > 0) {
+                String projectDirPath = APP_DATA + File.separator + project.getProjectName();
+                for (int i = 0; i < holes.size(); i++) {
+                    Hole hole = holes.get(i);
+                    String holeDirPath = projectDirPath + File.separator + hole.getHoleId() + File.separator;
+                    XlsParser.parse(holeDirPath, hole);
+                }
+            }
             projects.put(project.getProjectName(),project);
             return true;
         }
