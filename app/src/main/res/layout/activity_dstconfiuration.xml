@@ -330,7 +330,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"/>
                 <TextView
-                    android:text="重型圆锥动力触探锤击数N63.6"
+                    android:text="重型圆锥动力触探锤击数N63.5"
                     android:textColor="@android:color/black"
                     android:layout_weight="1"
                     android:background="@drawable/cell_hint"
@@ -503,7 +503,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"/>
                 <TextView
-                    android:text="重型圆锥动力触探击数N63.7"
+                    android:text="重型圆锥动力触探击数N63.5"
                     android:textColor="@android:color/black"
                     android:layout_weight="1"
                     android:background="@drawable/cell_hint"
@@ -676,7 +676,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"/>
                 <TextView
-                    android:text="重型圆锥动力触探击数N63.8"
+                    android:text="重型圆锥动力触探击数N63.5"
                     android:textColor="@android:color/black"
                     android:layout_weight="1"
                     android:background="@drawable/cell_hint"

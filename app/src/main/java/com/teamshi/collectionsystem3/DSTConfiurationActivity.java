@@ -76,19 +76,19 @@ public class DSTConfiurationActivity extends AppCompatActivity {
         dstConfigurationTable1120Cell4TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable1_120_Argument4()) + " < N120 <= " + String.valueOf((int) ConfigurationManager.getDstTable1_120_Argument5()));
         dstConfigurationTable1120Cell5TextView.setText("N120 > " + String.valueOf((int) ConfigurationManager.getDstTable1_120_Argument5()));
 
-        dstConfigurationTable2636Cell1TextView.setText("N63.6 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument1()));
-        dstConfigurationTable2636Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument1()) + " < N63.6 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument2()));
-        dstConfigurationTable2636Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument2()) + " < N63.6 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument3()));
-        dstConfigurationTable2636Cell4TextView.setText("N63.6 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument3()));
+        dstConfigurationTable2636Cell1TextView.setText("N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument1()));
+        dstConfigurationTable2636Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument1()) + " < N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument2()));
+        dstConfigurationTable2636Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument2()) + " < N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument3()));
+        dstConfigurationTable2636Cell4TextView.setText("N63.5 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_6_Argument3()));
 
-        dstConfigurationTable2637Cell1TextView.setText("N63.7 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument1()));
-        dstConfigurationTable2637Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument1()) + " < N63.7 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument2()));
-        dstConfigurationTable2637Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument2()) + " < N63.7 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument3()));
-        dstConfigurationTable2637Cell4TextView.setText("N63.7 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument3()));
+        dstConfigurationTable2637Cell1TextView.setText("N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument1()));
+        dstConfigurationTable2637Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument1()) + " < N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument2()));
+        dstConfigurationTable2637Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument2()) + " < N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument3()));
+        dstConfigurationTable2637Cell4TextView.setText("N63.5 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_7_Argument3()));
 
-        dstConfigurationTable2638Cell1TextView.setText("N63.8 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument1()));
-        dstConfigurationTable2638Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument1()) + " < N63.8 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument2()));
-        dstConfigurationTable2638Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument2()) + " < N63.8 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument3()));
-        dstConfigurationTable2638Cell4TextView.setText("N63.8 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument3()));
+        dstConfigurationTable2638Cell1TextView.setText("N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument1()));
+        dstConfigurationTable2638Cell2TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument1()) + " < N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument2()));
+        dstConfigurationTable2638Cell3TextView.setText(String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument2()) + " < N63.5 <= " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument3()));
+        dstConfigurationTable2638Cell4TextView.setText("N63.5 > " + String.valueOf((int) ConfigurationManager.getDstTable2_63_8_Argument3()));
     }
 }
