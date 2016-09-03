@@ -398,9 +398,9 @@ public class RigIndexActivity extends AppCompatActivity {
         tv.setTextSize(getResources().getDimension(R.dimen.default_text_size) / getResources().getDisplayMetrics().density);
 
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_height) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
-        TableRow.LayoutParams param = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, height, 0f);
+        TableRow.LayoutParams param = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 0f);
 
-        int paddingInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_padding) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
+        int paddingInDp = 2 * (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.default_table_padding) / getResources().getDisplayMetrics().density, getResources().getDisplayMetrics());
 
         tv.setPadding(paddingInDp, paddingInDp, paddingInDp, paddingInDp);
 
@@ -555,7 +555,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -620,7 +620,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -629,10 +629,10 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -699,13 +699,55 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < rig.getTrInfos().size(); i++) {
+            sb.append(rig.getTrInfos().get(i).getWallType());
+            if (i != rig.getTrInfos().size() - 1) {
+                sb.append("\n");
+            }
 
-        result.add(generateRigInfoCell(""));
+        }
+        result.add(generateRigInfoCell(sb.toString()));
+
+        sb = new StringBuilder();
+        for (int i = 0; i < rig.getTrInfos().size(); i++) {
+            sb.append(rig.getTrInfos().get(i).getIndex());
+            if (i != rig.getTrInfos().size() - 1) {
+                sb.append("\n");
+            }
+
+        }
+        result.add(generateRigInfoCell(sb.toString()));
+
+        sb = new StringBuilder();
+        for (int i = 0; i < rig.getTrInfos().size(); i++) {
+            sb.append(Utility.formatDouble(rig.getTrInfos().get(i).getDiameter()));
+            if (i != rig.getTrInfos().size() - 1) {
+                sb.append("\n");
+            }
+
+        }
+        result.add(generateRigInfoCell(sb.toString()));
+
+        sb = new StringBuilder();
+        for (int i = 0; i < rig.getTrInfos().size(); i++) {
+            sb.append(Utility.formatDouble(rig.getTrInfos().get(i).getLength()));
+            if (i != rig.getTrInfos().size() - 1) {
+                sb.append("\n");
+            }
+
+        }
+        result.add(generateRigInfoCell(sb.toString()));
+
+        sb = new StringBuilder();
+        for (int i = 0; i < rig.getTrInfos().size(); i++) {
+            sb.append(Utility.formatDouble(rig.getTrInfos().get(i).getTotalLength()));
+            if (i != rig.getTrInfos().size() - 1) {
+                sb.append("\n");
+            }
+
+        }
+        result.add(generateRigInfoCell(sb.toString()));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
