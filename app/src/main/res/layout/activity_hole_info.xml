@@ -321,6 +321,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"/>
+
                     <EditText
                         android:id="@+id/edittext_offset"
                         android:layout_weight="3"

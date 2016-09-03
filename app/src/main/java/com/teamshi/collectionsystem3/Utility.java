@@ -296,4 +296,12 @@ public class Utility {
         return c;
     }
 
+    public static String formatDouble(double d) {
+        if (d == 0) {
+            return "0";
+        } else {
+            return String.format("%.2f", d);
+        }
+    }
+
 }

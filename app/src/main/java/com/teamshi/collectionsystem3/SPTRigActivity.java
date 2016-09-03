@@ -432,7 +432,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             refreshInfo();
                         } else if (penetrationEndDepth < rigViewModel.getPenetrationStartDepth() + 0.15) {
                             rigViewModel.setPenetrationEndDepth(penetrationEndDepth);
-                            rigViewModel.setOtherDescription("贯入深度自 " + rigViewModel.getPenetrationStartDepth() + "m 至 " + String.format("%.2f", rigViewModel.getPenetrationEndDepth()) + "m 反弹51击");
+                            rigViewModel.setOtherDescription("贯入深度自 " + rigViewModel.getPenetrationStartDepth() + "m 至 " + Utility.formatDouble(rigViewModel.getPenetrationEndDepth()) + "m 反弹51击");
 
                             rigViewModel.setCountStartDepth1(-1);
                             rigViewModel.setCountStartDepth2(-1);
@@ -1124,27 +1124,27 @@ public class SPTRigActivity extends AppCompatActivity {
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
 
         injectionToolDialameterTextView.setText(String.valueOf(rigViewModel.getInjectionToolDiameter()));
-        injectionToolLengthTextView.setText(String.format("%.2f", rigViewModel.getInjectionToolLength()));
+        injectionToolLengthTextView.setText(Utility.formatDouble(rigViewModel.getInjectionToolLength()));
 
         probeTypeEditText.setText(rigViewModel.getProbeType());
         probeDiameterEditText.setText(String.valueOf(rigViewModel.getProbeDiameter()));
-        probeLengthEditText.setText(String.format("%.2f", rigViewModel.getProbeLength()));
+        probeLengthEditText.setText(Utility.formatDouble(rigViewModel.getProbeLength()));
 
-        drillToolTotalLengthTextView.setText(String.format("%.2f", rigViewModel.getDrillToolTotalLength()));
+        drillToolTotalLengthTextView.setText(Utility.formatDouble(rigViewModel.getDrillToolTotalLength()));
 
         if (getCurrentFocus() != drillPipeRemainLengthEditText) {
-            drillPipeRemainLengthEditText.setText(String.format("%.2f", rigViewModel.getDrillPipeRemainLength()));
+            drillPipeRemainLengthEditText.setText(Utility.formatDouble(rigViewModel.getDrillPipeRemainLength()));
         }
 
-        roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
-        accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()));
+        roundTripMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getRoundTripMeterageLength()));
+        accumulatedMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
 
         if (getCurrentFocus() != penetrationStartDepthEditText) {
-            penetrationStartDepthEditText.setText(String.format("%.2f", rigViewModel.getPenetrationStartDepth()));
+            penetrationStartDepthEditText.setText(Utility.formatDouble(rigViewModel.getPenetrationStartDepth()));
         }
 
         if (getCurrentFocus() != penetrationEndDepthEditText) {
-            penetrationEndDepthEditText.setText(String.format("%.2f", rigViewModel.getPenetrationEndDepth()));
+            penetrationEndDepthEditText.setText(Utility.formatDouble(rigViewModel.getPenetrationEndDepth()));
         }
 
         if (getCurrentFocus() != hitCount1EditText) {
@@ -1163,54 +1163,54 @@ public class SPTRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != countStartDepth1EditText) {
-            countStartDepth1EditText.setText(rigViewModel.getCountStartDepth1() < 0? "": String.format("%.2f", rigViewModel.getCountStartDepth1()));
+            countStartDepth1EditText.setText(rigViewModel.getCountStartDepth1() < 0? "": Utility.formatDouble(rigViewModel.getCountStartDepth1()));
         }
 
         if (getCurrentFocus() != countEndDepth1EditText) {
-            countEndDepth1EditText.setText(rigViewModel.getCountEndDepth1() < 0? "": String.format("%.2f", rigViewModel.getCountEndDepth1()));
+            countEndDepth1EditText.setText(rigViewModel.getCountEndDepth1() < 0? "": Utility.formatDouble(rigViewModel.getCountEndDepth1()));
             countEndDepth1EditText.setEnabled(rigViewModel.getCountEndDepth1() >= 0 && rigViewModel.getHitCount1() != 51);
         }
 
         if (getCurrentFocus() != countStartDepth2EditText) {
-            countStartDepth2EditText.setText(rigViewModel.getCountStartDepth2() < 0? "": String.format("%.2f", rigViewModel.getCountStartDepth2()));
+            countStartDepth2EditText.setText(rigViewModel.getCountStartDepth2() < 0? "": Utility.formatDouble(rigViewModel.getCountStartDepth2()));
         }
 
         if (getCurrentFocus() != countEndDepth2EditText) {
-            countEndDepth2EditText.setText(rigViewModel.getCountEndDepth2() < 0? "": String.format("%.2f", rigViewModel.getCountEndDepth2()));
+            countEndDepth2EditText.setText(rigViewModel.getCountEndDepth2() < 0? "": Utility.formatDouble(rigViewModel.getCountEndDepth2()));
             countEndDepth2EditText.setEnabled(rigViewModel.getCountEndDepth2() >= 0);
         }
 
         if (getCurrentFocus() != countStartDepth3EditText) {
-            countStartDepth3EditText.setText(rigViewModel.getCountStartDepth3() < 0? "": String.format("%.2f", rigViewModel.getCountStartDepth3()));
+            countStartDepth3EditText.setText(rigViewModel.getCountStartDepth3() < 0? "": Utility.formatDouble(rigViewModel.getCountStartDepth3()));
         }
 
         if (getCurrentFocus() != countEndDepth3EditText) {
-            countEndDepth3EditText.setText(rigViewModel.getCountEndDepth3() < 0? "": String.format("%.2f", rigViewModel.getCountEndDepth3()));
+            countEndDepth3EditText.setText(rigViewModel.getCountEndDepth3() < 0? "": Utility.formatDouble(rigViewModel.getCountEndDepth3()));
             countEndDepth3EditText.setEnabled(rigViewModel.getCountEndDepth3() >= 0);
         }
 
         if (getCurrentFocus() != drillStartDepth1EditText) {
-            drillStartDepth1EditText.setText(rigViewModel.getDrillStartDepth1() < 0? "": String.format("%.2f", rigViewModel.getDrillStartDepth1()));
+            drillStartDepth1EditText.setText(rigViewModel.getDrillStartDepth1() < 0? "": Utility.formatDouble(rigViewModel.getDrillStartDepth1()));
         }
 
         if (getCurrentFocus() != drillEndDepth1EditText) {
-            drillEndDepth1EditText.setText(rigViewModel.getDrillEndDepth1() < 0? "": String.format("%.2f", rigViewModel.getDrillEndDepth1()));
+            drillEndDepth1EditText.setText(rigViewModel.getDrillEndDepth1() < 0? "": Utility.formatDouble(rigViewModel.getDrillEndDepth1()));
         }
 
         if (getCurrentFocus() != drillStartDepth2EditText) {
-            drillStartDepth2EditText.setText(rigViewModel.getDrillStartDepth2() < 0? "": String.format("%.2f", rigViewModel.getDrillStartDepth2()));
+            drillStartDepth2EditText.setText(rigViewModel.getDrillStartDepth2() < 0? "": Utility.formatDouble(rigViewModel.getDrillStartDepth2()));
         }
 
         if (getCurrentFocus() != drillEndDepth2EditText) {
-            drillEndDepth2EditText.setText(rigViewModel.getDrillEndDepth2() < 0? "": String.format("%.2f", rigViewModel.getDrillEndDepth2()));
+            drillEndDepth2EditText.setText(rigViewModel.getDrillEndDepth2() < 0? "": Utility.formatDouble(rigViewModel.getDrillEndDepth2()));
         }
 
         if (getCurrentFocus() != drillStartDepth3EditText) {
-            drillStartDepth3EditText.setText(rigViewModel.getDrillStartDepth3() < 0? "": String.format("%.2f", rigViewModel.getDrillStartDepth3()));
+            drillStartDepth3EditText.setText(rigViewModel.getDrillStartDepth3() < 0? "": Utility.formatDouble(rigViewModel.getDrillStartDepth3()));
         }
 
         if (getCurrentFocus() != drillEndDepth3EditText) {
-            drillEndDepth3EditText.setText(rigViewModel.getDrillEndDepth3() < 0? "": String.format("%.2f", rigViewModel.getDrillEndDepth3()));
+            drillEndDepth3EditText.setText(rigViewModel.getDrillEndDepth3() < 0? "": Utility.formatDouble(rigViewModel.getDrillEndDepth3()));
         }
 
         if (getCurrentFocus() != otherDescriptionEditText) {

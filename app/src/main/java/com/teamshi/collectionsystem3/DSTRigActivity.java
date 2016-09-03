@@ -480,16 +480,16 @@ public class DSTRigActivity extends AppCompatActivity {
 
         probeTypeTextView.setText(rigViewModel.getProbeType());
         probeDiameterTextView.setText(String.valueOf(rigViewModel.getProbeDiameter()));
-        probeLengthTextView.setText(String.format("%.2f", rigViewModel.getProbeLength()));
+        probeLengthTextView.setText(Utility.formatDouble(rigViewModel.getProbeLength()));
 
-        drillToolTotalLengthTextView.setText(String.format("%.2f", rigViewModel.getDrillToolTotalLength()));
+        drillToolTotalLengthTextView.setText(Utility.formatDouble(rigViewModel.getDrillToolTotalLength()));
 
         if (getCurrentFocus() != drillPipeRemainLengthEditText) {
-            drillPipeRemainLengthEditText.setText(String.format("%.2f", rigViewModel.getDrillPipeRemainLength()));
+            drillPipeRemainLengthEditText.setText(Utility.formatDouble(rigViewModel.getDrillPipeRemainLength()));
         }
 
-        roundTripMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getRoundTripMeterageLength()));
-        accumulatedMeterageLengthTextView.setText(String.format("%.2f", rigViewModel.getAccumulatedMeterageLength()));
+        roundTripMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getRoundTripMeterageLength()));
+        accumulatedMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
 
         if (rigViewModel.getDstDetailInfos().size() == 1) {
             deleteDstDetailButton.setEnabled(false);
@@ -512,11 +512,11 @@ public class DSTRigActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             if (i < rigViewModel.getDstDetailInfos().size()) {
                 detailedInfoTableRows[i].setVisibility(View.VISIBLE);
-                detailedInfoPipeLengthTextViews[i].setText(String.format("%.2f", rigViewModel.getDstDetailInfos().get(i).getPipeLength()));
-                detailedInfoDepthTextViews[i].setText(String.format("%.2f", rigViewModel.getDstDetailInfos().get(i).getDepth()));
+                detailedInfoPipeLengthTextViews[i].setText(Utility.formatDouble(rigViewModel.getDstDetailInfos().get(i).getPipeLength()));
+                detailedInfoDepthTextViews[i].setText(Utility.formatDouble(rigViewModel.getDstDetailInfos().get(i).getDepth()));
 
                 if (getCurrentFocus() != detailedInfoLengthEditTexts[i]) {
-                    detailedInfoLengthEditTexts[i].setText(String.format("%.2f", rigViewModel.getDstDetailInfos().get(i).getLength()));
+                    detailedInfoLengthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDstDetailInfos().get(i).getLength()));
                 }
 
                 if (getCurrentFocus() != detailedInfoHitCountEditTexts[i]) {

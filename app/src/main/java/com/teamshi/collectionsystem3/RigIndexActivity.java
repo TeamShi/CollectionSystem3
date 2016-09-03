@@ -489,45 +489,45 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(rig.getRigType()));
 
         result.add(generateRigInfoCell(String.valueOf(rig.getPipeNumber())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getPipeLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getPipeTotalLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getPipeLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getPipeTotalLength())));
 
         result.add(generateRigInfoCell(String.valueOf(rig.getRockCorePipeDiameter())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRockCorePipeLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCorePipeLength())));
 
         result.add(generateRigInfoCell(rig.getDrillBitType()));
         result.add(generateRigInfoCell(String.valueOf(rig.getDrillBitDiameter())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillBitLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillBitLength())));
 
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillToolTotalLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillPipeRemainLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRoundTripMeterageLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getAccumulatedMeterageLength())));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRockCoreLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRockCorePickPercentage() * 100) + "%"));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getAccumulatedMeterageLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCoreLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCorePickPercentage() * 100) + "%"));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
         result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
@@ -564,10 +564,10 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillToolTotalLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getDrillPipeRemainLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getRoundTripMeterageLength())));
-        result.add(generateRigInfoCell(String.format("%.2f", rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

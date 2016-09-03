@@ -1028,12 +1028,12 @@ public class HoleInfoActivity extends AppCompatActivity {
 
         rigMachineTypeEditText.setText(holeViewModel.getRigMachineType());
 
-        mileageEditText.setText(String.format("%.2f", holeViewModel.getMileage()));
+        mileageEditText.setText(Utility.formatDouble(holeViewModel.getMileage()));
         engineTypeEditText.setText(holeViewModel.getEngineType());
-        offsetEditText.setText(String.format("%.2f", holeViewModel.getOffset()));
+        offsetEditText.setText(Utility.formatDouble(holeViewModel.getOffset()));
         pumpTypeEditText.setText(holeViewModel.getPumpType());
-        holeHeightEditText.setText(String.format("%.2f", holeViewModel.getHoleHeight()));
-        holeDepthEditText.setText(String.format("%.2f", holeViewModel.getHoleDepth()));
+        holeHeightEditText.setText(Utility.formatDouble(holeViewModel.getHoleHeight()));
+        holeDepthEditText.setText(Utility.formatDouble(holeViewModel.getHoleDepth()));
 
         if (holeViewModel.getInitialWaterDepth() == -1) {
             initialWaterDepthCheckBox.setChecked(true);
@@ -1042,7 +1042,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             initialWaterDepthDateTextView.setText("");
         } else {
             initialWaterDepthCheckBox.setChecked(false);
-            initialWaterDepthEditText.setText(String.format("%.2f", holeViewModel.getInitialWaterDepth()));
+            initialWaterDepthEditText.setText(Utility.formatDouble(holeViewModel.getInitialWaterDepth()));
             initialWaterDepthEditText.setEnabled(true);
             initialWaterDepthDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getInitialWaterDepthLoggedDate()));
         }
@@ -1054,7 +1054,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             finalWaterDepthDateTextView.setText("");
         } else {
             finalWaterDepthCheckBox.setChecked(false);
-            finalWaterDepthEditText.setText(String.format("%.2f", holeViewModel.getFinalWaterDepth()));
+            finalWaterDepthEditText.setText(Utility.formatDouble(holeViewModel.getFinalWaterDepth()));
             finalWaterDepthEditText.setEnabled(true);
             finalWaterDepthDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getFinalWaterDepthLoggedDate()));
         }

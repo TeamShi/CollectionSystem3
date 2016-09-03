@@ -433,10 +433,10 @@ public class TRRigActivity extends AppCompatActivity {
                 detailedInfoLengthEditTexts[i].setEnabled(i == rigViewModel.getTrInfos().size() - 1);
 
                 if (getCurrentFocus() != detailedInfoLengthEditTexts[i] || addDeleteLock) {
-                    detailedInfoLengthEditTexts[i].setText(String.valueOf(String.format("%.2f", rigViewModel.getTrInfos().get(i).getLength())));
+                    detailedInfoLengthEditTexts[i].setText(String.valueOf(Utility.formatDouble(rigViewModel.getTrInfos().get(i).getLength())));
                 }
 
-                detailedInfoTotalLengthEditTexts[i].setText(String.format("%.2f", rigViewModel.getTrInfos().get(i).getTotalLength()));
+                detailedInfoTotalLengthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getTrInfos().get(i).getTotalLength()));
             } else {
                 detailedInfoTableRows[i].setVisibility(View.GONE);
             }
