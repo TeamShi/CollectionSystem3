@@ -1065,7 +1065,6 @@ public class RegularRigActivity extends AppCompatActivity {
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 0, 0, "合金", 0, 0, 0, 0, 0, 0, 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
                 } else {
-                    //TODO: alfred rockcoreIndex handle;
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
                             DataManager.getHole(holeId).getPipeCount(), DataManager.getHole(holeId).getPipeLength(), DataManager.getHole(holeId).getTotalPipeLength(),
                             0, DataManager.getHole(holeId).getLastRockCorePipeLength(),

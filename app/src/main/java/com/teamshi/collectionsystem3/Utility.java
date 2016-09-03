@@ -297,8 +297,8 @@ public class Utility {
     }
 
     public static String formatDouble(double d) {
-        if (d == 0) {
-            return "0";
+        if (d % 1 == 0) {
+            return String.format("%.0f", d);
         } else {
             return String.format("%.2f", d);
         }

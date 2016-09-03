@@ -302,8 +302,6 @@ public class TRRigActivity extends AppCompatActivity {
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-                            // TODO: Alfred set TRRig lastAccumulated
-                            // DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
 
                             Calendar now = Calendar.getInstance();
                             DataManager.getHole(holeId).setEndDate(now);

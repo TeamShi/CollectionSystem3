@@ -98,6 +98,11 @@ public class HoleInfoActivity extends AppCompatActivity {
     private EditText classMonitorEditText;
     private EditText machineMonitorEditText;
 
+    private Button offsetNegativeButton;
+    private Button offsetPositiveButton;
+
+    private boolean refreshLock = false;
+
     private static final int TAKE_PHOTO = 0;
     private static final int CROP_PHOTO = 1;
 
@@ -215,6 +220,9 @@ public class HoleInfoActivity extends AppCompatActivity {
 
         classMonitorEditText = (EditText) findViewById(R.id.edittext_class_monitor);
         machineMonitorEditText = (EditText) findViewById(R.id.edittext_machine_monitor);
+
+        offsetNegativeButton = (Button) findViewById(R.id.button_offset_negative);
+        offsetPositiveButton = (Button) findViewById(R.id.button_offset_positve);
 
         holeIdPart1Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -503,11 +511,15 @@ public class HoleInfoActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                try {
-                    holeViewModel.setOffset(Double.parseDouble(s.toString()));
-                    offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
-                } catch (Exception e) {
-                    offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                if (!refreshLock) {
+                    try {
+                        holeViewModel.setOffset(Double.parseDouble(s.toString()));
+                        offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        refreshInfo();
+                    } catch (Exception e) {
+                        offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
                 }
             }
         });
@@ -878,6 +890,28 @@ public class HoleInfoActivity extends AppCompatActivity {
             }
         });
 
+        offsetPositiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holeViewModel.getOffset() < 0) {
+                    holeViewModel.setOffset(0 - holeViewModel.getOffset());
+
+                    refreshInfo();
+                }
+            }
+        });
+
+        offsetNegativeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holeViewModel.getOffset() > 0) {
+                    holeViewModel.setOffset(0 - holeViewModel.getOffset());
+
+                    refreshInfo();
+                }
+            }
+        });
+
         String requestCode = getIntent().getStringExtra("requestCode");
 
         switch (requestCode) {
@@ -942,6 +976,8 @@ public class HoleInfoActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+        refreshLock = true;
+
         projectNameTextView.setText(this.holeViewModel.getProjectName());
 
         if (holeViewModel.isSpecialHoleId()) {
@@ -1031,6 +1067,18 @@ public class HoleInfoActivity extends AppCompatActivity {
         mileageEditText.setText(Utility.formatDouble(holeViewModel.getMileage()));
         engineTypeEditText.setText(holeViewModel.getEngineType());
         offsetEditText.setText(Utility.formatDouble(holeViewModel.getOffset()));
+
+        if (holeViewModel.getOffset() == 0) {
+            offsetNegativeButton.setEnabled(false);
+            offsetPositiveButton.setEnabled(false);
+        } else if (holeViewModel.getOffset() > 0) {
+            offsetNegativeButton.setEnabled(true);
+            offsetPositiveButton.setEnabled(false);
+        } else {
+            offsetNegativeButton.setEnabled(false);
+            offsetPositiveButton.setEnabled(true);
+        }
+
         pumpTypeEditText.setText(holeViewModel.getPumpType());
         holeHeightEditText.setText(Utility.formatDouble(holeViewModel.getHoleHeight()));
         holeDepthEditText.setText(Utility.formatDouble(holeViewModel.getHoleDepth()));
@@ -1075,6 +1123,8 @@ public class HoleInfoActivity extends AppCompatActivity {
 
         classMonitorEditText.setText(holeViewModel.getClassMonitor());
         machineMonitorEditText.setText(holeViewModel.getMachineMonitor());
+
+        refreshLock = false;
     }
 
     private void setHoleIdSpecialControllers() {

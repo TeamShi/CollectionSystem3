@@ -31,6 +31,7 @@ import java.util.Map;
  * Created by jishshi on 2016/7/24.
  */
 public class IOManager {
+    //TODO: Johnson: If one double % 1 == 0, format it with Utility.formatDouble(d);
     private static final String TAG = "CollectionSystem3";
     public static String APP_NAME = "ZuanTan";
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;

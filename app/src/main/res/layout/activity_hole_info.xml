@@ -321,10 +321,23 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"/>
-
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="左"
+                        android:id="@+id/button_offset_negative"/>
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="右"
+                        android:id="@+id/button_offset_positve"/>
                     <EditText
                         android:id="@+id/edittext_offset"
-                        android:layout_weight="3"
+                        android:layout_weight="1"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
