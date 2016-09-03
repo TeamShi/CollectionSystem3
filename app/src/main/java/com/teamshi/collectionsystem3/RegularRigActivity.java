@@ -734,7 +734,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             rockWeatheringButton.setEnabled(false);
                             rigViewModel.setRockWeathering("");
                             rigViewModel.setRockDescription("");
-                        } else if (rigViewModel.getRockType().equals("岩")) {
+                        } else if (rigViewModel.getRockType().endsWith("岩")) {
                             rockColorEditText.setEnabled(true);
                             rockColorButton.setEnabled(true);
                             rigViewModel.setRockColor("灰色");
@@ -1270,7 +1270,7 @@ public class RegularRigActivity extends AppCompatActivity {
             rockSaturationButton.setEnabled(true);
             rockWeatheringEditText.setEnabled(false);
             rockWeatheringButton.setEnabled(false);
-        } else if (rigViewModel.getRockType().equals("岩")) {
+        } else if (rigViewModel.getRockType().endsWith("岩")) {
             rockColorEditText.setEnabled(true);
             rockColorButton.setEnabled(true);
             rockDensityEditText.setEnabled(false);

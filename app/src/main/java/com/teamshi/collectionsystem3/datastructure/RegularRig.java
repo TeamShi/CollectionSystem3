@@ -9,7 +9,7 @@ public class RegularRig extends CalculatingRig {
     private String rigType;                         // 作业项目
     private int pipeNumber;                         // 钻杆编号
     private double pipeLength;                      // 钻杆长度
-    private double pipeTotalLength;                 // 累积长度
+    private double pipeTotalLength;                 // 累计长度
 
     private int rockCorePipeDiameter;               // 岩芯管直径
     private double rockCorePipeLength;              // 岩芯管长度

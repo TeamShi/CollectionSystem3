@@ -1075,9 +1075,9 @@ public class SPTRigActivity extends AppCompatActivity {
                 String rockName = rockNameMap.containsKey(DataManager.getHole(holeId).getLastRockName())?rockNameMap.get(DataManager.getHole(holeId).getLastRockName()): "其它";
 
                 rigViewModel = new SPTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1.55, 0.45, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.55, 0.45, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         51, 0.5,
-                        "管靴",0, 0,
+                        "管靴",0, 0.05,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         0, 0, 0,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.15, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.25,

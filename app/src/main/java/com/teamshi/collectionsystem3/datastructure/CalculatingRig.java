@@ -9,7 +9,7 @@ public class CalculatingRig extends Rig {
     protected double drillToolTotalLength;            // 钻具总长
     protected double drillPipeRemainLength;           // 钻杆余长
     protected double roundTripMeterageLength;         // 回次进尺
-    protected double accumulatedMeterageLength;       // 累积进尺
+    protected double accumulatedMeterageLength;       // 累计进尺
 
     public CalculatingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                           double drillToolTotalLength, double drillPipeRemainLength,
