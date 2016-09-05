@@ -48,15 +48,15 @@ public class Parser {
         sb.append(NA).append("#");
 
         //进尺
-        sb.append(sptRig.getPenetrationStartDepth()).append("#");
-        sb.append(sptRig.getPenetrationEndDepth()).append("#");
+        sb.append(Utility.formatDouble(sptRig.getPenetrationStartDepth())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getPenetrationEndDepth())).append("#");
 
-        sb.append(sptRig.getCountStartDepth1() + "," + sptRig.getCountStartDepth2() + "," + sptRig.getCountStartDepth3()).append("#");
-        sb.append(sptRig.getCountEndDepth1() + "," + sptRig.getCountEndDepth2() + "," + sptRig.getCountEndDepth3()).append("#");
+        sb.append(Utility.formatDouble(sptRig.getCountStartDepth1()) + "," + Utility.formatDouble(sptRig.getCountStartDepth2()) + "," + Utility.formatDouble(sptRig.getCountStartDepth3())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getCountEndDepth1()) + "," + Utility.formatDouble(sptRig.getCountEndDepth2()) + "," + Utility.formatDouble(sptRig.getCountEndDepth3())).append("#");
 
         //todo need confirmation , currentlly data separated by comma
-        sb.append(sptRig.getDrillStartDepth1() + "," + sptRig.getDrillStartDepth2() + "," + sptRig.getDrillStartDepth3()).append("#");
-        sb.append(sptRig.getDrillEndDepth1() + "," + sptRig.getDrillEndDepth2() + "," + sptRig.getDrillEndDepth3()).append("#");
+        sb.append(Utility.formatDouble(sptRig.getDrillStartDepth1()) + "," + Utility.formatDouble(sptRig.getDrillStartDepth2()) + "," + Utility.formatDouble(sptRig.getDrillStartDepth3())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getDrillEndDepth1()) + "," + Utility.formatDouble(sptRig.getDrillEndDepth2()) + "," + Utility.formatDouble(sptRig.getDrillEndDepth3())).append("#");
 
         //分类
         sb.append(NA).append("#");
@@ -94,9 +94,9 @@ public class Parser {
         for (int index = 0; index < details.size(); index++) {
             sb = new StringBuffer();
             DSTRig.DSTDetailInfo detailInfo = details.get(index);
-            sb.append(detailInfo.getPipeLength()).append("#");
-            sb.append(detailInfo.getDepth()).append("#");
-            sb.append(detailInfo.getLength()).append("#");
+            sb.append(Utility.formatDouble(detailInfo.getPipeLength())).append("#");
+            sb.append(Utility.formatDouble(detailInfo.getDepth())).append("#");
+            sb.append(Utility.formatDouble(detailInfo.getLength())).append("#");
             sb.append(detailInfo.getHitCount()).append("#");
             sb.append(NA).append("#");
             sb.append(NA).append("#");
@@ -134,23 +134,23 @@ public class Parser {
                 sb.append(regularRig.getRigType()).append("#");
                 //钻杆
                 sb.append(regularRig.getPipeNumber()).append("#");
-                sb.append(regularRig.getPipeLength()).append("#");
-                sb.append(regularRig.getPipeTotalLength()).append("#");
+                sb.append(Utility.formatDouble(regularRig.getPipeLength())).append("#");
+                sb.append(Utility.formatDouble(regularRig.getPipeTotalLength())).append("#");
 
                 //岩芯管
                 sb.append(regularRig.getRockCorePipeDiameter()).append("#");
-                sb.append(regularRig.getRockCorePipeLength()).append("#");
+                sb.append(Utility.formatDouble(regularRig.getRockCorePipeLength())).append("#");
 
                 //钻头
                 sb.append(regularRig.getDrillBitType()).append("#");
-                sb.append(regularRig.getDrillBitDiameter()).append("#");
-                sb.append(regularRig.getDrillBitLength()).append("#");
+                sb.append(Utility.formatDouble(regularRig.getDrillBitDiameter())).append("#");
+                sb.append(Utility.formatDouble(regularRig.getDrillBitLength())).append("#");
 
                 //进尺
-                sb.append(regularRig.getDrillToolTotalLength()).append("#");
-                sb.append(regularRig.getDrillPipeRemainLength()).append("#");
-                sb.append(regularRig.getRoundTripMeterageLength()).append("#");
-                sb.append(regularRig.getAccumulatedMeterageLength()).append("#");
+                sb.append(Utility.formatDouble(regularRig.getDrillToolTotalLength())).append("#");
+                sb.append(Utility.formatDouble(regularRig.getDrillPipeRemainLength())).append("#");
+                sb.append(Utility.formatDouble(regularRig.getRoundTripMeterageLength())).append("#");
+                sb.append(Utility.formatDouble(regularRig.getAccumulatedMeterageLength())).append("#");
                 //护壁措施
                 sb.append("").append("#");
                 sb.append("").append("#");
@@ -267,12 +267,12 @@ public class Parser {
 
                 //钻杆
                 sb.append(sptRig.getProbeType()).append("#");
-                sb.append(sptRig.getProbeLength()).append("#");
+                sb.append(Utility.formatDouble(sptRig.getProbeLength())).append("#");
                 sb.append(NA).append("#");
 
                 //岩芯管
                 sb.append(sptRig.getInjectionToolDiameter()).append("#");
-                sb.append(sptRig.getInjectionToolLength()).append("#");
+                sb.append(Utility.formatDouble(sptRig.getInjectionToolLength())).append("#");
 
                 //钻头
                 sb.append("").append("#");
@@ -280,10 +280,10 @@ public class Parser {
                 sb.append("").append("#");
 
                 //进尺
-                sb.append(sptRig.getDrillToolTotalLength()).append("#");
-                sb.append(sptRig.getDrillPipeRemainLength()).append("#");
-                sb.append(sptRig.getRoundTripMeterageLength()).append("#");
-                sb.append(sptRig.getAccumulatedMeterageLength()).append("#");
+                sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength())).append("#");
+                sb.append(Utility.formatDouble(sptRig.getDrillPipeRemainLength())).append("#");
+                sb.append(Utility.formatDouble(sptRig.getRoundTripMeterageLength())).append("#");
+                sb.append(Utility.formatDouble(sptRig.getAccumulatedMeterageLength())).append("#");
                 //护壁措施
                 sb.append("").append("#");
                 sb.append("").append("#");
@@ -332,7 +332,7 @@ public class Parser {
                 sb.append("动 探").append("#");
                 //钻杆
                 sb.append(dstRig.getProbeType()).append("#");
-                sb.append(dstRig.getProbeLength()).append("#");
+                sb.append(Utility.formatDouble(dstRig.getProbeLength())).append("#");
                 sb.append("").append("#");
 
                 //岩芯管
@@ -345,10 +345,10 @@ public class Parser {
                 sb.append("").append("#");
 
                 //进尺
-                sb.append(dstRig.getDrillToolTotalLength()).append("#");
-                sb.append(dstRig.getDrillPipeRemainLength()).append("#");
-                sb.append(dstRig.getRoundTripMeterageLength()).append("#");
-                sb.append(dstRig.getAccumulatedMeterageLength()).append("#");
+                sb.append(Utility.formatDouble(dstRig.getDrillToolTotalLength())).append("#");
+                sb.append(Utility.formatDouble(dstRig.getDrillPipeRemainLength())).append("#");
+                sb.append(Utility.formatDouble(dstRig.getRoundTripMeterageLength())).append("#");
+                sb.append(Utility.formatDouble(dstRig.getAccumulatedMeterageLength())).append("#");
                 //护壁措施
                 sb.append("").append("#");
                 sb.append("").append("#");

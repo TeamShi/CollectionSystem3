@@ -220,49 +220,6 @@ public class HtmlParser extends Parser{
 //        return resultData;
 //    }
 
-    public static boolean parseToLocal(String outPath, ArrayList<Hole> holes, String srcTemplate) throws IOException {
-//        ArrayList<RigEvent> rigEvents = new ArrayList<RigEvent>();
-//        ArrayList<SPTRig> sptRigEvents = new ArrayList<SPTRig>();
-//        ArrayList<DSTRig> dstRigEvents = new ArrayList<DSTRig>();
-//
-//        for (int i = 0, len = holes.size(); i < len; i++) {
-//            ArrayList<RigEvent> currRigEvents = holes.get(i).getRigList();
-//            rigEvents.addAll(currRigEvents);
-//            for (int j = 0, size = currRigEvents.size(); j < size; j++) {
-//                RigEvent currRigEvent = currRigEvents.get(j);
-//                if (currRigEvent instanceof SPTRig) {
-//                    sptRigEvents.add((SPTRig) currRigEvent);
-//                } else if (currRigEvent instanceof DSTRig) {
-//                    dstRigEvents.add((DSTRig) currRigEvent);
-//                } else {
-//                    // do nothing
-//                }
-//            }
-//        }
-
-
-        //html output
-        for (Hole hole : holes) {
-//            String[][] sptRigEventArray = convertSpt(hole);
-//            String[][] dstRigEventArray = convertDst(hole);
-            File holeDir = new File(outPath + "_" + hole.getHoleId());
-            if (!holeDir.exists()) {
-                holeDir.mkdir();
-            }
-            try {
-                parseHole(outPath + "/hole_" + hole.getHoleId() + ".html", hole, new FileInputStream(srcTemplate + "/" + BASIC_RIG_EVENT_TEMPLATE));
-//                write(outPath + "/spt_" + hole.getHoleId() + ".html", sptRigEventArray, new FileInputStream(srcTemplate + "/" + SPT_RIG_EVENT_TEMPLATE));
-//                write(outPath + "/dst_" + hole.getHoleId() + ".html", dstRigEventArray, new FileInputStream(srcTemplate + "/" + DST_RIG_EVENT_TEMPLATE));
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-
-        return true;
-
-    }
-
     public static boolean parseHole(String outPath, Hole hole, InputStream inputStream) throws IOException {
         String[][] data = convertHole(hole);
 
@@ -302,10 +259,10 @@ public class HtmlParser extends Parser{
         mileageId.text(Utility.formatNumber(hole.getMileage()));
 
         Element offset = doc.getElementById(HOLE_OFFSET);
-        offset.text(String.valueOf(hole.getOffset()));
+        offset.text(Utility.formatDouble((hole.getOffset())));
 
         Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
-        holeElevation.text(String.valueOf(hole.getHoleHeight()));
+        holeElevation.text(Utility.formatDouble(hole.getHoleHeight()));
 
         Element holeId = doc.getElementById(HOLE_ID);
         holeId.text(hole.getHoleId());
