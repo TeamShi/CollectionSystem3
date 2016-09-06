@@ -258,6 +258,14 @@ public class NARigInfoActivity extends AppCompatActivity {
         endTimeButton.setText(Utility.formatTimeString(rigViewModel.getEndTime()));
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
         naTypeEditText.setText(rigViewModel.getNaType());
+
+        if (DataManager.getHole(holeId).isApproved()) {
+            classPeopleCountTextView.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            naTypeEditText.setEnabled(false);
+        }
     }
 
     private boolean validate() {

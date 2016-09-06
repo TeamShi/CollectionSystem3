@@ -51,7 +51,7 @@ public class TRRigActivity extends AppCompatActivity {
     private Button addTRDetailedButton;
     private Button removeTRDetailedButton;
 
-    private EditText holeSaturaionEditText;
+    private EditText holeSituraionEditText;
     private EditText specialDescriptionEditText;
 
     private boolean refreshLock;
@@ -79,7 +79,7 @@ public class TRRigActivity extends AppCompatActivity {
         removeTRDetailedButton = (Button) findViewById(R.id.button_delete_tr_detail);
 
         specialDescriptionEditText = (EditText) findViewById(R.id.edittext_tr_rig_special_description);
-        holeSaturaionEditText = (EditText) findViewById(R.id.edittext_tr_rig_hole_situration);
+        holeSituraionEditText = (EditText) findViewById(R.id.edittext_tr_rig_hole_situration);
 
         for (int i = 1; i <= 15; i++) {
             TableRow detailedInfoTabRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_tr_detail_" + i, "id", getPackageName()));
@@ -354,7 +354,7 @@ public class TRRigActivity extends AppCompatActivity {
             }
         });
 
-        holeSaturaionEditText.addTextChangedListener(new TextWatcher() {
+        holeSituraionEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -441,8 +441,33 @@ public class TRRigActivity extends AppCompatActivity {
         removeTRDetailedButton.setEnabled(! (rigViewModel.getTrInfos().size() == 1));
         addTRDetailedButton.setEnabled(! (rigViewModel.getTrInfos().size() == 15));
 
-        holeSaturaionEditText.setText(rigViewModel.getHoleSaturation());
+        holeSituraionEditText.setText(rigViewModel.getHoleSaturation());
         specialDescriptionEditText.setText(rigViewModel.getSpecialDescription());
+
+        if (DataManager.getHole(holeId).isApproved()) {
+            classPeopleCountTextView.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            addTRDetailedButton.setEnabled(false);
+            removeTRDetailedButton.setEnabled(false);
+
+            for (EditText et : detailedInfoWallTypeEditTexts) {
+                et.setEnabled(false);
+            }
+
+            for (EditText et : detailedInfoLengthEditTexts) {
+                et.setEnabled(false);
+            }
+
+            for (EditText et : detailedInfoTotalLengthEditTexts) {
+                et.setEnabled(false);
+            }
+
+            holeSituraionEditText.setEnabled(false);
+            specialDescriptionEditText.setEnabled(false);
+
+        }
 
         refreshLock = false;
     }
