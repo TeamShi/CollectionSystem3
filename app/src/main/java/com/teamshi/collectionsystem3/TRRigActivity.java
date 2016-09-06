@@ -194,8 +194,6 @@ public class TRRigActivity extends AppCompatActivity {
         removeTRDetailedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeTRDetailedButton.setFocusableInTouchMode(true);
-                removeTRDetailedButton.requestFocus();
 
                 rigViewModel.getTrInfos().remove(rigViewModel.getTrInfos().size() - 1);
 

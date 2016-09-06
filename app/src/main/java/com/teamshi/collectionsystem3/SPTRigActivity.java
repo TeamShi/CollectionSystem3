@@ -1254,6 +1254,27 @@ public class SPTRigActivity extends AppCompatActivity {
             countEndDepth3EditText.setEnabled(false);
         }
 
+        if (DataManager.getHole(holeId).isApproved()) {
+            classPeopleCountEditText.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            probeTypeEditText.setEnabled(false);
+            drillPipeRemainLengthEditText.setEnabled(false);
+            penetrationEndDepthEditText.setEnabled(false);
+            countEndDepth1EditText.setEnabled(false);
+            countEndDepth2EditText.setEnabled(false);
+            countEndDepth3EditText.setEnabled(false);
+            hitCount1EditText.setEnabled(false);
+            hitCount2EditText.setEnabled(false);
+            hitCount3EditText.setEnabled(false);
+            rockNameSpinner.setEnabled(false);
+            rockColorEditText.setEnabled(false);
+            rockDensityEditText.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            otherDescriptionEditText.setEnabled(false);
+        }
+
         refreshLock = false;
     }
 

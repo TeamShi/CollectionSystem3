@@ -380,7 +380,11 @@ public class ConfigurationManager {
 
     }
 
-    public static String parseDSTSaturationDescription(String rockName, int hitCount) {
+    public static String parseDSTSaturationDescription(String rockName, int hitCount, boolean isSuperHeavy) {
+        if (rockName == null) {
+            return null;
+        }
+
         if (rockName.equals("砾砂")) {
             if (hitCount > 0 && hitCount <= dstTable2_63_6_Argument1) {
                 return "松散";
@@ -423,9 +427,7 @@ public class ConfigurationManager {
             }
         }
 
-        final String[] ROCK120 = {"细圆砾土", "粗圆砾土", "细角砾土", "粗角砾土", "碎石", "卵石", "块石", "漂石"};
-
-        if (Arrays.asList(ROCK120).contains(rockName)) {
+        if (isSuperHeavy) {
             if (hitCount > 0 && hitCount <= dstTable1_120_Argument2) {
                 return "松散";
             } else if (hitCount > dstTable1_120_Argument2 && hitCount <= dstTable1_120_Argument3) {
@@ -439,8 +441,6 @@ public class ConfigurationManager {
             } else {
                 return "";
             }
-        } else if (rockName.equals("")) {
-            return "";
         } else {
             if (hitCount > 0 && hitCount <= dstTable1_63_5_Argument2) {
                 return "松散";
