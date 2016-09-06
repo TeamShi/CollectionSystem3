@@ -10,6 +10,7 @@ import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
@@ -32,9 +33,12 @@ public class Parser {
         return row;
     }
 
-    protected static String[][] convertSpt(SPTRig sptRig) {
+    protected static String[][] convertSpt(SPTRig sptRig, String BR) {
         String[][] resultData = new String[1][];
         StringBuffer sb = new StringBuffer();
+        if (null == BR || "".equals(BR)) {
+            BR = ",";
+        }
 
         sb.append("1").append("#");
 
@@ -51,12 +55,12 @@ public class Parser {
         sb.append(Utility.formatDouble(sptRig.getPenetrationStartDepth())).append("#");
         sb.append(Utility.formatDouble(sptRig.getPenetrationEndDepth())).append("#");
 
-        sb.append(Utility.formatDouble(sptRig.getCountStartDepth1()) + "," + Utility.formatDouble(sptRig.getCountStartDepth2()) + "," + Utility.formatDouble(sptRig.getCountStartDepth3())).append("#");
-        sb.append(Utility.formatDouble(sptRig.getCountEndDepth1()) + "," + Utility.formatDouble(sptRig.getCountEndDepth2()) + "," + Utility.formatDouble(sptRig.getCountEndDepth3())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getCountStartDepth1()) + BR + Utility.formatDouble(sptRig.getCountStartDepth2()) + BR + Utility.formatDouble(sptRig.getCountStartDepth3())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getCountEndDepth1()) + BR + Utility.formatDouble(sptRig.getCountEndDepth2()) + BR + Utility.formatDouble(sptRig.getCountEndDepth3())).append("#");
 
         //todo need confirmation , currentlly data separated by comma
-        sb.append(Utility.formatDouble(sptRig.getDrillStartDepth1()) + "," + Utility.formatDouble(sptRig.getDrillStartDepth2()) + "," + Utility.formatDouble(sptRig.getDrillStartDepth3())).append("#");
-        sb.append(Utility.formatDouble(sptRig.getDrillEndDepth1()) + "," + Utility.formatDouble(sptRig.getDrillEndDepth2()) + "," + Utility.formatDouble(sptRig.getDrillEndDepth3())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getDrillStartDepth1()) + BR + Utility.formatDouble(sptRig.getDrillStartDepth2()) + BR + Utility.formatDouble(sptRig.getDrillStartDepth3())).append("#");
+        sb.append(Utility.formatDouble(sptRig.getDrillEndDepth1()) + BR + Utility.formatDouble(sptRig.getDrillEndDepth2()) + BR + Utility.formatDouble(sptRig.getDrillEndDepth3())).append("#");
 
         //分类
         sb.append(NA).append("#");
@@ -74,7 +78,7 @@ public class Parser {
 
         sb.append(sptRig.getOtherDescription()).append("#");
 
-        sb.append(sptRig.getHitCount1() + "," + sptRig.getHitCount2() + "," + sptRig.getHitCount3()).append("#");
+        sb.append(sptRig.getHitCount1() + BR + sptRig.getHitCount2() + BR + sptRig.getHitCount3()).append("#");
 
         sb.append(NA).append("#");
         sb.append(NA).append("#");
@@ -88,7 +92,7 @@ public class Parser {
     protected static String[][] convertDst(DSTRig dstRig) {
         ArrayList<DSTRig.DSTDetailInfo> details = dstRig.getDstDetailInfos();
 
-        StringBuffer sb ;
+        StringBuffer sb;
         String[][] resultData = new String[details.size()][];
 
         for (int index = 0; index < details.size(); index++) {
@@ -107,7 +111,10 @@ public class Parser {
         return resultData;
     }
 
-    protected static String[][] convertHole(Hole hole) {
+    protected static String[][] convertHole(Hole hole, String BR) {
+        if (BR == null || BR.equals("")) {
+            BR = ",";
+        }
         ArrayList<Rig> rigs = hole.getRigList();
         int rows = rigs.size();
         String[][] resultData = new String[rows][];
@@ -260,7 +267,7 @@ public class Parser {
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(naRig.getNaType().trim().equals("") ? NA : naRig.getNaType()).append("#");
 
-            } else if(isSpt){
+            } else if (isSpt) {
                 SPTRig sptRig = (SPTRig) rigs.get(i);
 
                 sb.append("标 贯").append("#");
@@ -326,7 +333,7 @@ public class Parser {
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(sptRig.getOtherDescription().trim().equals("") ? NA : sptRig.getOtherDescription()).append("#");
 
-            }else if(isDst){
+            } else if (isDst) {
                 DSTRig dstRig = (DSTRig) rigs.get(i);
 
                 sb.append("动 探").append("#");
@@ -389,9 +396,9 @@ public class Parser {
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
-                sb.append( NA).append("#");
+                sb.append(NA).append("#");
 
-            }else if(isTrr){
+            } else if (isTrr) {
                 TRRig trRig = (TRRig) rigs.get(i);
 
                 sb.append("下套管").append("#");
@@ -417,11 +424,43 @@ public class Parser {
                 sb.append(NA).append("#");
 
                 //护壁措施
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                List<TRRig.TRInfo> infos = trRig.getTrInfos();
+                if (null == infos || infos.size() == 0) {
+                    sb.append("").append("#");
+                    sb.append("").append("#");
+                    sb.append("").append("#");
+                    sb.append("").append("#");
+                    sb.append("").append("#");
+                } else {
+                    String wallType = "";
+                    String index = "";
+                    String diameter = "";
+                    String length = "";
+                    String totalLen = "";
+                    for (int j = 0; j < infos.size(); j++) {
+                        TRRig.TRInfo info = infos.get(j);
+                        if (j == 0) {
+                            wallType += info.getWallType();
+                        } else {
+                            wallType += " " + BR;
+                        }
+
+                        index += info.getIndex() + BR;
+                        diameter += info.getDiameter() + BR;
+                        length += info.getLength() + BR;
+
+                        if (j == (infos.size() - 1)) {
+                            totalLen += info.getTotalLength();
+                        }else{
+                            totalLen += " " + BR;
+                        }
+                    }
+                    sb.append(wallType).append("#");
+                    sb.append(index).append("#");
+                    sb.append(diameter).append("#");
+                    sb.append(length).append("#");
+                    sb.append(totalLen).append("#");
+                }
 
                 //孔内情况
                 sb.append("").append("#");
@@ -456,7 +495,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
-                sb.append( trRig.getSpecialDescription().trim().equals("") ? NA : trRig.getSpecialDescription()).append("#");
+                sb.append(trRig.getSpecialDescription().trim().equals("") ? NA : trRig.getSpecialDescription()).append("#");
             }
 
             resultData[i] = convert2Array(sb.toString());

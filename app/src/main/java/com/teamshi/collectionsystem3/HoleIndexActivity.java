@@ -45,7 +45,7 @@ public class HoleIndexActivity extends AppCompatActivity {
         Log.d(TAG, "Start HoleIndexActivity.");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hole_index);
-
+        //todo 每次重启打开项目  DataManager.getProject() NPE
         String projectName = DataManager.getProject().getProjectName();
         Log.d(TAG, "Project name: " + projectName);
         this.setTitle(projectName);

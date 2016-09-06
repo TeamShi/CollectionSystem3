@@ -146,14 +146,14 @@ public class XlsParser extends Parser{
         String[][] resultData = new String[rows][];
         resultData[0] = SPTEVENT_HEADER;
         for (int i = 0; i < sptRigs.size(); i++) {
-            resultData[i+1] = convertSpt(sptRigs.get(i))[0];
+            resultData[i+1] = convertSpt(sptRigs.get(i), "\n")[0];
         }
 
         return resultData;
     }
 
     private static String[][] convertRigs(Hole hole) {
-        String[][] rawData = convertHole(hole);
+        String[][] rawData = convertHole(hole, "\n");
         int rows = rawData.length + 1;
         String[][] resultData = new String[rows][];
         resultData[0] = Rig_HEADER;

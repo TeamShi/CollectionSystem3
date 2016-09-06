@@ -141,7 +141,7 @@ public class HtmlParser extends Parser{
             return null;
         }
 
-        String[][] sptEventArray = convertSpt(sptRig);
+        String[][] sptEventArray = convertSpt(sptRig, "<br/>");
         String path = dirPath + "sptRigEvent.html";
 
         try {
@@ -221,7 +221,7 @@ public class HtmlParser extends Parser{
 //    }
 
     public static boolean parseHole(String outPath, Hole hole, InputStream inputStream) throws IOException {
-        String[][] data = convertHole(hole);
+        String[][] data = convertHole(hole, "<br/>");
 
         boolean isHtml = Utility.verifySuffix(outPath, "html");
         if (!isHtml) {
