@@ -54,6 +54,8 @@ public class RigIndexActivity extends AppCompatActivity {
 
     private Button addRigButton;
 
+    private boolean waterDepthFlag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -467,8 +469,12 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        }
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -532,8 +538,12 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        }
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -597,8 +607,12 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        }
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -662,8 +676,12 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        }
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -774,8 +792,12 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        }
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
