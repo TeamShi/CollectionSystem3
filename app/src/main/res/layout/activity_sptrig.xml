@@ -270,6 +270,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
+                        android:enabled="false"
                         android:layout_gravity="center_vertical"
                         android:inputType="number"
                         android:nextFocusDown="@+id/edittext_spt_rig_probe_length"/>
@@ -289,6 +290,7 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
+                        android:enabled="false"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"
                         android:inputType="numberDecimal"
