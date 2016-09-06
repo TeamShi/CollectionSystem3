@@ -252,6 +252,12 @@ public class RigIndexActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).setMaxRigRockCoreIndex(deletingRig.getLastMaxRigRockCoreIndex());
                     }
 
+                    // TODO: deleting for yuanzhuang.
+                    if (deletingRig instanceof RegularRig ||
+                            deletingRig instanceof SPTRig) {
+                        DataManager.getHole(holeId).setRockCoreIndex(DataManager.getHole(holeId).getRockCoreIndex() - 1);
+                    }
+
                     DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
                     DataManager.getHole(holeId).setLastRockColor(deletingRig.getLastRockColor());
                     DataManager.getHole(holeId).setLastRockSaturation(deletingRig.getLastRockSaturation());

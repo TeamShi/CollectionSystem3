@@ -352,10 +352,13 @@
                         android:id="@+id/edittext_regular_rig_drill_bit_diameter"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
-
+                        android:inputType="numberDecimal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:singleLine="true"
+                        android:enabled="false"
                         android:nextFocusDown="@+id/edittext_regular_rig_drill_bit_length"/>
                     <TextView
                         android:text="长度(m)"
@@ -370,6 +373,9 @@
                     <EditText
                         android:layout_weight="2"
                         android:id="@+id/edittext_regular_rig_drill_bit_length"
+                        android:inputType="numberDecimal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"

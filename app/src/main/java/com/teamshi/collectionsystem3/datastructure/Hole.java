@@ -80,6 +80,8 @@ public class Hole implements Serializable {
 
     private boolean isApproved;
 
+    private int rockCoreIndex;
+
     public Hole() {
 
     }
@@ -150,6 +152,8 @@ public class Hole implements Serializable {
         this.maxRigRockCoreIndex = 0;
 
         this.isApproved = false;
+
+        this.rockCoreIndex = 1;
     }
 
     public String getProjectName() {
@@ -573,6 +577,14 @@ public class Hole implements Serializable {
         isApproved = approved;
     }
 
+    public int getRockCoreIndex() {
+        return rockCoreIndex;
+    }
+
+    public void setRockCoreIndex(int rockCoreIndex) {
+        this.rockCoreIndex = rockCoreIndex;
+    }
+
     public Hole deepCopy() {
         Hole newHole = new Hole(projectName);
 
@@ -649,6 +661,10 @@ public class Hole implements Serializable {
         newHole.setLastRockColor(lastRockColor);
 
         newHole.setLastRockSaturation(lastRockSaturation);
+
+        newHole.setApproved(isApproved);
+
+        newHole.setRockCoreIndex(rockCoreIndex);
 
         return newHole;
     }

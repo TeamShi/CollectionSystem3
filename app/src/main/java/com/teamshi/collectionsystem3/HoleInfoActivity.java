@@ -1105,13 +1105,8 @@ public class HoleInfoActivity extends AppCompatActivity {
         // TODO: JOHNSON: handle sign pictures
         // Total 5 textviews.
 
-
         recordDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getRecordDate()));
         reviewDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getReviewDate()));
-
-
-
-
 
         refreshLock = false;
     }

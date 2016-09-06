@@ -56,8 +56,8 @@ public class RegularRigActivity extends AppCompatActivity {
             130, 110, 91, 75
     };
 
-    private static final CharSequence[] ROCK_TYPE_OPTIONS = {"黏土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
-            "块石", "卵石", "碎石", "粗圆砾", "粗角砾", "细圆砾", "细角砾", "泥岩", "砂岩", "灰岩", "花岗岩"};
+    private static final CharSequence[] ROCK_TYPE_OPTIONS = {"黏土", "杂填土", "素填土", "吹填土", "~~土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
+            "块石", "卵石", "碎石", "粗圆砾", "粗角砾", "细圆砾", "细角砾", "泥岩", "砂岩", "灰岩", "花岗岩", "~~岩"};
     private static final CharSequence[] ROCK_COLOR_OPTIONS = {"灰色", "青灰色", "深灰色", "紫色", "棕黄色", "浅黄色", "褐黄色", "红褐色", "棕红色", "棕色", "褐色", "黄褐色",
             "青色","灰绿色","浅紫色", "暗红色", "黑色", "浅蓝色", "蓝色"};
     private static final CharSequence[] ROCK_DENSITY_OPTIONS = {"坚硬", "硬塑", "软塑", "流塑", "稍密", "中密", "密实", "松散"};
@@ -314,6 +314,8 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
                             DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
+                            DataManager.getHole(holeId).setRockCoreIndex(DataManager.getHole(holeId).getRockCoreIndex() + 1);
+
                             IOManager.updateProject(DataManager.getProject());
                             RegularRigActivity.this.setResult(RESULT_OK);
                             RegularRigActivity.this.finish();
@@ -394,8 +396,8 @@ public class RegularRigActivity extends AppCompatActivity {
                             pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                             rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
-                            rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                            rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                            rigViewModel.setAccumulatedMeterageLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                            rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
 
                             rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
                             rigViewModel.setRigStartEndDepth(Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
@@ -412,22 +414,30 @@ public class RegularRigActivity extends AppCompatActivity {
         rockCorePipeDiameterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        rigViewModel.setRockCorePipeDiameter(73);
-                        break;
-                    case 1:
-                        rigViewModel.setRockCorePipeDiameter(89);
-                        break;
-                    case 2:
-                        rigViewModel.setRockCorePipeDiameter(108);
-                        break;
-                    case 3:
-                        rigViewModel.setRockCorePipeDiameter(127);
-                        break;
-                    case 4:
-                        rigViewModel.setRockCorePipeDiameter(146);
-                        break;
+                if (!refreshLock) {
+                    switch (position) {
+                        case 0:
+                            rigViewModel.setRockCorePipeDiameter(73);
+                            rigViewModel.setDrillBitDiameter(75);
+                            break;
+                        case 1:
+                            rigViewModel.setRockCorePipeDiameter(89);
+                            rigViewModel.setDrillBitDiameter(91);
+                            break;
+                        case 2:
+                            rigViewModel.setRockCorePipeDiameter(108);
+                            rigViewModel.setDrillBitDiameter(110);
+                            break;
+                        case 3:
+                            rigViewModel.setRockCorePipeDiameter(127);
+                            rigViewModel.setDrillBitDiameter(130);
+                            break;
+                        case 4:
+                            rigViewModel.setRockCorePipeDiameter(146);
+                            break;
+                    }
+
+                    refreshInfo();
                 }
             }
 
@@ -456,8 +466,8 @@ public class RegularRigActivity extends AppCompatActivity {
                         rockCorePipeLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                         rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
-                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
                         rigViewModel.setRigStartEndDepth(Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
@@ -473,7 +483,9 @@ public class RegularRigActivity extends AppCompatActivity {
         drillBitTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                rigViewModel.setDrillBitType(drillBitTypeSpinnerOptions[position]);
+                if (!refreshLock) {
+                    rigViewModel.setDrillBitType(drillBitTypeSpinnerOptions[position]);
+                }
             }
 
             @Override
@@ -526,8 +538,8 @@ public class RegularRigActivity extends AppCompatActivity {
                         drillBitLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                         rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
-                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
                         rigViewModel.setRigStartEndDepth(Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
@@ -543,14 +555,20 @@ public class RegularRigActivity extends AppCompatActivity {
         rigTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                rigViewModel.setRigType(rigTypeSpinnerOptions[position]);
+                if (!refreshLock) {
+                    rigViewModel.setRigType(rigTypeSpinnerOptions[position]);
 
-                rigViewModel.setDrillBitType(DRILL_BIT_TYPE_TEMPLATE[position]);
-                rigViewModel.setDrillBitLength(DRILL_BIT_LENGTH_TEMPLATE[position]);
-                rigViewModel.setRockCorePipeDiameter(ROCK_CORE_PIPE_DIAMETER_TEMPLATE[position]);
-                rigViewModel.setDrillBitDiameter(DRILL_BIT_DIAMETER_TEMPLATE[position]);
+                    String requestCode = getIntent().getStringExtra("requestCode");
 
-                refreshInfo();
+                    if (requestCode.equals("ACTION_ADD_RIG")) {
+                        rigViewModel.setDrillBitType(DRILL_BIT_TYPE_TEMPLATE[position]);
+                        rigViewModel.setDrillBitLength(DRILL_BIT_LENGTH_TEMPLATE[position]);
+                        rigViewModel.setRockCorePipeDiameter(ROCK_CORE_PIPE_DIAMETER_TEMPLATE[position]);
+                        rigViewModel.setDrillBitDiameter(DRILL_BIT_DIAMETER_TEMPLATE[position]);
+                    }
+
+                    refreshInfo();
+                }
             }
 
             @Override
@@ -578,8 +596,8 @@ public class RegularRigActivity extends AppCompatActivity {
                         drillPipeRemainLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                         rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
-                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getDrillToolTotalLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getPipeTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
 
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
                         rigViewModel.setRigStartEndDepth(Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
@@ -692,7 +710,11 @@ public class RegularRigActivity extends AppCompatActivity {
 
                         dialog.dismiss();
 
-                        if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[0]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1])) {
+                        if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[0])
+                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1])
+                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])
+                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[3])
+                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[4])) {
                             rockColorEditText.setEnabled(true);
                             rockColorButton.setEnabled(true);
                             rigViewModel.setRockColor("灰色");
@@ -706,7 +728,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             rockWeatheringButton.setEnabled(false);
                             rigViewModel.setRockWeathering("");
                             rigViewModel.setRockDescription("");
-                        } else if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])) {
+                        } else if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[5])) {
                             rockColorEditText.setEnabled(true);
                             rockColorButton.setEnabled(true);
                             rigViewModel.setRockColor("灰色");
@@ -751,9 +773,6 @@ public class RegularRigActivity extends AppCompatActivity {
                         }
 
                         refreshInfo();
-
-                        rockTypeButton.setFocusableInTouchMode(true);
-                        rockTypeButton.requestFocus();
                     }
                 });
 
@@ -775,7 +794,9 @@ public class RegularRigActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                rigViewModel.setRockColor(s.toString());
+                if (!refreshLock) {
+                    rigViewModel.setRockColor(s.toString());
+                }
             }
         });
 
@@ -795,9 +816,6 @@ public class RegularRigActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         refreshInfo();
-
-                        rockColorButton.setFocusableInTouchMode(true);
-                        rockColorButton.requestFocus();
                     }
                 });
 
@@ -840,9 +858,6 @@ public class RegularRigActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         refreshInfo();
-
-                        rockDensityButton.setFocusableInTouchMode(true);
-                        rockDensityButton.requestFocus();
                     }
                 });
 
@@ -865,7 +880,9 @@ public class RegularRigActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                rigViewModel.setRockSaturation(s.toString());
+                if (!refreshLock) {
+                    rigViewModel.setRockSaturation(s.toString());
+                }
             }
         });
 
@@ -885,9 +902,6 @@ public class RegularRigActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         refreshInfo();
-
-                        rockSaturationButton.setFocusableInTouchMode(true);
-                        rockSaturationButton.requestFocus();
                     }
                 });
 
@@ -910,7 +924,9 @@ public class RegularRigActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                rigViewModel.setRockWeathering(s.toString());
+                if (!refreshLock) {
+                    rigViewModel.setRockWeathering(s.toString());
+                }
             }
         });
 
@@ -930,9 +946,6 @@ public class RegularRigActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         refreshInfo();
-
-                        rockWeatheringButton.setFocusableInTouchMode(true);
-                        rockWeatheringButton.requestFocus();
                     }
                 });
 
@@ -968,9 +981,6 @@ public class RegularRigActivity extends AppCompatActivity {
                 rigViewModel.setRockDescription(TextUtils.join(", ", stringList));
 
                 refreshInfo();
-
-                generateRockDescriptionButton.setFocusableInTouchMode(true);
-                generateRockDescriptionButton.requestFocus();
             }
         });
 
@@ -1063,16 +1073,16 @@ public class RegularRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 0, 0, "合金", 0, 0, 0, 0, 0, 0, 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex(), 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
                 } else {
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
                             DataManager.getHole(holeId).getPipeCount(), DataManager.getHole(holeId).getPipeLength(), DataManager.getHole(holeId).getTotalPipeLength(),
-                            0, DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                            "合金", 0, 0.05,
+                            108, DataManager.getHole(holeId).getLastRockCorePipeLength(),
+                            "合金", 110, 0.05,
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                            1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
+                            DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
                             DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength()) + " m",
                             "黏土", "灰色", "坚硬", "", "", "", "");
                 }
@@ -1093,7 +1103,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                        oldRig.getRockCoreIndex() + 1, 0, 1,
+                        DataManager.getHole(holeId).getRockCoreIndex(), 0, 1,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
                         oldRig.getRockType(), oldRig.getRockColor(), oldRig.getRockDensity(), oldRig.getRockSaturation(), oldRig.getRockWeathering(), oldRig.getRockDescription(), oldRig.getNote()
                         );
@@ -1186,7 +1196,7 @@ public class RegularRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != drillBitDiameterEditText) {
-            drillBitDiameterEditText.setText(String.valueOf(rigViewModel.getDrillBitDiameter()));
+            drillBitDiameterEditText.setText(Utility.formatDouble(rigViewModel.getDrillBitDiameter()));
         }
 
         if (getCurrentFocus() != drillBitLengthEditText) {
@@ -1293,33 +1303,59 @@ public class RegularRigActivity extends AppCompatActivity {
         if (rigViewModel.getPipeNumber() != DataManager.getHole(holeId).getPipeCount() &&
                 rigViewModel.getPipeNumber() != DataManager.getHole(holeId).getPipeCount() + 1) {
             pipeNumberEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-            pipeNumberEditText.setFocusableInTouchMode(true);
-            pipeNumberEditText.requestFocus();
+
             Toast.makeText(RegularRigActivity.this, "钻杆编号只能不变或加1", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (rigViewModel.getPipeLength() <= 0) {
             pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-            pipeLengthEditText.setFocusableInTouchMode(true);
-            pipeLengthEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "钻杆长度必须为正数", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (rigViewModel.getRockCoreIndex() < DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
             rockCoreIndexEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-            rockCoreIndexEditText.setFocusableInTouchMode(true);
-            rockCoreIndexEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "岩芯采取编号不得小于前值", Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (rigViewModel.getRockDescription().equals("")) {
-            rockDescriptionEditText.setFocusableInTouchMode(true);
-            rockDescriptionEditText.requestFocus();
             Toast.makeText(RegularRigActivity.this, "名称及岩性不能为空", Toast.LENGTH_LONG).show();
             return false;
+        }
+
+        if (DataManager.getHole(holeId).isApproved()) {
+            classPeopleCountEditText.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            rigTypeSpinner.setEnabled(false);
+            pipeNumberEditText.setEnabled(false);
+            pipeLengthEditText.setEnabled(false);
+            pipeTotalLengthTextView.setEnabled(false);
+            rockCorePipeDiameterSpinner.setEnabled(false);
+            rockCoreLengthEditText.setEnabled(false);
+            drillBitTypeSpinner.setEnabled(false);
+            drillBitDiameterEditText.setEnabled(false);
+            drillBitLengthEditText.setEnabled(false);
+            drillPipeRemainLengthEditText.setEnabled(false);
+            rockCoreIndexEditText.setEnabled(false);
+            rockCoreLengthEditText.setEnabled(false);
+            rockTypeEditText.setEnabled(false);
+            rockTypeButton.setEnabled(false);
+            rockColorEditText.setEnabled(false);
+            rockColorButton.setEnabled(false);
+            rockDensityEditText.setEnabled(false);
+            rockDensityButton.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+            generateRockDescriptionButton.setEnabled(false);
+            loadRockDescriptionTemplateButton.setEnabled(false);
+            rockDescriptionEditText.setEnabled(false);
+            rigNoteEditText.setEnabled(false);
         }
 
         return true;
