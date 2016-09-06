@@ -31,7 +31,7 @@
         <activity android:name=".DSTRigActivity" />
         <activity android:name=".SPTRigActivity" />
         <activity android:name=".SPTConfigurationActivity" />
-        <activity android:name=".DSTConfiurationActivity" />
+        <activity android:name=".DSTConfigurationActivity" />
         <activity android:name=".TRRigActivity"></activity>
     </application>
 

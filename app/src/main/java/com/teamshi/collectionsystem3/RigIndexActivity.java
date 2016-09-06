@@ -525,9 +525,9 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
@@ -701,7 +701,10 @@ public class RigIndexActivity extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < rig.getTrInfos().size(); i++) {
-            sb.append(rig.getTrInfos().get(i).getWallType());
+            if (i == 0) {
+                sb.append(rig.getTrInfos().get(i).getWallType());
+            }
+
             if (i != rig.getTrInfos().size() - 1) {
                 sb.append("\n");
             }
@@ -741,7 +744,9 @@ public class RigIndexActivity extends AppCompatActivity {
 
         sb = new StringBuilder();
         for (int i = 0; i < rig.getTrInfos().size(); i++) {
-            sb.append(Utility.formatDouble(rig.getTrInfos().get(i).getTotalLength()));
+            if (i == rig.getTrInfos().size() - 1) {
+                sb.append(Utility.formatDouble(rig.getTrInfos().get(i).getTotalLength()));
+            }
             if (i != rig.getTrInfos().size() - 1) {
                 sb.append("\n");
             }

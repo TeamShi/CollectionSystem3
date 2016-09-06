@@ -246,7 +246,7 @@ public class DSTRigActivity extends AppCompatActivity {
         dstConfigurationPreviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DSTRigActivity.this, DSTConfiurationActivity.class);
+                Intent intent = new Intent(DSTRigActivity.this, DSTConfigurationActivity.class);
                 startActivity(intent);
             }
         });

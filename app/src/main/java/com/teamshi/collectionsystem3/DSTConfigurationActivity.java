@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.teamshi.collectionsystem3.datastructure.Configuration;
 
-public class DSTConfiurationActivity extends AppCompatActivity {
+public class DSTConfigurationActivity extends AppCompatActivity {
 
     private TextView dstConfigurationTable1635Cell1TextView;
     private TextView dstConfigurationTable1635Cell2TextView;
