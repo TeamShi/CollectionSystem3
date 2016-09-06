@@ -90,13 +90,20 @@ public class HoleInfoActivity extends AppCompatActivity {
     private EditText noteEditText;
     private EditText positionInformationEditText;
 
-    private EditText recorderEditText;
-    private EditText reviewerEditText;
+    private TextView recorderTextView;
+    private TextView reviewerTextView;
+    private Button signRecorderButton;
+    private Button signReviewerButton;
     private TextView recordDateTextView;
     private TextView reviewDateTextView;
 
-    private EditText classMonitorEditText;
-    private EditText machineMonitorEditText;
+    private TextView classMonitorTextView;
+    private TextView machineMonitorTextView;
+    private Button signClassMonitorButton;
+    private Button signMachineMonitorButton;
+
+    private TextView signApproverTextView;
+    private Button signApproverButton;
 
     private Button offsetNegativeButton;
     private Button offsetPositiveButton;
@@ -213,13 +220,22 @@ public class HoleInfoActivity extends AppCompatActivity {
         noteEditText = (EditText) findViewById(R.id.edittext_note);
         positionInformationEditText = (EditText) findViewById(R.id.edittext_position_information);
 
-        recorderEditText = (EditText) findViewById(R.id.edittext_recorder);
-        reviewerEditText = (EditText) findViewById(R.id.edittext_reviewer);
+        recorderTextView = (TextView) findViewById(R.id.textview_recorder);
+        reviewerTextView = (TextView) findViewById(R.id.textview_reviewer);
         recordDateTextView = (TextView) findViewById(R.id.textview_record_date);
         reviewDateTextView = (TextView) findViewById(R.id.textview_review_date);
 
-        classMonitorEditText = (EditText) findViewById(R.id.edittext_class_monitor);
-        machineMonitorEditText = (EditText) findViewById(R.id.edittext_machine_monitor);
+        signRecorderButton = (Button) findViewById(R.id.button_sign_recorder);
+        signReviewerButton = (Button) findViewById(R.id.button_sign_reviewer);
+
+        classMonitorTextView = (TextView) findViewById(R.id.textview_class_monitor);
+        machineMonitorTextView = (TextView) findViewById(R.id.textview_machine_monitor);
+
+        signClassMonitorButton = (Button) findViewById(R.id.button_sign_class_monitor);
+        signMachineMonitorButton = (Button) findViewById(R.id.button_sign_machine_monitor);
+
+        signApproverTextView = (TextView) findViewById(R.id.textview_sign_approver);
+        signApproverButton = (Button) findViewById(R.id.button_sign_approver);
 
         offsetNegativeButton = (Button) findViewById(R.id.button_offset_negative);
         offsetPositiveButton = (Button) findViewById(R.id.button_offset_positve);
@@ -732,40 +748,6 @@ public class HoleInfoActivity extends AppCompatActivity {
             }
         });
 
-        recorderEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                holeViewModel.setRecorder(s.toString());
-            }
-        });
-
-        reviewerEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                holeViewModel.setReviewer(s.toString());
-            }
-        });
-
         takeHolePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -810,40 +792,6 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 holeViewModel.setPositionInformation(s.toString());
-            }
-        });
-
-        machineMonitorEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                holeViewModel.setMachineMonitor(s.toString());
-            }
-        });
-
-        classMonitorEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                holeViewModel.setClassMonitor(s.toString());
             }
         });
 
@@ -909,6 +857,44 @@ public class HoleInfoActivity extends AppCompatActivity {
 
                     refreshInfo();
                 }
+            }
+        });
+
+        signRecorderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: JHONSON sign
+            }
+        });
+
+        signReviewerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: JHONSON sign
+            }
+        });
+
+        signMachineMonitorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: JHONSON sign
+
+            }
+        });
+
+        signClassMonitorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: JHONSON sign
+
+            }
+        });
+
+        signApproverButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: JHONSON sign
+
             }
         });
 
@@ -1116,13 +1102,16 @@ public class HoleInfoActivity extends AppCompatActivity {
         companyEditText.setText(holeViewModel.getCompany());
         machineIdEditText.setText(holeViewModel.getMachineId());
 
-        recorderEditText.setText(holeViewModel.getRecorder());
-        reviewerEditText.setText(holeViewModel.getReviewer());
+        // TODO: JOHNSON: handle sign pictures
+        // Total 5 textviews.
+
+
         recordDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getRecordDate()));
         reviewDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getReviewDate()));
 
-        classMonitorEditText.setText(holeViewModel.getClassMonitor());
-        machineMonitorEditText.setText(holeViewModel.getMachineMonitor());
+
+
+
 
         refreshLock = false;
     }

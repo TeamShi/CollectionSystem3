@@ -78,6 +78,8 @@ public class Hole implements Serializable {
     private String lastRockColor;
     private String lastRockSaturation;
 
+    private boolean isApproved;
+
     public Hole() {
 
     }
@@ -146,6 +148,8 @@ public class Hole implements Serializable {
         this.lastRockCorePipeLength = 0;
 
         this.maxRigRockCoreIndex = 0;
+
+        this.isApproved = false;
     }
 
     public String getProjectName() {
@@ -559,6 +563,14 @@ public class Hole implements Serializable {
 
     public void setLastRockSaturation(String lastRockSaturation) {
         this.lastRockSaturation = lastRockSaturation;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 
     public Hole deepCopy() {

@@ -694,7 +694,6 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:nextFocusDown="@+id/edittext_recorder"
                         android:singleLine="true"/>
                 </TableRow>
 
@@ -709,17 +708,23 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/edittext_recorder"
-                        android:layout_weight="3"
+                    <TextView
+                        android:id="@+id/textview_recorder"
+                        android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"
-                        android:nextFocusDown="@+id/edittext_reviewer"
                         android:singleLine="true"/>
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="签名"
+                        android:id="@+id/button_sign_recorder"/>
                     <TextView
                         android:text="日期"
                         android:layout_weight="1"
@@ -752,17 +757,23 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/edittext_reviewer"
-                        android:layout_weight="3"
+                    <TextView
+                        android:id="@+id/textview_reviewer"
+                        android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:nextFocusDown="@+id/edittext_class_monitor"
                         android:singleLine="true"/>
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="签名"
+                        android:id="@+id/button_sign_reviewer"/>
                     <TextView
                         android:text="日期"
                         android:layout_weight="1"
@@ -795,17 +806,23 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/edittext_class_monitor"
-                        android:layout_weight="3"
+                    <TextView
+                        android:id="@+id/textview_class_monitor"
+                        android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:nextFocusDown="@+id/edittext_machine_monitor"
                         android:singleLine="true"/>
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="签名"
+                        android:id="@+id/button_sign_class_monitor"/>
                     <TextView
                         android:text="机长"
                         android:layout_weight="1"
@@ -816,16 +833,63 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/edittext_machine_monitor"
-                        android:layout_weight="3"
+                    <TextView
+                        android:id="@+id/textview_machine_monitor"
+                        android:layout_weight="2"
                         android:background="@drawable/cell_input"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center"
                         android:singleLine="true"/>
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="签名"
+                        android:id="@+id/button_sign_machine_monitor"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="班长"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:background="@drawable/cell_hint"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/textview_sign_approver"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:singleLine="true"/>
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="签名"
+                        android:id="@+id/button_sign_approver"/>
+                    <TextView
+                        android:text=""
+                        android:layout_weight="4"
+                        android:textColor="@android:color/black"
+                        android:background="@drawable/cell_hint"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:textSize="@dimen/default_text_size"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
                 </TableRow>
             </TableLayout>
         </ScrollView>
