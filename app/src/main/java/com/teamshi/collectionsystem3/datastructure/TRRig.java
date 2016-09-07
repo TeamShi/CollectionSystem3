@@ -105,7 +105,7 @@ public class TRRig extends Rig {
 
     @Override
     public Rig deepCopy() {
-        TRRig temp = new TRRig(classPeopleCount, date, startTime, endTime);
+        TRRig temp = new TRRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone());
         temp.getTrInfos().clear();
 
         for (TRInfo info : trInfos) {

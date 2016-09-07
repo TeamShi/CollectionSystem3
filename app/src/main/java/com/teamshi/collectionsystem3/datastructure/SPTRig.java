@@ -324,7 +324,7 @@ public class SPTRig extends CalculatingRig {
 
     @Override
     public SPTRig deepCopy() {
-        SPTRig temp = new SPTRig(classPeopleCount, date, startTime, endTime,
+        SPTRig temp = new SPTRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone(),
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
                 injectionToolDiameter, injectionToolLength,
                 probeType, probeDiameter, probeLength,

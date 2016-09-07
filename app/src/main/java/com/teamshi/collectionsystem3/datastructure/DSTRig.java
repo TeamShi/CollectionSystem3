@@ -134,7 +134,7 @@ public class DSTRig extends CalculatingRig  {
 
     @Override
     public DSTRig deepCopy() {
-        DSTRig temp = new DSTRig(classPeopleCount, date, startTime, endTime,
+        DSTRig temp = new DSTRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone(),
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
                 probeType, probeDiameter, probeLength);
 

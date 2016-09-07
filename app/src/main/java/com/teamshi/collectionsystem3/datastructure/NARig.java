@@ -22,7 +22,7 @@ public class NARig extends Rig {
 
     @Override
     public Rig deepCopy() {
-        NARig temp = new NARig(classPeopleCount, date, startTime, endTime);
+        NARig temp = new NARig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone());
         temp.setNaType(naType);
 
         temp.setLastPipeNumber(lastPipeNumber);
