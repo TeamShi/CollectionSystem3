@@ -27,10 +27,9 @@ import java.util.ArrayList;
  * xls工具类
  *
  * @author johnson
- *
  */
-public class XlsParser extends Parser{
-
+public class XlsParser extends Parser {
+    //todo xls not saved
     public static String[] HOLE_HEADER = new String[]{"勘察点名称", "工程名称", "阶 段", "冠 词", "里  程", "偏移量", "高  程", "经距X", "纬距Y", "位置描述", "记录者", "记录日期", "复核者", "复核日期", "附  注", "孔  深"};
     public static String[] Rig_HEADER = new String[]{"勘探点名称", "作业ID", "班次/人数", "日期", "开始时间", "结束时间", "作业项目", "钻杆编号", "钻杆长度", "累计长度", "岩心管直接", "岩心管长度", "钻头类型", "钻头直径", "钻头长度",
             "贯入器直径", "贯入器长度", "动探类型", "探头直径", "探头长度", "钻具总长", "钻杆余长", "回次进尺", "累计进尺", "岩芯编号", "岩芯长度", "岩芯采取旅", "岩土名称", "本钻起深度", "本钻止深度", "岩土颜色", "岩土稠密度", "岩土饱和度", "岩石风化程度", "岩土岩性"};
@@ -101,20 +100,20 @@ public class XlsParser extends Parser{
         ArrayList<SPTRig> sptRigs = new ArrayList<>();
         ArrayList<DSTRig> dstRigs = new ArrayList<>();
 
-            for (Rig Rig : hole.getRigList()) {
-                if (Rig instanceof SPTRig) {
-                    sptRigs.add((SPTRig) Rig);
-                }
-                if (Rig instanceof DSTRig) {
-                    dstRigs.add((DSTRig) Rig);
-                }
+        for (Rig Rig : hole.getRigList()) {
+            if (Rig instanceof SPTRig) {
+                sptRigs.add((SPTRig) Rig);
             }
+            if (Rig instanceof DSTRig) {
+                dstRigs.add((DSTRig) Rig);
+            }
+        }
 
 
         String[][] rigArray = convertRigs(hole);
         String[][] sptRigArray = convertSpts(sptRigs);
         String[][] dstRigArray = convertDsts(dstRigs);
-        String filePath = dirPath + "hole_" + hole.getHoleId()+".xls";
+        String filePath = dirPath + "hole_" + hole.getHoleId() + ".xls";
 
         try {
             XlsParser.write(filePath, rigArray, RegularRig_NAME);
@@ -134,8 +133,8 @@ public class XlsParser extends Parser{
         String[][] resultData = new String[1][];
         resultData[0] = DSTEVENT_HEADER;
         for (int i = 0, len = dstRigs.size(); i < len; i++) {
-            String [][] lines = convertDst(dstRigs.get(i));
-            resultData = Utility.concat(lines,resultData);
+            String[][] lines = convertDst(dstRigs.get(i));
+            resultData = Utility.concat(lines, resultData);
         }
 
         return resultData;
@@ -146,7 +145,7 @@ public class XlsParser extends Parser{
         String[][] resultData = new String[rows][];
         resultData[0] = SPTEVENT_HEADER;
         for (int i = 0; i < sptRigs.size(); i++) {
-            resultData[i+1] = convertSpt(sptRigs.get(i), "\n")[0];
+            resultData[i + 1] = convertSpt(sptRigs.get(i), "\n")[0];
         }
 
         return resultData;

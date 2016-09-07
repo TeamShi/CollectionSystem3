@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
@@ -33,14 +34,21 @@ import java.util.Map;
 public class IOManager {
     private static final String TAG = "CollectionSystem3";
     public static String APP_NAME = "ZuanTan";
-    public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+APP_NAME;
-    public static String APP_DATA = APP_ROOT+File.separator +"Data/";
-    private static final String APP_CONFIG = APP_ROOT+File.separator +"Config/";;
-    public static final String APP_TEMP = APP_ROOT+File.separator+"Temp/" ;
+    public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + APP_NAME;
+    public static String APP_DATA = APP_ROOT + File.separator + "Data/";
+    private static final String APP_CONFIG = APP_ROOT + File.separator + "Config/";
+    ;
+    public static final String APP_TEMP = APP_ROOT + File.separator + "Temp/";
     private static Context appContext = null;
 
+    public static final int SIGNATURE_RECORDER = 2;
+    public static final int SIGNATURE_REVIEWER = 3;
+    public static final int SIGNATURE_MMONITOR = 4;
+    public static final int SIGNATURE_CMONITOR = 5;
+    public static final int SIGNATURE_APPROVER = 6;
 
-    public static void initFileSystem(Context applicationContext){
+
+    public static void initFileSystem(Context applicationContext) {
     /*
       app file system overview
 
@@ -60,15 +68,17 @@ public class IOManager {
                                        |
                                        |- Hole id - |- holeId.jpg
                                                     |
+                                                    |- holeId_signature_xxx.jpg
+                                                    |
                                                     |- holeId.xls
 
      */
         File root = new File(APP_ROOT);
-        if(!root.exists()){
+        if (!root.exists()) {
             root.mkdirs();
         }
         File dateDir = new File(APP_DATA);
-        if(!dateDir.exists()){
+        if (!dateDir.exists()) {
             dateDir.mkdirs();
         }
 
@@ -76,7 +86,7 @@ public class IOManager {
     }
 
     public static Object parseFileToObject(File file) {
-        if(null == file || file.getName().equals("")){
+        if (null == file || file.getName().equals("")) {
             Log.e(TAG, "Invalid File Path.");
             return null;
         }
@@ -129,7 +139,7 @@ public class IOManager {
 
 
     public static File parseObjectToFile(Object object, String fileName) {
-        if(null == fileName || fileName.trim().equals("")){
+        if (null == fileName || fileName.trim().equals("")) {
             Log.e(TAG, "Invalid File Path.");
             return null;
         }
@@ -140,7 +150,7 @@ public class IOManager {
         try {
             file = new File(fileName);
             // override ser file
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             }
@@ -167,26 +177,26 @@ public class IOManager {
     }
 
 
-    private static Map<String,Project> projects = null;
+    private static Map<String, Project> projects = null;
 
-    public static Map<String,Project> getProjects() {
-        if(null != projects) {
+    public static Map<String, Project> getProjects() {
+        if (null != projects) {
             return projects;
         }
         projects = new HashMap<>();
         // Scan app dir to listß all exists valid projects
-        File [] projectDirs = new File(APP_DATA).listFiles();
-        if(projectDirs != null && projectDirs.length  > 0){
-            for(File dir: projectDirs){
+        File[] projectDirs = new File(APP_DATA).listFiles();
+        if (projectDirs != null && projectDirs.length > 0) {
+            for (File dir : projectDirs) {
                 // load *.ser file
                 String projectName = dir.getName();
-                File serFile = new File(dir,projectName+".ser");
+                File serFile = new File(dir, projectName + ".ser");
                 Project project = (Project) parseFileToObject(serFile);
                 // remove invalid files with invalid ser file
-                if(null == project) {
+                if (null == project) {
                     Utility.deleteDir(dir);
                 }
-                projects.put(projectName,project);
+                projects.put(projectName, project);
             }
         }
 
@@ -195,15 +205,16 @@ public class IOManager {
 
     /**
      * add or save the project instance to 'projects' and persist on disk
+     *
      * @param project
      * @return
      */
     public static boolean updateProject(Project project) {
-        File projectDir = new File(APP_DATA,project.getProjectName());
+        File projectDir = new File(APP_DATA, project.getProjectName());
         projectDir.mkdirs();
-        String fileName = projectDir.getAbsolutePath()+File.separator+project.getProjectName()+".ser";
-        File projectFile = parseObjectToFile(project,fileName);
-        if(null == projectFile){
+        String fileName = projectDir.getAbsolutePath() + File.separator + project.getProjectName() + ".ser";
+        File projectFile = parseObjectToFile(project, fileName);
+        if (null == projectFile) {
             return false;
         } else {
             ArrayList<Hole> holes = project.getHoleList();
@@ -215,22 +226,22 @@ public class IOManager {
                     XlsParser.parse(holeDirPath, hole);
                 }
             }
-            projects.put(project.getProjectName(),project);
+            projects.put(project.getProjectName(), project);
             return true;
         }
     }
 
     public static boolean deleteProject(String projectName) {
-        Map<String,Project> projects = getProjects();
+        Map<String, Project> projects = getProjects();
         Project removedProject = projects.remove(projectName);
-        if(null == removedProject){
+        if (null == removedProject) {
             return false;
         }
 
-        File projectDir = new File(APP_DATA +File.separator+projectName);
-        if(!projectDir.exists()){
+        File projectDir = new File(APP_DATA + File.separator + projectName);
+        if (!projectDir.exists()) {
             return false;
-        }else{
+        } else {
             return Utility.deleteDir(projectDir);
         }
 
@@ -238,18 +249,18 @@ public class IOManager {
 
     public static List<String> previewProject() {
         Project project = DataManager.getProject();
-        if(project == null || project.getHoleList() == null || project.getHoleList().size() == 0) {
+        if (project == null || project.getHoleList() == null || project.getHoleList().size() == 0) {
             return null;
         }
 
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parse(APP_TEMP,project,assetManager);
-        if(null == path) {
+        String path = HtmlParser.parse(APP_TEMP, project, assetManager);
+        if (null == path) {
             Log.d(TAG, "IOManager.previewProject: path isnull");
             return null;
-        }else{
+        } else {
             Uri uri = Uri.fromFile(new File(path));
             urls.add(uri.toString());
         }
@@ -258,18 +269,18 @@ public class IOManager {
     }
 
     public static List<String> previewSPTRig(SPTRig sptRig) {
-        if( null == sptRig || sptRig instanceof  SPTRig == false) {
+        if (null == sptRig || sptRig instanceof SPTRig == false) {
             return null;
         }
 
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parseSptRig(APP_TEMP,sptRig,assetManager);
-        if(null == path) {
+        String path = HtmlParser.parseSptRig(APP_TEMP, sptRig, assetManager);
+        if (null == path) {
             Log.d(TAG, "IOManager.previewSPTRig: path isnull");
             return null;
-        }else{
+        } else {
             Uri uri = Uri.fromFile(new File(path));
             urls.add(uri.toString());
         }
@@ -278,18 +289,18 @@ public class IOManager {
     }
 
     public static List<String> previewDSTRig(DSTRig dstRig) {
-        if( null == dstRig || dstRig instanceof  DSTRig == false) {
+        if (null == dstRig || dstRig instanceof DSTRig == false) {
             return null;
         }
 
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parseDstRig(APP_TEMP,dstRig,assetManager);
-        if(null == path) {
+        String path = HtmlParser.parseDstRig(APP_TEMP, dstRig, assetManager);
+        if (null == path) {
             Log.d(TAG, "IOManager.previewSPTRig: path isnull");
             return null;
-        }else{
+        } else {
             Uri uri = Uri.fromFile(new File(path));
             urls.add(uri.toString());
         }
@@ -300,40 +311,77 @@ public class IOManager {
     private static File tempImageFile;
 
     public static File getTempImageFile() {
-        if(tempImageFile != null){
+        if (tempImageFile != null) {
             return tempImageFile;
         }
         File temp = new File(IOManager.APP_TEMP);
-        String path =  IOManager.APP_TEMP + new Date().getTime()+ ".jpg";
+        String path = IOManager.APP_TEMP + new Date().getTime() + ".jpg";
         File file = new File(path);
         tempImageFile = file;
         try {
             Utility.deleteDir(temp);
-            Utility.createFile(path,false);
+            Utility.createFile(path, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return file;
     }
 
-    public static File getHoleImage(Hole hole){
-        String holeImagePath =APP_DATA+hole.getProjectName()+File.separator+hole.getHoleId()+File.separator+hole.getHoleId()+".jpg";
+    public static File getHoleImage(Hole hole) {
+        String holeImagePath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator + hole.getHoleId() + ".jpg";
         File file = null;
         try {
-             file = Utility.createFile(holeImagePath, false);
+            file = Utility.createFile(holeImagePath, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return file;
     }
 
-    public static void copyImageFile(Hole hole) {
-       File temp = getTempImageFile();
-        InputStream inputstream = null;
+    public static File getSignatureImage(Hole hole, int roleCode) {
+        String roleName = null;
+        switch (roleCode) {
+            case SIGNATURE_APPROVER:
+                roleName = "approver";
+                break;
+            case SIGNATURE_RECORDER:
+                roleName = "recorder";
+                break;
+            case SIGNATURE_REVIEWER:
+                roleName = "reviewer";
+                break;
+            case SIGNATURE_CMONITOR:
+                roleName = "classMonitor";
+                break;
+            case SIGNATURE_MMONITOR:
+                roleName = "machineMonitor";
+                break;
+            default:
+                break;
+        }
+
+        if(null == roleName) {
+            Toast.makeText(null,"签名用户名错误",Toast.LENGTH_LONG);
+            return null;
+        }
+
+        String holeImagePath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator + hole.getHoleId() + "_" + roleName + ".jpg";
+        File file = null;
+        try {
+            file = Utility.createFile(holeImagePath, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    public static void copyHoleDescImage(Hole hole) {
+        File temp = getTempImageFile();
+        InputStream inputstream;
         try {
             inputstream = new FileInputStream(temp);
-            File dest =getHoleImage(hole);
-            Utility.copyFile(inputstream,dest);
+            File dest = getHoleImage(hole);
+            Utility.copyFile(inputstream, dest);
         } catch (IOException e) {
             e.printStackTrace();
         }
