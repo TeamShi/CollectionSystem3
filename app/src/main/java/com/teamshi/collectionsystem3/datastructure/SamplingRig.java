@@ -6,8 +6,11 @@ import java.util.Calendar;
  * Created by Alfred on 16/8/25.
  */
 public class SamplingRig extends CalculatingRig {
-    protected int samplerDiameter;
-    protected long samplerLength;
+    protected int samplerPipeDiameter;
+    protected long samplerPipeLength;
+    protected String samplerDrillType;
+    protected int samplerDrillDiameter;
+    protected double samplerDrillLength;
     protected String index;
     protected double startDepth;
     protected double endDepth;
@@ -16,32 +19,36 @@ public class SamplingRig extends CalculatingRig {
     public SamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                        double drillToolTotalLength, double drillPipeRemainLength,
                        double roundTripMeterageLength, double accumulatedMeterageLength,
-                       int samplerDiameter, long samplerLength,
+                       int samplerPipeDiameter, long samplerPipeLength,
+                       String samplerDrillType, int samplerDrillDiameter, double samplerDrillLength,
                        String index,
                        double startDepth, double endDepth, int count) {
         super(classPeopleCount, date, startTime, endTime, drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
-        this.samplerDiameter = samplerDiameter;
-        this.samplerLength = samplerLength;
+        this.samplerPipeDiameter = samplerPipeDiameter;
+        this.samplerPipeLength = samplerPipeLength;
+        this.samplerDrillType = samplerDrillType;
+        this.samplerDrillLength = samplerDrillLength;
+        this.samplerDrillDiameter = samplerDrillDiameter;
         this.index = index;
         this.startDepth = startDepth;
         this.endDepth = endDepth;
         this.count = count;
     }
 
-    public int getSamplerDiameter() {
-        return samplerDiameter;
+    public int getSamplerPipeDiameter() {
+        return samplerPipeDiameter;
     }
 
-    public void setSamplerDiameter(int samplerDiameter) {
-        this.samplerDiameter = samplerDiameter;
+    public void setSamplerPipeDiameter(int samplerPipeDiameter) {
+        this.samplerPipeDiameter = samplerPipeDiameter;
     }
 
-    public long getSamplerLength() {
-        return samplerLength;
+    public long getSamplerPipeLength() {
+        return samplerPipeLength;
     }
 
-    public void setSamplerLength(long samplerLength) {
-        this.samplerLength = samplerLength;
+    public void setSamplerPipeLength(long samplerPipeLength) {
+        this.samplerPipeLength = samplerPipeLength;
     }
 
     public String getIndex() {
@@ -76,11 +83,36 @@ public class SamplingRig extends CalculatingRig {
         this.count = count;
     }
 
+    public String getSamplerDrillType() {
+        return samplerDrillType;
+    }
+
+    public void setSamplerDrillType(String samplerDrillType) {
+        this.samplerDrillType = samplerDrillType;
+    }
+
+    public int getSamplerDrillDiameter() {
+        return samplerDrillDiameter;
+    }
+
+    public void setSamplerDrillDiameter(int samplerDrillDiameter) {
+        this.samplerDrillDiameter = samplerDrillDiameter;
+    }
+
+    public double getSamplerDrillLength() {
+        return samplerDrillLength;
+    }
+
+    public void setSamplerDrillLength(double samplerDrillLength) {
+        this.samplerDrillLength = samplerDrillLength;
+    }
+
     @Override
     public Rig deepCopy() {
         SamplingRig temp = new SamplingRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone(),
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
-                samplerDiameter, samplerLength, index, startDepth, endDepth, count);
+                samplerPipeDiameter, samplerPipeLength, samplerDrillType, samplerDrillDiameter, samplerDrillLength,
+                index, startDepth, endDepth, count);
 
         temp.setLastPipeNumber(lastPipeNumber);
         temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
