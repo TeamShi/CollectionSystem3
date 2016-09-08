@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -112,6 +113,11 @@ public class HoleInfoActivity extends AppCompatActivity {
 
     private static final int TAKE_PHOTO = 0;
     private static final int CROP_PHOTO = 1;
+    private static final int CAP_SIGN_RECORDER = 2;
+    private static final int CAP_SIGN_REVIEWER = 3;
+    private static final int CAP_SIGN_APPROVER = 4;
+    private static final int CAP_SIGN_MMONITOR = 5;
+    private static final int CAP_SIGN_CMONITOR = 6;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -151,6 +157,15 @@ public class HoleInfoActivity extends AppCompatActivity {
                     Toast.makeText(this, "照片保存失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case CAP_SIGN_RECORDER :
+                //todo load pic jpg
+                if(resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(this, "保存ooo", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "保存!!!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
             default:
                 break;
         }
@@ -808,7 +823,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                             DataManager.getProject().getHoleList().add(holeViewModel);
 
                             IOManager.updateProject(DataManager.getProject());
-                            IOManager.copyImageFile(holeViewModel);
+                            IOManager.copyHoleDescImage(holeViewModel);
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
                         }
@@ -863,21 +878,30 @@ public class HoleInfoActivity extends AppCompatActivity {
         signRecorderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: JHONSON sign
+                Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
+                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_RECORDER).getAbsolutePath();
+                intent.putExtra("path",signaturePath);
+                startActivityForResult(intent, CAP_SIGN_RECORDER);
             }
         });
 
         signReviewerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: JHONSON sign
+                Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
+                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_REVIEWER).getAbsolutePath();
+                intent.putExtra("path",signaturePath);
+                startActivityForResult(intent, CAP_SIGN_REVIEWER);
             }
         });
 
         signMachineMonitorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: JHONSON sign
+                Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
+                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_MMONITOR).getAbsolutePath();
+                intent.putExtra("path",signaturePath);
+                startActivityForResult(intent, CAP_SIGN_MMONITOR);
 
             }
         });
@@ -885,7 +909,10 @@ public class HoleInfoActivity extends AppCompatActivity {
         signClassMonitorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: JHONSON sign
+                Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
+                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_CMONITOR).getAbsolutePath();
+                intent.putExtra("path",signaturePath);
+                startActivityForResult(intent, CAP_SIGN_CMONITOR);
 
             }
         });
@@ -893,7 +920,10 @@ public class HoleInfoActivity extends AppCompatActivity {
         signApproverButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: JHONSON sign
+                Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
+                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_APPROVER).getAbsolutePath();
+                intent.putExtra("path",signaturePath);
+                startActivityForResult(intent, CAP_SIGN_APPROVER);
 
             }
         });
@@ -937,7 +967,8 @@ public class HoleInfoActivity extends AppCompatActivity {
             case "ACTION_EDIT_HOLE":
                 holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
                 File image = IOManager.getHoleImage(holeViewModel);
-                if(image.exists()){
+                //todo check and load signature files
+                if (image.exists()) {
                     Bitmap bitmap = null;
                     Uri uri = Uri.fromFile(image);
                     try {

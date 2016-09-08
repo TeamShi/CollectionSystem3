@@ -9,7 +9,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PreviewActivity extends AppCompatActivity implements View.OnClickListener {
@@ -18,10 +17,6 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
     private Button nextRigButton;
 
     private Button prevRigButton;
-
-    public static List<String> getUrls() {
-        return urls;
-    }
 
     public static void setUrls(List<String> url_list) {
         urls = url_list;
@@ -62,7 +57,7 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
                 if (currentUrl.indexOf("project_") > 0) {
                     nextRigButton.setEnabled(false);
                     prevRigButton.setEnabled(false);
-                }else{
+                } else {
                     nextRigButton.setEnabled(true);
                     prevRigButton.setEnabled(true);
                 }

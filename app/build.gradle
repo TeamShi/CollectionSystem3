@@ -24,6 +24,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.github.gcacace:signature-pad:1.2.0'
     compile files('libs/poi-ooxml-3.9.jar')
     compile files('libs/poi-3.9.jar')
     compile files('libs/jsoup-1.8.2.jar')
