@@ -430,7 +430,6 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            // TODO: Johnson, preview original sampling.
             Project project = DataManager.getProject();
             Hole hole = DataManager.getHole(holeId);
             PreviewActivity.setUrls(IOManager.previewOtherSamplingRig(hole, rigViewModel));
