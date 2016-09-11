@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import com.teamshi.collectionsystem3.Utility;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
+import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
+import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
@@ -14,11 +16,9 @@ import org.jsoup.nodes.Element;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
@@ -29,8 +29,11 @@ public class HtmlParser extends Parser{
     public static String PROJECT_OVERVIEW_TEMPLATE = "Project.html";
     public static String BASIC_RIG_EVENT_TEMPLATE = "RigEventTable.html";
     public static String SPT_RIG_EVENT_TEMPLATE = "SPTRigEventTable.html";
-    public static String SMPL_RIG_EVENT_TEMPLATE = "SMPLRigEventTable.html";
     public static String DST_RIG_EVENT_TEMPLATE = "DSTRigEventTable.html"; // 动力触探
+    public static String SMPL_ORIGIN_RIG_EVENT_TEMPLATE = "SMPLRigEventTable.html";
+    public static String SMPL_EARTH_RIG_EVENT_TEMPLATE = "SampleEarth.html";
+    public static String SMPL_WATER_RIG_EVENT_TEMPLATE = "SampleWater.html";
+    public static String SMPL_ROCK_RIG_EVENT_TEMPLATE = "SampleRock.html";
 
 
     public static String TBODY_ID = "tableBody";
@@ -154,23 +157,62 @@ public class HtmlParser extends Parser{
         return path;
     }
 
-    public static boolean parseSmplRig(String dirPath, Hole hole, AssetManager assetManager) {
-        if (hole == null) {
-            return false;
+
+    public static String parseOriSmlRig(String dirPath, Hole hole, OriginalSamplingRig originalSamplingRig, AssetManager assetManager) {
+        if (originalSamplingRig == null) {
+            return null;
         }
 
-//        String[][] smplEventArray = convertSmpl(hole);
+        String[][] oriRigEventArray = convertNormalSmpl(originalSamplingRig, "<br/>");
+        String path = dirPath + "originalSampling.html";
 
-//        try {
-//            write(dirPath + "smplRigEvent.html", smplEventArray, assetManager.open(SMPL_RIG_EVENT_TEMPLATE));
-//        } catch (IOException e) {
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
+        try {
+            write(path, oriRigEventArray, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
 
-        return true;
+        return path;
     }
+
+    public static String parseOtherSmlRig(String dirPath, Hole hole, OtherSamplingRig otherSamplingRig, AssetManager assetManager) {
+        if (otherSamplingRig == null) {
+            return null;
+        }
+
+        String path = dirPath + "otherSampling.html";
+        try {
+            String[][] oriRigEventArray = null;
+            String htmlTemp = null;
+            switch (otherSamplingRig.getSamplingRigType()) {
+                case "扰动样":
+                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
+                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
+                    break;
+                case "岩样":
+                    oriRigEventArray = convertRockSmpl(hole, otherSamplingRig, "<br/>");
+                    htmlTemp = SMPL_ROCK_RIG_EVENT_TEMPLATE;
+                    break;
+                case "水样":
+                    oriRigEventArray = convertWaterSmpl(hole, otherSamplingRig, "<br/>");
+                    htmlTemp = SMPL_WATER_RIG_EVENT_TEMPLATE;
+                    break;
+                default:
+                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
+                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
+            }
+
+            write(path, oriRigEventArray, assetManager.open(htmlTemp));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
+    }
+
+
 
     public static String parseDstRig(String dirPath, DSTRig dstRig, AssetManager assetManager) {
         if (dstRig == null) {

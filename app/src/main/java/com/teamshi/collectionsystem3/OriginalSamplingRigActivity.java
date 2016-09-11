@@ -2,6 +2,7 @@ package com.teamshi.collectionsystem3;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,7 +19,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
+import com.teamshi.collectionsystem3.datastructure.Project;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -426,7 +429,12 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Johnson, preview original sampling.
+                Project project = DataManager.getProject();
+                Hole hole = DataManager.getHole(holeId);
+                PreviewActivity.setUrls(IOManager.previewOriginalSamplingRig(hole, rigViewModel));
+                Intent intent = new Intent(OriginalSamplingRigActivity.this, PreviewActivity.class);
+                intent.putExtra("projectName", project.getProjectName());
+                startActivity(intent);
             }
         });
 

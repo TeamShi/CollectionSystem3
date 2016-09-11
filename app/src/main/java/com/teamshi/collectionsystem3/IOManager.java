@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
+import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
+import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.parser.HtmlParser;
@@ -396,4 +398,43 @@ public class IOManager {
         }
     }
 
+    public static List<String> previewOriginalSamplingRig(Hole hole, OriginalSamplingRig originalSamplingRig) {
+        if (null == originalSamplingRig) {
+            return null;
+        }
+
+        List<String> urls = new ArrayList<>();
+        AssetManager assetManager = appContext.getAssets();
+
+        String path = HtmlParser.parseOriSmlRig(APP_TEMP, hole, originalSamplingRig, assetManager);
+        if (null == path) {
+            Log.d(TAG, "IOManager.previewOriginalSamplingRig: path isnull");
+            return null;
+        } else {
+            Uri uri = Uri.fromFile(new File(path));
+            urls.add(uri.toString());
+        }
+
+        return urls;
+    }
+
+    public static List<String> previewOtherSamplingRig(Hole hole, OtherSamplingRig otherSamplingRig) {
+        if (null == otherSamplingRig) {
+            return null;
+        }
+
+        List<String> urls = new ArrayList<>();
+        AssetManager assetManager = appContext.getAssets();
+
+        String path = HtmlParser.parseOtherSmlRig(APP_TEMP, hole, otherSamplingRig, assetManager);
+        if (null == path) {
+            Log.d(TAG, "IOManager.parseOtherSmlRig: path isnull");
+            return null;
+        } else {
+            Uri uri = Uri.fromFile(new File(path));
+            urls.add(uri.toString());
+        }
+
+        return urls;
+    }
 }
