@@ -957,11 +957,9 @@ public class HoleInfoActivity extends AppCompatActivity {
                     case "ACTION_EDIT_HOLE":
                         if (validateUpdating()) {
                             Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
-
                             DataManager.updateHole(oldHole.getHoleId(), holeViewModel);
                             IOManager.copyImagesFromTemp(tempImagsMap, holeViewModel);
                             IOManager.updateProject(DataManager.getProject());
-
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
                         }
@@ -1005,7 +1003,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_RECORDER);
+                File file = IOManager.getTempJpgFile();
                 intent.putExtra("path", file.getAbsolutePath());
                 tempImagsMap.put(JPG_SIGN_RECO, file);
                 startActivityForResult(intent, CAP_SIGN_RECORDER);
@@ -1016,7 +1014,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_REVIEWER);
+                File file = IOManager.getTempJpgFile();
                 String signaturePath = file.getAbsolutePath();
                 intent.putExtra("path", signaturePath);
                 tempImagsMap.put(JPG_SIGN_REVI, file);
@@ -1028,7 +1026,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_MMONITOR);
+                File file = IOManager.getTempJpgFile();
                 String signaturePath = file.getAbsolutePath();
                 intent.putExtra("path", signaturePath);
                 tempImagsMap.put(JPG_SIGN_MMON, file);
@@ -1041,7 +1039,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_CMONITOR);
+                File file = IOManager.getTempJpgFile();
                 String signaturePath = file.getAbsolutePath();
                 intent.putExtra("path", signaturePath);
                 tempImagsMap.put(JPG_SIGN_CMON, file);
@@ -1054,7 +1052,7 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_APPROVER);
+                File file = IOManager.getTempJpgFile();
                 String signaturePath = file.getAbsolutePath();
                 intent.putExtra("path", signaturePath);
                 tempImagsMap.put(JPG_SIGN_APPR, file);
@@ -1064,6 +1062,7 @@ public class HoleInfoActivity extends AppCompatActivity {
 
         // empty temp files
         IOManager.emptyTempDir();
+        tempImagsMap.clear();
 
         String requestCode = getIntent().getStringExtra("requestCode");
 
@@ -1256,7 +1255,6 @@ public class HoleInfoActivity extends AppCompatActivity {
         companyEditText.setText(holeViewModel.getCompany());
         machineIdEditText.setText(holeViewModel.getMachineId());
 
-        // TODO: JOHNSON: handle sign pictures
         HashMap<String, File> holeImagesMap = IOManager.getHoleImages(holeViewModel);
         if (null != holeImagesMap) {
             for (Map.Entry<String, File> entry : holeImagesMap.entrySet()) {

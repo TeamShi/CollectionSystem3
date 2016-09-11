@@ -40,7 +40,7 @@ public class CaptureSignature extends Activity {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(CaptureSignature.this, "正在输入", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CaptureSignature.this, "正在输入", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -73,10 +73,10 @@ public class CaptureSignature extends Activity {
                 String storagePath = getIntent().getStringExtra("path");
                 Intent intent = new Intent(CaptureSignature.this, HoleInfoActivity.class);
                 if (IOManager.saveBitmapToJpg(signatureBitmap, storagePath)) {
-                    Toast.makeText(CaptureSignature.this, "签名已保存", Toast.LENGTH_SHORT).show();
+                    Log.d("SingaturPad", "签名已保存" +storagePath);
                     setResult(Activity.RESULT_OK, intent);
                 } else {
-                    Toast.makeText(CaptureSignature.this, "保存失败", Toast.LENGTH_SHORT).show();
+                    Log.d("SingaturPad", "签名保存失败" +storagePath);
                     setResult(Activity.RESULT_CANCELED, intent);
                 }
                 finish();

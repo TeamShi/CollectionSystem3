@@ -44,12 +44,6 @@ public class IOManager {
     public static final String APP_TEMP = APP_ROOT + File.separator + "Temp/";
     private static Context appContext = null;
 
-    public static final int SIGNATURE_RECORDER = 2;
-    public static final int SIGNATURE_REVIEWER = 3;
-    public static final int SIGNATURE_MMONITOR = 4;
-    public static final int SIGNATURE_CMONITOR = 5;
-    public static final int SIGNATURE_APPROVER = 6;
-
 
     public static void initFileSystem(Context applicationContext) {
     /*
@@ -309,42 +303,6 @@ public class IOManager {
         return new File(holeImagePath);
     }
 
-    public static File getSignatureImage(Hole hole, int roleCode) {
-        String roleName = null;
-        switch (roleCode) {
-            case SIGNATURE_APPROVER:
-                roleName = "approver";
-                break;
-            case SIGNATURE_RECORDER:
-                roleName = "recorder";
-                break;
-            case SIGNATURE_REVIEWER:
-                roleName = "reviewer";
-                break;
-            case SIGNATURE_CMONITOR:
-                roleName = "classMonitor";
-                break;
-            case SIGNATURE_MMONITOR:
-                roleName = "machineMonitor";
-                break;
-            default:
-                break;
-        }
-
-        if (null == roleName) {
-            return null;
-        }
-
-        String holeImagePath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator + hole.getHoleId() + "_" + roleName + ".jpg";
-        File file = null;
-        try {
-            file = Utility.createFile(holeImagePath, false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
-
 //    public static void copyHoleFiles(Hole hole) {
 //        String holeDirPath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator + hole.getHoleId() + "_" + roleName + ".jpg";
 //
@@ -374,7 +332,6 @@ public class IOManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
