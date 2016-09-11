@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -75,7 +72,7 @@ public class CaptureSignature extends Activity {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 String storagePath = getIntent().getStringExtra("path");
                 Intent intent = new Intent(CaptureSignature.this, HoleInfoActivity.class);
-                if (saveJpgSignatureToStorage(signatureBitmap, storagePath)) {
+                if (IOManager.saveBitmapToJpg(signatureBitmap, storagePath)) {
                     Toast.makeText(CaptureSignature.this, "签名已保存", Toast.LENGTH_SHORT).show();
                     setResult(Activity.RESULT_OK, intent);
                 } else {
@@ -111,35 +108,7 @@ public class CaptureSignature extends Activity {
         return file;
     }
 
-    public void saveBitmapToJPG(Bitmap bitmap, File photo) throws IOException {
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(newBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        OutputStream stream = new FileOutputStream(photo);
-        newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-        stream.close();
-    }
 
-    public boolean saveJpgSignatureToStorage(Bitmap signature, String storagePath) {
-        boolean result = false;
-        try {
-            File photo = new File(storagePath);
-            saveBitmapToJPG(signature, photo);
-            scanMediaFile(photo);
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private void scanMediaFile(File photo) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(photo);
-        mediaScanIntent.setData(contentUri);
-        CaptureSignature.this.sendBroadcast(mediaScanIntent);
-    }
 
     public boolean addSvgSignatureToGallery(String signatureSvg) {
         boolean result = false;
@@ -151,7 +120,7 @@ public class CaptureSignature extends Activity {
             writer.close();
             stream.flush();
             stream.close();
-            scanMediaFile(svgFile);
+            IOManager.scanMediaFile(CaptureSignature.this, svgFile);
             result = true;
         } catch (IOException e) {
             e.printStackTrace();

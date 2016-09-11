@@ -1,11 +1,14 @@
 package com.teamshi.collectionsystem3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,7 +41,6 @@ public class IOManager {
     public static String APP_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + APP_NAME;
     public static String APP_DATA = APP_ROOT + File.separator + "Data/";
     private static final String APP_CONFIG = APP_ROOT + File.separator + "Config/";
-    ;
     public static final String APP_TEMP = APP_ROOT + File.separator + "Temp/";
     private static Context appContext = null;
 
@@ -68,7 +71,7 @@ public class IOManager {
                                        |
                                        |- Hole id - |- holeId.jpg
                                                     |
-                                                    |- holeId_signature_xxx.jpg
+                                                    |- holeId_sign_xxx.jpg
                                                     |
                                                     |- holeId.xls
 
@@ -102,11 +105,7 @@ public class IOManager {
             ois = new ObjectInputStream(fis);
             object = ois.readObject();
             return object;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             assert ois != null;
@@ -207,7 +206,7 @@ public class IOManager {
      * add or save the project instance to 'projects' and persist on disk
      *
      * @param project
-     * @return
+     * @return boolean
      */
     public static boolean updateProject(Project project) {
         File projectDir = new File(APP_DATA, project.getProjectName());
@@ -234,15 +233,11 @@ public class IOManager {
     public static boolean deleteProject(String projectName) {
         Map<String, Project> projects = getProjects();
         Project removedProject = projects.remove(projectName);
-        if (null == removedProject) {
-            return false;
-        }
-
-        File projectDir = new File(APP_DATA + File.separator + projectName);
-        if (!projectDir.exists()) {
-            return false;
+        if (null != removedProject) {
+            File projectDir = new File(APP_DATA + File.separator + projectName);
+            return projectDir.exists() && Utility.deleteDir(projectDir);
         } else {
-            return Utility.deleteDir(projectDir);
+            return false;
         }
 
     }
@@ -269,7 +264,7 @@ public class IOManager {
     }
 
     public static List<String> previewSPTRig(SPTRig sptRig) {
-        if (null == sptRig || sptRig instanceof SPTRig == false) {
+        if (null == sptRig) {
             return null;
         }
 
@@ -289,53 +284,29 @@ public class IOManager {
     }
 
     public static List<String> previewDSTRig(DSTRig dstRig) {
-        if (null == dstRig || dstRig instanceof DSTRig == false) {
-            return null;
-        }
+        if (null != dstRig) {
 
-        List<String> urls = new ArrayList<>();
-        AssetManager assetManager = appContext.getAssets();
+            List<String> urls = new ArrayList<>();
+            AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parseDstRig(APP_TEMP, dstRig, assetManager);
-        if (null == path) {
-            Log.d(TAG, "IOManager.previewSPTRig: path isnull");
-            return null;
+            String path = HtmlParser.parseDstRig(APP_TEMP, dstRig, assetManager);
+            if (null == path) {
+                Log.d(TAG, "IOManager.previewSPTRig: path isnull");
+                return null;
+            } else {
+                Uri uri = Uri.fromFile(new File(path));
+                urls.add(uri.toString());
+            }
+
+            return urls;
         } else {
-            Uri uri = Uri.fromFile(new File(path));
-            urls.add(uri.toString());
+            return null;
         }
-
-        return urls;
     }
 
-    private static File tempImageFile;
-
-    public static File getTempImageFile() {
-        if (tempImageFile != null) {
-            return tempImageFile;
-        }
-        File temp = new File(IOManager.APP_TEMP);
-        String path = IOManager.APP_TEMP + new Date().getTime() + ".jpg";
-        File file = new File(path);
-        tempImageFile = file;
-        try {
-            Utility.deleteDir(temp);
-            Utility.createFile(path, false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
-
-    public static File getHoleImage(Hole hole) {
-        String holeImagePath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator + hole.getHoleId() + ".jpg";
-        File file = null;
-        try {
-            file = Utility.createFile(holeImagePath, false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
+    public static File getTempJpgFile() {
+        String holeImagePath = APP_TEMP + new Date().getTime() + ".jpg";
+        return new File(holeImagePath);
     }
 
     public static File getSignatureImage(Hole hole, int roleCode) {
@@ -360,8 +331,7 @@ public class IOManager {
                 break;
         }
 
-        if(null == roleName) {
-            Toast.makeText(null,"签名用户名错误",Toast.LENGTH_LONG);
+        if (null == roleName) {
             return null;
         }
 
@@ -375,16 +345,98 @@ public class IOManager {
         return file;
     }
 
-    public static void copyHoleDescImage(Hole hole) {
-        File temp = getTempImageFile();
-        InputStream inputstream;
+//    public static void copyHoleFiles(Hole hole) {
+//        String holeDirPath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator + hole.getHoleId() + "_" + roleName + ".jpg";
+//
+//        InputStream inputstream;
+//        try {
+//            inputstream = new FileInputStream(temp);
+//            if(dest.exists()) {
+//                Utility.copyFile(inputstream, dest);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+    public static boolean saveBitmapToJpg(Bitmap bitmap, String jpgPath) {
         try {
-            inputstream = new FileInputStream(temp);
-            File dest = getHoleImage(hole);
-            Utility.copyFile(inputstream, dest);
+            File photo = new File(jpgPath);
+            Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(newBitmap);
+            canvas.drawColor(Color.WHITE);
+            canvas.drawBitmap(bitmap, 0, 0, null);
+            OutputStream stream = new FileOutputStream(photo);
+            newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+            stream.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return false;
     }
+
+    public static void scanMediaFile(Context context, File photo) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri contentUri = Uri.fromFile(photo);
+        mediaScanIntent.setData(contentUri);
+        context.sendBroadcast(mediaScanIntent);
+    }
+
+    public static void copyImagesFromTemp(HashMap<String, File> tempImagsMap, Hole hole) {
+        String holeDirPath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId();
+        for (Map.Entry<String, File> tempEntry : tempImagsMap.entrySet())
+            try {
+                File tempFile = tempEntry.getValue();
+                if (null == tempFile) {
+                    continue;
+                }
+
+                File holeDir = new File(holeDirPath);
+                if (!holeDir.exists()) {
+                    holeDir.mkdir();
+                }
+
+                File dest = new File(holeDirPath, tempEntry.getKey() + ".jpg");
+                Utility.copyFile(new FileInputStream(tempFile), dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public static HashMap<String, File> getHoleImages(Hole hole) {
+        HashMap<String, File> imagesMap = new HashMap<>();
+        String holeDirPath = APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId();
+        File holeDir = new File(holeDirPath);
+        File[] files = holeDir.listFiles();
+        if (files == null) {
+            return null;
+        }
+        for (File file : files) {
+            String fileName = file.getName();
+            int indexOfDot = fileName.lastIndexOf(".");
+            String fileType = fileName.substring( indexOfDot+ 1, fileName.length());
+            if (("jpg").equals(fileType)) {
+                imagesMap.put(fileName.substring(0,indexOfDot), file);
+            }
+        }
+
+        return imagesMap;
+    }
+
+    public static void emptyTempDir() {
+        String tempDirPath = APP_TEMP;
+        File tempDir = new File(tempDirPath);
+        if (tempDir.exists()) {
+            File[] files = tempDir.listFiles();
+            for (File file : files) {
+                file.delete();
+            }
+        } else {
+            tempDir.mkdir();
+        }
+    }
+
 }

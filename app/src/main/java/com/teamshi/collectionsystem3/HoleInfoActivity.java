@@ -29,6 +29,8 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HoleInfoActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
@@ -85,7 +87,7 @@ public class HoleInfoActivity extends AppCompatActivity {
     private EditText companyEditText;
     private EditText machineIdEditText;
 
-    private TextView imageView;
+    private TextView holeDescImageView;
     private Button takeHolePhotoButton;
 
     private EditText noteEditText;
@@ -118,6 +120,13 @@ public class HoleInfoActivity extends AppCompatActivity {
     private static final int CAP_SIGN_APPROVER = 4;
     private static final int CAP_SIGN_MMONITOR = 5;
     private static final int CAP_SIGN_CMONITOR = 6;
+    private static HashMap<String, File> tempImagsMap = new HashMap<>();
+    public final String JPG_HOLE_DESC = "hole_desc";
+    public final String JPG_SIGN_RECO = "sign_recorder";
+    public final String JPG_SIGN_REVI = "sign_reviewer";
+    public final String JPG_SIGN_APPR = "sign_approver";
+    public final String JPG_SIGN_MMON = "sign_mmonitor";
+    public final String JPG_SIGN_CMON = "sign_cmonitor";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,8 +135,8 @@ public class HoleInfoActivity extends AppCompatActivity {
             case TAKE_PHOTO:
                 Intent intent = new Intent("com.android.camera.action.CROP");
 
-                Uri uri = Uri.fromFile(IOManager.getTempImageFile());
-                intent.setDataAndType(uri, "image/*");
+                Uri tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_HOLE_DESC));
+                intent.setDataAndType(tempHoleImageUri, "image/*");
                 intent.putExtra("scale", true);
 
                 intent.putExtra("aspectX", 1);
@@ -135,34 +144,142 @@ public class HoleInfoActivity extends AppCompatActivity {
                 intent.putExtra("outputX", 800);
                 intent.putExtra("outputY", 600);
 
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, tempHoleImageUri);
 
                 startActivityForResult(intent, CROP_PHOTO);
                 break;
             case CROP_PHOTO:
                 Bitmap bitmap = null;
-                uri = Uri.fromFile(IOManager.getTempImageFile());
+                tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_HOLE_DESC));
                 try {
                     bitmap = BitmapFactory.decodeStream(
-                            getContentResolver().openInputStream(uri));
+                            getContentResolver().openInputStream(tempHoleImageUri));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
                 Drawable background = new BitmapDrawable(bitmap);
                 if (null != background) {
                     Toast.makeText(this, "照片保存成功", Toast.LENGTH_SHORT).show();
-                    imageView.setText("");
-                    imageView.setBackground(background);
+                    holeDescImageView.setText("");
+                    holeDescImageView.setBackground(background);
                 } else {
+                    tempImagsMap.put(JPG_HOLE_DESC, null);
                     Toast.makeText(this, "照片保存失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case CAP_SIGN_RECORDER :
-                //todo load pic jpg
-                if(resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(this, "保存ooo", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, "保存!!!", Toast.LENGTH_SHORT).show();
+            case CAP_SIGN_RECORDER:
+                if (resultCode == Activity.RESULT_OK) {
+                    bitmap = null;
+                    tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_SIGN_RECO));
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(tempHoleImageUri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        recorderTextView.setText("");
+                        recorderTextView.setBackground(background);
+                    } else {
+                        tempImagsMap.put(JPG_SIGN_RECO, null);
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case CAP_SIGN_REVIEWER:
+                if (resultCode == Activity.RESULT_OK) {
+                    bitmap = null;
+                    tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_SIGN_REVI));
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(tempHoleImageUri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        reviewerTextView.setText("");
+                        reviewerTextView.setBackground(background);
+                    } else {
+                        tempImagsMap.put(JPG_SIGN_REVI, null);
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case CAP_SIGN_APPROVER:
+                if (resultCode == Activity.RESULT_OK) {
+                    bitmap = null;
+                    tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_SIGN_APPR));
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(tempHoleImageUri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        signApproverTextView.setText("");
+                        signApproverTextView.setBackground(background);
+                    } else {
+                        tempImagsMap.put(JPG_SIGN_APPR, null);
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case CAP_SIGN_MMONITOR:
+                if (resultCode == Activity.RESULT_OK) {
+                    bitmap = null;
+                    tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_SIGN_MMON));
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(tempHoleImageUri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        machineMonitorTextView.setText("");
+                        machineMonitorTextView.setBackground(background);
+                    } else {
+                        tempImagsMap.put(JPG_SIGN_MMON, null);
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case CAP_SIGN_CMONITOR:
+                if (resultCode == Activity.RESULT_OK) {
+                    bitmap = null;
+                    tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_SIGN_CMON));
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(tempHoleImageUri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        classMonitorTextView.setText("");
+                        classMonitorTextView.setBackground(background);
+                    } else {
+                        tempImagsMap.put(JPG_SIGN_CMON, null);
+                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -229,7 +346,7 @@ public class HoleInfoActivity extends AppCompatActivity {
         companyEditText = (EditText) findViewById(R.id.edittext_company);
         machineIdEditText = (EditText) findViewById(R.id.edittext_machine_id);
 
-        imageView = (TextView) findViewById(R.id.image_view);
+        holeDescImageView = (TextView) findViewById(R.id.image_view);
         takeHolePhotoButton = (Button) findViewById(R.id.button_take_hole_photo);
 
         noteEditText = (EditText) findViewById(R.id.edittext_note);
@@ -766,7 +883,8 @@ public class HoleInfoActivity extends AppCompatActivity {
         takeHolePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = IOManager.getTempImageFile();
+                File file = IOManager.getTempJpgFile();
+                tempImagsMap.put(JPG_HOLE_DESC, file);
                 Uri uri = Uri.fromFile(file);
                 //拍照
                 Intent photoIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -818,12 +936,20 @@ public class HoleInfoActivity extends AppCompatActivity {
 
                 switch (requestCode) {
                     case "ACTION_ADD_HOLE":
-                    case "ACTION_COPY_HOLE":
                         if (validateAdding()) {
                             DataManager.getProject().getHoleList().add(holeViewModel);
-
                             IOManager.updateProject(DataManager.getProject());
-                            IOManager.copyHoleDescImage(holeViewModel);
+                            IOManager.copyImagesFromTemp(tempImagsMap, holeViewModel);
+                            HoleInfoActivity.this.setResult(RESULT_OK);
+                            HoleInfoActivity.this.finish();
+                        }
+                        break;
+                    case "ACTION_COPY_HOLE":
+                        if (validateAdding()) {
+                            //TODO clone is not avail since holeid is same , hole dir is same
+                            DataManager.getProject().getHoleList().add(holeViewModel);
+                            IOManager.updateProject(DataManager.getProject());
+//                            IOManager.copyHoleFiles(holeViewModel);
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
                         }
@@ -833,7 +959,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                             Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
 
                             DataManager.updateHole(oldHole.getHoleId(), holeViewModel);
-
+                            IOManager.copyImagesFromTemp(tempImagsMap, holeViewModel);
                             IOManager.updateProject(DataManager.getProject());
 
                             HoleInfoActivity.this.setResult(RESULT_OK);
@@ -879,8 +1005,9 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_RECORDER).getAbsolutePath();
-                intent.putExtra("path",signaturePath);
+                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_RECORDER);
+                intent.putExtra("path", file.getAbsolutePath());
+                tempImagsMap.put(JPG_SIGN_RECO, file);
                 startActivityForResult(intent, CAP_SIGN_RECORDER);
             }
         });
@@ -889,8 +1016,10 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_REVIEWER).getAbsolutePath();
-                intent.putExtra("path",signaturePath);
+                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_REVIEWER);
+                String signaturePath = file.getAbsolutePath();
+                intent.putExtra("path", signaturePath);
+                tempImagsMap.put(JPG_SIGN_REVI, file);
                 startActivityForResult(intent, CAP_SIGN_REVIEWER);
             }
         });
@@ -899,8 +1028,10 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_MMONITOR).getAbsolutePath();
-                intent.putExtra("path",signaturePath);
+                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_MMONITOR);
+                String signaturePath = file.getAbsolutePath();
+                intent.putExtra("path", signaturePath);
+                tempImagsMap.put(JPG_SIGN_MMON, file);
                 startActivityForResult(intent, CAP_SIGN_MMONITOR);
 
             }
@@ -910,8 +1041,10 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_CMONITOR).getAbsolutePath();
-                intent.putExtra("path",signaturePath);
+                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_CMONITOR);
+                String signaturePath = file.getAbsolutePath();
+                intent.putExtra("path", signaturePath);
+                tempImagsMap.put(JPG_SIGN_CMON, file);
                 startActivityForResult(intent, CAP_SIGN_CMONITOR);
 
             }
@@ -921,12 +1054,16 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HoleInfoActivity.this, CaptureSignature.class);
-                String signaturePath = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_APPROVER).getAbsolutePath();
-                intent.putExtra("path",signaturePath);
+                File file = IOManager.getSignatureImage(holeViewModel, IOManager.SIGNATURE_APPROVER);
+                String signaturePath = file.getAbsolutePath();
+                intent.putExtra("path", signaturePath);
+                tempImagsMap.put(JPG_SIGN_APPR, file);
                 startActivityForResult(intent, CAP_SIGN_APPROVER);
-
             }
         });
+
+        // empty temp files
+        IOManager.emptyTempDir();
 
         String requestCode = getIntent().getStringExtra("requestCode");
 
@@ -966,24 +1103,6 @@ public class HoleInfoActivity extends AppCompatActivity {
                 break;
             case "ACTION_EDIT_HOLE":
                 holeViewModel = DataManager.getHole(getIntent().getStringExtra("holeId")).deepCopy();
-                File image = IOManager.getHoleImage(holeViewModel);
-                //todo check and load signature files
-                if (image.exists()) {
-                    Bitmap bitmap = null;
-                    Uri uri = Uri.fromFile(image);
-                    try {
-                        bitmap = BitmapFactory.decodeStream(
-                                getContentResolver().openInputStream(uri));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    Drawable background = new BitmapDrawable(bitmap);
-                    if (null != background) {
-                        imageView.setText("");
-                        imageView.setBackground(background);
-                    }
-                }
-
                 break;
             default:
                 break;
@@ -1138,7 +1257,53 @@ public class HoleInfoActivity extends AppCompatActivity {
         machineIdEditText.setText(holeViewModel.getMachineId());
 
         // TODO: JOHNSON: handle sign pictures
-        // Total 5 textviews.
+        HashMap<String, File> holeImagesMap = IOManager.getHoleImages(holeViewModel);
+        if (null != holeImagesMap) {
+            for (Map.Entry<String, File> entry : holeImagesMap.entrySet()) {
+                File image = entry.getValue();
+                if (image != null && image.exists()) {
+                    Bitmap bitmap = null;
+                    Uri uri = Uri.fromFile(image);
+                    try {
+                        bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(uri));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Drawable background = new BitmapDrawable(bitmap);
+                    if (null != background) {
+                        switch (entry.getKey()) {
+                            case JPG_HOLE_DESC:
+                                holeDescImageView.setText("");
+                                holeDescImageView.setBackground(background);
+                                break;
+                            case JPG_SIGN_RECO:
+                                recorderTextView.setText("");
+                                recorderTextView.setBackground(background);
+                                break;
+                            case JPG_SIGN_REVI:
+                                reviewerTextView.setText("");
+                                reviewerTextView.setBackground(background);
+                                break;
+                            case JPG_SIGN_APPR:
+                                signApproverTextView.setText("");
+                                signApproverTextView.setBackground(background);
+                                break;
+                            case JPG_SIGN_CMON:
+                                classMonitorTextView.setText("");
+                                classMonitorTextView.setBackground(background);
+                                break;
+                            case JPG_SIGN_MMON:
+                                machineMonitorTextView.setText("");
+                                machineMonitorTextView.setBackground(background);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
 
         recordDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getRecordDate()));
         reviewDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getReviewDate()));
