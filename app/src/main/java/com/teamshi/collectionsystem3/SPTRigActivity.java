@@ -1112,6 +1112,10 @@ public class SPTRigActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+        if (refreshLock) {
+            return;
+        }
+
         refreshLock = true;
 
         String requestCode = getIntent().getStringExtra("requestCode");

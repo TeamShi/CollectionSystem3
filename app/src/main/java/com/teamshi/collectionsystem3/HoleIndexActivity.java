@@ -164,6 +164,7 @@ public class HoleIndexActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+
         Log.d(TAG, "Clear table content.");
         while (holesTableLayout.getChildCount() != 1) {
             holesTableLayout.removeViewAt(1);

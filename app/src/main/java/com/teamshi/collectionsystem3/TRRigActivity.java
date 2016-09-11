@@ -397,6 +397,10 @@ public class TRRigActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+        if (refreshLock) {
+            return;
+        }
+
         refreshLock = true;
 
         classPeopleCountTextView.setText(rigViewModel.getClassPeopleCount());

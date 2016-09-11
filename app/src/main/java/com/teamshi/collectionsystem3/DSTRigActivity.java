@@ -513,6 +513,10 @@ public class DSTRigActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+        if (refreshLock) {
+            return;
+        }
+
         refreshLock = true;
 
         if (getCurrentFocus() != classPeopleCountEditText) {

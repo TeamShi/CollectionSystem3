@@ -993,6 +993,10 @@ public class HoleInfoActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+        if (refreshLock) {
+            return;
+        }
+
         refreshLock = true;
 
         projectNameTextView.setText(this.holeViewModel.getProjectName());
