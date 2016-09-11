@@ -32,8 +32,10 @@
         <activity android:name=".SPTRigActivity" />
         <activity android:name=".SPTConfigurationActivity" />
         <activity android:name=".DSTConfigurationActivity" />
-        <activity android:name=".TRRigActivity"/>
-        <activity android:name=".CaptureSignature"/>
+        <activity android:name=".TRRigActivity" />
+        <activity android:name=".CaptureSignature" />
+        <activity android:name=".OriginalSamplingRigActivity" />
+        <activity android:name=".OtherSamplingRigActivity"></activity>
     </application>
 
 </manifest>

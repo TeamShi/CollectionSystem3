@@ -7,7 +7,7 @@ import java.util.Calendar;
  */
 public class SamplingRig extends CalculatingRig {
     protected int samplerPipeDiameter;
-    protected long samplerPipeLength;
+    protected double samplerPipeLength;
     protected String samplerDrillType;
     protected int samplerDrillDiameter;
     protected double samplerDrillLength;
@@ -19,7 +19,7 @@ public class SamplingRig extends CalculatingRig {
     public SamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                        double drillToolTotalLength, double drillPipeRemainLength,
                        double roundTripMeterageLength, double accumulatedMeterageLength,
-                       int samplerPipeDiameter, long samplerPipeLength,
+                       int samplerPipeDiameter, double samplerPipeLength,
                        String samplerDrillType, int samplerDrillDiameter, double samplerDrillLength,
                        String index,
                        double startDepth, double endDepth, int count) {
@@ -43,11 +43,11 @@ public class SamplingRig extends CalculatingRig {
         this.samplerPipeDiameter = samplerPipeDiameter;
     }
 
-    public long getSamplerPipeLength() {
+    public double getSamplerPipeLength() {
         return samplerPipeLength;
     }
 
-    public void setSamplerPipeLength(long samplerPipeLength) {
+    public void setSamplerPipeLength(double samplerPipeLength) {
         this.samplerPipeLength = samplerPipeLength;
     }
 

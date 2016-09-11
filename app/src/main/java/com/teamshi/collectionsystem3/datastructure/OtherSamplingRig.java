@@ -10,7 +10,7 @@ public class OtherSamplingRig extends SamplingRig {
 
     public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                             double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
-                            int samplerDiameter, long samplerLength,
+                            int samplerDiameter, double samplerLength,
                             String samplerDrillType, int samplerDrillDiameter, double samplerDrillLength,
                             String index, double startDepth, double endDepth, int count, String samplingRigType) {
         super(classPeopleCount, date, startTime, endTime, drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength, samplerDiameter, samplerLength, samplerDrillType, samplerDrillDiameter, samplerDrillLength, index, startDepth, endDepth, count);

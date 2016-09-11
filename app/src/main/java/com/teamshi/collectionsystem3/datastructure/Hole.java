@@ -82,6 +82,11 @@ public class Hole implements Serializable {
 
     private int rockCoreIndex;
 
+    private int originalSampleIndex;
+    private int disturbanceSampleIndex;
+    private int rockSampleIndex;
+    private int waterSampleIndex;
+
     public Hole() {
 
     }
@@ -154,6 +159,11 @@ public class Hole implements Serializable {
         this.isApproved = false;
 
         this.rockCoreIndex = 1;
+
+        this.originalSampleIndex = 1;
+        this.disturbanceSampleIndex = 1;
+        this.rockSampleIndex = 1;
+        this.waterSampleIndex = 1;
     }
 
     public String getProjectName() {
@@ -585,6 +595,38 @@ public class Hole implements Serializable {
         this.rockCoreIndex = rockCoreIndex;
     }
 
+    public int getOriginalSampleIndex() {
+        return originalSampleIndex;
+    }
+
+    public void setOriginalSampleIndex(int originalSampleIndex) {
+        this.originalSampleIndex = originalSampleIndex;
+    }
+
+    public int getDisturbanceSampleIndex() {
+        return disturbanceSampleIndex;
+    }
+
+    public void setDisturbanceSampleIndex(int disturbanceSampleIndex) {
+        this.disturbanceSampleIndex = disturbanceSampleIndex;
+    }
+
+    public int getRockSampleIndex() {
+        return rockSampleIndex;
+    }
+
+    public void setRockSampleIndex(int rockSampleIndex) {
+        this.rockSampleIndex = rockSampleIndex;
+    }
+
+    public int getWaterSampleIndex() {
+        return waterSampleIndex;
+    }
+
+    public void setWaterSampleIndex(int waterSampleIndex) {
+        this.waterSampleIndex = waterSampleIndex;
+    }
+
     public Hole deepCopy() {
         Hole newHole = new Hole(projectName);
 
@@ -665,6 +707,11 @@ public class Hole implements Serializable {
         newHole.setApproved(isApproved);
 
         newHole.setRockCoreIndex(rockCoreIndex);
+
+        newHole.setOriginalSampleIndex(originalSampleIndex);
+        newHole.setRockSampleIndex(rockSampleIndex);
+        newHole.setWaterSampleIndex(waterSampleIndex);
+        newHole.setDisturbanceSampleIndex(disturbanceSampleIndex);
 
         return newHole;
     }

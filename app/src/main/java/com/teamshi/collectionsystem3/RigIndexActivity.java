@@ -25,11 +25,14 @@ import android.widget.Toast;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.NARig;
+import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
+import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RigIndexActivity extends AppCompatActivity {
@@ -55,6 +58,7 @@ public class RigIndexActivity extends AppCompatActivity {
     private Button addRigButton;
 
     private boolean waterDepthFlag = false;
+    private boolean refreshLock = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,7 @@ public class RigIndexActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "newRigButton clicked.");
                 AlertDialog typeDialog;
-                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验", "下套管试验"};
+                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验", "下套管试验", "原状样", "扰动样, 岩样, 水样"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RigIndexActivity.this);
 
@@ -118,6 +122,18 @@ public class RigIndexActivity extends AppCompatActivity {
                                 intent.putExtra("holeId", holeId);
                                 startActivityForResult(intent, ACTION_ADD_RIG);
                                 break;
+                            case 5:
+                                intent = new Intent(RigIndexActivity.this, OriginalSamplingRigActivity.class);
+                                intent.putExtra("requestCode", "ACTION_ADD_RIG");
+                                intent.putExtra("holeId", holeId);
+                                startActivityForResult(intent, ACTION_ADD_RIG);
+                                break;
+                            case 6:
+                                intent = new Intent(RigIndexActivity.this, OtherSamplingRigActivity.class);
+                                intent.putExtra("requestCode", "ACTION_ADD_RIG");
+                                intent.putExtra("holeId", holeId);
+                                startActivityForResult(intent, ACTION_ADD_RIG);
+                                break;
                         }
 
                         dialog.dismiss();
@@ -132,9 +148,11 @@ public class RigIndexActivity extends AppCompatActivity {
         holeListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                holeId = holeListSpinnerOptions[position];
-                hole = DataManager.getHole(holeId);
-                refreshInfo();
+                if (!refreshLock) {
+                    holeId = holeListSpinnerOptions[position];
+                    hole = DataManager.getHole(holeId);
+                    refreshInfo();
+                }
             }
 
             @Override
@@ -207,6 +225,18 @@ public class RigIndexActivity extends AppCompatActivity {
                     intent.putExtra("holeId", holeId);
                     intent.putExtra("rigIndex", selectedRigIndex);
                     startActivityForResult(intent, ACTION_EDIT_RIG);
+                } else if (rig instanceof OriginalSamplingRig) {
+                    intent = new Intent(RigIndexActivity.this, OriginalSamplingRigActivity.class);
+                    intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                    intent.putExtra("holeId", holeId);
+                    intent.putExtra("rigIndex", selectedRigIndex);
+                    startActivityForResult(intent, ACTION_EDIT_RIG);
+                } else if (rig instanceof OtherSamplingRig) {
+                    intent = new Intent(RigIndexActivity.this, OtherSamplingRigActivity.class);
+                    intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                    intent.putExtra("holeId", holeId);
+                    intent.putExtra("rigIndex", selectedRigIndex);
+                    startActivityForResult(intent, ACTION_EDIT_RIG);
                 }
                 break;
             case CONTEXT_MENU_COPY_NEW:
@@ -230,6 +260,10 @@ public class RigIndexActivity extends AppCompatActivity {
                     Toast.makeText(RigIndexActivity.this, "动力触探试验不能复制新增.", Toast.LENGTH_SHORT).show();
                 } else if (rig instanceof TRRig) {
                     Toast.makeText(RigIndexActivity.this, "下套管试验不能复制新增.", Toast.LENGTH_SHORT).show();
+                } else if (rig instanceof OriginalSamplingRig) {
+                    Toast.makeText(RigIndexActivity.this, "原状样不能复制新增.", Toast.LENGTH_SHORT).show();
+                } else if (rig instanceof OtherSamplingRig) {
+                    Toast.makeText(RigIndexActivity.this, "扰动样, 岩样, 水样不能复制新增.", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -252,10 +286,24 @@ public class RigIndexActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).setMaxRigRockCoreIndex(deletingRig.getLastMaxRigRockCoreIndex());
                     }
 
-                    // TODO: deleting for yuanzhuang.
                     if (deletingRig instanceof RegularRig ||
-                            deletingRig instanceof SPTRig) {
+                            deletingRig instanceof SPTRig ||
+                            deletingRig instanceof OriginalSamplingRig) {
                         DataManager.getHole(holeId).setRockCoreIndex(DataManager.getHole(holeId).getRockCoreIndex() - 1);
+                    }
+
+                    if (deletingRig instanceof OriginalSamplingRig) {
+                        DataManager.getHole(holeId).setOriginalSampleIndex(DataManager.getHole(holeId).getOriginalSampleIndex() - 1);
+                    }
+
+                    if (deletingRig instanceof OtherSamplingRig) {
+                        if (((OtherSamplingRig) deletingRig).getSamplingRigType().equals("扰动样")) {
+                            DataManager.getHole(holeId).setDisturbanceSampleIndex(DataManager.getHole(holeId).getDisturbanceSampleIndex() - 1);
+                        } else if (((OtherSamplingRig) deletingRig).getSamplingRigType().equals("岩样")) {
+                            DataManager.getHole(holeId).setRockSampleIndex(DataManager.getHole(holeId).getRockSampleIndex() - 1);
+                        } else if (((OtherSamplingRig) deletingRig).getSamplingRigType().equals("水样")) {
+                            DataManager.getHole(holeId).setWaterSampleIndex(DataManager.getHole(holeId).getWaterSampleIndex() - 1);
+                        }
                     }
 
                     DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
@@ -291,12 +339,20 @@ public class RigIndexActivity extends AppCompatActivity {
     }
 
     private void refreshInfo() {
+        if (refreshLock) {
+            return;
+        }
+
+        refreshLock = true;
         Log.d(TAG, "Clear table content.");
         while (rigListTableLayout.getChildCount() != 3) {
             rigListTableLayout.removeViewAt(3);
         }
 
         Log.d(TAG, "Draw table.");
+
+        waterDepthFlag = false;
+
         for (int i = 0; i < hole.getRigList().size(); i++) {
             TableRow row = new TableRow(this);
 
@@ -334,6 +390,16 @@ public class RigIndexActivity extends AppCompatActivity {
             } else if (hole.getRigList().get(i) instanceof TRRig) {
                 TRRig rig = (TRRig) hole.getRigList().get(i);
                 for (TextView tv : generateTRRigRowContent(rig)) {
+                    row.addView(tv);
+                }
+            } else if (hole.getRigList().get(i) instanceof OriginalSamplingRig) {
+                OriginalSamplingRig rig = (OriginalSamplingRig) hole.getRigList().get(i);
+                for (TextView tv : generateOriginalSamplingRigContent(rig)) {
+                    row.addView(tv);
+                }
+            } else if (hole.getRigList().get(i) instanceof OtherSamplingRig) {
+                OtherSamplingRig rig = (OtherSamplingRig) hole.getRigList().get(i);
+                for (TextView tv : generateOtherSamplingRigContent(rig)) {
                     row.addView(tv);
                 }
             }
@@ -379,6 +445,18 @@ public class RigIndexActivity extends AppCompatActivity {
                         intent.putExtra("holeId", holeId);
                         intent.putExtra("rigIndex", selectedRigIndex);
                         startActivityForResult(intent, ACTION_EDIT_RIG);
+                    } else if (rig instanceof OriginalSamplingRig) {
+                        intent = new Intent(RigIndexActivity.this, OriginalSamplingRigActivity.class);
+                        intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                        intent.putExtra("holeId", holeId);
+                        intent.putExtra("rigIndex", selectedRigIndex);
+                        startActivityForResult(intent, ACTION_EDIT_RIG);
+                    } else if (rig instanceof OtherSamplingRig) {
+                        intent = new Intent(RigIndexActivity.this, OtherSamplingRigActivity.class);
+                        intent.putExtra("requestCode", "ACTION_EDIT_RIG");
+                        intent.putExtra("holeId", holeId);
+                        intent.putExtra("rigIndex", selectedRigIndex);
+                        startActivityForResult(intent, ACTION_EDIT_RIG);
                     }
                 }
             });
@@ -395,6 +473,8 @@ public class RigIndexActivity extends AppCompatActivity {
 
             rigListTableLayout.addView(row);
         }
+
+        refreshLock = false;
     }
 
     private TextView generateRigInfoCell(String s) {
@@ -480,6 +560,9 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
 
             waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
         result.add(generateRigInfoCell(""));
 
@@ -549,6 +632,9 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
 
             waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
         result.add(generateRigInfoCell(""));
 
@@ -618,6 +704,9 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
 
             waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
         result.add(generateRigInfoCell(""));
 
@@ -687,6 +776,9 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
 
             waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
         result.add(generateRigInfoCell(""));
 
@@ -803,6 +895,165 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
 
             waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        return result;
+    }
+
+    private ArrayList<TextView> generateOriginalSamplingRigContent(OriginalSamplingRig rig) {
+        ArrayList<TextView> result = new ArrayList<>();
+
+        result.add(generateRigInfoCell(rig.getClassPeopleCount()));
+
+        result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
+        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
+
+        result.add(generateRigInfoCell("原状样"));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeLength())));
+
+        result.add(generateRigInfoCell(rig.getSamplerDrillType()));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillDiameter())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillLength())));
+
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(rig.getIndex()));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(hole.getInitialWaterDepth() < 0? "未见": Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        return result;
+    }
+
+    private ArrayList<TextView> generateOtherSamplingRigContent(OtherSamplingRig rig) {
+        ArrayList<TextView> result = new ArrayList<>();
+
+        result.add(generateRigInfoCell(rig.getClassPeopleCount()));
+
+        result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
+        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
+
+        if (rig.getSamplingRigType().equals("扰动样")) {
+            result.add(generateRigInfoCell("扰动样"));
+        } else if (rig.getSamplingRigType().equals("岩样")) {
+            result.add(generateRigInfoCell("岩样"));
+        } else if (rig.getSamplingRigType().equals("水样")) {
+            result.add(generateRigInfoCell("水样"));
+        }
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeLength())));
+
+        result.add(generateRigInfoCell(rig.getSamplerDrillType()));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillDiameter())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillLength())));
+
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        if (rig.getSamplingRigType().equals("水样")) {
+            result.add(generateRigInfoCell(rig.getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+            result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        if (!waterDepthFlag) {
+            result.add(generateRigInfoCell(hole.getInitialWaterDepth() < 0? "未见": Utility.formatDouble(hole.getInitialWaterDepth())));
+            result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
+
+            waterDepthFlag = true;
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
         result.add(generateRigInfoCell(""));
 

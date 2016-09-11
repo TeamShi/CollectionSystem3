@@ -1291,6 +1291,40 @@ public class RegularRigActivity extends AppCompatActivity {
             rockWeatheringButton.setEnabled(true);
         }
 
+
+        if (DataManager.getHole(holeId).isApproved()) {
+            classPeopleCountEditText.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            rigTypeSpinner.setEnabled(false);
+            pipeNumberEditText.setEnabled(false);
+            pipeLengthEditText.setEnabled(false);
+            pipeTotalLengthTextView.setEnabled(false);
+            rockCorePipeDiameterSpinner.setEnabled(false);
+            rockCoreLengthEditText.setEnabled(false);
+            drillBitTypeSpinner.setEnabled(false);
+            drillBitDiameterEditText.setEnabled(false);
+            drillBitLengthEditText.setEnabled(false);
+            drillPipeRemainLengthEditText.setEnabled(false);
+            rockCoreIndexEditText.setEnabled(false);
+            rockCoreLengthEditText.setEnabled(false);
+            rockTypeEditText.setEnabled(false);
+            rockTypeButton.setEnabled(false);
+            rockColorEditText.setEnabled(false);
+            rockColorButton.setEnabled(false);
+            rockDensityEditText.setEnabled(false);
+            rockDensityButton.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+            generateRockDescriptionButton.setEnabled(false);
+            loadRockDescriptionTemplateButton.setEnabled(false);
+            rockDescriptionEditText.setEnabled(false);
+            rigNoteEditText.setEnabled(false);
+        }
+
         refreshLock = false;
     }
 
@@ -1325,38 +1359,6 @@ public class RegularRigActivity extends AppCompatActivity {
             return false;
         }
 
-        if (DataManager.getHole(holeId).isApproved()) {
-            classPeopleCountEditText.setEnabled(false);
-            dateButton.setEnabled(false);
-            startTimeButton.setEnabled(false);
-            endTimeButton.setEnabled(false);
-            rigTypeSpinner.setEnabled(false);
-            pipeNumberEditText.setEnabled(false);
-            pipeLengthEditText.setEnabled(false);
-            pipeTotalLengthTextView.setEnabled(false);
-            rockCorePipeDiameterSpinner.setEnabled(false);
-            rockCoreLengthEditText.setEnabled(false);
-            drillBitTypeSpinner.setEnabled(false);
-            drillBitDiameterEditText.setEnabled(false);
-            drillBitLengthEditText.setEnabled(false);
-            drillPipeRemainLengthEditText.setEnabled(false);
-            rockCoreIndexEditText.setEnabled(false);
-            rockCoreLengthEditText.setEnabled(false);
-            rockTypeEditText.setEnabled(false);
-            rockTypeButton.setEnabled(false);
-            rockColorEditText.setEnabled(false);
-            rockColorButton.setEnabled(false);
-            rockDensityEditText.setEnabled(false);
-            rockDensityButton.setEnabled(false);
-            rockSaturationEditText.setEnabled(false);
-            rockSaturationButton.setEnabled(false);
-            rockWeatheringEditText.setEnabled(false);
-            rockWeatheringButton.setEnabled(false);
-            generateRockDescriptionButton.setEnabled(false);
-            loadRockDescriptionTemplateButton.setEnabled(false);
-            rockDescriptionEditText.setEnabled(false);
-            rigNoteEditText.setEnabled(false);
-        }
 
         return true;
     }
