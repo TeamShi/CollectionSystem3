@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -30,7 +31,7 @@ public class DSTRig extends CalculatingRig  {
         dstDetailInfos.add(new DSTDetailInfo(drillToolTotalLength, drillToolTotalLength - 1.9, 0.1, 10, ""));
     }
 
-    public static class DSTDetailInfo {
+    public static class DSTDetailInfo implements Serializable{
         private double pipeLength;
         private double depth;
         private double length;
