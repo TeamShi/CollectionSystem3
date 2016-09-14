@@ -167,7 +167,7 @@
                         android:gravity="center"
                         android:layout_gravity="center"/>
                     <TextView
-                        android:text="取 原状样"
+                        android:text="原状样"
                         android:textColor="@android:color/black"
                         android:layout_weight="7"
                         android:background="@drawable/cell_input"
@@ -224,6 +224,7 @@
                         android:layout_weight="6"
                         android:id="@+id/edittext_original_sampling_rig_pipe_length"
                         android:background="@drawable/cell_input"
+                        android:inputType="numberDecimal"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
