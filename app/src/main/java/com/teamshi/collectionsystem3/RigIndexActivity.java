@@ -948,7 +948,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(rig.getIndex()));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
         result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
 
         result.add(generateRigInfoCell(""));
@@ -1031,7 +1031,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         if (rig.getSamplingRigType().equals("水样")) {
             result.add(generateRigInfoCell(rig.getIndex()));
-            result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+            result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
             result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
         } else {
             result.add(generateRigInfoCell(""));
