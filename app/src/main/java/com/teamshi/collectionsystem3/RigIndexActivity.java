@@ -1000,17 +1000,17 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeLength())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(rig.getSamplerDrillType()));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillDiameter())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillLength())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

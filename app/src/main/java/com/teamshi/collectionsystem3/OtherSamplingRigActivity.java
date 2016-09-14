@@ -553,11 +553,6 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
             return false;
         }
 
-        if (rigViewModel.getStartDepth() >= rigViewModel.getEndDepth()) {
-            Toast.makeText(OtherSamplingRigActivity.this, "取样起深要小于取样止深.", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
         return true;
     }
 
@@ -615,10 +610,10 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         samplerIndexEditText.setText(rigViewModel.getIndex());
 
 
-        startLengthEditText.setText(Utility.formatDouble(rigViewModel.getStartDepth()));
+//        startLengthEditText.setText(Utility.formatDouble(rigViewModel.getStartDepth()));
 
 
-        endLengthEditText.setText(Utility.formatDouble(rigViewModel.getEndDepth()));
+//        endLengthEditText.setText(Utility.formatDouble(rigViewModel.getEndDepth()));
 
 
         countEditText.setText(String.valueOf(rigViewModel.getCount()));

@@ -508,6 +508,8 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:text="不需要计算"
+                        android:enabled="false"
                         android:nextFocusDown="@+id/edittext_other_sampling_rig_end_depth"/>
                     <EditText
                         android:layout_weight="1"
@@ -519,6 +521,8 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:text="不需要计算"
+                        android:enabled="false"
                         android:nextFocusDown="@+id/edittext_other_sampling_rig_count"/>
                     <EditText
                         android:layout_weight="1"

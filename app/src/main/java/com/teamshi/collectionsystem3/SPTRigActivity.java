@@ -273,7 +273,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime((Calendar) rigViewModel.getEndTime().clone());
-                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
                             DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
                             DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
