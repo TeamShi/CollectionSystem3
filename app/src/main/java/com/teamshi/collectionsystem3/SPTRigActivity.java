@@ -277,6 +277,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
                             DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
                             DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+                            DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
 
                             Calendar now = Calendar.getInstance();
                             DataManager.getHole(holeId).setEndDate(now);
@@ -1092,7 +1093,7 @@ public class SPTRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastRockColor(),
                         DataManager.getHole(holeId).getLastRockSaturation(),
                         ConfigurationManager.parseSPTSaturationDescription(rockName, 0),
-                        ""
+                        "", DataManager.getHole(holeId).getRockCoreIndex()
                 );
 
                 refreshInfo();

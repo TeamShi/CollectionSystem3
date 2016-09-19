@@ -679,9 +679,9 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
+        result.add(generateRigInfoCell("100%"));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

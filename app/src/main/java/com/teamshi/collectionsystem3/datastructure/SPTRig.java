@@ -40,6 +40,8 @@ public class SPTRig extends CalculatingRig {
     private String rockSaturation;                  // 岩土饱和度
     private String otherDescription;                // 其它描述
 
+    private int rockCoreIndex;                   // 隐含参数, 岩芯采取编号
+
     public SPTRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                   double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
                   int injectionToolDiameter, double injectionToolLength,
@@ -56,7 +58,8 @@ public class SPTRig extends CalculatingRig {
                   String rockColor,
                   String rockDensity,
                   String rockSaturation,
-                  String otherDescription) {
+                  String otherDescription,
+                  int rockCoreIndex) {
         super(classPeopleCount, date, startTime, endTime,
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
 
@@ -96,6 +99,8 @@ public class SPTRig extends CalculatingRig {
         this.rockDensity = rockDensity;
         this.rockSaturation = rockSaturation;
         this.otherDescription = otherDescription;
+
+        this.rockCoreIndex = rockCoreIndex;
     }
 
     public int getInjectionToolDiameter() {
@@ -322,6 +327,14 @@ public class SPTRig extends CalculatingRig {
         this.otherDescription = otherDescription;
     }
 
+    public int getRockCoreIndex() {
+        return rockCoreIndex;
+    }
+
+    public void setRockCoreIndex(int rockCoreIndex) {
+        this.rockCoreIndex = rockCoreIndex;
+    }
+
     @Override
     public SPTRig deepCopy() {
         SPTRig temp = new SPTRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone(),
@@ -338,7 +351,7 @@ public class SPTRig extends CalculatingRig {
                 drillStartDepth3, drillEndDepth3,
                 rockName, rockColor,
                 rockDensity, rockSaturation,
-                otherDescription);
+                otherDescription, rockCoreIndex);
 
         temp.setLastPipeNumber(lastPipeNumber);
         temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
