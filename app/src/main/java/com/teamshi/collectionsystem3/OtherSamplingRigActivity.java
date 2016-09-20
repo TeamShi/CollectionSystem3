@@ -186,7 +186,7 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel. getAccumulatedMeterageLength());
 
                             Calendar now = Calendar.getInstance();
                             DataManager.getHole(holeId).setEndDate(now);

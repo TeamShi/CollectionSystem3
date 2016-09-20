@@ -7,17 +7,29 @@ import java.util.Calendar;
  * Created by Alfred on 16/9/7.
  */
 public class OtherSamplingRig extends Rig {
+    private ArrayList<OtherSamplingDetail> details;
+
     public static class OtherSamplingDetail {
+        private String samplingType;
         private String index;
         private double startDepth;
         private double endDepth;
         private String count;
 
-        public OtherSamplingDetail(String index, double startDepth, double endDepth, String count) {
+        public OtherSamplingDetail(String samplingType, String index, double startDepth, double endDepth, String count) {
+            this.samplingType = samplingType;
             this.index = index;
             this.startDepth = startDepth;
             this.endDepth = endDepth;
             this.count = count;
+        }
+
+        public String getSamplingType() {
+            return samplingType;
+        }
+
+        public void setSamplingType(String samplingType) {
+            this.samplingType = samplingType;
         }
 
         public String getIndex() {
@@ -53,11 +65,9 @@ public class OtherSamplingRig extends Rig {
         }
 
         public OtherSamplingDetail deepCopy() {
-            return new OtherSamplingDetail(index, startDepth, endDepth, count);
+            return new OtherSamplingDetail(samplingType, index, startDepth, endDepth, count);
         }
     }
-
-    private ArrayList<OtherSamplingDetail> details;
 
     public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
         super(classPeopleCount, date, startTime, endTime);

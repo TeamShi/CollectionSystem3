@@ -308,16 +308,6 @@ public class RigIndexActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).setOriginalSampleIndex(DataManager.getHole(holeId).getOriginalSampleIndex() - 1);
                     }
 
-                    if (deletingRig instanceof OtherSamplingRig) {
-                        if (((OtherSamplingRig) deletingRig).getSamplingRigType().equals("扰动样")) {
-                            DataManager.getHole(holeId).setDisturbanceSampleIndex(DataManager.getHole(holeId).getDisturbanceSampleIndex() - 1);
-                        } else if (((OtherSamplingRig) deletingRig).getSamplingRigType().equals("岩样")) {
-                            DataManager.getHole(holeId).setRockSampleIndex(DataManager.getHole(holeId).getRockSampleIndex() - 1);
-                        } else if (((OtherSamplingRig) deletingRig).getSamplingRigType().equals("水样")) {
-                            DataManager.getHole(holeId).setWaterSampleIndex(DataManager.getHole(holeId).getWaterSampleIndex() - 1);
-                        }
-                    }
-
                     DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
                     DataManager.getHole(holeId).setLastRockColor(deletingRig.getLastRockColor());
                     DataManager.getHole(holeId).setLastRockSaturation(deletingRig.getLastRockSaturation());
