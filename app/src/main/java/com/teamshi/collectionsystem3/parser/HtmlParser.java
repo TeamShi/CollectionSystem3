@@ -233,16 +233,16 @@ public class HtmlParser extends Parser{
     }
 
     //    private static String[][] convertSmpl(Hole hole) {
-//        ArrayList<SamplingRig> smplRigEvents = new ArrayList<>();
+//        ArrayList<OriginalSamplingRig> smplRigEvents = new ArrayList<>();
 //        for (RigEvent rigEvent : hole.getRigList()) {
-//            if (rigEvent instanceof SamplingRig) {
-//                smplRigEvents.add((SamplingRig) rigEvent);
+//            if (rigEvent instanceof OriginalSamplingRig) {
+//                smplRigEvents.add((OriginalSamplingRig) rigEvent);
 //            }
 //        }
 //        int rows = smplRigEvents.size();
 //        String[][] resultData = new String[rows][];
 //        for (int i = 0; i < rows; i++) {
-//            SamplingRig samplingRig = smplRigEvents.get(i);
+//            OriginalSamplingRig samplingRig = smplRigEvents.get(i);
 //            StringBuffer sb = new StringBuffer();
 //            sb.append(samplingRig.getClassPeopleCount()).append("#");
 //            sb.append(formatCalendarDateString(samplingRig.getDate(), "yyyy年MM月dd日")).append("#");

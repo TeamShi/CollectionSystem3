@@ -30,7 +30,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
     private static final String [] SAMPLER_PIPE_DIAMETER_OPTIONS = {"108", "89"};
-    private static final String [] SAMPLER_DRILL_DIAMETER_OPTIONS = {"110", "91"};
     private static final String [] SAMPLER_TYPE_OPTIONS = {"厚壁", "薄壁"};
 
     private boolean refreshLock = false;
@@ -51,12 +50,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
     private ArrayAdapter<String> pipeDiameterSpinnerAdapter;
 
     private EditText pipeLengthEditText;
-
-    private EditText drillTypeEditText;
-    private Spinner drillDiameterSpinner;
-    private ArrayAdapter<String> drillDiameterSpinnerAdapter;
-
-    private EditText drillLengthEditText;
 
     private TextView drillToolTotalLengthTextView;
     private TextView drillPipeRemainLengthTextView;
@@ -95,14 +88,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
         pipeDiameterSpinner.setAdapter(pipeDiameterSpinnerAdapter);
 
         pipeLengthEditText = (EditText) findViewById(R.id.edittext_original_sampling_rig_pipe_length);
-
-        drillTypeEditText = (EditText) findViewById(R.id.edittext_original_sampling_rig_drill_type);
-
-        drillDiameterSpinner = (Spinner) findViewById(R.id.spinner_original_sampling_rig_drill_diameter);
-        drillDiameterSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, SAMPLER_DRILL_DIAMETER_OPTIONS);
-        drillDiameterSpinner.setAdapter(drillDiameterSpinnerAdapter);
-
-        drillLengthEditText = (EditText) findViewById(R.id.edittext_original_sampling_rig_drill_length);
 
         drillToolTotalLengthTextView = (TextView) findViewById(R.id.textview_original_sampling_rig_drill_tool_total_length);
         drillPipeRemainLengthTextView = (TextView) findViewById(R.id.textView_original_sampling_rig_drill_pipe_remain_length);
@@ -202,8 +187,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                 if (!refreshLock) {
                     rigViewModel.setSamplerPipeDiameter(Integer.valueOf(SAMPLER_PIPE_DIAMETER_OPTIONS[position]));
 
-                    rigViewModel.setSamplerDrillDiameter(Integer.valueOf(SAMPLER_DRILL_DIAMETER_OPTIONS[position]));
-
                     if (position == 0) {
                         rigViewModel.setSamplerPipeLength(0.8);
                     } else if (position == 1) {
@@ -245,61 +228,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
             }
         });
 
-        drillTypeEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!refreshLock) {
-                    rigViewModel.setSamplerDrillType(s.toString());
-                }
-            }
-        });
-
-        drillDiameterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                rigViewModel.setSamplerDrillDiameter(Integer.parseInt(SAMPLER_DRILL_DIAMETER_OPTIONS[position]));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        drillLengthEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!refreshLock) {
-                    try {
-                        rigViewModel.setSamplerDrillLength(Double.valueOf(s.toString()));
-                        drillLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
-                    } catch (Exception e) {
-                        drillLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-                    }
-
-                }
-            }
-        });
 
         samplerTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -520,11 +448,10 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         0.4,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4,
                         89, 0.9,
-                        "管靴", 91, 0,
-                        "原" + DataManager.getHole(holeId).getOriginalSampleIndex(), "厚壁",
+                        "原" + DataManager.getHole(holeId).getOriginalSampleIndex(),
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.3,
-                        1);
+                        1, "厚壁");
 
                 refreshInfo();
                 break;
@@ -566,21 +493,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
             pipeLengthEditText.setText(Utility.formatDouble(rigViewModel.getSamplerPipeLength()));
         }
 
-        for (int i = 0; i < SAMPLER_DRILL_DIAMETER_OPTIONS.length; i++) {
-            if (SAMPLER_DRILL_DIAMETER_OPTIONS[i].equals(String.valueOf(rigViewModel.getSamplerDrillDiameter()))) {
-                drillDiameterSpinner.setSelection(i);
-                break;
-            }
-        }
-
-        if (getCurrentFocus() != drillLengthEditText) {
-            drillLengthEditText.setText(Utility.formatDouble(rigViewModel.getSamplerDrillLength()));
-        }
-
-        if (getCurrentFocus() != drillTypeEditText) {
-            drillTypeEditText.setText(rigViewModel.getSamplerDrillType());
-        }
-
         drillToolTotalLengthTextView.setText(Utility.formatDouble(rigViewModel.getDrillToolTotalLength()));
         drillPipeRemainLengthTextView.setText(Utility.formatDouble(rigViewModel.getDrillPipeRemainLength()));
         roundTripMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getRoundTripMeterageLength()));
@@ -616,10 +528,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
             endTimeButton.setEnabled(false);
             timeDurationTextView.setEnabled(false);
             pipeDiameterSpinner.setEnabled(false);
-            pipeLengthEditText.setEnabled(false);
-            drillDiameterSpinner.setEnabled(false);
-            drillLengthEditText.setEnabled(false);
-            drillTypeEditText.setEnabled(false);
             drillToolTotalLengthTextView.setEnabled(false);
             drillPipeRemainLengthTextView.setEnabled(false);
             roundTripMeterageLengthTextView.setEnabled(false);

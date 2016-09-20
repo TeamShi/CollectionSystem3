@@ -9,7 +9,6 @@ import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
-import com.teamshi.collectionsystem3.datastructure.SamplingRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
 import java.util.ArrayList;
@@ -115,18 +114,18 @@ public class Parser {
         return resultData;
     }
 
-    protected static String[][] convertNormalSmpl(SamplingRig samplingRig, String BR) {
+    protected static String[][] convertNormalSmpl(OriginalSamplingRig originalSamplingRig, String BR) {
         String[][] resultData = new String[1][];
         StringBuffer sb = new StringBuffer();
         if (null == BR || "".equals(BR)) {
             BR = ",";
         }
 
-        sb.append(samplingRig.getClassPeopleCount()).append("#");
-        sb.append(formatCalendarDateString(samplingRig.getDate(), "MM月dd日")).append("#");
-        sb.append(formatCalendarDateString(samplingRig.getStartTime(), "hh时mm分")).append("#");
-        sb.append(formatCalendarDateString(samplingRig.getEndTime(), "hh时mm分")).append("#");
-        sb.append(Utility.calculateTimeSpanChinese(samplingRig.getStartTime(), samplingRig.getEndTime())).append("#");
+        sb.append(originalSamplingRig.getClassPeopleCount()).append("#");
+        sb.append(formatCalendarDateString(originalSamplingRig.getDate(), "MM月dd日")).append("#");
+        sb.append(formatCalendarDateString(originalSamplingRig.getStartTime(), "hh时mm分")).append("#");
+        sb.append(formatCalendarDateString(originalSamplingRig.getEndTime(), "hh时mm分")).append("#");
+        sb.append(Utility.calculateTimeSpanChinese(originalSamplingRig.getStartTime(), originalSamplingRig.getEndTime())).append("#");
 
         sb.append("取  样").append("#");
         //钻杆
@@ -138,16 +137,17 @@ public class Parser {
         sb.append("").append("#");
         sb.append("").append("#");
 
+        // TODO: Sampling changes
         //钻头
-        sb.append(samplingRig.getSamplerDrillType()).append("#");
-        sb.append(Utility.formatDouble(samplingRig.getSamplerDrillDiameter())).append("#");
-        sb.append(Utility.formatDouble(samplingRig.getSamplerDrillLength())).append("#");
+//        sb.append(originalSamplingRig.getSamplerDrillType()).append("#");
+//        sb.append(Utility.formatDouble(originalSamplingRig.getSamplerDrillDiameter())).append("#");
+//        sb.append(Utility.formatDouble(originalSamplingRig.getSamplerDrillLength())).append("#");
 
         //进尺
-        sb.append(Utility.formatDouble(samplingRig.getDrillToolTotalLength())).append("#");
-        sb.append(Utility.formatDouble(samplingRig.getDrillPipeRemainLength())).append("#");
-        sb.append(Utility.formatDouble(samplingRig.getRoundTripMeterageLength())).append("#");
-        sb.append(Utility.formatDouble(samplingRig.getAccumulatedMeterageLength())).append("#");
+        sb.append(Utility.formatDouble(originalSamplingRig.getDrillToolTotalLength())).append("#");
+        sb.append(Utility.formatDouble(originalSamplingRig.getDrillPipeRemainLength())).append("#");
+        sb.append(Utility.formatDouble(originalSamplingRig.getRoundTripMeterageLength())).append("#");
+        sb.append(Utility.formatDouble(originalSamplingRig.getAccumulatedMeterageLength())).append("#");
 
         //护壁措施
         sb.append("").append("#");
@@ -161,14 +161,14 @@ public class Parser {
 
         //岩心采取
         sb.append("").append("#");
-        sb.append(samplingRig.getLastRockCorePipeLength()).append("#");
+        sb.append(originalSamplingRig.getLastRockCorePipeLength()).append("#");
         sb.append("").append("#");
 
         //土样
-        sb.append(samplingRig.getIndex()).append("#");
-        sb.append(Utility.formatDouble(samplingRig.getSamplerPipeDiameter())).append("#");
-        sb.append((samplingRig.getEndDepth() + BR + samplingRig.getStartDepth())).append("#");
-        sb.append(samplingRig.getCount()).append("#");
+        sb.append(originalSamplingRig.getIndex()).append("#");
+        sb.append(Utility.formatDouble(originalSamplingRig.getSamplerPipeDiameter())).append("#");
+        sb.append((originalSamplingRig.getEndDepth() + BR + originalSamplingRig.getStartDepth())).append("#");
+        sb.append(originalSamplingRig.getCount()).append("#");
 
         //水样
         sb.append("").append("#");
@@ -204,8 +204,9 @@ public class Parser {
             BR = ",";
         }
 
+        // TODO: Sampling changes
         //外业
-        sb.append(otherSamplingRig.getIndex()).append("#");
+//        sb.append(otherSamplingRig.getIndex()).append("#");
         //实验室
         sb.append("").append("#");
         //钻孔编号
@@ -216,8 +217,9 @@ public class Parser {
         //取样地点
         sb.append("").append("#");
 
-        //深度
-        sb.append(otherSamplingRig.getStartDepth()+BR+otherSamplingRig.getEndDepth()).append("#");
+// TODO: Sampling changes
+//        //深度
+//        sb.append(otherSamplingRig.getStartDepth()+BR+otherSamplingRig.getEndDepth()).append("#");
 
         sb.append("").append("#");
         sb.append("").append("#");
@@ -236,16 +238,18 @@ public class Parser {
             BR = ",";
         }
 
+        // TODO: Sampling changes
         //外业
-        sb.append(otherSamplingRig.getIndex()).append("#");
+//        sb.append(otherSamplingRig.getIndex()).append("#");
         //实验室
         sb.append("").append("#");
         //钻孔编号
         sb.append(hole.getHoleId()).append("#");
         //取样地点
         sb.append("").append("#");
+        // TODO: Sampling changes
         //深度
-        sb.append(otherSamplingRig.getStartDepth()+BR+otherSamplingRig.getEndDepth()).append("#");
+//        sb.append(otherSamplingRig.getStartDepth()+BR+otherSamplingRig.getEndDepth()).append("#");
 
         //岩石名称
         sb.append(otherSamplingRig.getLastRockName()).append("#");
@@ -669,10 +673,11 @@ public class Parser {
                 sb.append("").append("#");
                 sb.append("").append("#");
 
-                //钻头
-                sb.append(originalSamplingRig.getSamplerDrillType()).append("#");
-                sb.append(Utility.formatDouble(originalSamplingRig.getSamplerDrillDiameter())).append("#");
-                sb.append(Utility.formatDouble(originalSamplingRig.getSamplerDrillLength())).append("#");
+                // TODO: Sampling changes
+//                //钻头
+//                sb.append(originalSamplingRig.getSamplerDrillType()).append("#");
+//                sb.append(Utility.formatDouble(originalSamplingRig.getSamplerDrillDiameter())).append("#");
+//                sb.append(Utility.formatDouble(originalSamplingRig.getSamplerDrillLength())).append("#");
 
                 //进尺
                 sb.append(Utility.formatDouble(originalSamplingRig.getDrillToolTotalLength())).append("#");
@@ -735,16 +740,17 @@ public class Parser {
                 sb.append("").append("#");
                 sb.append("").append("#");
 
-                //钻头
-                sb.append(otherSamplingRig.getSamplerDrillType()).append("#");
-                sb.append(Utility.formatDouble(otherSamplingRig.getSamplerDrillDiameter())).append("#");
-                sb.append(Utility.formatDouble(otherSamplingRig.getSamplerDrillLength())).append("#");
-
-                //进尺
-                sb.append(Utility.formatDouble(otherSamplingRig.getDrillToolTotalLength())).append("#");
-                sb.append(Utility.formatDouble(otherSamplingRig.getDrillPipeRemainLength())).append("#");
-                sb.append(Utility.formatDouble(otherSamplingRig.getRoundTripMeterageLength())).append("#");
-                sb.append(Utility.formatDouble(otherSamplingRig.getAccumulatedMeterageLength())).append("#");
+                // TODO: Sampling changes
+//                //钻头
+//                sb.append(otherSamplingRig.getSamplerDrillType()).append("#");
+//                sb.append(Utility.formatDouble(otherSamplingRig.getSamplerDrillDiameter())).append("#");
+//                sb.append(Utility.formatDouble(otherSamplingRig.getSamplerDrillLength())).append("#");
+//
+//                //进尺
+//                sb.append(Utility.formatDouble(otherSamplingRig.getDrillToolTotalLength())).append("#");
+//                sb.append(Utility.formatDouble(otherSamplingRig.getDrillPipeRemainLength())).append("#");
+//                sb.append(Utility.formatDouble(otherSamplingRig.getRoundTripMeterageLength())).append("#");
+//                sb.append(Utility.formatDouble(otherSamplingRig.getAccumulatedMeterageLength())).append("#");
 
                 //护壁措施
                 sb.append("").append("#");
@@ -761,11 +767,12 @@ public class Parser {
                 sb.append(otherSamplingRig.getLastRockCorePipeLength()).append("#");
                 sb.append("").append("#");
 
+                // TODO: Sampling changes
                 //土样
-                sb.append(otherSamplingRig.getIndex()).append("#");
-                sb.append(Utility.formatDouble(otherSamplingRig.getSamplerPipeDiameter())).append("#");
-                sb.append((otherSamplingRig.getEndDepth() + BR + otherSamplingRig.getStartDepth())).append("#");
-                sb.append(otherSamplingRig.getCount()).append("#");
+//                sb.append(otherSamplingRig.getIndex()).append("#");
+//                sb.append(Utility.formatDouble(otherSamplingRig.getSamplerPipeDiameter())).append("#");
+//                sb.append((otherSamplingRig.getEndDepth() + BR + otherSamplingRig.getStartDepth())).append("#");
+//                sb.append(otherSamplingRig.getCount()).append("#");
 
                 //水样
                 sb.append("").append("#");

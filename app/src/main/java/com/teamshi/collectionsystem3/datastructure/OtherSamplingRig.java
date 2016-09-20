@@ -5,15 +5,11 @@ import java.util.Calendar;
 /**
  * Created by Alfred on 16/9/7.
  */
-public class OtherSamplingRig extends SamplingRig {
+public class OtherSamplingRig extends Rig {
     private String samplingRigType;
 
-    public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
-                            double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
-                            int samplerDiameter, double samplerLength,
-                            String samplerDrillType, int samplerDrillDiameter, double samplerDrillLength,
-                            String index, double startDepth, double endDepth, int count, String samplingRigType) {
-        super(classPeopleCount, date, startTime, endTime, drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength, samplerDiameter, samplerLength, samplerDrillType, samplerDrillDiameter, samplerDrillLength, index, startDepth, endDepth, count);
+    public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
+        super(classPeopleCount, date, startTime, endTime);
         this.samplingRigType = samplingRigType;
     }
 
@@ -27,9 +23,7 @@ public class OtherSamplingRig extends SamplingRig {
 
     @Override
     public Rig deepCopy() {
-        OtherSamplingRig temp = new OtherSamplingRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone(),
-                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
-                samplerPipeDiameter, samplerPipeLength, samplerDrillType, samplerDrillDiameter, samplerDrillLength, index, startDepth, endDepth, count, samplingRigType);
+        OtherSamplingRig temp = new OtherSamplingRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone());
 
         temp.setLastPipeNumber(lastPipeNumber);
         temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());
