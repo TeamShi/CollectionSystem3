@@ -81,7 +81,7 @@ public class RigIndexActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "newRigButton clicked.");
                 AlertDialog typeDialog;
-                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验", "下套管试验", "原状样", "扰动样, 岩样, 水样"};
+                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验", "下套管试验", "原状样", "扰动样", "岩样", "水样"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RigIndexActivity.this);
 
@@ -130,7 +130,19 @@ public class RigIndexActivity extends AppCompatActivity {
                                 break;
                             case 6:
                                 intent = new Intent(RigIndexActivity.this, OtherSamplingRigActivity.class);
-                                intent.putExtra("requestCode", "ACTION_ADD_RIG");
+                                intent.putExtra("requestCode", "ACTION_DISTURBANCE_SAMPLE");
+                                intent.putExtra("holeId", holeId);
+                                startActivityForResult(intent, ACTION_ADD_RIG);
+                                break;
+                            case 7:
+                                intent = new Intent(RigIndexActivity.this, OtherSamplingRigActivity.class);
+                                intent.putExtra("requestCode", "ACTION_ROCK_SAMPLE");
+                                intent.putExtra("holeId", holeId);
+                                startActivityForResult(intent, ACTION_ADD_RIG);
+                                break;
+                            case 8:
+                                intent = new Intent(RigIndexActivity.this, OtherSamplingRigActivity.class);
+                                intent.putExtra("requestCode", "ACTION_WATER_SAMPLE");
                                 intent.putExtra("holeId", holeId);
                                 startActivityForResult(intent, ACTION_ADD_RIG);
                                 break;

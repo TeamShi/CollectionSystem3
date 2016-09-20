@@ -83,9 +83,10 @@ public class Hole implements Serializable {
     private int rockCoreIndex;
 
     private int originalSampleIndex;
-    private int disturbanceSampleIndex;
-    private int rockSampleIndex;
-    private int waterSampleIndex;
+
+    private OtherSamplingRig disturbanceSample;
+    private OtherSamplingRig rockSample;
+    private OtherSamplingRig waterSample;
 
     public Hole() {
 
@@ -161,9 +162,10 @@ public class Hole implements Serializable {
         this.rockCoreIndex = 1;
 
         this.originalSampleIndex = 1;
-        this.disturbanceSampleIndex = 1;
-        this.rockSampleIndex = 1;
-        this.waterSampleIndex = 1;
+
+        disturbanceSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
+        rockSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
+        waterSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
     }
 
     public String getProjectName() {
@@ -603,28 +605,28 @@ public class Hole implements Serializable {
         this.originalSampleIndex = originalSampleIndex;
     }
 
-    public int getDisturbanceSampleIndex() {
-        return disturbanceSampleIndex;
+    public OtherSamplingRig getDisturbanceSample() {
+        return disturbanceSample;
     }
 
-    public void setDisturbanceSampleIndex(int disturbanceSampleIndex) {
-        this.disturbanceSampleIndex = disturbanceSampleIndex;
+    public void setDisturbanceSample(OtherSamplingRig disturbanceSample) {
+        this.disturbanceSample = disturbanceSample;
     }
 
-    public int getRockSampleIndex() {
-        return rockSampleIndex;
+    public OtherSamplingRig getRockSample() {
+        return rockSample;
     }
 
-    public void setRockSampleIndex(int rockSampleIndex) {
-        this.rockSampleIndex = rockSampleIndex;
+    public void setRockSample(OtherSamplingRig rockSample) {
+        this.rockSample = rockSample;
     }
 
-    public int getWaterSampleIndex() {
-        return waterSampleIndex;
+    public OtherSamplingRig getWaterSample() {
+        return waterSample;
     }
 
-    public void setWaterSampleIndex(int waterSampleIndex) {
-        this.waterSampleIndex = waterSampleIndex;
+    public void setWaterSample(OtherSamplingRig waterSample) {
+        this.waterSample = waterSample;
     }
 
     public Hole deepCopy() {
@@ -709,9 +711,12 @@ public class Hole implements Serializable {
         newHole.setRockCoreIndex(rockCoreIndex);
 
         newHole.setOriginalSampleIndex(originalSampleIndex);
-        newHole.setRockSampleIndex(rockSampleIndex);
-        newHole.setWaterSampleIndex(waterSampleIndex);
-        newHole.setDisturbanceSampleIndex(disturbanceSampleIndex);
+
+        newHole.setDisturbanceSample(disturbanceSample.deepCopy());
+
+        newHole.setRockSample(rockSample.deepCopy());
+
+        newHole.setWaterSample(waterSample.deepCopy());
 
         return newHole;
     }
