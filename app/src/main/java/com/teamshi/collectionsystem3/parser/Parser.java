@@ -465,10 +465,10 @@ public class Parser {
                 //孔内情况
                 sb.append("").append("#");
 
-                //岩心采取
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                //岩心采取 标贯编号顺便 长度0.45 采取率100%
+                sb.append(sptRig.getRockCoreIndex()).append("#");
+                sb.append("0.45").append("#");
+                sb.append("100%").append("#");
 
                 //土样
                 sb.append("").append("#");
