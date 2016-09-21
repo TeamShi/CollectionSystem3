@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -23,6 +24,8 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -46,7 +49,19 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
     private TextView endTimeButton;
     private TextView timeDurationTextView;
 
+    private TextView samplingTypeTextView;
+
     private Button previewButton;
+
+    private Button addDetailedButton;
+    private Button removeDetailedButton;
+
+    private TableRow[] detailedInfoTableRows = new TableRow[80];
+    private EditText[] detailedInfoIndexEditTexts = new EditText[80];
+    private EditText[] detailedInfoStartDepthEditTexts = new EditText[80];
+    private EditText[] detailedInfoEndDepthEditTexts = new EditText[80];
+    private EditText[] detailedInfoCountEditTexts = new EditText[80];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +81,117 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         endTimeButton = (Button) findViewById(R.id.button_other_sampling_rig_end_time);
         timeDurationTextView = (TextView) findViewById(R.id.textview_other_sampling_rig_duration);
 
-
         previewButton = (Button) findViewById(R.id.button_other_sampling_rig_preview);
+
+        addDetailedButton = (Button) findViewById(R.id.button_add_sampling_detail);
+        removeDetailedButton = (Button) findViewById(R.id.button_delete_sampling_detail);
+
+        samplingTypeTextView = (TextView) findViewById(R.id.textview_other_sampling_rig_type);
+
+        for (int i = 1; i <= 80; i++) {
+            final TableRow detailedInfoTableRow = (TableRow) findViewById(getResources().getIdentifier("table_row_sampling_detail_" + i, "id", getPackageName()));
+            detailedInfoTableRows[i - 1] = detailedInfoTableRow;
+
+            final EditText detailedInfoIndexEditText = (EditText) findViewById(getResources().getIdentifier("edittext_other_sampling_detail_index_" + i, "id", getPackageName()));
+            detailedInfoIndexEditText.setTag(i);
+            detailedInfoIndexEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        rigViewModel.getDetails().get((Integer) detailedInfoIndexEditText.getTag() - 1).setIndex(s.toString());
+                    }
+                }
+            });
+            detailedInfoIndexEditTexts[i - 1] = detailedInfoIndexEditText;
+
+            final EditText detailedInfoStartDepthEditText = (EditText) findViewById(getResources().getIdentifier("edittext_other_sampling_detail_start_depth_" + i, "id", getPackageName()));
+            detailedInfoStartDepthEditText.setTag(i);
+            detailedInfoStartDepthEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        try {
+                            rigViewModel.getDetails().get((Integer) detailedInfoStartDepthEditText.getTag() - 1).setStartDepth(Double.parseDouble(s.toString()));
+                            detailedInfoStartDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        } catch (Exception e) {
+                            detailedInfoStartDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                        }
+                    }
+                }
+            });
+            detailedInfoStartDepthEditTexts[i - 1] = detailedInfoStartDepthEditText;
+
+            final EditText detailedInfoEndDepthEditText = (EditText) findViewById(getResources().getIdentifier("edittext_other_sampling_detail_end_depth_" + i, "id", getPackageName()));
+            detailedInfoEndDepthEditText.setTag(i);
+            detailedInfoEndDepthEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        try {
+                            rigViewModel.getDetails().get((Integer) detailedInfoEndDepthEditText.getTag() - 1).setEndDepth(Double.parseDouble(s.toString()));
+                            detailedInfoEndDepthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        } catch (Exception e) {
+                            detailedInfoEndDepthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                        }
+                    }
+                }
+            });
+            detailedInfoEndDepthEditTexts[i - 1] = detailedInfoEndDepthEditText;
+
+            final EditText detailedInfoCountEditText = (EditText) findViewById(getResources().getIdentifier("edittext_other_sampling_detail_count_" + i, "id", getPackageName()));
+            detailedInfoCountEditText.setTag(i);
+            detailedInfoCountEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        rigViewModel.getDetails().get((Integer) detailedInfoCountEditText.getTag() - 1).setCount(s.toString());
+                    }
+                }
+            });
+            detailedInfoCountEditTexts[i - 1] = detailedInfoCountEditText;
+        }
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -145,9 +269,35 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
             }
         });
 
+        addDetailedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rigViewModel.getSamplingType().equals("扰动样")) {
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                } else if (rigViewModel.getSamplingType().equals("岩样")) {
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                } else if (rigViewModel.getSamplingType().equals("水样")) {
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                }
+
+                refreshInfo();
+            }
+        });
+
+        removeDetailedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rigViewModel.getDetails().remove(rigViewModel.getDetails().size() - 1);
+
+                refreshInfo();
+            }
+        });
+
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // todo: JHONSON: preview other sampling according to
+//                otherType = "扰动样" "岩样" "水样";
             Project project = DataManager.getProject();
             Hole hole = DataManager.getHole(holeId);
             PreviewActivity.setUrls(IOManager.previewOtherSamplingRig(hole, rigViewModel));
@@ -164,66 +314,19 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
 
                 switch (requestCode) {
                     case "ACTION_DISTURBANCE_SAMPLE":
+                        DataManager.getHole(holeId).setDisturbanceSample(rigViewModel);
                         break;
                     case "ACTION_ROCK_SAMPLE":
+                        DataManager.getHole(holeId).setRockSample(rigViewModel);
                         break;
                     case "ACTION_WATER_SAMPLE":
-                        break;
-                    case "ACTION_ADD_RIG":
-                        if (validate()) {
-                            String holeId = getIntent().getStringExtra("holeId");
-
-                            rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
-                            rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
-                            rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
-                            rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-                            rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
-
-                            rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
-                            rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
-                            rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
-
-                            DataManager.addRig(holeId, rigViewModel);
-
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel. getAccumulatedMeterageLength());
-
-                            Calendar now = Calendar.getInstance();
-                            DataManager.getHole(holeId).setEndDate(now);
-
-                            now.add(Calendar.DATE, 2);
-
-                            DataManager.getHole(holeId).setReviewDate(now);
-
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
-                            DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
-
-                            if (rigViewModel.getSamplingRigType().equals(OTHER_SAMPLER_TYPE_OPTIONS[0])) {
-                                DataManager.getHole(holeId).setDisturbanceSampleIndex(DataManager.getHole(holeId).getDisturbanceSampleIndex() + 1);
-                            } else if (rigViewModel.getSamplingRigType().equals(OTHER_SAMPLER_TYPE_OPTIONS[1])) {
-                                DataManager.getHole(holeId).setRockSampleIndex(DataManager.getHole(holeId).getRockSampleIndex() + 1);
-                            } else if (rigViewModel.getSamplingRigType().equals(OTHER_SAMPLER_TYPE_OPTIONS[2])) {
-                                DataManager.getHole(holeId).setWaterSampleIndex(DataManager.getHole(holeId).getWaterSampleIndex() + 1);
-                            }
-
-                            IOManager.updateProject(DataManager.getProject());
-                            OtherSamplingRigActivity.this.setResult(RESULT_OK);
-                            OtherSamplingRigActivity.this.finish();
-                        }
-                        break;
-                    case "ACTION_EDIT_RIG":
-                        if (validate()) {
-                            String holeId = getIntent().getStringExtra("holeId");
-                            int rigIndex = getIntent().getIntExtra("rigIndex", 0);
-
-                            DataManager.updateRig(holeId, rigIndex, rigViewModel);
-
-                            IOManager.updateProject(DataManager.getProject());
-                            OtherSamplingRigActivity.this.setResult(RESULT_OK);
-                            OtherSamplingRigActivity.this.finish();
-                        }
+                        DataManager.getHole(holeId).setWaterSample(rigViewModel);
                         break;
                 }
+
+                IOManager.updateProject(DataManager.getProject());
+                OtherSamplingRigActivity.this.setResult(RESULT_OK);
+                OtherSamplingRigActivity.this.finish();
             }
         });
 
@@ -240,31 +343,19 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         holeId = getIntent().getStringExtra("holeId");
 
         switch (requestCode) {
-            case "ACTION_ADD_RIG":
-                Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                endTime.add(Calendar.MINUTE, 1);
-
-                rigViewModel = new OtherSamplingRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2,
-                        1.6,
-                        0.4,
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4,
-                        89, 0.9,
-                        "管靴", 91, 0,
-                        "扰" + DataManager.getHole(holeId).getDisturbanceSampleIndex(),
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.3,
-                        1, "扰动样");
-
+            case "ACTION_DISTURBANCE_SAMPLE":
+                rigViewModel = DataManager.getHole(holeId).getDisturbanceSample().deepCopy();
+                rigViewModel.setClassPeopleCount(DataManager.getHole(holeId).getLastClassPeopleCount());
                 refreshInfo();
                 break;
-            case "ACTION_EDIT_RIG":
-                String holeId = getIntent().getStringExtra("holeId");
-                int rigIndex = getIntent().getIntExtra("rigIndex", 0);
-
-                rigViewModel = (OtherSamplingRig) DataManager.getRig(holeId, rigIndex).deepCopy();
-
+            case "ACTION_ROCK_SAMPLE":
+                rigViewModel = DataManager.getHole(holeId).getRockSample().deepCopy();
+                rigViewModel.setClassPeopleCount(DataManager.getHole(holeId).getLastClassPeopleCount());
+                refreshInfo();
+                break;
+            case "ACTION_WATER_SAMPLE":
+                rigViewModel = DataManager.getHole(holeId).getWaterSample().deepCopy();
+                rigViewModel.setClassPeopleCount(DataManager.getHole(holeId).getLastClassPeopleCount());
                 refreshInfo();
                 break;
         }
@@ -296,52 +387,46 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         endTimeButton.setText(Utility.formatTimeString(rigViewModel.getEndTime()));
         timeDurationTextView.setText(Utility.calculateTimeSpan(rigViewModel.getStartTime(), rigViewModel.getEndTime()));
 
-        for (int i = 0; i < SAMPLER_PIPE_DIAMETER_OPTIONS.length; i++) {
-            if (SAMPLER_PIPE_DIAMETER_OPTIONS[i].equals(String.valueOf(rigViewModel.getSamplerPipeDiameter()))) {
-                pipeDiameterSpinner.setSelection(i);
-                break;
+        samplingTypeTextView.setText(rigViewModel.getSamplingType());
+
+        for (int i = 0; i < 80; i++) {
+            if (i < rigViewModel.getDetails().size()) {
+                detailedInfoTableRows[i].setVisibility(View.VISIBLE);
+
+                detailedInfoIndexEditTexts[i].setText(rigViewModel.getDetails().get(i).getIndex());
+                detailedInfoStartDepthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDetails().get(i).getStartDepth()));
+                detailedInfoEndDepthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDetails().get(i).getEndDepth()));
+                detailedInfoCountEditTexts[i].setText(rigViewModel.getDetails().get(i).getCount());
+
+                detailedInfoIndexEditTexts[i].setEnabled(true);
+                detailedInfoStartDepthEditTexts[i].setEnabled(true);
+                detailedInfoEndDepthEditTexts[i].setEnabled(true);
+                detailedInfoCountEditTexts[i].setEnabled(true);
+            } else {
+                detailedInfoTableRows[i].setVisibility(View.GONE);
+
+                detailedInfoIndexEditTexts[i].setText("");
+                detailedInfoStartDepthEditTexts[i].setText("");
+                detailedInfoEndDepthEditTexts[i].setText("");
+                detailedInfoCountEditTexts[i].setText("");
+
+                detailedInfoIndexEditTexts[i].setEnabled(false);
+                detailedInfoStartDepthEditTexts[i].setEnabled(false);
+                detailedInfoEndDepthEditTexts[i].setEnabled(false);
+                detailedInfoCountEditTexts[i].setEnabled(false);
             }
         }
 
-        pipeLengthEditText.setText(Utility.formatDouble(rigViewModel.getSamplerPipeLength()));
-
-
-        for (int i = 0; i < SAMPLER_DRILL_DIAMETER_OPTIONS.length; i++) {
-            if (SAMPLER_DRILL_DIAMETER_OPTIONS[i].equals(String.valueOf(rigViewModel.getSamplerDrillDiameter()))) {
-                drillDiameterSpinner.setSelection(i);
-                break;
-            }
+        if (rigViewModel.getDetails().size() == 0) {
+            addDetailedButton.setEnabled(true);
+            removeDetailedButton.setEnabled(false);
+        } else if (rigViewModel.getDetails().size() == 80) {
+            addDetailedButton.setEnabled(false);
+            removeDetailedButton.setEnabled(true);
+        } else {
+            addDetailedButton.setEnabled(true);
+            removeDetailedButton.setEnabled(true);
         }
-
-        drillLengthEditText.setText(Utility.formatDouble(rigViewModel.getSamplerDrillLength()));
-
-
-        drillTypeEditText.setText(rigViewModel.getSamplerDrillType());
-
-
-        drillToolTotalLengthTextView.setText(Utility.formatDouble(rigViewModel.getDrillToolTotalLength()));
-        drillPipeRemainLengthTextView.setText(Utility.formatDouble(rigViewModel.getDrillPipeRemainLength()));
-        roundTripMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getRoundTripMeterageLength()));
-        accumulatedMeterageLengthTextView.setText(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
-
-        for (int i = 0; i < OTHER_SAMPLER_TYPE_OPTIONS.length; i++) {
-            if (rigViewModel.getSamplingRigType().equals(OTHER_SAMPLER_TYPE_OPTIONS[i])) {
-                otherSamplingTypeSpinner.setSelection(i);
-                break;
-            }
-        }
-
-        samplerIndexEditText.setText(rigViewModel.getIndex());
-
-
-//        startLengthEditText.setText(Utility.formatDouble(rigViewModel.getStartDepth()));
-
-
-//        endLengthEditText.setText(Utility.formatDouble(rigViewModel.getEndDepth()));
-
-
-        countEditText.setText(String.valueOf(rigViewModel.getCount()));
-
 
         if (DataManager.getHole(holeId).isApproved()) {
             classPeopleCountEditText.setEnabled(false);
@@ -349,6 +434,8 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
             startTimeButton.setEnabled(false);
             endTimeButton.setEnabled(false);
             timeDurationTextView.setEnabled(false);
+            addDetailedButton.setEnabled(false);
+            removeDetailedButton.setEnabled(false);
         }
 
         refreshLock = false;

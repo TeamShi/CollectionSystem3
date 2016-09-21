@@ -163,9 +163,9 @@ public class Hole implements Serializable {
 
         this.originalSampleIndex = 1;
 
-        disturbanceSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
-        rockSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
-        waterSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
+        disturbanceSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "扰动样");
+        rockSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "岩样");
+        waterSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "水样");
     }
 
     public String getProjectName() {

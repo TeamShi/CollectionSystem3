@@ -927,9 +927,9 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeLength())));
 
-        result.add(generateRigInfoCell(rig.getSamplerDrillType()));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillDiameter())));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerDrillLength())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength())));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength())));
@@ -990,36 +990,21 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
         result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
 
-        if (rig.getSamplingRigType().equals("扰动样")) {
-            result.add(generateRigInfoCell("扰动样"));
-        } else if (rig.getSamplingRigType().equals("岩样")) {
-            result.add(generateRigInfoCell("岩样"));
-        } else if (rig.getSamplingRigType().equals("水样")) {
-            result.add(generateRigInfoCell("水样"));
-        }
+//        if (rig.getSamplingRigType().equals("扰动样")) {
+//            result.add(generateRigInfoCell("扰动样"));
+//        } else if (rig.getSamplingRigType().equals("岩样")) {
+//            result.add(generateRigInfoCell("岩样"));
+//        } else if (rig.getSamplingRigType().equals("水样")) {
+//            result.add(generateRigInfoCell("水样"));
+//        }
+
+        result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -1031,15 +1016,32 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        if (rig.getSamplingRigType().equals("水样")) {
-            result.add(generateRigInfoCell(rig.getIndex()));
-            result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
-            result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
-        } else {
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+
+//        if (rig.getSamplingRigType().equals("水样")) {
+//            result.add(generateRigInfoCell(rig.getIndex()));
+//            result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
+//            result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
+//        } else {
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
-        }
+//        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

@@ -8,6 +8,7 @@ import java.util.Calendar;
  */
 public class OtherSamplingRig extends Rig {
     private ArrayList<OtherSamplingDetail> details;
+    private String samplingType;
 
     public static class OtherSamplingDetail {
         private String samplingType;
@@ -69,14 +70,16 @@ public class OtherSamplingRig extends Rig {
         }
     }
 
-    public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
+    public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime, String samplingType) {
         super(classPeopleCount, date, startTime, endTime);
         this.details = new ArrayList<>();
+        this.samplingType = samplingType;
     }
 
-    public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime, ArrayList<OtherSamplingDetail> details) {
+    public OtherSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime, ArrayList<OtherSamplingDetail> details, String samplingType) {
         super(classPeopleCount, date, startTime, endTime);
         this.details = details;
+        this.samplingType = samplingType;
     }
 
     public ArrayList<OtherSamplingDetail> getDetails() {
@@ -87,8 +90,16 @@ public class OtherSamplingRig extends Rig {
         this.details = details;
     }
 
+    public String getSamplingType() {
+        return samplingType;
+    }
+
+    public void setSamplingType(String samplingType) {
+        this.samplingType = samplingType;
+    }
+
     public OtherSamplingRig deepCopy() {
-        OtherSamplingRig temp = new OtherSamplingRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone());
+        OtherSamplingRig temp = new OtherSamplingRig(classPeopleCount, (Calendar) date.clone(), (Calendar) startTime.clone(), (Calendar) endTime.clone(), samplingType);
 
         for (OtherSamplingDetail detail : details) {
             temp.getDetails().add(detail.deepCopy());

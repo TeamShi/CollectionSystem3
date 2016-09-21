@@ -185,23 +185,24 @@ public class HtmlParser extends Parser{
         try {
             String[][] oriRigEventArray = null;
             String htmlTemp = null;
-            switch (otherSamplingRig.getSamplingRigType()) {
-                case "扰动样":
-                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
-                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
-                    break;
-                case "岩样":
-                    oriRigEventArray = convertRockSmpl(hole, otherSamplingRig, "<br/>");
-                    htmlTemp = SMPL_ROCK_RIG_EVENT_TEMPLATE;
-                    break;
-                case "水样":
-                    oriRigEventArray = convertWaterSmpl(hole, otherSamplingRig, "<br/>");
-                    htmlTemp = SMPL_WATER_RIG_EVENT_TEMPLATE;
-                    break;
-                default:
-                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
-                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
-            }
+            // FIXME: 2016/9/21
+//            switch (otherSamplingRig.getSamplingRigType()) {
+//                case "扰动样":
+//                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
+//                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
+//                    break;
+//                case "岩样":
+//                    oriRigEventArray = convertRockSmpl(hole, otherSamplingRig, "<br/>");
+//                    htmlTemp = SMPL_ROCK_RIG_EVENT_TEMPLATE;
+//                    break;
+//                case "水样":
+//                    oriRigEventArray = convertWaterSmpl(hole, otherSamplingRig, "<br/>");
+//                    htmlTemp = SMPL_WATER_RIG_EVENT_TEMPLATE;
+//                    break;
+//                default:
+//                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
+//                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
+//            }
 
             write(path, oriRigEventArray, assetManager.open(htmlTemp));
         } catch (IOException e) {

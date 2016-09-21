@@ -729,8 +729,8 @@ public class Parser {
             } else if (isOtherSmpl) {
                 //todo difference with original sampling
                 OtherSamplingRig otherSamplingRig = (OtherSamplingRig) rigs.get(i);
-
-                sb.append(otherSamplingRig.getSamplingRigType()).append("#");
+                // // FIXME: 2016/9/21 
+//                sb.append(otherSamplingRig.getSamplingRigType()).append("#");
                 //钻杆
                 sb.append("").append("#");
                 sb.append("").append("#");
