@@ -163,11 +163,11 @@ public class HtmlParser extends Parser{
             return null;
         }
 
-        String[][] oriRigEventArray = convertNormalSmpl(originalSamplingRig, "<br/>");
+        String[][] oriRigEventArray = convertOriSmpl(hole, originalSamplingRig, "<br/>");
         String path = dirPath + "originalSampling.html";
 
         try {
-            write(path, oriRigEventArray, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+            write(path, oriRigEventArray, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -185,24 +185,22 @@ public class HtmlParser extends Parser{
         try {
             String[][] oriRigEventArray = null;
             String htmlTemp = null;
-            // FIXME: 2016/9/21
-//            switch (otherSamplingRig.getSamplingRigType()) {
-//                case "扰动样":
-//                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
-//                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
-//                    break;
-//                case "岩样":
-//                    oriRigEventArray = convertRockSmpl(hole, otherSamplingRig, "<br/>");
-//                    htmlTemp = SMPL_ROCK_RIG_EVENT_TEMPLATE;
-//                    break;
-//                case "水样":
-//                    oriRigEventArray = convertWaterSmpl(hole, otherSamplingRig, "<br/>");
-//                    htmlTemp = SMPL_WATER_RIG_EVENT_TEMPLATE;
-//                    break;
-//                default:
-//                    oriRigEventArray = convertNormalSmpl(otherSamplingRig, "<br/>");
-//                    htmlTemp = BASIC_RIG_EVENT_TEMPLATE;
-//            }
+            switch (otherSamplingRig.getSamplingType()) {
+                case "扰动样":
+                    oriRigEventArray = convertDistributionSmpl(hole, otherSamplingRig, "<br/>");
+                    htmlTemp = SMPL_EARTH_RIG_EVENT_TEMPLATE;
+                    break;
+                case "岩样":
+                    oriRigEventArray = convertRockSmpl(hole, otherSamplingRig, "<br/>");
+                    htmlTemp = SMPL_ROCK_RIG_EVENT_TEMPLATE;
+                    break;
+                case "水样":
+                    oriRigEventArray = convertWaterSmpl(hole, otherSamplingRig, "<br/>");
+                    htmlTemp = SMPL_WATER_RIG_EVENT_TEMPLATE;
+                    break;
+                default:
+                    break;
+            }
 
             write(path, oriRigEventArray, assetManager.open(htmlTemp));
         } catch (IOException e) {
@@ -212,7 +210,6 @@ public class HtmlParser extends Parser{
 
         return path;
     }
-
 
 
     public static String parseDstRig(String dirPath, DSTRig dstRig, AssetManager assetManager) {
@@ -233,35 +230,6 @@ public class HtmlParser extends Parser{
         return path;
     }
 
-    //    private static String[][] convertSmpl(Hole hole) {
-//        ArrayList<OriginalSamplingRig> smplRigEvents = new ArrayList<>();
-//        for (RigEvent rigEvent : hole.getRigList()) {
-//            if (rigEvent instanceof OriginalSamplingRig) {
-//                smplRigEvents.add((OriginalSamplingRig) rigEvent);
-//            }
-//        }
-//        int rows = smplRigEvents.size();
-//        String[][] resultData = new String[rows][];
-//        for (int i = 0; i < rows; i++) {
-//            OriginalSamplingRig samplingRig = smplRigEvents.get(i);
-//            StringBuffer sb = new StringBuffer();
-//            sb.append(samplingRig.getClassPeopleCount()).append("#");
-//            sb.append(formatCalendarDateString(samplingRig.getDate(), "yyyy年MM月dd日")).append("#");
-//            sb.append(formatCalendarDateString(samplingRig.getStartTime(), "hh时mm分")).append("#");
-//            sb.append(formatCalendarDateString(samplingRig.getEndTime(), "hh时mm分")).append("#");
-//
-//            sb.append(samplingRig.getSampleStatus()).append("#");
-//            sb.append(samplingRig.getSamplerType()).append("#");
-//            sb.append(samplingRig.getSampleId()).append("#");
-//            sb.append(samplingRig.getSampleDiameter()).append("#");
-//            sb.append(samplingRig.getSampleStartDepth()).append("#");
-//            sb.append(samplingRig.getSampleEndDepth()).append("#");
-//            sb.append(samplingRig.getSampleCount()).append("#");
-//
-//            resultData[i] = convert2Array(sb.toString());
-//        }
-//        return resultData;
-//    }
 
     public static boolean parseHole(String outPath, Hole hole, InputStream inputStream) throws IOException {
         String[][] data = convertHole(hole, "<br/>");

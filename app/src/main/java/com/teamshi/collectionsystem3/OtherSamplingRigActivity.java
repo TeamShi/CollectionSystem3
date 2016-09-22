@@ -296,7 +296,6 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         previewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo: JHONSON: preview other sampling according to
 //                otherType = "扰动样" "岩样" "水样";
             Project project = DataManager.getProject();
             Hole hole = DataManager.getHole(holeId);
