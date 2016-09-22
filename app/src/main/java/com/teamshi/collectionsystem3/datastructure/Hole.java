@@ -517,26 +517,28 @@ public class Hole implements Serializable {
 
 
         for (OtherSamplingRig.OtherSamplingDetail detail : rockSample.getDetails()) {
-            for (int i = 0; i < viewList.size(); i++) {
-                boolean hitFlag = false;
+            boolean hitFlag = false;
 
+            for (int i = 0; i < viewList.size(); i++) {
                 if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
                     if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
                         viewList.add(i, detail);
+                        hitFlag = true;
                         break;
                     }
                 } else if (viewList.get(i) instanceof CalculatingRig) {
                     if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
                         viewList.add(i, detail);
+                        hitFlag = true;
                         break;
                     }
                 } else {
                     continue;
                 }
+            }
 
-                if (!hitFlag) {
-                    viewList.add(detail);
-                }
+            if (!hitFlag) {
+                viewList.add(detail);
             }
         }
 
@@ -547,11 +549,13 @@ public class Hole implements Serializable {
                 if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
                     if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
                         viewList.add(i, detail);
+                        hitFlag = true;
                         break;
                     }
                 } else if (viewList.get(i) instanceof CalculatingRig) {
                     if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
                         viewList.add(i, detail);
+                        hitFlag = true;
                         break;
                     }
                 } else {
