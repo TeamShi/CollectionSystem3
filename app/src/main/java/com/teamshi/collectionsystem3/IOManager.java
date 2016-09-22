@@ -206,9 +206,11 @@ public class IOManager {
      */
     public static boolean updateProject(Project project) {
         File projectDir = new File(APP_DATA, project.getProjectName());
-        projectDir.mkdirs();
-        String fileName = projectDir.getAbsolutePath() + File.separator + project.getProjectName() + ".ser";
-        File projectFile = parseObjectToFile(project, fileName);
+        if(!projectDir.exists()) {
+            projectDir.mkdirs();
+        }
+        String projectSerFilePath = projectDir.getAbsolutePath() + File.separator + project.getProjectName() + ".ser";
+        File projectFile = parseObjectToFile(project, projectSerFilePath);
         if (null == projectFile) {
             return false;
         } else {
@@ -247,13 +249,22 @@ public class IOManager {
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parse(APP_TEMP, project, assetManager);
-        if (null == path) {
-            Log.d(TAG, "IOManager.previewProject: path isnull");
-            return null;
-        } else {
-            Uri uri = Uri.fromFile(new File(path));
-            urls.add(uri.toString());
+        List<String> paths = new ArrayList<>();
+        String allRigsPath = HtmlParser.parse(APP_TEMP, project, assetManager);
+//        String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, assetManager);
+//        String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, assetManager);
+        paths.add(allRigsPath);
+//        paths.add(sptRigsPath);
+//        paths.add(dstRigsPath);
+
+        for(String path : paths ) {
+            if (null == path) {
+                Log.d(TAG, "IOManager.previewProject: " + path + " isnull");
+                return null;
+            } else {
+                Uri uri = Uri.fromFile(new File(path));
+                urls.add(uri.toString());
+            }
         }
 
         return urls;

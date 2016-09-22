@@ -34,14 +34,14 @@ public class Parser {
         return row;
     }
 
-    protected static String[][] convertSpt(SPTRig sptRig, String BR) {
+    protected static String[][] convertSpt(SPTRig sptRig, int index , String BR) {
         String[][] resultData = new String[1][];
         StringBuffer sb = new StringBuffer();
         if (null == BR || "".equals(BR)) {
             BR = ",";
         }
 
-        sb.append("1").append("#");
+        sb.append(index).append("#");
 
         sb.append(formatCalendarDateString(sptRig.getDate(), "MM月")).append("#");
         sb.append(formatCalendarDateString(sptRig.getDate(), "dd日")).append("#");
@@ -241,6 +241,40 @@ public class Parser {
         return resultData;
     }
 
+    protected static String[][] convertWaterSmplDetail(Hole hole, OtherSamplingRig.OtherSamplingDetail detail, String BR) {
+        if (null == BR || "".equals(BR)) {
+            BR = ",";
+        }
+
+        StringBuffer sb = new StringBuffer();
+        String[][] resultData = new String[1][];
+
+        //外业
+        sb.append(detail.getIndex()).append("#");
+        //实验室
+        sb.append("").append("#");
+        //钻孔编号
+        sb.append(hole.getHoleId()).append("#");
+        //取样日期
+        sb.append(formatCalendarDateString(detail.getDate(), "MM月dd日")).append("#");
+
+        //取样地点
+        sb.append("").append("#");
+
+        //深度
+        sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+
+        resultData[0] = convert2Array(sb.toString());
+
+        return resultData;
+    }
+
     protected static String[][] convertRockSmpl(Hole hole, OtherSamplingRig otherSamplingRig, String BR) {
         if (null == BR || "".equals(BR)) {
             BR = ",";
@@ -288,6 +322,92 @@ public class Parser {
         return resultData;
     }
 
+    protected static String[][] convertEarthSmplDetail(Hole hole, OtherSamplingRig.OtherSamplingDetail detail, String BR) {
+        StringBuffer sb;
+        if (null == BR || "".equals(BR)) {
+            BR = ",";
+        }
+
+        sb = new StringBuffer();
+        String[][] resultData = new String[1][];
+
+        //实验室
+        sb.append("").append("#");
+
+        //外业
+        sb.append(detail.getIndex()).append("#");
+
+        //勘探点编号
+        sb.append(hole.getHoleId()).append("#");
+
+        //取样地点
+        sb.append("").append("#");
+
+        //试件深度
+        sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+
+        //野外鉴定名称
+        sb.append("").append("#");
+
+        //工程名称
+        sb.append("").append("#");
+
+        //原状土(直径)
+        sb.append("").append("#");
+
+        //扰动土(千克)
+        sb.append("").append("#");
+
+        //备注
+        sb.append(NA).append("#");
+
+        resultData[0] = convert2Array(sb.toString());
+
+        return resultData;
+    }
+
+    protected static String[][] convertRockSmplDetail(Hole hole, OtherSamplingRig.OtherSamplingDetail detail, String BR) {
+        if (null == BR || "".equals(BR)) {
+            BR = ",";
+        }
+
+        StringBuffer sb = new StringBuffer();
+        String[][] resultData = new String[1][];
+
+        //外业
+        sb.append(detail.getIndex()).append("#");
+        //实验室
+        sb.append("").append("#");
+        //钻孔编号
+        sb.append(hole.getHoleId()).append("#");
+        //取样地点
+        sb.append("").append("#");
+        //深度
+        sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+
+        //岩石名称
+        sb.append(detail.getLastRockName()).append("#");
+        sb.append(detail.getLastRockSaturation()).append("#");
+
+        //工程名称
+        sb.append("").append("#");
+
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+
+        resultData[0] = convert2Array(sb.toString());
+
+        return resultData;
+    }
+
     protected static String[][] convertHole(Hole hole, String BR) {
         if (BR == null || BR.equals("")) {
             BR = ",";
@@ -295,8 +415,8 @@ public class Parser {
         ArrayList<Rig> rigs = hole.getRigIndexViewList();
         int rows = rigs.size();
         String[][] resultData = new String[rows][];
-        String initialWaterDepth ;
-        String finalWaterDepth ;
+        String initialWaterDepth;
+        String finalWaterDepth;
         for (int i = 0; i < rows; i++) {
             Rig rig = rigs.get(i);
             boolean isNAType = rig instanceof NARig;
@@ -307,7 +427,7 @@ public class Parser {
             boolean isOriSmpl = rig instanceof OriginalSamplingRig;
             boolean isOtherSmplDetail = rig instanceof OtherSamplingRig.OtherSamplingDetail;
 
-            if(i == 0) {
+            if (i == 0) {
                 initialWaterDepth = Utility.formatDouble(hole.getInitialWaterDepth());
                 finalWaterDepth = Utility.formatDouble(hole.getFinalWaterDepth());
             } else {
@@ -751,7 +871,7 @@ public class Parser {
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(NA).append("#");
             } else if (isOtherSmplDetail) {
-                OtherSamplingRig.OtherSamplingDetail  detail = (OtherSamplingRig.OtherSamplingDetail) rigs.get(i);
+                OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rigs.get(i);
                 sb.append(detail.getSamplingType()).append("#");
                 //钻杆
                 sb.append("").append("#");

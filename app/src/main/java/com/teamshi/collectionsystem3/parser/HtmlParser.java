@@ -144,7 +144,7 @@ public class HtmlParser extends Parser{
             return null;
         }
 
-        String[][] sptEventArray = convertSpt(sptRig, "<br/>");
+        String[][] sptEventArray = convertSpt(sptRig,1, "<br/>");
         String path = dirPath + "sptRigEvent.html";
 
         try {
