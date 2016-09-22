@@ -260,6 +260,7 @@
                         android:layout_gravity="center"/>
                 </TableRow>
 
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_1">
                     <EditText
@@ -277,6 +278,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_1"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -290,6 +292,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_1"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -313,6 +316,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_2">
                     <EditText
@@ -330,6 +335,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_2"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -343,6 +349,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_2"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -366,6 +373,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_3">
                     <EditText
@@ -383,6 +392,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_3"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -396,6 +406,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_3"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -419,6 +430,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_4">
                     <EditText
@@ -436,6 +449,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_4"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -449,6 +463,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_4"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -472,6 +487,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_5">
                     <EditText
@@ -489,6 +506,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_5"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -502,6 +520,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_5"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -525,6 +544,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_6">
                     <EditText
@@ -542,6 +563,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_6"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -555,6 +577,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_6"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -578,6 +601,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_7">
                     <EditText
@@ -595,6 +620,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_7"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -608,6 +634,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_7"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -631,6 +658,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_8">
                     <EditText
@@ -648,6 +677,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_8"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -661,6 +691,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_8"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -684,6 +715,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_9">
                     <EditText
@@ -701,6 +734,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_9"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -714,6 +748,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_9"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -737,6 +772,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_10">
                     <EditText
@@ -754,6 +791,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_10"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -767,6 +805,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_10"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -790,6 +829,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_11">
                     <EditText
@@ -807,6 +848,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_11"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -820,6 +862,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_11"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -843,6 +886,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_12">
                     <EditText
@@ -860,6 +905,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_12"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -873,6 +919,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_12"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -896,6 +943,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_13">
                     <EditText
@@ -913,6 +962,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_13"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -926,6 +976,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_13"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -949,6 +1000,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_14">
                     <EditText
@@ -966,6 +1019,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_14"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -979,6 +1033,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_14"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1002,6 +1057,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_15">
                     <EditText
@@ -1019,6 +1076,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_15"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1032,6 +1090,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_15"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1055,6 +1114,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_16">
                     <EditText
@@ -1072,6 +1133,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_16"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1085,6 +1147,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_16"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1108,6 +1171,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_17">
                     <EditText
@@ -1125,6 +1190,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_17"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1138,6 +1204,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_17"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1161,6 +1228,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_18">
                     <EditText
@@ -1178,6 +1247,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_18"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1191,6 +1261,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_18"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1214,6 +1285,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_19">
                     <EditText
@@ -1231,6 +1304,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_19"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1244,6 +1318,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_19"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1267,6 +1342,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_20">
                     <EditText
@@ -1284,6 +1361,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_20"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1297,6 +1375,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_20"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1320,6 +1399,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_21">
                     <EditText
@@ -1337,6 +1418,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_21"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1350,6 +1432,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_21"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1373,6 +1456,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_22">
                     <EditText
@@ -1390,6 +1475,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_22"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1403,6 +1489,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_22"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1426,6 +1513,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_23">
                     <EditText
@@ -1443,6 +1532,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_23"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1456,6 +1546,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_23"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1479,6 +1570,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_24">
                     <EditText
@@ -1496,6 +1589,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_24"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1509,6 +1603,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_24"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1532,6 +1627,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_25">
                     <EditText
@@ -1549,6 +1646,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_25"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1562,6 +1660,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_25"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1585,6 +1684,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_26">
                     <EditText
@@ -1602,6 +1703,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_26"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1615,6 +1717,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_26"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1638,6 +1741,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_27">
                     <EditText
@@ -1655,6 +1760,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_27"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1668,6 +1774,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_27"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1691,6 +1798,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_28">
                     <EditText
@@ -1708,6 +1817,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_28"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1721,6 +1831,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_28"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1744,6 +1855,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_29">
                     <EditText
@@ -1761,6 +1874,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_29"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1774,6 +1888,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_29"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1797,6 +1912,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_30">
                     <EditText
@@ -1814,6 +1931,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_30"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1827,6 +1945,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_30"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1850,6 +1969,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_31">
                     <EditText
@@ -1867,6 +1988,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_31"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1880,6 +2002,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_31"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1903,6 +2026,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_32">
                     <EditText
@@ -1920,6 +2045,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_32"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1933,6 +2059,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_32"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1956,6 +2083,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_33">
                     <EditText
@@ -1973,6 +2102,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_33"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1986,6 +2116,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_33"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2009,6 +2140,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_34">
                     <EditText
@@ -2026,6 +2159,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_34"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2039,6 +2173,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_34"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2062,6 +2197,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_35">
                     <EditText
@@ -2079,6 +2216,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_35"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2092,6 +2230,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_35"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2115,6 +2254,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_36">
                     <EditText
@@ -2132,6 +2273,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_36"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2145,6 +2287,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_36"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2168,6 +2311,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_37">
                     <EditText
@@ -2185,6 +2330,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_37"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2198,6 +2344,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_37"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2221,6 +2368,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_38">
                     <EditText
@@ -2238,6 +2387,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_38"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2251,6 +2401,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_38"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2274,6 +2425,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_39">
                     <EditText
@@ -2291,6 +2444,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_39"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2304,6 +2458,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_39"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2327,6 +2482,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_40">
                     <EditText
@@ -2344,6 +2501,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_40"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2357,6 +2515,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_40"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2380,6 +2539,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_41">
                     <EditText
@@ -2397,6 +2558,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_41"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2410,6 +2572,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_41"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2433,6 +2596,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_42">
                     <EditText
@@ -2450,6 +2615,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_42"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2463,6 +2629,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_42"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2486,6 +2653,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_43">
                     <EditText
@@ -2503,6 +2672,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_43"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2516,6 +2686,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_43"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2539,6 +2710,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_44">
                     <EditText
@@ -2556,6 +2729,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_44"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2569,6 +2743,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_44"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2592,6 +2767,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_45">
                     <EditText
@@ -2609,6 +2786,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_45"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2622,6 +2800,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_45"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2645,6 +2824,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_46">
                     <EditText
@@ -2662,6 +2843,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_46"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2675,6 +2857,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_46"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2698,6 +2881,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_47">
                     <EditText
@@ -2715,6 +2900,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_47"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2728,6 +2914,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_47"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2751,6 +2938,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_48">
                     <EditText
@@ -2768,6 +2957,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_48"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2781,6 +2971,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_48"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2804,6 +2995,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_49">
                     <EditText
@@ -2821,6 +3014,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_49"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2834,6 +3028,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_49"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2857,6 +3052,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_50">
                     <EditText
@@ -2874,6 +3071,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_50"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2887,6 +3085,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_50"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2910,6 +3109,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_51">
                     <EditText
@@ -2927,6 +3128,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_51"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2940,6 +3142,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_51"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2963,6 +3166,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_52">
                     <EditText
@@ -2980,6 +3185,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_52"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2993,6 +3199,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_52"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3016,6 +3223,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_53">
                     <EditText
@@ -3033,6 +3242,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_53"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3046,6 +3256,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_53"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3069,6 +3280,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_54">
                     <EditText
@@ -3086,6 +3299,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_54"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3099,6 +3313,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_54"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3122,6 +3337,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_55">
                     <EditText
@@ -3139,6 +3356,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_55"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3152,6 +3370,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_55"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3175,6 +3394,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_56">
                     <EditText
@@ -3192,6 +3413,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_56"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3205,6 +3427,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_56"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3228,6 +3451,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_57">
                     <EditText
@@ -3245,6 +3470,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_57"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3258,6 +3484,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_57"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3281,6 +3508,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_58">
                     <EditText
@@ -3298,6 +3527,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_58"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3311,6 +3541,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_58"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3334,6 +3565,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_59">
                     <EditText
@@ -3351,6 +3584,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_59"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3364,6 +3598,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_59"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3387,6 +3622,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_60">
                     <EditText
@@ -3404,6 +3641,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_60"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3417,6 +3655,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_60"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3440,6 +3679,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_61">
                     <EditText
@@ -3457,6 +3698,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_61"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3470,6 +3712,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_61"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3493,6 +3736,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_62">
                     <EditText
@@ -3510,6 +3755,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_62"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3523,6 +3769,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_62"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3546,6 +3793,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_63">
                     <EditText
@@ -3563,6 +3812,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_63"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3576,6 +3826,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_63"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3599,6 +3850,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_64">
                     <EditText
@@ -3616,6 +3869,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_64"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3629,6 +3883,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_64"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3652,6 +3907,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_65">
                     <EditText
@@ -3669,6 +3926,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_65"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3682,6 +3940,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_65"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3705,6 +3964,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_66">
                     <EditText
@@ -3722,6 +3983,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_66"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3735,6 +3997,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_66"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3758,6 +4021,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_67">
                     <EditText
@@ -3775,6 +4040,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_67"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3788,6 +4054,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_67"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3811,6 +4078,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_68">
                     <EditText
@@ -3828,6 +4097,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_68"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3841,6 +4111,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_68"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3864,6 +4135,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_69">
                     <EditText
@@ -3881,6 +4154,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_69"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3894,6 +4168,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_69"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3917,6 +4192,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_70">
                     <EditText
@@ -3934,6 +4211,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_70"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3947,6 +4225,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_70"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3970,6 +4249,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_71">
                     <EditText
@@ -3987,6 +4268,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_71"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4000,6 +4282,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_71"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4023,6 +4306,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_72">
                     <EditText
@@ -4040,6 +4325,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_72"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4053,6 +4339,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_72"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4076,6 +4363,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_73">
                     <EditText
@@ -4093,6 +4382,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_73"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4106,6 +4396,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_73"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4129,6 +4420,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_74">
                     <EditText
@@ -4146,6 +4439,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_74"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4159,6 +4453,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_74"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4182,6 +4477,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_75">
                     <EditText
@@ -4199,6 +4496,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_75"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4212,6 +4510,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_75"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4235,6 +4534,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_76">
                     <EditText
@@ -4252,6 +4553,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_76"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4265,6 +4567,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_76"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4288,6 +4591,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_77">
                     <EditText
@@ -4305,6 +4610,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_77"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4318,6 +4624,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_77"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4341,6 +4648,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_78">
                     <EditText
@@ -4358,6 +4667,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_78"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4371,6 +4681,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_78"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4394,6 +4705,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_79">
                     <EditText
@@ -4411,6 +4724,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_79"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4424,6 +4738,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_79"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4447,6 +4762,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_80">
                     <EditText
@@ -4464,6 +4781,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_start_depth_80"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4477,6 +4795,7 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_end_depth_80"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4500,6 +4819,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
             </TableLayout>
         </ScrollView>
     </LinearLayout>

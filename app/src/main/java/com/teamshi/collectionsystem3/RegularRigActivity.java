@@ -406,6 +406,24 @@ public class RegularRigActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                         }
+                    } else if (rigViewModel.getPipeNumber() == DataManager.getHole(holeId).getPipeCount()) {
+                        try {
+                            rigViewModel.setPipeLength(Double.parseDouble(s.toString()));
+                            DataManager.getHole(holeId).getPipeArray().set(DataManager.getHole(holeId).getPipeArray().size() - 1, Double.parseDouble(s.toString()));
+                            rigViewModel.setPipeTotalLength(DataManager.getHole(holeId).getTotalPipeLength());
+                            pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                            rigViewModel.setDrillToolTotalLength(rigViewModel.getPipeTotalLength() + rigViewModel.getRockCorePipeLength() + rigViewModel.getDrillBitLength());
+                            rigViewModel.setAccumulatedMeterageLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getDrillPipeRemainLength());
+                            rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
+
+                            rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
+                            rigViewModel.setRigStartEndDepth(Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
+
+                            refreshInfo();
+                        } catch (Exception e) {
+                            pipeLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                        }
                     }
                 }
             }
