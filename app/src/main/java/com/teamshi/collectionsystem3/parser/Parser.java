@@ -20,8 +20,6 @@ import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
  * Created by yueyue on 16/8/21.
  */
 public class Parser {
-    //todo  水位输出
-
     protected static final String NA = "NA";
 
     public static String[] convert2Array(String string) {
@@ -297,6 +295,8 @@ public class Parser {
         ArrayList<Rig> rigs = hole.getRigIndexViewList();
         int rows = rigs.size();
         String[][] resultData = new String[rows][];
+        String initialWaterDepth ;
+        String finalWaterDepth ;
         for (int i = 0; i < rows; i++) {
             Rig rig = rigs.get(i);
             boolean isNAType = rig instanceof NARig;
@@ -306,6 +306,14 @@ public class Parser {
             boolean isTrr = rig instanceof TRRig;
             boolean isOriSmpl = rig instanceof OriginalSamplingRig;
             boolean isOtherSmplDetail = rig instanceof OtherSamplingRig.OtherSamplingDetail;
+
+            if(i == 0) {
+                initialWaterDepth = Utility.formatDouble(hole.getInitialWaterDepth());
+                finalWaterDepth = Utility.formatDouble(hole.getFinalWaterDepth());
+            } else {
+                initialWaterDepth = "";
+                finalWaterDepth = "";
+            }
 
             StringBuffer sb = new StringBuffer();
 
@@ -374,8 +382,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
@@ -441,8 +449,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
@@ -507,8 +515,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
@@ -572,8 +580,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
@@ -671,8 +679,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
@@ -736,8 +744,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
@@ -800,8 +808,8 @@ public class Parser {
 
                 //地下水 只填第一行
                 sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(initialWaterDepth).append("#");
+                sb.append(finalWaterDepth).append("#");
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
