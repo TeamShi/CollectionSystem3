@@ -355,7 +355,9 @@ public class RigIndexActivity extends AppCompatActivity {
 
         waterDepthFlag = false;
 
-        for (int i = 0; i < hole.getRigList().size(); i++) {
+        ArrayList<Rig> viewList = hole.getRigIndexViewList();
+
+        for (int i = 0; i < viewList.size(); i++) {
             TableRow row = new TableRow(this);
 
             row.setBackgroundColor(getResources().getColor(android.R.color.white));
@@ -366,41 +368,41 @@ public class RigIndexActivity extends AppCompatActivity {
 
             row.setLayoutParams(param);
 
-            if (hole.getRigList().get(i) instanceof NARig) {
-                NARig rig = (NARig) hole.getRigList().get(i);
+            if (viewList.get(i) instanceof NARig) {
+                NARig rig = (NARig) viewList.get(i);
 
                 for (TextView tv : generateNARigRowContent(rig)) {
                     row.addView(tv);
                 }
-            } else if (hole.getRigList().get(i) instanceof RegularRig) {
-                RegularRig rig = (RegularRig) hole.getRigList().get(i);
+            } else if (viewList.get(i) instanceof RegularRig) {
+                RegularRig rig = (RegularRig) viewList.get(i);
 
                 for (TextView tv : generateRegularRigRowContent(rig)) {
                     row.addView(tv);
                 }
-            } else if (hole.getRigList().get(i) instanceof SPTRig) {
-                SPTRig rig = (SPTRig) hole.getRigList().get(i);
+            } else if (viewList.get(i) instanceof SPTRig) {
+                SPTRig rig = (SPTRig) viewList.get(i);
 
                 for (TextView tv : generateSPTRigRowContent(rig)) {
                     row.addView(tv);
                 }
-            } else if (hole.getRigList().get(i) instanceof DSTRig) {
-                DSTRig rig = (DSTRig) hole.getRigList().get(i);
+            } else if (viewList.get(i) instanceof DSTRig) {
+                DSTRig rig = (DSTRig) viewList.get(i);
                 for (TextView tv : generateDSTRigRowContent(rig)) {
                     row.addView(tv);
                 }
-            } else if (hole.getRigList().get(i) instanceof TRRig) {
-                TRRig rig = (TRRig) hole.getRigList().get(i);
+            } else if (viewList.get(i) instanceof TRRig) {
+                TRRig rig = (TRRig) viewList.get(i);
                 for (TextView tv : generateTRRigRowContent(rig)) {
                     row.addView(tv);
                 }
-            } else if (hole.getRigList().get(i) instanceof OriginalSamplingRig) {
-                OriginalSamplingRig rig = (OriginalSamplingRig) hole.getRigList().get(i);
+            } else if (viewList.get(i) instanceof OriginalSamplingRig) {
+                OriginalSamplingRig rig = (OriginalSamplingRig) viewList.get(i);
                 for (TextView tv : generateOriginalSamplingRigContent(rig)) {
                     row.addView(tv);
                 }
-            } else if (hole.getRigList().get(i) instanceof OtherSamplingRig) {
-                OtherSamplingRig rig = (OtherSamplingRig) hole.getRigList().get(i);
+            } else if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
+                OtherSamplingRig.OtherSamplingDetail rig = (OtherSamplingRig.OtherSamplingDetail) viewList.get(i);
                 for (TextView tv : generateOtherSamplingRigContent(rig)) {
                     row.addView(tv);
                 }
@@ -980,7 +982,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateOtherSamplingRigContent(OtherSamplingRig rig) {
+    private ArrayList<TextView> generateOtherSamplingRigContent(OtherSamplingRig.OtherSamplingDetail rig) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -990,13 +992,13 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
         result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
 
-//        if (rig.getSamplingRigType().equals("扰动样")) {
-//            result.add(generateRigInfoCell("扰动样"));
-//        } else if (rig.getSamplingRigType().equals("岩样")) {
-//            result.add(generateRigInfoCell("岩样"));
-//        } else if (rig.getSamplingRigType().equals("水样")) {
-//            result.add(generateRigInfoCell("水样"));
-//        }
+        if (rig.getSamplingType().equals("扰动样")) {
+            result.add(generateRigInfoCell("扰动样"));
+        } else if (rig.getSamplingType().equals("岩样")) {
+            result.add(generateRigInfoCell("岩样"));
+        } else if (rig.getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell("水样"));
+        }
 
         result.add(generateRigInfoCell(""));
 
@@ -1033,15 +1035,15 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-//        if (rig.getSamplingRigType().equals("水样")) {
-//            result.add(generateRigInfoCell(rig.getIndex()));
-//            result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
-//            result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
-//        } else {
+        if (rig.getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell(rig.getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
+        } else {
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
-//        }
+        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

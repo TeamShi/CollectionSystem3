@@ -10,7 +10,7 @@ public class OtherSamplingRig extends Rig {
     private ArrayList<OtherSamplingDetail> details;
     private String samplingType;
 
-    public static class OtherSamplingDetail {
+    public static class OtherSamplingDetail extends Rig {
         private String samplingType;
         private String index;
         private double startDepth;
@@ -18,6 +18,7 @@ public class OtherSamplingRig extends Rig {
         private String count;
 
         public OtherSamplingDetail(String samplingType, String index, double startDepth, double endDepth, String count) {
+            super("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
             this.samplingType = samplingType;
             this.index = index;
             this.startDepth = startDepth;

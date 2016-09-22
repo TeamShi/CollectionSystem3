@@ -3,6 +3,7 @@ package com.teamshi.collectionsystem3.datastructure;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 /**
  * Created by Alfred on 16/7/14.
@@ -477,6 +478,93 @@ public class Hole implements Serializable {
 
     public ArrayList<Rig> getRigList() {
         return rigList;
+    }
+
+    public ArrayList<Rig> getRigIndexViewList() {
+        ArrayList<Rig> viewList = new ArrayList<>();
+
+        for (Rig rig : rigList) {
+            viewList.add(rig);
+        }
+
+
+        for (OtherSamplingRig.OtherSamplingDetail detail : disturbanceSample.getDetails()) {
+            boolean hitFlag = false;
+
+            for (int i = 0; i < viewList.size(); i++) {
+                if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
+                    if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
+                        viewList.add(i, detail);
+                        hitFlag = true;
+                        break;
+                    }
+                } else if (viewList.get(i) instanceof CalculatingRig) {
+                    if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
+                        viewList.add(i, detail);
+                        hitFlag = true;
+                        break;
+                    }
+                } else {
+                    continue;
+                }
+            }
+
+            if (!hitFlag) {
+                viewList.add(detail);
+            }
+        }
+
+
+
+        for (OtherSamplingRig.OtherSamplingDetail detail : rockSample.getDetails()) {
+            for (int i = 0; i < viewList.size(); i++) {
+                boolean hitFlag = false;
+
+                if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
+                    if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
+                        viewList.add(i, detail);
+                        break;
+                    }
+                } else if (viewList.get(i) instanceof CalculatingRig) {
+                    if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
+                        viewList.add(i, detail);
+                        break;
+                    }
+                } else {
+                    continue;
+                }
+
+                if (!hitFlag) {
+                    viewList.add(detail);
+                }
+            }
+        }
+
+        for (OtherSamplingRig.OtherSamplingDetail detail : waterSample.getDetails()) {
+            boolean hitFlag = false;
+
+            for (int i = 0; i < viewList.size(); i++) {
+                if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
+                    if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
+                        viewList.add(i, detail);
+                        break;
+                    }
+                } else if (viewList.get(i) instanceof CalculatingRig) {
+                    if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
+                        viewList.add(i, detail);
+                        break;
+                    }
+                } else {
+                    continue;
+                }
+            }
+
+            if (!hitFlag) {
+                viewList.add(detail);
+            }
+        }
+
+        return viewList;
     }
 
     public void setRigList(ArrayList<Rig> rigList) {
