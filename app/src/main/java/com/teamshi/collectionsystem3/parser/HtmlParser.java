@@ -8,6 +8,7 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
 import org.jsoup.Jsoup;
@@ -19,12 +20,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
 
-public class HtmlParser extends Parser{
+public class HtmlParser extends Parser {
 
     public static String PROJECT_OVERVIEW_TEMPLATE = "Project.html";
     public static String BASIC_RIG_EVENT_TEMPLATE = "RigEventTable.html";
@@ -82,7 +84,7 @@ public class HtmlParser extends Parser{
             }
         }
 
-        FileWriter fileWriter = new FileWriter(outPath,false);
+        FileWriter fileWriter = new FileWriter(outPath, false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(doc.outerHtml());
         bufferedWriter.close();
@@ -126,7 +128,6 @@ public class HtmlParser extends Parser{
         for (Hole hole : holes) {
             try {
                 parseHole(dirPath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
-////            write(dirPath + "/sptRig_" + hole.getHoleId() + ".html", sptRigEventArray, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
 ////            write(dirPath + "/dstRig_" + hole.getHoleId() + ".html", dstRigEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -144,7 +145,7 @@ public class HtmlParser extends Parser{
             return null;
         }
 
-        String[][] sptEventArray = convertSpt(sptRig,1, "<br/>");
+        String[][] sptEventArray = convertSpt(sptRig, 1, "<br/>");
         String path = dirPath + "sptRigEvent.html";
 
         try {
@@ -306,6 +307,80 @@ public class HtmlParser extends Parser{
 
         return true;
 
+    }
+
+    public static String parseSptRigs(String dirPath, Project project, AssetManager assetManager) {
+        if (project == null) {
+            return null;
+        }
+
+        ArrayList<SPTRig> sptRigs = new ArrayList<>();
+        for (Hole hole : project.getHoleList()) {
+            for (Rig rig : hole.getRigIndexViewList()) {
+                if (rig instanceof SPTRig) {
+                    sptRigs.add((SPTRig) rig);
+                }
+            }
+        }
+
+        if (sptRigs.isEmpty()) {
+            return null;
+        }
+
+        String[][] sptResults = null;
+        for (int i = 0, len = sptRigs.size(); i < len; i++) {
+            SPTRig sptRig = sptRigs.get(i);
+            String[][] result = convertSpt(sptRig, (i + 1), "<br/>");
+            sptResults = sptResults == null ? result : Utility.concat(sptResults, result);
+        }
+
+        String path = dirPath + "sptRigs.html";
+
+        try {
+            write(path, sptResults, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
+    }
+
+    public static String parseDstRigs(String dirPath, Project project, AssetManager assetManager) {
+        if (project == null) {
+            return null;
+        }
+
+        ArrayList<DSTRig> dstRigs = new ArrayList<>();
+        for (Hole hole : project.getHoleList()) {
+            for (Rig rig : hole.getRigIndexViewList()) {
+                if (rig instanceof DSTRig) {
+                    DSTRig dst = (DSTRig) rig;
+                    dstRigs.add(dst);
+                }
+            }
+        }
+
+        if (dstRigs.isEmpty()) {
+            return null;
+        }
+
+        String[][] dstResults = null;
+        for (DSTRig dstRig : dstRigs) {
+            String[][] result = convertDst(dstRig);
+            dstResults = null == dstResults ? result : Utility.concat(dstResults, result);
+        }
+
+        String path = dirPath + "dstRigs.html";
+
+        try {
+            write(path, dstResults, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
     }
 
 }

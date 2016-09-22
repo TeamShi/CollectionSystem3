@@ -251,16 +251,15 @@ public class IOManager {
 
         List<String> paths = new ArrayList<>();
         String allRigsPath = HtmlParser.parse(APP_TEMP, project, assetManager);
-//        String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, assetManager);
-//        String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, assetManager);
+        String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, assetManager);
+        String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, assetManager);
         paths.add(allRigsPath);
-//        paths.add(sptRigsPath);
-//        paths.add(dstRigsPath);
+        paths.add(sptRigsPath);
+        paths.add(dstRigsPath);
 
         for(String path : paths ) {
             if (null == path) {
                 Log.d(TAG, "IOManager.previewProject: " + path + " isnull");
-                return null;
             } else {
                 Uri uri = Uri.fromFile(new File(path));
                 urls.add(uri.toString());
