@@ -253,9 +253,16 @@ public class IOManager {
         String allRigsPath = HtmlParser.parse(APP_TEMP, project, assetManager);
         String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, assetManager);
         String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, assetManager);
+        String earthSmplRigsPath = HtmlParser.parseEarthSmlRigs(APP_TEMP, project, assetManager);
+        String waterSmplRigsPath = HtmlParser.parseWaterSmlRigs(APP_TEMP, project, assetManager);
+        String rockSmplRigsPath = HtmlParser.parseRockSmlRigs(APP_TEMP, project, assetManager);
+
         paths.add(allRigsPath);
         paths.add(sptRigsPath);
         paths.add(dstRigsPath);
+        paths.add(earthSmplRigsPath);
+        paths.add(waterSmplRigsPath);
+        paths.add(rockSmplRigsPath);
 
         for(String path : paths ) {
             if (null == path) {

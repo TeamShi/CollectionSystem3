@@ -21,7 +21,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
@@ -375,6 +377,139 @@ public class HtmlParser extends Parser {
 
         try {
             write(path, dstResults, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
+    }
+
+    public static String parseEarthSmlRigs(String dirPath, Project project, AssetManager assetManager) {
+        if (project == null) {
+            return null;
+        }
+
+        HashMap<Hole,OtherSamplingRig.OtherSamplingDetail> distributionDetails = new HashMap<>();
+        HashMap<Hole,OriginalSamplingRig> originalSampling= new HashMap<>();
+        for (Hole hole : project.getHoleList()) {
+            for (Rig rig : hole.getRigIndexViewList()) {
+                if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
+                    OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
+                    if(detail.getSamplingType().equals("扰动样")) {
+                        distributionDetails.put(hole,detail);
+                    }
+                }else if( rig instanceof OriginalSamplingRig) {
+                    OriginalSamplingRig originalSamplingRig = (OriginalSamplingRig) rig;
+                    originalSampling.put(hole,originalSamplingRig);
+                }
+            }
+        }
+
+        if (distributionDetails.isEmpty()) {
+            return null;
+        }
+
+        String[][] earthResults = null;
+        String[][] distributionResults = null;
+        for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : distributionDetails.entrySet()) {
+            String[][] result = convertEarthSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
+            distributionResults = null == distributionResults ? result : Utility.concat(distributionResults, result);
+        }
+
+        String[][] originalSmplResults = null;
+        for (Map.Entry<Hole,OriginalSamplingRig> entry : originalSampling.entrySet()) {
+            String[][] result = convertOriSmpl(entry.getKey(),entry.getValue(),"<BR/>");
+            originalSmplResults = null == originalSmplResults ? result : Utility.concat(originalSmplResults, result);
+        }
+
+        distributionResults = distributionResults == null ? new String [0][]:distributionResults;
+        originalSmplResults = originalSmplResults == null ? new String [0][]:originalSmplResults;
+
+        earthResults = Utility.concat(distributionResults,originalSmplResults);
+
+        String path = dirPath + "smplEarthRigs.html";
+
+        try {
+            write(path, earthResults, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
+    }
+
+    public static String parseWaterSmlRigs(String dirPath, Project project, AssetManager assetManager) {
+        if (project == null) {
+            return null;
+        }
+
+        HashMap<Hole,OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
+        for (Hole hole : project.getHoleList()) {
+            for (Rig rig : hole.getRigIndexViewList()) {
+                if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
+                    OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
+                    if(detail.getSamplingType().equals("水样")) {
+                        details.put(hole, detail);
+                    }
+                }
+            }
+        }
+
+        if (details.isEmpty()) {
+            return null;
+        }
+
+        String[][] smplWaterResults = null;
+        for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
+            String[][] result = convertWaterSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
+            smplWaterResults = null == smplWaterResults ? result : Utility.concat(smplWaterResults, result);
+        }
+
+        String path = dirPath + "smplWaterRigs.html";
+
+        try {
+            write(path, smplWaterResults, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return path;
+    }
+
+    public static String parseRockSmlRigs(String dirPath, Project project, AssetManager assetManager) {
+        if (project == null) {
+            return null;
+        }
+
+        HashMap<Hole,OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
+        for (Hole hole : project.getHoleList()) {
+            for (Rig rig : hole.getRigIndexViewList()) {
+                if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
+                    OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
+                    if(detail.getSamplingType().equals("岩样")) {
+                        details.put(hole, detail);
+                    }
+                }
+            }
+        }
+
+        if (details.isEmpty()) {
+            return null;
+        }
+
+        String[][] smplRockResults = null;
+        for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
+            String[][] result = convertRockSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
+            smplRockResults = null == smplRockResults ? result : Utility.concat(smplRockResults, result);
+        }
+
+        String path = dirPath + "smplRockRigs.html";
+
+        try {
+            write(path, smplRockResults, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
