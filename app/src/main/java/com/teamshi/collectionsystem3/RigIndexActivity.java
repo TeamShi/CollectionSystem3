@@ -916,9 +916,9 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
 
         result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
-        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
-        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
-        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell("原状样"));
 
@@ -988,9 +988,9 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
 
         result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
-        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
-        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
-        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(""));
 
         if (rig.getSamplingType().equals("扰动样")) {
             result.add(generateRigInfoCell("扰动样"));
@@ -1028,7 +1028,11 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        if (rig.getSamplingType().equals("岩样") || rig.getSamplingType().equals("扰动样")) {
+            result.add(generateRigInfoCell(rig.getIndex()));
+        } else {
+            result.add(generateRigInfoCell(""));
+        }
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));

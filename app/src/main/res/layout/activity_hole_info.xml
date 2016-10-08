@@ -264,7 +264,7 @@
 
                 <TableRow>
                     <TextView
-                        android:text="里程(km)"
+                        android:text="里程(m)"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
@@ -344,7 +344,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"
-                        android:inputType="numberDecimal|numberSigned"
+                        android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/edittext_pump_type"
                         android:singleLine="true"
                         />

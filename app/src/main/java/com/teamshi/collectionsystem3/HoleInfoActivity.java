@@ -659,15 +659,12 @@ public class HoleInfoActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!refreshLock) {
-                    try {
-                        holeViewModel.setOffset(Double.parseDouble(s.toString()));
-                        offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
+                try {
+                    holeViewModel.setOffset(Double.parseDouble(s.toString()));
+                    offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
 
-                        refreshInfo();
-                    } catch (Exception e) {
-                        offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-                    }
+                } catch (Exception e) {
+                    offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }
             }
         });
@@ -1205,7 +1202,6 @@ public class HoleInfoActivity extends AppCompatActivity {
 
         mileageEditText.setText(Utility.formatDouble(holeViewModel.getMileage()));
         engineTypeEditText.setText(holeViewModel.getEngineType());
-        offsetEditText.setText(Utility.formatDouble(holeViewModel.getOffset()));
 
         if (holeViewModel.getOffset() == 0) {
             offsetNegativeButton.setEnabled(false);
@@ -1217,6 +1213,8 @@ public class HoleInfoActivity extends AppCompatActivity {
             offsetNegativeButton.setEnabled(false);
             offsetPositiveButton.setEnabled(true);
         }
+
+        offsetEditText.setText(Utility.formatDouble(holeViewModel.getOffset()));
 
         pumpTypeEditText.setText(holeViewModel.getPumpType());
         holeHeightEditText.setText(Utility.formatDouble(holeViewModel.getHoleHeight()));

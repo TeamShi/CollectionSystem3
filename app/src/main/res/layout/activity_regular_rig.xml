@@ -306,7 +306,8 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:nextFocusDown="@+id/edittext_regular_rig_drill_bit_diameter"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_drill_bit_diameter"
+                        android:inputType="numberDecimal" />
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -451,7 +452,8 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_index"/>
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_index"
+                        android:inputType="numberDecimal" />
                 </TableRow>
 
                 <TableRow>
