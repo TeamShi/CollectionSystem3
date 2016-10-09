@@ -30,7 +30,6 @@ import java.util.ArrayList;
  * @author johnson
  */
 public class XlsParser extends Parser {
-    //todo xls headers updated
     public static String[] HOLE_HEADER = new String[]{"勘察点名称", "工程名称", "阶 段", "冠 词", "里  程", "偏移量", "高  程", "经距X", "纬距Y", "位置描述", "记录者", "记录日期", "复核者", "复核日期", "附  注", "孔  深"};
     public static String[] Rig_HEADER = new String[]{"班次/人数", "日期", "开始时间", "结束时间", "计",
             "作业项目", "钻杆编号", "钻杆长度", "钻杆总长", "岩心管直径", "岩心管长度", "钻头类型",

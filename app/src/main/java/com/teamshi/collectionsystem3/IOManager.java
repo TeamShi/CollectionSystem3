@@ -206,7 +206,7 @@ public class IOManager {
      */
     public static boolean updateProject(Project project) {
         File projectDir = new File(APP_DATA, project.getProjectName());
-        if(!projectDir.exists()) {
+        if (!projectDir.exists()) {
             projectDir.mkdirs();
         }
         String projectSerFilePath = projectDir.getAbsolutePath() + File.separator + project.getProjectName() + ".ser";
@@ -264,7 +264,7 @@ public class IOManager {
         paths.add(waterSmplRigsPath);
         paths.add(rockSmplRigsPath);
 
-        for(String path : paths ) {
+        for (String path : paths) {
             if (null == path) {
                 Log.d(TAG, "IOManager.previewProject: " + path + " isnull");
             } else {
@@ -337,21 +337,16 @@ public class IOManager {
 //
 //    }
 
-    public static boolean saveBitmapToJpg(Bitmap bitmap, String jpgPath) {
-        try {
-            File photo = new File(jpgPath);
-            Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(newBitmap);
-            canvas.drawColor(Color.WHITE);
-            canvas.drawBitmap(bitmap, 0, 0, null);
-            OutputStream stream = new FileOutputStream(photo);
-            newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-            stream.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public static void saveBitmapToJpg(Bitmap bitmap, String jpgPath) throws IOException {
+        File photo = new File(jpgPath);
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        OutputStream stream = new FileOutputStream(photo);
+        newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+        stream.close();
+
     }
 
     public static void scanMediaFile(Context context, File photo) {
@@ -393,9 +388,9 @@ public class IOManager {
         for (File file : files) {
             String fileName = file.getName();
             int indexOfDot = fileName.lastIndexOf(".");
-            String fileType = fileName.substring( indexOfDot+ 1, fileName.length());
+            String fileType = fileName.substring(indexOfDot + 1, fileName.length());
             if (("jpg").equals(fileType)) {
-                imagesMap.put(fileName.substring(0,indexOfDot), file);
+                imagesMap.put(fileName.substring(0, indexOfDot), file);
             }
         }
 

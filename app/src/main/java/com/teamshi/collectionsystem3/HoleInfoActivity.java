@@ -179,7 +179,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                     }
                     background = new BitmapDrawable(bitmap);
                     if (null != background) {
-                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "签名保存成功", Toast.LENGTH_SHORT).show();
                         recorderTextView.setText("");
                         recorderTextView.setBackground(background);
                     } else {
@@ -202,7 +202,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                     }
                     background = new BitmapDrawable(bitmap);
                     if (null != background) {
-                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "签名保存成功", Toast.LENGTH_SHORT).show();
                         reviewerTextView.setText("");
                         reviewerTextView.setBackground(background);
                     } else {
@@ -225,7 +225,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                     }
                     background = new BitmapDrawable(bitmap);
                     if (null != background) {
-                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "签名保存成功", Toast.LENGTH_SHORT).show();
                         signApproverTextView.setText("");
                         signApproverTextView.setBackground(background);
                     } else {
@@ -248,7 +248,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                     }
                     background = new BitmapDrawable(bitmap);
                     if (null != background) {
-                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "签名保存成功", Toast.LENGTH_SHORT).show();
                         machineMonitorTextView.setText("");
                         machineMonitorTextView.setBackground(background);
                     } else {
@@ -271,7 +271,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                     }
                     background = new BitmapDrawable(bitmap);
                     if (null != background) {
-                        Toast.makeText(this, "签名保存失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "签名保存成功", Toast.LENGTH_SHORT).show();
                         classMonitorTextView.setText("");
                         classMonitorTextView.setBackground(background);
                     } else {

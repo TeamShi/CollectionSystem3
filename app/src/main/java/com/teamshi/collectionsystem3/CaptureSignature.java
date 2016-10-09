@@ -72,10 +72,11 @@ public class CaptureSignature extends Activity {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 String storagePath = getIntent().getStringExtra("path");
                 Intent intent = new Intent(CaptureSignature.this, HoleInfoActivity.class);
-                if (IOManager.saveBitmapToJpg(signatureBitmap, storagePath)) {
+                try {
+                    IOManager.saveBitmapToJpg(signatureBitmap, storagePath);
                     Log.d("SingaturPad", "签名已保存" +storagePath);
                     setResult(Activity.RESULT_OK, intent);
-                } else {
+                } catch (IOException e){
                     Log.d("SingaturPad", "签名保存失败" +storagePath);
                     setResult(Activity.RESULT_CANCELED, intent);
                 }
