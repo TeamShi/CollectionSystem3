@@ -11,6 +11,7 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Parser {
         return row;
     }
 
-    protected static String[][] convertSpt(SPTRig sptRig, int index , String BR) {
+    protected static String[][] convertSpt(SPTRig sptRig, int index, String BR) {
         String[][] resultData = new String[1][];
         StringBuffer sb = new StringBuffer();
         if (null == BR || "".equals(BR)) {
@@ -408,28 +409,68 @@ public class Parser {
         return resultData;
     }
 
+    protected static void generateEarthSampleIndexInfo(Rig nextRig, StringBuffer sb) {
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (
+                ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样")
+                        || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样")
+        )) {
+            sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
+
+        } else {
+            sb.append("").append("#");
+        }
+    }
+
+    protected static void generateWaterSampleInfo(Rig nextRig, StringBuffer sb) {
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (
+                ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("水样")
+        )) {
+            sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
+            sb.append(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) +
+                    " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())).append("#");
+            sb.append(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())).append("#");
+            sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
+
+        } else {
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+        }
+    }
+
     protected static String[][] convertHole(Hole hole, String BR) {
         if (BR == null || BR.equals("")) {
             BR = ",";
         }
         ArrayList<Rig> rigs = hole.getRigIndexViewList();
         int rows = rigs.size();
-        String[][] resultData = new String[rows][];
+        List<String> resultList = new ArrayList<>();
         String initialWaterDepth;
         String finalWaterDepth;
+        boolean hasStart = false;
         for (int i = 0; i < rows; i++) {
             Rig rig = rigs.get(i);
+            boolean isOtherSmplDetail = rig instanceof OtherSamplingRig.OtherSamplingDetail;
+            if (isOtherSmplDetail) {
+                continue;
+            }
+
+            Rig nextRig = i < rows - 1 ? rigs.get(i + 1) : null;
             boolean isNAType = rig instanceof NARig;
             boolean isRegular = rig instanceof RegularRig;
             boolean isSpt = rig instanceof SPTRig;
             boolean isDst = rig instanceof DSTRig;
             boolean isTrr = rig instanceof TRRig;
             boolean isOriSmpl = rig instanceof OriginalSamplingRig;
-            boolean isOtherSmplDetail = rig instanceof OtherSamplingRig.OtherSamplingDetail;
 
-            if (i == 0) {
+            if (hasStart) {
                 initialWaterDepth = Utility.formatDouble(hole.getInitialWaterDepth());
                 finalWaterDepth = Utility.formatDouble(hole.getFinalWaterDepth());
+                hasStart = true;
             } else {
                 initialWaterDepth = "";
                 finalWaterDepth = "";
@@ -483,15 +524,13 @@ public class Parser {
                 sb.append("").append("#");
 
                 //土样
-                sb.append("").append("#");
+                generateEarthSampleIndexInfo(nextRig, sb);
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
 
                 //水样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                generateWaterSampleInfo(nextRig, sb);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
@@ -550,15 +589,13 @@ public class Parser {
                 sb.append("").append("#");
 
                 //土样
-                sb.append("").append("#");
+                generateEarthSampleIndexInfo(nextRig, sb);
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
 
                 //水样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                generateWaterSampleInfo(nextRig, sb);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
@@ -616,15 +653,13 @@ public class Parser {
                 sb.append("100%").append("#");
 
                 //土样
-                sb.append("").append("#");
+                generateEarthSampleIndexInfo(nextRig, sb);
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
 
                 //水样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                generateWaterSampleInfo(nextRig, sb);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
@@ -681,15 +716,13 @@ public class Parser {
                 sb.append("").append("#");
 
                 //土样
-                sb.append("").append("#");
+                generateEarthSampleIndexInfo(nextRig, sb);
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
 
                 //水样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                generateWaterSampleInfo(nextRig, sb);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
@@ -780,15 +813,13 @@ public class Parser {
                 sb.append("").append("#");
 
                 //土样
-                sb.append("").append("#");
+                generateEarthSampleIndexInfo(nextRig, sb);
                 sb.append("").append("#");
                 sb.append("").append("#");
                 sb.append("").append("#");
 
                 //水样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                generateWaterSampleInfo(nextRig, sb);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
@@ -870,73 +901,16 @@ public class Parser {
 
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(NA).append("#");
-            } else if (isOtherSmplDetail) {
-                OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rigs.get(i);
-                sb.append(detail.getSamplingType()).append("#");
-                //钻杆
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //岩芯管
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //钻头
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //进尺
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //护壁措施
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //孔内情况
-                sb.append("").append("#");
-
-                //岩心采取
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //土样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //水样
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-
-                //地层
-                sb.append("").append("#");//编号, 四类普通钻,编号加1
-                sb.append("").append("#"); //底层深度 本次累计进尺
-                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append("").append("#"); // 名称及岩性
-                sb.append("").append("#"); //岩层等级
-
-                //地下水 只填第一行
-                sb.append("").append("#");
-                sb.append(initialWaterDepth).append("#");
-                sb.append(finalWaterDepth).append("#");
-                sb.append("").append("#");
-
-                //特殊情况记录 最后一个string 特殊处理
-                sb.append(NA).append("#");
             }
 
-            resultData[i] = convert2Array(sb.toString());
+            resultList.add(sb.toString());
+
+        }
+
+        String[] resultArray = resultList.toArray(new String[resultList.size()]);
+        String[][] resultData = new String[resultArray.length][];
+        for (int i = 0, len = resultData.length; i < len; i++) {
+            resultData[i] = convert2Array(resultArray[i]);
         }
 
         return resultData;

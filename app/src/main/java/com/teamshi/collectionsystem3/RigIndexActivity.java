@@ -542,7 +542,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
-                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
         } else {
             result.add(generateRigInfoCell(""));
@@ -628,7 +628,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
-                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
         } else {
             result.add(generateRigInfoCell(""));
@@ -714,7 +714,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
-                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
         } else {
             result.add(generateRigInfoCell(""));
@@ -800,7 +800,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
-                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
         } else {
             result.add(generateRigInfoCell(""));
@@ -933,7 +933,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
-                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
         } else {
             result.add(generateRigInfoCell(""));
