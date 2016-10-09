@@ -521,6 +521,27 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
             countEditText.setText(String.valueOf(rigViewModel.getCount()));
         }
 
+        String holeId = getIntent().getStringExtra("holeId");
+        int rigIndex = getIntent().getIntExtra("rigIndex", 0);
+
+        if (rigIndex != DataManager.getHole(holeId).getRigList().size() - 1) {
+            classPeopleCountEditText.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            timeDurationTextView.setEnabled(false);
+            pipeDiameterSpinner.setEnabled(false);
+            drillToolTotalLengthTextView.setEnabled(false);
+            drillPipeRemainLengthTextView.setEnabled(false);
+            roundTripMeterageLengthTextView.setEnabled(false);
+            accumulatedMeterageLengthTextView.setEnabled(false);
+            samplerTypeSpinner.setEnabled(false);
+            samplerIndexEditText.setEnabled(false);
+            startLengthEditText.setEnabled(false);
+            endLengthEditText.setEnabled(false);
+            countEditText.setEnabled(false);
+        }
+
         if (DataManager.getHole(holeId).isApproved()) {
             classPeopleCountEditText.setEnabled(false);
             dateButton.setEnabled(false);

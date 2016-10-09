@@ -433,6 +433,70 @@
                 </TableRow>
 
                 <TableRow>
+                    <TextView
+                        android:text="取样器类型"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="编号"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="取样起深(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="取样止深(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="数量"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+
+                </TableRow>
+
+                <TableRow>
                     <Spinner
                         android:layout_weight="1"
                         android:id="@+id/spinner_original_sampling_sampler_type"

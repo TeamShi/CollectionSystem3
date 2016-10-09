@@ -371,29 +371,29 @@ public class RigIndexActivity extends AppCompatActivity {
             if (viewList.get(i) instanceof NARig) {
                 NARig rig = (NARig) viewList.get(i);
 
-                for (TextView tv : generateNARigRowContent(rig)) {
+                for (TextView tv : generateNARigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof RegularRig) {
                 RegularRig rig = (RegularRig) viewList.get(i);
 
-                for (TextView tv : generateRegularRigRowContent(rig)) {
+                for (TextView tv : generateRegularRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof SPTRig) {
                 SPTRig rig = (SPTRig) viewList.get(i);
 
-                for (TextView tv : generateSPTRigRowContent(rig)) {
+                for (TextView tv : generateSPTRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof DSTRig) {
                 DSTRig rig = (DSTRig) viewList.get(i);
-                for (TextView tv : generateDSTRigRowContent(rig)) {
+                for (TextView tv : generateDSTRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof TRRig) {
                 TRRig rig = (TRRig) viewList.get(i);
-                for (TextView tv : generateTRRigRowContent(rig)) {
+                for (TextView tv : generateTRRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof OriginalSamplingRig) {
@@ -402,10 +402,7 @@ public class RigIndexActivity extends AppCompatActivity {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
-                OtherSamplingRig.OtherSamplingDetail rig = (OtherSamplingRig.OtherSamplingDetail) viewList.get(i);
-                for (TextView tv : generateOtherSamplingRigContent(rig)) {
-                    row.addView(tv);
-                }
+                continue;
             }
 
             row.setTag(i);
@@ -503,7 +500,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return tv;
     }
 
-    private ArrayList<TextView> generateNARigRowContent(NARig rig) {
+    private ArrayList<TextView> generateNARigRowContent(NARig rig, Rig nextRig) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -543,14 +540,28 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+        } else {
+            result.add(generateRigInfoCell(""));
+        }
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -575,7 +586,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateRegularRigRowContent(RegularRig rig) {
+    private ArrayList<TextView> generateRegularRigRowContent(RegularRig rig, Rig nextRig) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -615,14 +626,28 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCoreLength())));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCorePickPercentage() * 100) + "%"));
 
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+        } else {
+            result.add(generateRigInfoCell(""));
+        }
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -647,7 +672,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateSPTRigRowContent(SPTRig rig) {
+    private ArrayList<TextView> generateSPTRigRowContent(SPTRig rig, Rig nextRig) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -687,14 +712,28 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
         result.add(generateRigInfoCell("100%"));
 
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+        } else {
+            result.add(generateRigInfoCell(""));
+        }
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -719,7 +758,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateDSTRigRowContent(DSTRig rig) {
+    private ArrayList<TextView> generateDSTRigRowContent(DSTRig rig, Rig nextRig) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -759,14 +798,28 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+        } else {
+            result.add(generateRigInfoCell(""));
+        }
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -791,7 +844,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateTRRigRowContent(TRRig rig) {
+    private ArrayList<TextView> generateTRRigRowContent(TRRig rig, Rig nextRig) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -878,14 +931,28 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("原状样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+        } else {
+            result.add(generateRigInfoCell(""));
+        }
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (nextRig != null
+                && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
+                && ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("水样")) {
+            result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -958,94 +1025,6 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        if (!waterDepthFlag) {
-            result.add(generateRigInfoCell(hole.getInitialWaterDepth() < 0? "未见": Utility.formatDouble(hole.getInitialWaterDepth())));
-            result.add(generateRigInfoCell(hole.getFinalWaterDepth() < 0? "未见": Utility.formatDouble(hole.getFinalWaterDepth())));
-
-            waterDepthFlag = true;
-        } else {
-            result.add(generateRigInfoCell(""));
-            result.add(generateRigInfoCell(""));
-        }
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-
-        return result;
-    }
-
-    private ArrayList<TextView> generateOtherSamplingRigContent(OtherSamplingRig.OtherSamplingDetail rig) {
-        ArrayList<TextView> result = new ArrayList<>();
-
-        result.add(generateRigInfoCell(rig.getClassPeopleCount()));
-
-        result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        if (rig.getSamplingType().equals("扰动样")) {
-            result.add(generateRigInfoCell("扰动样"));
-        } else if (rig.getSamplingType().equals("岩样")) {
-            result.add(generateRigInfoCell("岩样"));
-        } else if (rig.getSamplingType().equals("水样")) {
-            result.add(generateRigInfoCell("水样"));
-        }
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        if (rig.getSamplingType().equals("岩样") || rig.getSamplingType().equals("扰动样")) {
-            result.add(generateRigInfoCell(rig.getIndex()));
-        } else {
-            result.add(generateRigInfoCell(""));
-        }
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-
-        if (rig.getSamplingType().equals("水样")) {
-            result.add(generateRigInfoCell(rig.getIndex()));
-            result.add(generateRigInfoCell(Utility.formatDouble(rig.getStartDepth()) + " ~ " + Utility.formatDouble(rig.getEndDepth())));
-            result.add(generateRigInfoCell(String.valueOf(rig.getCount())));
-        } else {
-            result.add(generateRigInfoCell(""));
-            result.add(generateRigInfoCell(""));
-            result.add(generateRigInfoCell(""));
-        }
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
