@@ -16,14 +16,16 @@ public class OtherSamplingRig extends Rig {
         private double startDepth;
         private double endDepth;
         private String count;
+        private int diameter;
 
-        public OtherSamplingDetail(String samplingType, String index, double startDepth, double endDepth, String count) {
+        public OtherSamplingDetail(String samplingType, String index, double startDepth, double endDepth, String count, int diameter) {
             super("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance());
             this.samplingType = samplingType;
             this.index = index;
             this.startDepth = startDepth;
             this.endDepth = endDepth;
             this.count = count;
+            this.diameter = diameter;
         }
 
         public String getSamplingType() {
@@ -66,8 +68,16 @@ public class OtherSamplingRig extends Rig {
             this.count = count;
         }
 
+        public int getDiameter() {
+            return diameter;
+        }
+
+        public void setDiameter(int diameter) {
+            this.diameter = diameter;
+        }
+
         public OtherSamplingDetail deepCopy() {
-            return new OtherSamplingDetail(samplingType, index, startDepth, endDepth, count);
+            return new OtherSamplingDetail(samplingType, index, startDepth, endDepth, count, diameter);
         }
     }
 
