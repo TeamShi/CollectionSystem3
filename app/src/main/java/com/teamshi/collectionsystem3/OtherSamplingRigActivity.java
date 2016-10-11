@@ -2,7 +2,9 @@ package com.teamshi.collectionsystem3;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -58,6 +60,7 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
 
     private TableRow[] detailedInfoTableRows = new TableRow[80];
     private EditText[] detailedInfoIndexEditTexts = new EditText[80];
+    private EditText[] detailedInfoDiameterEditTexts = new EditText[80];
     private EditText[] detailedInfoStartDepthEditTexts = new EditText[80];
     private EditText[] detailedInfoEndDepthEditTexts = new EditText[80];
     private EditText[] detailedInfoCountEditTexts = new EditText[80];
@@ -113,6 +116,66 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                 }
             });
             detailedInfoIndexEditTexts[i - 1] = detailedInfoIndexEditText;
+
+            final EditText detailedInfoDiameterEditText = (EditText) findViewById(getResources().getIdentifier("edittext_other_sampling_detail_diameter_" + i, "id", getPackageName()));
+            detailedInfoDiameterEditText.setTag(i);
+            detailedInfoDiameterEditText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OtherSamplingRigActivity.this);
+                    AlertDialog typeDialog;
+                    final CharSequence[] items = {"130", "110", "91", "其他"};
+                    builder.setTitle("直径");
+
+                    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0:
+                                case 1:
+                                case 2:
+                                    rigViewModel.getDetails().get((Integer) detailedInfoDiameterEditText.getTag() - 1).setDiameter(Integer.parseInt(items[which].toString()));
+                                    detailedInfoDiameterEditText.setText(items[which].toString());
+                                    break;
+                                case 3:
+                                    rigViewModel.getDetails().get((Integer) detailedInfoDiameterEditText.getTag() - 1).setDiameter(0);
+                                    detailedInfoDiameterEditText.setText("0");
+                                    break;
+                            }
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    typeDialog = builder.create();
+                    typeDialog.show();
+                }
+            });
+            detailedInfoDiameterEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (!refreshLock) {
+                        try {
+                            rigViewModel.getDetails().get((Integer) detailedInfoDiameterEditText.getTag() - 1).setDiameter(Integer.parseInt(s.toString()));
+                            detailedInfoDiameterEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        } catch (Exception e) {
+                            detailedInfoDiameterEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                        }
+                    }
+                }
+            });
+            detailedInfoDiameterEditTexts[i - 1] = detailedInfoDiameterEditText;
 
             final EditText detailedInfoStartDepthEditText = (EditText) findViewById(getResources().getIdentifier("edittext_other_sampling_detail_start_depth_" + i, "id", getPackageName()));
             detailedInfoStartDepthEditText.setTag(i);
@@ -273,11 +336,11 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (rigViewModel.getSamplingType().equals("扰动样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
                 } else if (rigViewModel.getSamplingType().equals("岩样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
                 } else if (rigViewModel.getSamplingType().equals("水样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
                 }
 
                 refreshInfo();
@@ -393,11 +456,13 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                 detailedInfoTableRows[i].setVisibility(View.VISIBLE);
 
                 detailedInfoIndexEditTexts[i].setText(rigViewModel.getDetails().get(i).getIndex());
+                detailedInfoDiameterEditTexts[i].setText(String.valueOf(rigViewModel.getDetails().get(i).getDiameter()));
                 detailedInfoStartDepthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDetails().get(i).getStartDepth()));
                 detailedInfoEndDepthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDetails().get(i).getEndDepth()));
                 detailedInfoCountEditTexts[i].setText(rigViewModel.getDetails().get(i).getCount());
 
                 detailedInfoIndexEditTexts[i].setEnabled(true);
+                detailedInfoDiameterEditTexts[i].setEnabled(true);
                 detailedInfoStartDepthEditTexts[i].setEnabled(true);
                 detailedInfoEndDepthEditTexts[i].setEnabled(true);
                 detailedInfoCountEditTexts[i].setEnabled(true);
@@ -405,11 +470,13 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                 detailedInfoTableRows[i].setVisibility(View.GONE);
 
                 detailedInfoIndexEditTexts[i].setText("");
+                detailedInfoDiameterEditTexts[i].setText("");
                 detailedInfoStartDepthEditTexts[i].setText("");
                 detailedInfoEndDepthEditTexts[i].setText("");
                 detailedInfoCountEditTexts[i].setText("");
 
                 detailedInfoIndexEditTexts[i].setEnabled(false);
+                detailedInfoDiameterEditTexts[i].setEnabled(false);
                 detailedInfoStartDepthEditTexts[i].setEnabled(false);
                 detailedInfoEndDepthEditTexts[i].setEnabled(false);
                 detailedInfoCountEditTexts[i].setEnabled(false);

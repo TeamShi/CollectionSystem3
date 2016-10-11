@@ -633,12 +633,15 @@ public class RigIndexActivity extends AppCompatActivity {
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
                 && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getDiameter())));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
         } else {
             result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
@@ -719,12 +722,15 @@ public class RigIndexActivity extends AppCompatActivity {
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
                 && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getDiameter())));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
         } else {
             result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
@@ -805,12 +811,15 @@ public class RigIndexActivity extends AppCompatActivity {
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
                 && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getDiameter())));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
         } else {
             result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
@@ -938,12 +947,15 @@ public class RigIndexActivity extends AppCompatActivity {
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
                 && (((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("扰动样") || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样"))) {
             result.add(generateRigInfoCell(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getDiameter())));
+            result.add(generateRigInfoCell(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())));
+            result.add(generateRigInfoCell(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())));
         } else {
             result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
         }
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
 
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail

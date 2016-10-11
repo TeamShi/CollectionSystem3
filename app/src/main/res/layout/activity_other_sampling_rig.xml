@@ -230,7 +230,7 @@
                         android:gravity="center"
                         android:layout_gravity="center"/>
                     <TextView
-                        android:text="编号"
+                        android:text="直径(mm)"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_hint"
@@ -272,11 +272,24 @@
                 </TableRow>
 
 
+
                 <TableRow
                     android:id="@+id/table_row_sampling_detail_1">
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_1"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_1"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_1"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -341,6 +354,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_2"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_2"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_2"
                         />
                     <EditText
@@ -391,6 +416,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_3"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_3"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_3"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -455,6 +492,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_4"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_4"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_4"
                         />
                     <EditText
@@ -505,6 +554,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_5"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_5"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_5"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -569,6 +630,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_6"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_6"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_6"
                         />
                     <EditText
@@ -619,6 +692,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_7"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_7"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_7"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -683,6 +768,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_8"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_8"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_8"
                         />
                     <EditText
@@ -733,6 +830,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_9"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_9"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_9"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -797,6 +906,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_10"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_10"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_10"
                         />
                     <EditText
@@ -847,6 +968,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_11"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_11"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_11"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -911,6 +1044,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_12"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_12"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_12"
                         />
                     <EditText
@@ -961,6 +1106,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_13"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_13"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_13"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1025,6 +1182,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_14"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_14"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_14"
                         />
                     <EditText
@@ -1075,6 +1244,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_15"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_15"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_15"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1139,6 +1320,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_16"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_16"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_16"
                         />
                     <EditText
@@ -1189,6 +1382,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_17"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_17"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_17"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1253,6 +1458,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_18"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_18"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_18"
                         />
                     <EditText
@@ -1303,6 +1520,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_19"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_19"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_19"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1367,6 +1596,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_20"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_20"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_20"
                         />
                     <EditText
@@ -1417,6 +1658,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_21"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_21"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_21"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1481,6 +1734,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_22"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_22"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_22"
                         />
                     <EditText
@@ -1531,6 +1796,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_23"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_23"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_23"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1595,6 +1872,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_24"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_24"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_24"
                         />
                     <EditText
@@ -1645,6 +1934,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_25"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_25"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_25"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1709,6 +2010,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_26"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_26"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_26"
                         />
                     <EditText
@@ -1759,6 +2072,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_27"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_27"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_27"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1823,6 +2148,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_28"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_28"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_28"
                         />
                     <EditText
@@ -1873,6 +2210,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_29"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_29"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_29"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1937,6 +2286,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_30"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_30"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_30"
                         />
                     <EditText
@@ -1987,6 +2348,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_31"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_31"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_31"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2051,6 +2424,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_32"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_32"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_32"
                         />
                     <EditText
@@ -2101,6 +2486,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_33"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_33"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_33"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2165,6 +2562,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_34"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_34"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_34"
                         />
                     <EditText
@@ -2215,6 +2624,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_35"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_35"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_35"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2279,6 +2700,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_36"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_36"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_36"
                         />
                     <EditText
@@ -2329,6 +2762,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_37"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_37"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_37"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2393,6 +2838,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_38"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_38"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_38"
                         />
                     <EditText
@@ -2443,6 +2900,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_39"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_39"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_39"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2507,6 +2976,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_40"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_40"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_40"
                         />
                     <EditText
@@ -2557,6 +3038,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_41"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_41"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_41"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2621,6 +3114,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_42"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_42"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_42"
                         />
                     <EditText
@@ -2671,6 +3176,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_43"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_43"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_43"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2735,6 +3252,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_44"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_44"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_44"
                         />
                     <EditText
@@ -2785,6 +3314,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_45"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_45"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_45"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2849,6 +3390,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_46"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_46"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_46"
                         />
                     <EditText
@@ -2899,6 +3452,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_47"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_47"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_47"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -2963,6 +3528,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_48"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_48"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_48"
                         />
                     <EditText
@@ -3013,6 +3590,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_49"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_49"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_49"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3077,6 +3666,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_50"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_50"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_50"
                         />
                     <EditText
@@ -3127,6 +3728,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_51"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_51"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_51"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3191,6 +3804,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_52"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_52"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_52"
                         />
                     <EditText
@@ -3241,6 +3866,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_53"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_53"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_53"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3305,6 +3942,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_54"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_54"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_54"
                         />
                     <EditText
@@ -3355,6 +4004,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_55"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_55"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_55"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3419,6 +4080,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_56"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_56"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_56"
                         />
                     <EditText
@@ -3469,6 +4142,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_57"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_57"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_57"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3533,6 +4218,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_58"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_58"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_58"
                         />
                     <EditText
@@ -3583,6 +4280,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_59"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_59"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_59"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3647,6 +4356,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_60"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_60"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_60"
                         />
                     <EditText
@@ -3697,6 +4418,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_61"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_61"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_61"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3761,6 +4494,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_62"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_62"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_62"
                         />
                     <EditText
@@ -3811,6 +4556,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_63"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_63"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_63"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3875,6 +4632,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_64"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_64"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_64"
                         />
                     <EditText
@@ -3925,6 +4694,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_65"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_65"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_65"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -3989,6 +4770,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_66"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_66"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_66"
                         />
                     <EditText
@@ -4039,6 +4832,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_67"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_67"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_67"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4103,6 +4908,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_68"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_68"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_68"
                         />
                     <EditText
@@ -4153,6 +4970,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_69"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_69"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_69"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4217,6 +5046,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_70"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_70"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_70"
                         />
                     <EditText
@@ -4267,6 +5108,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_71"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_71"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_71"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4331,6 +5184,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_72"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_72"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_72"
                         />
                     <EditText
@@ -4381,6 +5246,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_73"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_73"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_73"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4445,6 +5322,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_74"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_74"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_74"
                         />
                     <EditText
@@ -4495,6 +5384,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_75"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_75"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_75"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4559,6 +5460,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_76"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_76"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_76"
                         />
                     <EditText
@@ -4609,6 +5522,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_77"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_77"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_77"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4673,6 +5598,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_78"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_78"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_78"
                         />
                     <EditText
@@ -4723,6 +5660,18 @@
                     <EditText
                         android:layout_weight="1"
                         android:id="@+id/edittext_other_sampling_detail_index_79"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_79"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_79"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -4787,6 +5736,18 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_other_sampling_detail_diameter_80"
+                        />
+                    <EditText
+                        android:layout_weight="1"
+                        android:id="@+id/edittext_other_sampling_detail_diameter_80"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_other_sampling_detail_start_depth_80"
                         />
                     <EditText
@@ -4830,6 +5791,8 @@
                         android:text=""
                         android:enabled="false"/>
                 </TableRow>
+
+
 
 
             </TableLayout>
