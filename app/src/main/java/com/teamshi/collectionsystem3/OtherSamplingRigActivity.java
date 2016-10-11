@@ -273,11 +273,11 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (rigViewModel.getSamplingType().equals("扰动样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 0));
                 } else if (rigViewModel.getSamplingType().equals("岩样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 0));
                 } else if (rigViewModel.getSamplingType().equals("水样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0"));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 0));
                 }
 
                 refreshInfo();
