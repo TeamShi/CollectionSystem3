@@ -186,12 +186,14 @@ public class IOManager {
                 // load *.ser file
                 String projectName = dir.getName();
                 File serFile = new File(dir, projectName + ".ser");
-                Project project = (Project) parseFileToObject(serFile);
-                // remove invalid files with invalid ser file
-                if (null == project) {
-                    Utility.deleteDir(dir);
+                if(serFile.exists()) {
+                    Project project = (Project) parseFileToObject(serFile);
+                    // remove invalid files with invalid ser file
+                    if (null == project) {
+                        Utility.deleteDir(dir);
+                    }
+                    projects.put(projectName, project);
                 }
-                projects.put(projectName, project);
             }
         }
 
