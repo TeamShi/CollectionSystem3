@@ -341,6 +341,7 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                     rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
                 } else if (rigViewModel.getSamplingType().equals("水样")) {
                     rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
+
                 }
 
                 refreshInfo();
