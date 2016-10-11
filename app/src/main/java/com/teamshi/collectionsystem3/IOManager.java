@@ -191,6 +191,7 @@ public class IOManager {
                     // remove invalid files with invalid ser file
                     if (null == project) {
                         Utility.deleteDir(dir);
+                        continue;
                     }
                     projects.put(projectName, project);
                 }
