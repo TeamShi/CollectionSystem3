@@ -361,6 +361,8 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
                         rigViewModel.setRigStartEndDepth(rigViewModel.getStartDepth() + " m ~ " + rigViewModel.getEndDepth() + " m");
+
+                        refreshInfo();
                     } catch (Exception e) {
                         startLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                     }
@@ -897,6 +899,14 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
 
+                            if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
+                                DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
+                            }
+
+                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockType());
+                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
+                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+
                             Calendar now = Calendar.getInstance();
                             DataManager.getHole(holeId).setEndDate(now);
 
@@ -1051,6 +1061,44 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
             countEditText.setEnabled(false);
         }
 
+        String requestCode = getIntent().getStringExtra("requestCode");
+
+        if (requestCode.equals("ACTION_EDIT_RIG")) {
+            classPeopleCountEditText.setEnabled(false);
+            dateButton.setEnabled(false);
+            startTimeButton.setEnabled(false);
+            endTimeButton.setEnabled(false);
+            timeDurationTextView.setEnabled(false);
+            pipeDiameterSpinner.setEnabled(false);
+            drillToolTotalLengthTextView.setEnabled(false);
+            drillPipeRemainLengthTextView.setEnabled(false);
+            roundTripMeterageLengthTextView.setEnabled(false);
+            accumulatedMeterageLengthTextView.setEnabled(false);
+            samplerTypeSpinner.setEnabled(false);
+            samplerIndexEditText.setEnabled(false);
+            startLengthEditText.setEnabled(false);
+            endLengthEditText.setEnabled(false);
+            countEditText.setEnabled(false);
+            rockCoreIndexEditText.setEnabled(true);
+            rockCoreLengthEditText.setEnabled(true);
+            rockCorePickPercentageTextView.setEnabled(true);
+            startEndDepthTextView.setEnabled(true);
+            rockTypeEditText.setEnabled(true);
+            rockColorEditText.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockWeatheringEditText.setEnabled(true);
+            rockDescriptionEditText.setEnabled(true);
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
+            rockWeatheringEditText.setEnabled(true);
+            rockWeatheringButton.setEnabled(true);
+        }
+
         if (DataManager.getHole(holeId).isApproved()) {
             classPeopleCountEditText.setEnabled(false);
             dateButton.setEnabled(false);
@@ -1067,6 +1115,25 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
             startLengthEditText.setEnabled(false);
             endLengthEditText.setEnabled(false);
             countEditText.setEnabled(false);
+            rockCoreIndexEditText.setEnabled(false);
+            rockCoreLengthEditText.setEnabled(false);
+            rockCorePickPercentageTextView.setEnabled(false);
+            startEndDepthTextView.setEnabled(false);
+            rockTypeEditText.setEnabled(false);
+            rockColorEditText.setEnabled(false);
+            rockDensityEditText.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockDescriptionEditText.setEnabled(false);
+            rockColorEditText.setEnabled(false);
+            rockColorButton.setEnabled(false);
+            rockDensityEditText.setEnabled(false);
+            rockDensityButton.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+
         }
 
         if (getCurrentFocus() != rockCoreIndexEditText) {
