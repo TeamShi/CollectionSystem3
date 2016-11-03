@@ -709,7 +709,7 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(rig.getOtherDescription()));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -998,9 +998,10 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
 
         result.add(generateRigInfoCell(Utility.formatCalendarDateStringWithoutYear(rig.getDate())));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getStartTime())));
+        result.add(generateRigInfoCell(Utility.formatTimeStringChinese(rig.getEndTime())));
+        result.add(generateRigInfoCell(Utility.calculateTimeSpanChinese(rig.getStartTime(), rig.getEndTime())));
 
         result.add(generateRigInfoCell("原状样"));
 
@@ -1028,9 +1029,9 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCoreLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getRockCorePickPercentage() * 100) + "%"));
 
         result.add(generateRigInfoCell(rig.getIndex()));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
@@ -1044,7 +1045,7 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));

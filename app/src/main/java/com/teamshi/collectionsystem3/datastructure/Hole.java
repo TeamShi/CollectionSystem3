@@ -73,7 +73,6 @@ public class Hole implements Serializable {
     private Calendar lastRigEndTime;
 
     private double lastAccumulatedMeterageLength;
-    private double lastRockCorePipeLength;
 
     private String lastRockName;
     private String lastRockColor;
@@ -88,6 +87,8 @@ public class Hole implements Serializable {
     private OtherSamplingRig disturbanceSample;
     private OtherSamplingRig rockSample;
     private OtherSamplingRig waterSample;
+
+    private double lastRockCorePipeLength;
 
     public Hole() {
 

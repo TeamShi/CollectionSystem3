@@ -660,9 +660,12 @@ public class HoleInfoActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 try {
-                    holeViewModel.setOffset(Double.parseDouble(s.toString()));
-                    offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
+                    if (!refreshLock) {
+                        holeViewModel.setOffset(Double.parseDouble(s.toString()));
+                        offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
+                    }
 
+                    refreshInfo();
                 } catch (Exception e) {
                     offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }

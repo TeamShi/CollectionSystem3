@@ -1084,7 +1084,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"/>
                     <TextView
-                        android:text="其它特征"
+                        android:text="描述"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_hint"
