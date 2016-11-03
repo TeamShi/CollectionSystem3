@@ -35,12 +35,24 @@ public class SPTRig extends CalculatingRig {
     private double drillEndDepth3;                  // 钻进深度至3
 
     private String rockName;                        // 岩土名称
-    private String rockColor;                       // 岩土颜色
-    private String rockDensity;                     // 岩土稠度/密实度
-    private String rockSaturation;                  // 岩土饱和度
+    private String oldRockColor;                       // 岩土颜色
+    private String oldRockDensity;                     // 岩土稠度/密实度
+    private String oldRockSaturation;                  // 岩土饱和度
     private String otherDescription;                // 其它描述
 
-    private int rockCoreIndex;                   // 隐含参数, 岩芯采取编号
+    private int oldRockCoreIndex;                   // 隐含参数, 岩芯采取编号
+
+    private int rockCoreIndex;                      // 岩芯采取编号
+    private double rockCoreLength;                  // 岩芯长度
+    private double rockCorePickPercentage;          // 岩芯采取率
+
+    private String rigStartEndDepth;                // 本钻起止深度
+    private String rockType;                        // 岩土名称
+    private String rockColor;                       // 颜色
+    private String rockDensity;                     // 稠度/密实度
+    private String rockSaturation;                  // 饱和度
+    private String rockWeathering;                  // 风化程度
+    private String rockDescription;                 // 名称及岩性
 
     public SPTRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                   double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
@@ -55,11 +67,15 @@ public class SPTRig extends CalculatingRig {
                   double drillStartDepth2, double drillEndDepth2,
                   double drillStartDepth3, double drillEndDepth3,
                   String rockName,
-                  String rockColor,
-                  String rockDensity,
-                  String rockSaturation,
+                  String oldRockColor,
+                  String oldRockDensity,
+                  String oldRockSaturation,
                   String otherDescription,
-                  int rockCoreIndex) {
+                  int oldRockCoreIndex,
+                  int rockCoreIndex, double rockCoreLength, double rockCorePickPerentage,
+                  String rigStartEndDepth, String rockType, String rockColor,
+                  String rockDensity, String rockSaturation, String rockWeathering,
+                  String rockDescription) {
         super(classPeopleCount, date, startTime, endTime,
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
 
@@ -95,12 +111,24 @@ public class SPTRig extends CalculatingRig {
         this.drillEndDepth3 = drillEndDepth3;
 
         this.rockName = rockName;
+        this.oldRockColor = oldRockColor;
+        this.oldRockDensity = oldRockDensity;
+        this.oldRockSaturation = oldRockSaturation;
+        this.otherDescription = otherDescription;
+
+        this.oldRockCoreIndex = oldRockCoreIndex;
+
+        this.rockCoreIndex = rockCoreIndex;
+        this.rockCoreLength = rockCoreLength;
+        this.rockCorePickPercentage = rockCorePickPerentage;
+
+        this.rigStartEndDepth = rigStartEndDepth;
+        this.rockType = rockType;
         this.rockColor = rockColor;
         this.rockDensity = rockDensity;
         this.rockSaturation = rockSaturation;
-        this.otherDescription = otherDescription;
-
-        this.rockCoreIndex = rockCoreIndex;
+        this.rockWeathering = rockWeathering;
+        this.rockDescription = rockDescription;
     }
 
     public int getInjectionToolDiameter() {
@@ -295,6 +323,86 @@ public class SPTRig extends CalculatingRig {
         this.rockName = rockName;
     }
 
+    public String getOldRockColor() {
+        return oldRockColor;
+    }
+
+    public void setOldRockColor(String oldRockColor) {
+        this.oldRockColor = oldRockColor;
+    }
+
+    public String getOldRockDensity() {
+        return oldRockDensity;
+    }
+
+    public void setOldRockDensity(String oldRockDensity) {
+        this.oldRockDensity = oldRockDensity;
+    }
+
+    public String getOldRockSaturation() {
+        return oldRockSaturation;
+    }
+
+    public void setOldRockSaturation(String oldRockSaturation) {
+        this.oldRockSaturation = oldRockSaturation;
+    }
+
+    public String getOtherDescription() {
+        return otherDescription;
+    }
+
+    public void setOtherDescription(String otherDescription) {
+        this.otherDescription = otherDescription;
+    }
+
+    public int getOldRockCoreIndex() {
+        return oldRockCoreIndex;
+    }
+
+    public void setOldRockCoreIndex(int oldRockCoreIndex) {
+        this.oldRockCoreIndex = oldRockCoreIndex;
+    }
+
+    public int getRockCoreIndex() {
+        return rockCoreIndex;
+    }
+
+    public void setRockCoreIndex(int rockCoreIndex) {
+        this.rockCoreIndex = rockCoreIndex;
+    }
+
+    public double getRockCoreLength() {
+        return rockCoreLength;
+    }
+
+    public void setRockCoreLength(double rockCoreLength) {
+        this.rockCoreLength = rockCoreLength;
+    }
+
+    public double getRockCorePickPercentage() {
+        return rockCorePickPercentage;
+    }
+
+    public void setRockCorePickPercentage(double rockCorePickPercentage) {
+        this.rockCorePickPercentage = rockCorePickPercentage;
+    }
+
+    public String getRigStartEndDepth() {
+        return rigStartEndDepth;
+    }
+
+    public void setRigStartEndDepth(String rigStartEndDepth) {
+        this.rigStartEndDepth = rigStartEndDepth;
+    }
+
+    public String getRockType() {
+        return rockType;
+    }
+
+    public void setRockType(String rockType) {
+        this.rockType = rockType;
+    }
+
     public String getRockColor() {
         return rockColor;
     }
@@ -319,20 +427,20 @@ public class SPTRig extends CalculatingRig {
         this.rockSaturation = rockSaturation;
     }
 
-    public String getOtherDescription() {
-        return otherDescription;
+    public String getRockWeathering() {
+        return rockWeathering;
     }
 
-    public void setOtherDescription(String otherDescription) {
-        this.otherDescription = otherDescription;
+    public void setRockWeathering(String rockWeathering) {
+        this.rockWeathering = rockWeathering;
     }
 
-    public int getRockCoreIndex() {
-        return rockCoreIndex;
+    public String getRockDescription() {
+        return rockDescription;
     }
 
-    public void setRockCoreIndex(int rockCoreIndex) {
-        this.rockCoreIndex = rockCoreIndex;
+    public void setRockDescription(String rockDescription) {
+        this.rockDescription = rockDescription;
     }
 
     @Override
@@ -349,9 +457,13 @@ public class SPTRig extends CalculatingRig {
                 drillStartDepth1, drillEndDepth1,
                 drillStartDepth2, drillEndDepth2,
                 drillStartDepth3, drillEndDepth3,
-                rockName, rockColor,
-                rockDensity, rockSaturation,
-                otherDescription, rockCoreIndex);
+                rockName, oldRockColor,
+                oldRockDensity, oldRockSaturation,
+                otherDescription, oldRockCoreIndex,
+                rockCoreIndex, rockCoreLength, rockCorePickPercentage,
+                rigStartEndDepth, rockType, rockColor,
+                rockDensity, rockSaturation, rockWeathering,
+                rockDescription);
 
         temp.setLastPipeNumber(lastPipeNumber);
         temp.setLastRigEndTime((Calendar) lastRigEndTime.clone());

@@ -103,7 +103,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
     private Button generateRockDescriptionButton;
     private Button loadRockDescriptionTemplateButton;
     private EditText rockDescriptionEditText;
-    private EditText rigNoteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +166,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
         generateRockDescriptionButton = (Button) findViewById(R.id.button_generate_rock_description);
         loadRockDescriptionTemplateButton = (Button) findViewById(R.id.button_load_description_template);
         rockDescriptionEditText = (EditText) findViewById(R.id.edittext_original_sampling_rig_rock_description);
-        rigNoteEditText = (EditText) findViewById(R.id.edittext_regular_rig_note);
 
         classPeopleCountEditText.addTextChangedListener(new TextWatcher() {
             @Override
