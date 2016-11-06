@@ -1,5 +1,6 @@
 package com.teamshi.collectionsystem3;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -30,14 +31,6 @@ public class SPTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
     private static final String[] ROCK_NAME_OPTIONS = {"黏性土", "砂类土", "粉土", "其它"};
     private static final HashMap<String, String> rockNameMap;
-
-    private static final CharSequence[] ROCK_TYPE_OPTIONS = {"黏土", "杂填土", "素填土", "吹填土", "~~土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
-            "块石", "卵石", "碎石", "粗圆砾", "粗角砾", "细圆砾", "细角砾", "泥岩", "砂岩", "灰岩", "花岗岩", "~~岩"};
-    private static final CharSequence[] ROCK_COLOR_OPTIONS = {"灰色", "青灰色", "深灰色", "紫色", "棕黄色", "浅黄色", "褐黄色", "红褐色", "棕红色", "棕色", "褐色", "黄褐色",
-            "青色","灰绿色","浅紫色", "暗红色", "黑色", "浅蓝色", "蓝色"};
-    private static final CharSequence[] ROCK_DENSITY_OPTIONS = {"坚硬", "硬塑", "软塑", "流塑", "稍密", "中密", "密实", "松散"};
-    private static final CharSequence[] ROCK_SATURATION_OPTIONS = {"稍湿", "潮湿", "饱和"};
-    private static final CharSequence[] ROCK_WEATHERING_OPTIONS = {"全风化", "强风化", "中风化", "弱风化", "微风化", "未风化"};
 
     private boolean refreshLock = false;
 
@@ -282,9 +275,9 @@ public class SPTRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRigEndTime((Calendar) rigViewModel.getEndTime().clone());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
-                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getOldRockColor());
-                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getOldRockSaturation());
-                            DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getOldRockCoreIndex());
+                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
+                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+                            DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
 
                             Calendar now = Calendar.getInstance();
                             DataManager.getHole(holeId).setEndDate(now);
@@ -901,7 +894,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
                         }
 
-                        rigViewModel.setOldRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+                        rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -954,7 +947,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
                         }
 
-                        rigViewModel.setOldRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+                        rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -1007,7 +1000,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             accumulatedHitCountTextView.setTextColor(getResources().getColor(android.R.color.black));
                         }
 
-                        rigViewModel.setOldRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+                        rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
 
                         refreshInfo();
                     } catch (Exception e) {
@@ -1023,7 +1016,7 @@ public class SPTRigActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 rigViewModel.setRockName(ROCK_NAME_OPTIONS[position]);
 
-                rigViewModel.setOldRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
+                rigViewModel.setRockDensity(ConfigurationManager.parseSPTSaturationDescription(rigViewModel.getRockName(), rigViewModel.getAccumulatehHitCount()));
 
                 refreshInfo();
             }
@@ -1241,15 +1234,15 @@ public class SPTRigActivity extends AppCompatActivity {
         }
 
         if (getCurrentFocus() != rockColorEditText) {
-            rockColorEditText.setText(rigViewModel.getOldRockColor());
+            rockColorEditText.setText(rigViewModel.getRockColor());
         }
 
         if (getCurrentFocus() != rockDensityEditText) {
-            rockDensityEditText.setText(rigViewModel.getOldRockDensity());
+            rockDensityEditText.setText(rigViewModel.getRockDensity());
         }
 
         if (getCurrentFocus() != rockSaturationEditText) {
-            rockSaturationEditText.setText(rigViewModel.getOldRockSaturation());
+            rockSaturationEditText.setText(rigViewModel.getRockSaturation());
         }
 
         if (requestCode.equals("ACTION_EDIT_RIG")) {

@@ -32,6 +32,7 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RigIndexActivity extends AppCompatActivity {
@@ -713,7 +714,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(String.valueOf(rig.getOldRockCoreIndex())));
+        result.add(generateRigInfoCell(String.valueOf(rig.getRockCoreIndex())));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getRoundTripMeterageLength())));
         result.add(generateRigInfoCell("100%"));
 

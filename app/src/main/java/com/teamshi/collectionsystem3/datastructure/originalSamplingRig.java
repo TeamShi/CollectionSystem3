@@ -26,6 +26,8 @@ public class OriginalSamplingRig extends CalculatingRig {
     private String rockWeathering;                  // 风化程度
     private String rockDescription;                 // 名称及岩性
 
+    private String note;                            // 备注
+
     public OriginalSamplingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                                double drillToolTotalLength, double drillPipeRemainLength,
                                double roundTripMeterageLength, double accumulatedMeterageLength,
@@ -192,6 +194,14 @@ public class OriginalSamplingRig extends CalculatingRig {
 
     public void setRockDescription(String rockDescription) {
         this.rockDescription = rockDescription;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
