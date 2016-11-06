@@ -150,7 +150,7 @@ public class IOManager {
                 file.createNewFile();
             }
 
-            fos = new FileOutputStream(file);
+            fos = new FileOutputStream(file, false);
             oos = new ObjectOutputStream(fos);
             oos.writeObject(object);
             return file;
