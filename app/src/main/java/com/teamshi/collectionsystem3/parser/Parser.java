@@ -538,7 +538,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append("").append("#"); // 名称及岩性
+                sb.append(regularRig.getRockDescription()).append("#"); // 名称及岩性
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
@@ -661,7 +661,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append("").append("#"); // 名称及岩性
+                sb.append(sptRig.getRockName() + sptRig.getOtherDescription()).append("#"); // 名称及岩性 TODO
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
@@ -721,7 +721,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append("").append("#"); // 名称及岩性
+                sb.append(dstRig.getRockName()).append("#"); // 名称及岩性 TODO
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
@@ -861,9 +861,9 @@ public class Parser {
                 sb.append("").append("#");
 
                 //岩心采取
-                sb.append("").append("#");
-                sb.append(originalSamplingRig.getLastRockCorePipeLength()).append("#");
-                sb.append("").append("#");
+                sb.append(String.valueOf(originalSamplingRig.getRockCoreIndex())).append("#");
+                sb.append(Utility.formatDouble(originalSamplingRig.getLastRockCorePipeLength())).append("#");
+                sb.append(Utility.formatDouble(originalSamplingRig.getRockCorePickPercentage() * 100) + "%").append("#");
 
                 //土样
                 sb.append(originalSamplingRig.getIndex()).append("#");
@@ -880,7 +880,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append("").append("#"); // 名称及岩性
+                sb.append(originalSamplingRig.getRockDescription()).append("#"); // 名称及岩性
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
