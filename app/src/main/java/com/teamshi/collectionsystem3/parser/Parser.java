@@ -197,7 +197,7 @@ public class Parser {
         sb.append("").append("#");
 
         //备注
-        sb.append("").append("#");
+        sb.append(originalSamplingRig.getRockDescription()).append("#");
 
         resultData[0] = convert2Array(sb.toString());
 
@@ -661,7 +661,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(sptRig.getRockName() + sptRig.getOtherDescription()).append("#"); // 名称及岩性 TODO
+                sb.append(sptRig.getOtherDescription()).append("#"); // 名称及岩性
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
@@ -721,7 +721,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(dstRig.getRockName()).append("#"); // 名称及岩性 TODO
+                sb.append(dstRig.getRockDescription()).append("#");
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
