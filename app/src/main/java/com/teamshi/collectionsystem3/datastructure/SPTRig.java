@@ -42,6 +42,8 @@ public class SPTRig extends CalculatingRig {
 
     private int rockCoreIndex;                   // 隐含参数, 岩芯采取编号
 
+
+
     public SPTRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                   double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
                   int injectionToolDiameter, double injectionToolLength,

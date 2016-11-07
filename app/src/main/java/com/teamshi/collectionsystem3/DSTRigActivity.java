@@ -38,6 +38,9 @@ import java.util.Set;
 public class DSTRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
+    private static final String[] ROCK_NAME_OPTIONS = {"", "黏土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
+            "块石", "卵石", "碎石", "粗圆砾土", "细角砾土", "细圆砾土", "粗角砾土", "泥岩", "砂岩", "灰岩", "花岗岩"};
+
     private static final String[] ROCK120 = {"细圆砾土", "粗圆砾土", "细角砾土", "粗角砾土", "碎石", "卵石", "块石", "漂石"};
 
     private static final String[] PROBE_TYPE_SPINNER = {"重型", "超重型"};
@@ -58,6 +61,9 @@ public class DSTRigActivity extends AppCompatActivity {
     private Button cancelAddRigButton;
 
     private String holeId;
+
+    private Spinner rockNameSpinner;
+    private SpinnerAdapter rockNameSpinnerAdapter;
 
     private EditText classPeopleCountEditText;
     private TextView dateButton;
@@ -170,6 +176,10 @@ public class DSTRigActivity extends AppCompatActivity {
         loadRockDescriptionTemplateButton = (Button) findViewById(R.id.button_load_description_template);
         rockDescriptionEditText = (EditText) findViewById(R.id.edittext_dst_rig_rock_description);
         rigNoteEditText = (EditText) findViewById(R.id.edittext_regular_rig_note);
+        rockNameSpinner = (Spinner) findViewById(R.id.spinner_dst_rig_rock_name);
+        rockNameSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ROCK_NAME_OPTIONS);
+        rockNameSpinner.setAdapter(rockNameSpinnerAdapter);
+
 
 
         for (int i = 1; i <= 20; i++) {
@@ -280,6 +290,10 @@ public class DSTRigActivity extends AppCompatActivity {
 
                 rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
                 rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
+
+                for (DSTRig.DSTDetailInfo info : rigViewModel.getDstDetailInfos()) {
+                    info.setSaturationDescription(ConfigurationManager.parseDSTSaturationDescription(rigViewModel.getRockName(), info.getHitCount(), rigViewModel.getProbeType().equals("超重型")));
+                }
 
                 refreshInfo();
             }
@@ -461,6 +475,33 @@ public class DSTRigActivity extends AppCompatActivity {
                         }
                         break;
                 }
+            }
+        });
+
+        rockNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // set probe type
+                if (!refreshLock) {
+                    rigViewModel.setRockName(ROCK_NAME_OPTIONS[position]);
+
+                    if (Arrays.asList(ROCK120).contains(rigViewModel.getRockName())) {
+                        rigViewModel.setProbeType("超重型");
+                    } else {
+                        rigViewModel.setProbeType("重型");
+                    }
+
+                    for (DSTRig.DSTDetailInfo info : rigViewModel.getDstDetailInfos()) {
+                        info.setSaturationDescription(ConfigurationManager.parseDSTSaturationDescription(rigViewModel.getRockName(), info.getHitCount(), rigViewModel.getProbeType().equals("超重型")));
+                    }
+
+                    refreshInfo();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -962,6 +1003,8 @@ public class DSTRigActivity extends AppCompatActivity {
                     et.setEnabled(false);
                 }
 
+                rockNameSpinner.setEnabled(false);
+
                 classPeopleCountEditText.setEnabled(false);
                 dateButton.setEnabled(false);
                 startTimeButton.setEnabled(false);
@@ -1160,6 +1203,13 @@ public class DSTRigActivity extends AppCompatActivity {
             rockSaturationButton.setEnabled(false);
             rockWeatheringEditText.setEnabled(true);
             rockWeatheringButton.setEnabled(true);
+        }
+
+        for (int i = 0; i < ROCK_NAME_OPTIONS.length; i++) {
+            if (ROCK_NAME_OPTIONS[i].equals(rigViewModel.getRockName())) {
+                rockNameSpinner.setSelection(i);
+                break;
+            }
         }
 
         refreshLock = false;

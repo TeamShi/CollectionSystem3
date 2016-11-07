@@ -1724,8 +1724,9 @@
 
                 <TableRow>
                     <TextView
-                        android:layout_weight="5"
-                        android:text=""
+                        android:layout_weight="1"
+                        android:text="岩土名称"
+                        android:textColor="@android:color/black"
                         android:background="@drawable/cell_hint"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -1734,6 +1735,11 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:inputType="numberDecimal"/>
+                    <Spinner
+                        android:id="@+id/spinner_dst_rig_rock_name"
+                        android:layout_weight="4"
+                        android:text=""
+                    />
                     <Button
                         android:id="@+id/button_dst_rig_preview"
                         android:layout_weight="1"
