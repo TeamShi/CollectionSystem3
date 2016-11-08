@@ -968,7 +968,7 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.3,
                         1, "厚壁",
-                        DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 0.125,
+                        DataManager.getHole(holeId).getRockCoreIndex(), 0, 0,
                         (DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1) + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.3) + " m",
                         "黏土", "灰色", "坚硬", "", "", "");
 
