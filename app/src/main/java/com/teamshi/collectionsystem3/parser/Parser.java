@@ -11,7 +11,6 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,11 +66,11 @@ public class Parser {
         sb.append(NA).append("#");
 
         //野外描述
-        sb.append(sptRig.getRockColor()).append("#");
-        sb.append(sptRig.getRockDensity()).append("#");
+        sb.append(sptRig.getOldRockColor()).append("#");
+        sb.append(sptRig.getOldRockDensity()).append("#");
         sb.append(NA).append("#");
         sb.append(sptRig.getRockName()).append("#");
-        sb.append(sptRig.getRockSaturation()).append("#");
+        sb.append(sptRig.getOldRockSaturation()).append("#");
         //光泽
         sb.append(NA).append("#");
         sb.append(NA).append("#");

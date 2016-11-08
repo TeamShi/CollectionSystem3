@@ -981,7 +981,7 @@ public class DSTRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.9,
                         0.1, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         "重型", 74, 0.25,
-                        DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 0.5,
+                        DataManager.getHole(holeId).getRockCoreIndex(), 0, 0,
                         (DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.1) + " m",
                         "黏土", "灰色", "坚硬", "", "", "");
 
