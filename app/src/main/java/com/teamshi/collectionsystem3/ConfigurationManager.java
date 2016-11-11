@@ -300,7 +300,7 @@ public class ConfigurationManager {
         switch (selectionIndex) {
             case 0:
                 if (hit < sptTable1Argument1) {
-                    return "流动";
+                    return "流塑";
                 } else if (hit < sptTable1Argument2) {
                     return "软塑";
                 } else if (hit < sptTable1Argument3) {
