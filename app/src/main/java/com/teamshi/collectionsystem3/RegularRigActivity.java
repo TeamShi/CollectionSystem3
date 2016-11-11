@@ -311,7 +311,6 @@ public class RegularRigActivity extends AppCompatActivity {
 
                             DataManager.getHole(holeId).setReviewDate(now);
 
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
                             DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
                             DataManager.getHole(holeId).setRockCoreIndex(DataManager.getHole(holeId).getRockCoreIndex() + 1);

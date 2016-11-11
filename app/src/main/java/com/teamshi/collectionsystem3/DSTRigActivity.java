@@ -438,6 +438,7 @@ public class DSTRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
+                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
 
                             if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
                                 DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
@@ -454,7 +455,6 @@ public class DSTRigActivity extends AppCompatActivity {
 
                             DataManager.getHole(holeId).setReviewDate(now);
 
-                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
                             DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
                             IOManager.updateProject(DataManager.getProject());
@@ -981,7 +981,7 @@ public class DSTRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.9,
                         0.1, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         "重型", 74, 0.25,
-                        DataManager.getHole(holeId).getRockCoreIndex(), 0, 0,
+                        DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         (DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.1) + " m",
                         "黏土", "灰色", "坚硬", "", "", "");
 
