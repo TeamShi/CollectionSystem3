@@ -360,7 +360,7 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
-                        rigViewModel.setRigStartEndDepth(rigViewModel.getStartDepth() + " m ~ " + rigViewModel.getEndDepth() + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getStartDepth()) + " m ~ " + Utility.formatDouble(rigViewModel.getEndDepth()) + " m");
                     } catch (Exception e) {
                         startLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                     }
