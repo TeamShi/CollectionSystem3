@@ -798,7 +798,7 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(rig.getRockDescription()));
+        result.add(generateRigInfoCell("");
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
@@ -836,7 +836,7 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));
