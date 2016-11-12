@@ -1122,7 +1122,7 @@ public class RegularRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
                         DataManager.getHole(holeId).getRockCoreIndex(), 0, 1,
-                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + "~" + DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
+                        DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength()) + " m",
                         oldRig.getRockType(), oldRig.getRockColor(), oldRig.getRockDensity(), oldRig.getRockSaturation(), oldRig.getRockWeathering(), oldRig.getRockDescription(), oldRig.getNote()
                         );
 
