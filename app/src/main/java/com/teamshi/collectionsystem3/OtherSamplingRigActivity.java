@@ -391,11 +391,7 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                 OtherSamplingRigActivity.this.setResult(RESULT_OK);
                 OtherSamplingRigActivity.this.finish();
             }
-        });rigViewModel.setLastPipeNumber(DataManager.getHole(holeId).getPipeCount());
-        rigViewModel.setLastRigEndTime((Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone());
-        rigViewModel.setLastRockCorePipeLength(DataManager.getHole(holeId).getLastRockCorePipeLength());
-        rigViewModel.setLastAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
-        rigViewModel.setLastMaxRigRockCoreIndex(DataManager.getHole(holeId).getMaxRigRockCoreIndex());
+        });
 
         cancelAddRigButton.setOnClickListener(new View.OnClickListener() {
             @Override

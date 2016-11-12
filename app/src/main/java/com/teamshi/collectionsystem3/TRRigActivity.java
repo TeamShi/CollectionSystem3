@@ -57,6 +57,8 @@ public class TRRigActivity extends AppCompatActivity {
     private boolean refreshLock;
     private boolean addDeleteLock;
 
+    private int lastTRIndex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class TRRigActivity extends AppCompatActivity {
 
         specialDescriptionEditText = (EditText) findViewById(R.id.edittext_tr_rig_special_description);
         holeSituraionEditText = (EditText) findViewById(R.id.edittext_tr_rig_hole_situration);
+
 
         for (int i = 1; i <= 15; i++) {
             TableRow detailedInfoTabRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_tr_detail_" + i, "id", getPackageName()));
@@ -111,7 +114,7 @@ public class TRRigActivity extends AppCompatActivity {
             final EditText detailedInfoIndexEditText = (EditText) findViewById(getResources().getIdentifier("edittext_tr_rig_tr_detail_index_" + i, "id", getPackageName()));
             detailedInfoIndexEditText.setTag(i);
             detailedInfoIndexEditText.setEnabled(false);
-            detailedInfoIndexEditText.setText(String.valueOf(i));
+            detailedInfoIndexEditText.setText(String.valueOf(i + lastTRIndex - 1));
             detailedInfoIndexEditTexts[i - 1] = detailedInfoIndexEditText;
 
             final Spinner detailedInfoDiameterSpinner = (Spinner) findViewById(getResources().getIdentifier("spinner_tr_rig_tr_detail_diameter_" + i, "id", getPackageName()));
@@ -184,7 +187,7 @@ public class TRRigActivity extends AppCompatActivity {
                     totalLength += info.getLength();
                 }
 
-                rigViewModel.getTrInfos().add(new TRRig.TRInfo("钢管", rigViewModel.getTrInfos().size() + 1, rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1).getDiameter(), 0, totalLength));
+                rigViewModel.getTrInfos().add(new TRRig.TRInfo("钢管", rigViewModel.getTrInfos().size() + lastTRIndex, rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1).getDiameter(), 0, totalLength));
                 addDeleteLock = true;
                 refreshInfo();
                 addDeleteLock = false;
@@ -297,6 +300,8 @@ public class TRRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
 
+                            DataManager.getHole(holeId).setLastTRIndex(lastTRIndex + rigViewModel.getTrInfos().size());
+
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
@@ -375,13 +380,15 @@ public class TRRigActivity extends AppCompatActivity {
 
         holeId = getIntent().getStringExtra("holeId");
 
+        lastTRIndex = DataManager.getHole(holeId).getLastTRIndex();
+
         switch (requestCode) {
             case "ACTION_ADD_RIG":
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
                 rigViewModel = new TRRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, endTime, endTime);
-
+                rigViewModel.getTrInfos().get(0).setIndex(lastTRIndex);
                 refreshInfo();
                 break;
             case "ACTION_EDIT_RIG":

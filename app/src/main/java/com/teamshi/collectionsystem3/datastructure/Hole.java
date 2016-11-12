@@ -89,6 +89,7 @@ public class Hole implements Serializable {
     private OtherSamplingRig waterSample;
 
     private double lastRockCorePipeLength;
+    private int lastTRIndex;
 
     public Hole() {
 
@@ -168,6 +169,8 @@ public class Hole implements Serializable {
         disturbanceSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "扰动样");
         rockSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "岩样");
         waterSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "水样");
+
+        this.lastTRIndex = 1;
     }
 
     public String getProjectName() {
@@ -722,6 +725,14 @@ public class Hole implements Serializable {
         this.waterSample = waterSample;
     }
 
+    public int getLastTRIndex() {
+        return lastTRIndex;
+    }
+
+    public void setLastTRIndex(int lastTRIndex) {
+        this.lastTRIndex = lastTRIndex;
+    }
+
     public Hole deepCopy() {
         Hole newHole = new Hole(projectName);
 
@@ -810,6 +821,8 @@ public class Hole implements Serializable {
         newHole.setRockSample(rockSample.deepCopy());
 
         newHole.setWaterSample(waterSample.deepCopy());
+
+        newHole.setLastTRIndex(lastTRIndex);
 
         return newHole;
     }

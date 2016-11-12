@@ -81,7 +81,7 @@ public class RigIndexActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "newRigButton clicked.");
                 AlertDialog typeDialog;
-                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验", "下套管试验", "原状样", "扰动样", "岩样", "水样"};
+                final CharSequence[] items = {"搬家移孔, 下雨停工, 其它", "干钻, 合水钻, 金刚石钻, 钢粒钻", "标准贯入试验", "动力触探试验", "下套管", "原状样", "扰动样", "岩样", "水样"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(RigIndexActivity.this);
 
@@ -306,6 +306,10 @@ public class RigIndexActivity extends AppCompatActivity {
 
                     if (deletingRig instanceof OriginalSamplingRig) {
                         DataManager.getHole(holeId).setOriginalSampleIndex(DataManager.getHole(holeId).getOriginalSampleIndex() - 1);
+                    }
+
+                    if (deletingRig instanceof TRRig) {
+                        DataManager.getHole(holeId).setLastTRIndex(DataManager.getHole(holeId).getLastTRIndex() - ((TRRig) deletingRig).getTrInfos().size());
                     }
 
                     DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
@@ -798,7 +802,7 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell("");
+        result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
         result.add(generateRigInfoCell(""));

@@ -36,7 +36,7 @@ import java.util.Set;
 public class OriginalSamplingRigActivity extends AppCompatActivity {
     private static final String TAG = "CollectionSystem3";
 
-    private static final String [] SAMPLER_PIPE_DIAMETER_OPTIONS = {"108", "89"};
+    private static final String [] SAMPLER_PIPE_DIAMETER_OPTIONS = {"108", "89", "127"};
     private static final String [] SAMPLER_TYPE_OPTIONS = {"厚壁", "薄壁"};
 
     private static final CharSequence[] ROCK_TYPE_OPTIONS = {"黏土", "杂填土", "素填土", "吹填土", "~~土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
@@ -969,7 +969,7 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.3,
                         1, "厚壁",
-                        DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
+                        DataManager.getHole(holeId).getRockCoreIndex() + 1, DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         (DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1) + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.3) + " m",
                         "黏土", "灰色", "坚硬", "", "", "");
 

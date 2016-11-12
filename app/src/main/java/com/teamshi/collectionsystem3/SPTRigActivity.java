@@ -1630,7 +1630,7 @@ public class SPTRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastRockColor(),
                         DataManager.getHole(holeId).getLastRockSaturation(),
                         ConfigurationManager.parseSPTSaturationDescription(rockName, 0),
-                        "", DataManager.getHole(holeId).getRockCoreIndex(),
+                        "", DataManager.getHole(holeId).getRockCoreIndex() + 1,
                         DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45) + " m",
                         "黏土", "灰色", "坚硬", "", "", "");
