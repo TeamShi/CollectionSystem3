@@ -226,7 +226,7 @@ public class DSTRigActivity extends AppCompatActivity {
 
 
                             rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                            rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
+                            rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
 
                             refreshInfo();
                         } catch (Exception e) {
@@ -289,7 +289,7 @@ public class DSTRigActivity extends AppCompatActivity {
                 rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillPipeRemainLength() - 0.1);
 
                 rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
+                rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
 
                 for (DSTRig.DSTDetailInfo info : rigViewModel.getDstDetailInfos()) {
                     info.setSaturationDescription(ConfigurationManager.parseDSTSaturationDescription(rigViewModel.getRockName(), info.getHitCount(), rigViewModel.getProbeType().equals("超重型")));
@@ -311,7 +311,7 @@ public class DSTRigActivity extends AppCompatActivity {
                 rigViewModel.getDstDetailInfos().remove(rigViewModel.getDstDetailInfos().size() - 1);
 
                 rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
-                rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()));
+                rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
 
                 refreshInfo();
             }
