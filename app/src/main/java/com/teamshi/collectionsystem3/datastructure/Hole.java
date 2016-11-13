@@ -71,6 +71,7 @@ public class Hole implements Serializable {
     private ArrayList<Double> pipeArray;
 
     private Calendar lastRigEndTime;
+    private Calendar lastDate;
 
     private double lastAccumulatedMeterageLength;
 
@@ -154,6 +155,7 @@ public class Hole implements Serializable {
         this.pipeArray = new ArrayList<>();
 
         this.lastRigEndTime = Calendar.getInstance();
+        this.lastDate = Calendar.getInstance();
 
         this.lastAccumulatedMeterageLength = 0;
         this.lastRockCorePipeLength = 0;
@@ -621,6 +623,14 @@ public class Hole implements Serializable {
         this.lastRigEndTime = lastRigEndTime;
     }
 
+    public Calendar getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(Calendar lastDate) {
+        this.lastDate = lastDate;
+    }
+
     public double getLastAccumulatedMeterageLength() {
         return lastAccumulatedMeterageLength;
     }
@@ -797,6 +807,8 @@ public class Hole implements Serializable {
         }
 
         newHole.setLastRigEndTime((Calendar) lastRigEndTime.clone());
+
+        newHole.setLastDate((Calendar) lastDate.clone());
 
         newHole.setLastAccumulatedMeterageLength(lastAccumulatedMeterageLength);
 

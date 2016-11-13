@@ -345,6 +345,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setReviewDate(now);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
                             DataManager.getHole(holeId).setActualDepth(rigViewModel.getAccumulatedMeterageLength());
 
                             if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
@@ -1608,13 +1609,15 @@ public class SPTRigActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
+                Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
+
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
 
                 String rockName = rockNameMap.containsKey(DataManager.getHole(holeId).getLastRockName())?rockNameMap.get(DataManager.getHole(holeId).getLastRockName()): "其它";
 
-                rigViewModel = new SPTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
+                rigViewModel = new SPTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.55, 0.45, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45,
                         51, 0.5,
                         "管靴",51, 0.05,

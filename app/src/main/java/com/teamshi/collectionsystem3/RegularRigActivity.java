@@ -293,6 +293,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             }
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCorePipeLength());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
 
@@ -1086,14 +1087,15 @@ public class RegularRigActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
+                Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
                 } else {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime,
                             DataManager.getHole(holeId).getPipeCount(), DataManager.getHole(holeId).getPipeLength(), DataManager.getHole(holeId).getTotalPipeLength(),
                             108, DataManager.getHole(holeId).getLastRockCorePipeLength(),
                             "合金", 110, 0.05,

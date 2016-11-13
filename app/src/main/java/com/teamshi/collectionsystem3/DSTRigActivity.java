@@ -436,6 +436,7 @@ public class DSTRigActivity extends AppCompatActivity {
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
@@ -973,11 +974,13 @@ public class DSTRigActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
+                Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
+
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
 
-                rigViewModel = new DSTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
+                rigViewModel = new DSTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.9,
                         0.1, DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         "重型", 74, 0.25,

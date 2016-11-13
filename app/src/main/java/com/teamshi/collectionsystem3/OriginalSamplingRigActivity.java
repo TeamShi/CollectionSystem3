@@ -896,6 +896,7 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
 
                             if (rigViewModel.getRockCoreIndex() > DataManager.getHole(holeId).getMaxRigRockCoreIndex()) {
@@ -955,11 +956,13 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
+                Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
+
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
 
-                rigViewModel = new OriginalSamplingRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
+                rigViewModel = new OriginalSamplingRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2,
                         1.6,
                         0.4,

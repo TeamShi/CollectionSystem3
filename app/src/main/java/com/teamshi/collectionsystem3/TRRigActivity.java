@@ -301,6 +301,7 @@ public class TRRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
 
                             DataManager.getHole(holeId).setLastTRIndex(lastTRIndex + rigViewModel.getTrInfos().size());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
 
                             DataManager.addRig(holeId, rigViewModel);
 
@@ -384,10 +385,12 @@ public class TRRigActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
+                Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
+
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 endTime.add(Calendar.MINUTE, 1);
-                rigViewModel = new TRRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, endTime, endTime);
+                rigViewModel = new TRRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, endTime, endTime);
                 rigViewModel.getTrInfos().get(0).setIndex(lastTRIndex);
                 refreshInfo();
                 break;
