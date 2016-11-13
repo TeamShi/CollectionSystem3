@@ -51,11 +51,11 @@ public class Rig implements UIMethods, Serializable{
     }
 
     public Calendar getDate() {
-        return date;
+        return endTime;
     }
 
     public void setDate(Calendar date) {
-        this.date = date;
+        this.endTime = endTime;
     }
 
     public Calendar getStartTime() {
@@ -63,6 +63,7 @@ public class Rig implements UIMethods, Serializable{
     }
 
     public void setStartTime(Calendar startTime) {
+        this.startTime = startTime;
         this.startTime = startTime;
     }
 

@@ -1091,7 +1091,7 @@ public class RegularRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex(), 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
                 } else {
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), startTime, startTime, endTime,
                             DataManager.getHole(holeId).getPipeCount(), DataManager.getHole(holeId).getPipeLength(), DataManager.getHole(holeId).getTotalPipeLength(),
@@ -1100,7 +1100,7 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                            DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
+                            DataManager.getHole(holeId).getRockCoreIndex() + 1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
                             DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength()) + " m",
                             "黏土", "灰色", "坚硬", "", "", "", "");
                 }

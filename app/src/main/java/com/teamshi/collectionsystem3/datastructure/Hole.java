@@ -162,7 +162,7 @@ public class Hole implements Serializable {
 
         this.isApproved = false;
 
-        this.rockCoreIndex = 1;
+        this.rockCoreIndex = 0;
 
         this.originalSampleIndex = 1;
 
