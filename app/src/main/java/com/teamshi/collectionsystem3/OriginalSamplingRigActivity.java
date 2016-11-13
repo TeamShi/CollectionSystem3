@@ -300,14 +300,14 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                     rigViewModel.setSamplerType(SAMPLER_TYPE_OPTIONS[position]);
 
                     if (position == 0) {
-                        rigViewModel.setEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.3);
+                        rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.3);
                         rigViewModel.setRoundTripMeterageLength(0.4);
-                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4);
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getStartDepth() + 0.4);
                         rigViewModel.setDrillPipeRemainLength(1.6);
                     } else if (position == 1) {
-                        rigViewModel.setEndDepth(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4);
+                        rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.4);
                         rigViewModel.setRoundTripMeterageLength(0.5);
-                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.5);
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getStartDepth() + 0.5);
                         rigViewModel.setDrillPipeRemainLength(1.5);
                     }
 
@@ -907,6 +907,7 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
                             DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
+                            DataManager.getHole(holeId).setRockCoreIndex(rigViewModel.getRockCoreIndex());
 
 
                             Calendar now = Calendar.getInstance();
@@ -1046,24 +1047,6 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
 
         String holeId = getIntent().getStringExtra("holeId");
         int rigIndex = getIntent().getIntExtra("rigIndex", 0);
-
-        if (DataManager.getHole(holeId).getRigList().size() != 0 && rigIndex != DataManager.getHole(holeId).getRigList().size() - 1) {
-            classPeopleCountEditText.setEnabled(false);
-            dateButton.setEnabled(false);
-            startTimeButton.setEnabled(false);
-            endTimeButton.setEnabled(false);
-            timeDurationTextView.setEnabled(false);
-            pipeDiameterSpinner.setEnabled(false);
-            drillToolTotalLengthTextView.setEnabled(false);
-            drillPipeRemainLengthTextView.setEnabled(false);
-            roundTripMeterageLengthTextView.setEnabled(false);
-            accumulatedMeterageLengthTextView.setEnabled(false);
-            samplerTypeSpinner.setEnabled(false);
-            samplerIndexEditText.setEnabled(false);
-            startLengthEditText.setEnabled(false);
-            endLengthEditText.setEnabled(false);
-            countEditText.setEnabled(false);
-        }
 
         String requestCode = getIntent().getStringExtra("requestCode");
 
