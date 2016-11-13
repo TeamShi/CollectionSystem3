@@ -356,7 +356,7 @@ public class SPTRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
                             DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
-
+                            DataManager.getHole(holeId).setRockCoreIndex(rigViewModel.getRockCoreIndex());
                             IOManager.updateProject(DataManager.getProject());
                             SPTRigActivity.this.setResult(RESULT_OK);
                             SPTRigActivity.this.finish();
