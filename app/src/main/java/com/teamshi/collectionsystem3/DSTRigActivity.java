@@ -432,6 +432,8 @@ public class DSTRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
                             rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+                            rigViewModel.setLastRockDentisy(DataManager.getHole(holeId).getLastRockDentisy());
+                            rigViewModel.setLastRockWeathering(DataManager.getHole(holeId).getLastRockWeathering());
 
                             DataManager.addRig(holeId, rigViewModel);
 
@@ -986,7 +988,11 @@ public class DSTRigActivity extends AppCompatActivity {
                         "重型", 74, 0.25,
                         DataManager.getHole(holeId).getRockCoreIndex(), DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         (DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.1) + " m",
-                        "黏土", "灰色", "坚硬", "", "", "");
+                        DataManager.getHole(holeId).getLastRockName(),
+                        DataManager.getHole(holeId).getLastRockColor(),
+                        DataManager.getHole(holeId).getLastRockDentisy(),
+                        DataManager.getHole(holeId).getLastRockSaturation(),
+                        DataManager.getHole(holeId).getLastRockWeathering(), "");
 
                 refreshInfo();
                 break;

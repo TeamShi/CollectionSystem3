@@ -315,6 +315,8 @@ public class RigIndexActivity extends AppCompatActivity {
                     DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
                     DataManager.getHole(holeId).setLastRockColor(deletingRig.getLastRockColor());
                     DataManager.getHole(holeId).setLastRockSaturation(deletingRig.getLastRockSaturation());
+                    DataManager.getHole(holeId).setLastRockDentisy(deletingRig.getLastRockDentisy());
+                    DataManager.getHole(holeId).setLastRockWeathering(deletingRig.getLastRockWeathering());
 
                     DataManager.removeLastRig(holeId);
 

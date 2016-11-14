@@ -892,8 +892,16 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
                             rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+                            rigViewModel.setLastRockDentisy(DataManager.getHole(holeId).getLastRockDentisy());
+                            rigViewModel.setLastRockWeathering(DataManager.getHole(holeId).getLastRockWeathering());
 
                             DataManager.addRig(holeId, rigViewModel);
+
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockType());
+                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
                             DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
@@ -975,7 +983,12 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         1, "厚壁",
                         DataManager.getHole(holeId).getRockCoreIndex() + 1, DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         (DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1) + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.3) + " m",
-                        "黏土", "灰色", "坚硬", "", "", "");
+                        DataManager.getHole(holeId).getLastRockName(),
+                        DataManager.getHole(holeId).getLastRockColor(),
+                        DataManager.getHole(holeId).getLastRockDentisy(),
+                        DataManager.getHole(holeId).getLastRockSaturation(),
+                        DataManager.getHole(holeId).getLastRockWeathering(),
+                        "");
 
                 refreshInfo();
                 break;

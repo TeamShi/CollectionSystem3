@@ -22,6 +22,8 @@ public class Rig implements UIMethods, Serializable{
     protected String lastRockName;
     protected String lastRockColor;
     protected String lastRockSaturation;
+    protected String lastRockDentisy;
+    protected String lastRockWeathering;
 
     public Rig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime) {
         this.classPeopleCount = classPeopleCount;
@@ -35,6 +37,12 @@ public class Rig implements UIMethods, Serializable{
         this.lastRockCorePipeLength = 0;
         this.lastAccumulatedMeterageLength = 0;
         this.lastMaxRigRockCoreIndex = 0;
+
+        this.lastRockName = "黏土";
+        this.lastRockColor = "灰色";
+        this.lastRockDentisy = "坚硬";
+        this.lastRockSaturation = "";
+        this.lastRockWeathering = "";
     }
 
     @Override
@@ -136,6 +144,22 @@ public class Rig implements UIMethods, Serializable{
 
     public void setLastRockSaturation(String lastRockSaturation) {
         this.lastRockSaturation = lastRockSaturation;
+    }
+
+    public String getLastRockDentisy() {
+        return lastRockDentisy;
+    }
+
+    public void setLastRockDentisy(String lastRockDentisy) {
+        this.lastRockDentisy = lastRockDentisy;
+    }
+
+    public String getLastRockWeathering() {
+        return lastRockWeathering;
+    }
+
+    public void setLastRockWeathering(String lastRockWeathering) {
+        this.lastRockWeathering = lastRockWeathering;
     }
 }
 

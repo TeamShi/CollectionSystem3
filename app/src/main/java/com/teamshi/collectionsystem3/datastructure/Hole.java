@@ -77,7 +77,9 @@ public class Hole implements Serializable {
 
     private String lastRockName;
     private String lastRockColor;
+    private String lastRockDentisy;
     private String lastRockSaturation;
+    private String lastRockWeathering;
 
     private boolean isApproved;
 
@@ -167,6 +169,12 @@ public class Hole implements Serializable {
         this.rockCoreIndex = 0;
 
         this.originalSampleIndex = 1;
+
+        this.lastRockName = "黏土";
+        this.lastRockColor = "灰色";
+        this.lastRockDentisy = "坚硬";
+        this.lastRockSaturation = "";
+        this.lastRockWeathering = "";
 
         disturbanceSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "扰动样");
         rockSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "岩样");
@@ -463,6 +471,22 @@ public class Hole implements Serializable {
         isSpecialArticle = specialArticle;
     }
 
+    public String getLastRockDentisy() {
+        return lastRockDentisy;
+    }
+
+    public void setLastRockDentisy(String lastRockDentisy) {
+        this.lastRockDentisy = lastRockDentisy;
+    }
+
+    public String getLastRockWeathering() {
+        return lastRockWeathering;
+    }
+
+    public void setLastRockWeathering(String lastRockWeathering) {
+        this.lastRockWeathering = lastRockWeathering;
+    }
+
     public String getHoleId() {
         if (isSpecialHoleId()) {
             return specialHoleId;
@@ -519,7 +543,6 @@ public class Hole implements Serializable {
                 viewList.add(detail);
             }
         }
-
 
 
         for (OtherSamplingRig.OtherSamplingDetail detail : rockSample.getDetails()) {
@@ -821,6 +844,10 @@ public class Hole implements Serializable {
         newHole.setLastRockColor(lastRockColor);
 
         newHole.setLastRockSaturation(lastRockSaturation);
+
+        newHole.setLastRockDentisy(lastRockDentisy);
+
+        newHole.setLastRockWeathering(lastRockWeathering);
 
         newHole.setApproved(isApproved);
 

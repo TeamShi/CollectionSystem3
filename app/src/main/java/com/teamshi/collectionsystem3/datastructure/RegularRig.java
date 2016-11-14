@@ -87,6 +87,8 @@ public class RegularRig extends CalculatingRig {
         temp.setLastRockName(lastRockName);
         temp.setLastRockColor(lastRockColor);
         temp.setLastRockSaturation(lastRockSaturation);
+        temp.setLastRockDentisy(lastRockDentisy);
+        temp.setLastRockWeathering(lastRockWeathering);
 
         return temp;
     }

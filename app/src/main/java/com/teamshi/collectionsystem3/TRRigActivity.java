@@ -299,6 +299,8 @@ public class TRRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
                             rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+                            rigViewModel.setLastRockDentisy(DataManager.getHole(holeId).getLastRockDentisy());
+                            rigViewModel.setLastRockWeathering(DataManager.getHole(holeId).getLastRockWeathering());
 
                             DataManager.getHole(holeId).setLastTRIndex(lastTRIndex + rigViewModel.getTrInfos().size());
                             DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());

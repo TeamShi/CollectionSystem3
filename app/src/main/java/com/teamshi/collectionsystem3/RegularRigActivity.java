@@ -285,6 +285,8 @@ public class RegularRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
                             rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+                            rigViewModel.setLastRockDentisy(DataManager.getHole(holeId).getLastRockDentisy());
+                            rigViewModel.setLastRockWeathering(DataManager.getHole(holeId).getLastRockWeathering());
 
                             DataManager.addRig(holeId, rigViewModel);
 
@@ -304,6 +306,8 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockType());
                             DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
                             DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+                            DataManager.getHole(holeId).setLastRockDentisy(rigViewModel.getRockDensity());
+                            DataManager.getHole(holeId).setLastRockWeathering(rigViewModel.getRockWeathering());
 
                             Calendar now = Calendar.getInstance();
                             DataManager.getHole(holeId).setEndDate(now);
@@ -1093,7 +1097,7 @@ public class RegularRigActivity extends AppCompatActivity {
                 endTime.add(Calendar.MINUTE, 1);
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
-                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 0, "0~0", "黏土", "灰色", "坚硬", "", "", "", "");
+                    rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 0, "0 m ~ 0 m", "黏土", "灰色", "坚硬", "", "", "", "");
                 } else {
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime,
                             DataManager.getHole(holeId).getPipeCount(), DataManager.getHole(holeId).getPipeLength(), DataManager.getHole(holeId).getTotalPipeLength(),
@@ -1104,7 +1108,12 @@ public class RegularRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
                             DataManager.getHole(holeId).getRockCoreIndex() + 1, DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), 1,
                             DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + " m ~ " + (DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength()) + " m",
-                            "黏土", "灰色", "坚硬", "", "", "", "");
+                            DataManager.getHole(holeId).getLastRockName(),
+                            DataManager.getHole(holeId).getLastRockColor(),
+                            DataManager.getHole(holeId).getLastRockDentisy(),
+                            DataManager.getHole(holeId).getLastRockSaturation(),
+                            DataManager.getHole(holeId).getLastRockWeathering(),
+                            "", "");
                 }
 
                 refreshInfo();

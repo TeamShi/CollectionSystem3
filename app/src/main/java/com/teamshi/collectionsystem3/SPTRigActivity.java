@@ -327,14 +327,17 @@ public class SPTRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockName(DataManager.getHole(holeId).getLastRockName());
                             rigViewModel.setLastRockColor(DataManager.getHole(holeId).getLastRockColor());
                             rigViewModel.setLastRockSaturation(DataManager.getHole(holeId).getLastRockSaturation());
+                            rigViewModel.setLastRockDentisy(DataManager.getHole(holeId).getLastRockDentisy());
+                            rigViewModel.setLastRockWeathering(DataManager.getHole(holeId).getLastRockWeathering());
 
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime((Calendar) rigViewModel.getEndTime().clone());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
-                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
-                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getOldRockColor());
-                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getOldRockSaturation());
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
                             DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
 
                             Calendar now = Calendar.getInstance();
@@ -352,9 +355,12 @@ public class SPTRigActivity extends AppCompatActivity {
                                 DataManager.getHole(holeId).setMaxRigRockCoreIndex(rigViewModel.getRockCoreIndex());
                             }
 
-                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockType());
-                            DataManager.getHole(holeId).setLastRockColor(rigViewModel.getRockColor());
-                            DataManager.getHole(holeId).setLastRockSaturation(rigViewModel.getRockSaturation());
+                            DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
+                            DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
+                            DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
+                            DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
+                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
+
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
                             DataManager.getHole(holeId).setRockCoreIndex(rigViewModel.getRockCoreIndex());
                             IOManager.updateProject(DataManager.getProject());
@@ -1636,7 +1642,12 @@ public class SPTRigActivity extends AppCompatActivity {
                         "", DataManager.getHole(holeId).getRockCoreIndex() + 1,
                         DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.45) + " m",
-                        "黏土", "灰色", "坚硬", "", "", "");
+                        DataManager.getHole(holeId).getLastRockName(),
+                        DataManager.getHole(holeId).getLastRockColor(),
+                        DataManager.getHole(holeId).getLastRockDentisy(),
+                        DataManager.getHole(holeId).getLastRockSaturation(),
+                        DataManager.getHole(holeId).getLastRockWeathering(),
+                        "");
 
 
 
