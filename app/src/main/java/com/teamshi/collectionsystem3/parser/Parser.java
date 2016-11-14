@@ -660,7 +660,7 @@ public class Parser {
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
                 sb.append("").append("#"); //底层深度 本次累计进尺
                 sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(sptRig.getOtherDescription()).append("#"); // 名称及岩性
+                sb.append(sptRig.getRockDescription()).append("#"); // 名称及岩性
                 sb.append("").append("#"); //岩层等级
 
                 //地下水 只填第一行
