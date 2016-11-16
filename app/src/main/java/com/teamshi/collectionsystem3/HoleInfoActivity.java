@@ -215,6 +215,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                 break;
             case CAP_SIGN_APPROVER:
                 if (resultCode == Activity.RESULT_OK) {
+                    holeViewModel.setApproved(true);
                     bitmap = null;
                     tempHoleImageUri = Uri.fromFile(tempImagsMap.get(JPG_SIGN_APPR));
                     try {
@@ -663,9 +664,9 @@ public class HoleInfoActivity extends AppCompatActivity {
                     if (!refreshLock) {
                         holeViewModel.setOffset(Double.parseDouble(s.toString()));
                         offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
+
                     }
 
-                    refreshInfo();
                 } catch (Exception e) {
                     offsetEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }
