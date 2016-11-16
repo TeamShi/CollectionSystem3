@@ -191,7 +191,6 @@ public class XlsParser extends Parser {
 
     private static String[][] convertDsts(ArrayList<DSTRig> dstRigs) {
         String[][] resultData = new String[1][];
-        resultData[0] = DSTEVENT_HEADER;
         for (int i = 0, len = dstRigs.size(); i < len; i++) {
             String[][] lines = convertDst(dstRigs.get(i));
             resultData = Utility.concat(lines, resultData);
@@ -202,7 +201,6 @@ public class XlsParser extends Parser {
 
     private static String[][] convertSpts(ArrayList<SPTRig> sptRigs, String BR) {
         String[][] resultData = new String[1][];
-        resultData[0] = DSTEVENT_HEADER;
         for (int i = 0, len = sptRigs.size(); i < len; i++) {
             String[][] lines = convertSpt(sptRigs.get(i), (i + 1), BR);
             resultData = Utility.concat(lines, resultData);
@@ -213,7 +211,6 @@ public class XlsParser extends Parser {
 
     private static String[][] convertEarthSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> earthSampleDetails) {
         String[][] resultData = new String[1][];
-        resultData[0] = SMPL_WATER_EVENT_HEADER;
         for (int i = 0, len = earthSampleDetails.size(); i < len; i++) {
             String[][] lines = convertEarthSmplDetail(hole, earthSampleDetails.get(i), "\n");
             resultData = Utility.concat(lines, resultData);
@@ -224,7 +221,6 @@ public class XlsParser extends Parser {
 
     private static String[][] convertWaterSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> waterSampleRigs) {
         String[][] resultData = new String[1][];
-        resultData[0] = SMPL_WATER_EVENT_HEADER;
         for (int i = 0, len = waterSampleRigs.size(); i < len; i++) {
             String[][] lines = convertWaterSmplDetail(hole, waterSampleRigs.get(i), "\n");
             resultData = Utility.concat(lines, resultData);
@@ -235,7 +231,6 @@ public class XlsParser extends Parser {
 
     private static String[][] convertRockSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> details) {
         String[][] resultData = new String[1][];
-        resultData[0] = SMPL_ROCK_EVENT_HEADER;
         for (int i = 0, len = details.size(); i < len; i++) {
             String[][] lines = convertRockSmplDetail(hole, details.get(i), "\n");
             resultData = Utility.concat(lines, resultData);
