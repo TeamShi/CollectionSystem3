@@ -1119,21 +1119,24 @@ public class RegularRigActivity extends AppCompatActivity {
                 refreshInfo();
                 break;
             case "ACTION_COPY_RIG":
-                Calendar copiedStartTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                Calendar copiedEndTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
                 int selectedRigIndex = getIntent().getIntExtra("rigIndex", 0);
 
                 RegularRig oldRig = (RegularRig) DataManager.getRig(holeId, selectedRigIndex);
 
-                rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), copiedStartTime, copiedStartTime, copiedEndTime,
+                Calendar copiedDate = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
+                Calendar copiedStartTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
+                Calendar copiedEndTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
+                copiedEndTime.add(Calendar.MINUTE, 1);
+
+                rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), copiedDate, copiedStartTime, copiedEndTime,
                         oldRig.getPipeNumber(), oldRig.getPipeLength(), oldRig.getPipeTotalLength(),
                         oldRig.getRockCorePipeDiameter(), oldRig.getRockCorePipeLength(),
                         oldRig.getDrillBitType(), oldRig.getDrillBitDiameter(), oldRig.getDrillBitLength(),
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(), 0,
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength(),
                         DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength(),
-                        DataManager.getHole(holeId).getRockCoreIndex(), 0, 1,
-                        Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(DataManager.getHole(holeId).getTotalPipeLength() + 0.05 + DataManager.getHole(holeId).getLastRockCorePipeLength()) + " m",
+                        DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 1,
+                        oldRig.getRigStartEndDepth(),
                         oldRig.getRockType(), oldRig.getRockColor(), oldRig.getRockDensity(), oldRig.getRockSaturation(), oldRig.getRockWeathering(), oldRig.getRockDescription(), oldRig.getNote()
                         );
 
