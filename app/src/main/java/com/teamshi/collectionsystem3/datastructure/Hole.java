@@ -524,13 +524,13 @@ public class Hole implements Serializable {
             for (int i = 0; i < viewList.size(); i++) {
                 if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
                     if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
-                        viewList.add(i, detail);
+                        viewList.add(i + 1, detail);
                         hitFlag = true;
                         break;
                     }
                 } else if (viewList.get(i) instanceof CalculatingRig) {
                     if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
-                        viewList.add(i, detail);
+                        viewList.add(i + 1, detail);
                         hitFlag = true;
                         break;
                     }
@@ -551,13 +551,13 @@ public class Hole implements Serializable {
             for (int i = 0; i < viewList.size(); i++) {
                 if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
                     if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
-                        viewList.add(i, detail);
+                        viewList.add(i + 1, detail);
                         hitFlag = true;
                         break;
                     }
                 } else if (viewList.get(i) instanceof CalculatingRig) {
                     if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
-                        viewList.add(i, detail);
+                        viewList.add(i + 1, detail);
                         hitFlag = true;
                         break;
                     }
@@ -577,13 +577,13 @@ public class Hole implements Serializable {
             for (int i = 0; i < viewList.size(); i++) {
                 if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
                     if (detail.getEndDepth() < ((OtherSamplingRig.OtherSamplingDetail) viewList.get(i)).getEndDepth()) {
-                        viewList.add(i, detail);
+                        viewList.add(i + 1, detail);
                         hitFlag = true;
                         break;
                     }
                 } else if (viewList.get(i) instanceof CalculatingRig) {
                     if (detail.getEndDepth() < ((CalculatingRig) viewList.get(i)).getAccumulatedMeterageLength()) {
-                        viewList.add(i, detail);
+                        viewList.add(i + 1, detail);
                         hitFlag = true;
                         break;
                     }
