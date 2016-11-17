@@ -138,8 +138,8 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                                     detailedInfoDiameterEditText.setText(items[which].toString());
                                     break;
                                 case 3:
-                                    rigViewModel.getDetails().get((Integer) detailedInfoDiameterEditText.getTag() - 1).setDiameter(0);
-                                    detailedInfoDiameterEditText.setText("0");
+                                    rigViewModel.getDetails().get((Integer) detailedInfoDiameterEditText.getTag() - 1).setDiameter(-1);
+                                    detailedInfoDiameterEditText.setText("");
                                     break;
                             }
 
@@ -457,7 +457,11 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
                 detailedInfoTableRows[i].setVisibility(View.VISIBLE);
 
                 detailedInfoIndexEditTexts[i].setText(rigViewModel.getDetails().get(i).getIndex());
-                detailedInfoDiameterEditTexts[i].setText(String.valueOf(rigViewModel.getDetails().get(i).getDiameter()));
+                if (rigViewModel.getDetails().get(i).getDiameter() == -1) {
+                    detailedInfoDiameterEditTexts[i].setText("");
+                } else {
+                    detailedInfoDiameterEditTexts[i].setText(String.valueOf(rigViewModel.getDetails().get(i).getDiameter()));
+                }
                 detailedInfoStartDepthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDetails().get(i).getStartDepth()));
                 detailedInfoEndDepthEditTexts[i].setText(Utility.formatDouble(rigViewModel.getDetails().get(i).getEndDepth()));
                 detailedInfoCountEditTexts[i].setText(rigViewModel.getDetails().get(i).getCount());
