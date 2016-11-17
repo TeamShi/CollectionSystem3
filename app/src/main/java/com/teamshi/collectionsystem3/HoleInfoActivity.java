@@ -665,6 +665,17 @@ public class HoleInfoActivity extends AppCompatActivity {
                         holeViewModel.setOffset(Double.parseDouble(s.toString()));
                         offsetEditText.setTextColor(getResources().getColor(android.R.color.black));
 
+                        if (holeViewModel.getOffset() == 0) {
+                            offsetNegativeButton.setEnabled(false);
+                            offsetPositiveButton.setEnabled(false);
+                        } else if (holeViewModel.getOffset() > 0) {
+                            offsetNegativeButton.setEnabled(true);
+                            offsetPositiveButton.setEnabled(false);
+                        } else {
+                            offsetNegativeButton.setEnabled(false);
+                            offsetPositiveButton.setEnabled(true);
+                        }
+
                     }
 
                 } catch (Exception e) {
