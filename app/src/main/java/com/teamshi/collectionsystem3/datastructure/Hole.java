@@ -93,6 +93,7 @@ public class Hole implements Serializable {
 
     private double lastRockCorePipeLength;
     private int lastTRIndex;
+    private int lastTR108Index;
 
     public Hole() {
 
@@ -181,6 +182,7 @@ public class Hole implements Serializable {
         waterSample = new OtherSamplingRig("", Calendar.getInstance(), Calendar.getInstance(), Calendar.getInstance(), "水样");
 
         this.lastTRIndex = 1;
+        this.lastTR108Index = 1;
     }
 
     public String getProjectName() {
@@ -485,6 +487,14 @@ public class Hole implements Serializable {
 
     public void setLastRockWeathering(String lastRockWeathering) {
         this.lastRockWeathering = lastRockWeathering;
+    }
+
+    public int getLastTR108Index() {
+        return lastTR108Index;
+    }
+
+    public void setLastTR108Index(int lastTR108Index) {
+        this.lastTR108Index = lastTR108Index;
     }
 
     public String getHoleId() {
@@ -862,6 +872,8 @@ public class Hole implements Serializable {
         newHole.setWaterSample(waterSample.deepCopy());
 
         newHole.setLastTRIndex(lastTRIndex);
+
+        newHole.setLastTR108Index(lastTR108Index);
 
         return newHole;
     }

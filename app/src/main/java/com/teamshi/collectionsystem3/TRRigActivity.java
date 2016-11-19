@@ -58,6 +58,7 @@ public class TRRigActivity extends AppCompatActivity {
     private boolean addDeleteLock;
 
     private int lastTRIndex;
+    private int lastTR108Index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,6 @@ public class TRRigActivity extends AppCompatActivity {
 
         specialDescriptionEditText = (EditText) findViewById(R.id.edittext_tr_rig_special_description);
         holeSituraionEditText = (EditText) findViewById(R.id.edittext_tr_rig_hole_situration);
-
 
         for (int i = 1; i <= 15; i++) {
             TableRow detailedInfoTabRow = (TableRow) findViewById(getResources().getIdentifier("tablerow_tr_detail_" + i, "id", getPackageName()));
@@ -114,7 +114,6 @@ public class TRRigActivity extends AppCompatActivity {
             final EditText detailedInfoIndexEditText = (EditText) findViewById(getResources().getIdentifier("edittext_tr_rig_tr_detail_index_" + i, "id", getPackageName()));
             detailedInfoIndexEditText.setTag(i);
             detailedInfoIndexEditText.setEnabled(false);
-            detailedInfoIndexEditText.setText(String.valueOf(i + lastTRIndex - 1));
             detailedInfoIndexEditTexts[i - 1] = detailedInfoIndexEditText;
 
             final Spinner detailedInfoDiameterSpinner = (Spinner) findViewById(getResources().getIdentifier("spinner_tr_rig_tr_detail_diameter_" + i, "id", getPackageName()));
@@ -124,7 +123,28 @@ public class TRRigActivity extends AppCompatActivity {
             detailedInfoDiameterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setDiameter(Integer.parseInt(TR_INFO_DIAMETER_OPTIONS[position]));
+                    if (!refreshLock && !addDeleteLock) {
+                        rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setDiameter(Integer.parseInt(TR_INFO_DIAMETER_OPTIONS[position]));
+
+                        int count127 = 0;
+                        int count108 = 0;
+
+                        for (int k = 0; k < rigViewModel.getTrInfos().size(); k++) {
+                            if (rigViewModel.getTrInfos().get(k).getDiameter() == 127) {
+                                count127++;
+                            } else {
+                                count108++;
+                            }
+                        }
+
+                        if (position == 1) {
+                            rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setIndex(count108 + lastTR108Index - 1);
+                        } else {
+                            rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setIndex(count127 + lastTRIndex - 1);
+                        }
+
+                        refreshInfo();
+                    }
                 }
 
                 @Override
@@ -187,7 +207,15 @@ public class TRRigActivity extends AppCompatActivity {
                     totalLength += info.getLength();
                 }
 
-                rigViewModel.getTrInfos().add(new TRRig.TRInfo("钢管", rigViewModel.getTrInfos().size() + lastTRIndex, rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1).getDiameter(), 0, totalLength));
+                int count127 = 0;
+
+                for (int k = 0; k < rigViewModel.getTrInfos().size(); k++) {
+                    if (rigViewModel.getTrInfos().get(k).getDiameter() == 127) {
+                        count127++;
+                    }
+                }
+
+                rigViewModel.getTrInfos().add(new TRRig.TRInfo("钢管", count127 + lastTRIndex , rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1).getDiameter(), 0, totalLength));
                 addDeleteLock = true;
                 refreshInfo();
                 addDeleteLock = false;
@@ -302,7 +330,20 @@ public class TRRigActivity extends AppCompatActivity {
                             rigViewModel.setLastRockDentisy(DataManager.getHole(holeId).getLastRockDentisy());
                             rigViewModel.setLastRockWeathering(DataManager.getHole(holeId).getLastRockWeathering());
 
-                            DataManager.getHole(holeId).setLastTRIndex(lastTRIndex + rigViewModel.getTrInfos().size());
+
+                            int count127 = 0;
+                            int count108 = 0;
+
+                            for (int k = 0; k < rigViewModel.getTrInfos().size(); k++) {
+                                if (rigViewModel.getTrInfos().get(k).getDiameter() == 127) {
+                                    count127++;
+                                } else {
+                                    count108++;
+                                }
+                            }
+
+                            DataManager.getHole(holeId).setLastTRIndex(lastTRIndex + count127);
+                            DataManager.getHole(holeId).setLastTR108Index(lastTR108Index + count108);
                             DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
 
                             DataManager.addRig(holeId, rigViewModel);
@@ -383,7 +424,10 @@ public class TRRigActivity extends AppCompatActivity {
 
         holeId = getIntent().getStringExtra("holeId");
 
+
         lastTRIndex = DataManager.getHole(holeId).getLastTRIndex();
+        lastTR108Index = DataManager.getHole(holeId).getLastTR108Index();
+
 
         switch (requestCode) {
             case "ACTION_ADD_RIG":
