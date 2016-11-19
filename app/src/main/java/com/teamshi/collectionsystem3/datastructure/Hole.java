@@ -818,10 +818,11 @@ public class Hole implements Serializable {
         newHole.setClassMonitor(classMonitor);
         newHole.setMachineMonitor(machineMonitor);
 
-        ArrayList<Rig> rigList = newHole.getRigList();
-        for (Rig rig : rigList) {
-            rigList.add(rig.deepCopy());
+        ArrayList<Rig> newRigList = new ArrayList<>();
+        for (Rig rig : this.getRigList()) {
+            newRigList.add(rig.deepCopy());
         }
+        newHole.setRigList(newRigList);
 
         newHole.setPipeArray(new ArrayList<Double>());
 
