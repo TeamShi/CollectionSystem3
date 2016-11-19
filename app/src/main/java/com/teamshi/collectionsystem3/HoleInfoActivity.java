@@ -968,9 +968,11 @@ public class HoleInfoActivity extends AppCompatActivity {
                         break;
                     case "ACTION_EDIT_HOLE":
                         if (validateUpdating()) {
-                            Hole oldHole = DataManager.getHole(getIntent().getStringExtra("holeId"));
+                            String holeId = getIntent().getStringExtra("holeId");
+                            Hole oldHole = DataManager.getHole(holeId);
                             DataManager.updateHole(oldHole.getHoleId(), holeViewModel);
-                            IOManager.copyImagesFromTemp(tempImagsMap, holeViewModel);
+                            Hole newHole = DataManager.getHole(holeId);
+                            IOManager.copyImagesFromTemp(tempImagsMap, newHole);
                             IOManager.updateProject(DataManager.getProject());
                             HoleInfoActivity.this.setResult(RESULT_OK);
                             HoleInfoActivity.this.finish();
