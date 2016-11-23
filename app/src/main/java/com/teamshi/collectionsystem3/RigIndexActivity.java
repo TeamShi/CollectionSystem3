@@ -707,7 +707,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength() - 0.5)));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -800,7 +800,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
+        result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength() - 0.25)));
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
@@ -1034,7 +1034,11 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        if (rig.getSamplerPipeDiameter() == 0.9) {
+            result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillToolTotalLength() - 0.9)));
+        } else {
+            result.add(generateRigInfoCell(Utility.formatDouble(rig.getDrillPipeRemainLength() - 0.8)));
+        }
 
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeDiameter())));
         result.add(generateRigInfoCell(Utility.formatDouble(rig.getSamplerPipeLength())));
