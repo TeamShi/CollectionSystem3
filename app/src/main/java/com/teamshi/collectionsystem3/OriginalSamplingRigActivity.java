@@ -302,13 +302,17 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                     if (position == 0) {
                         rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.3);
                         rigViewModel.setRoundTripMeterageLength(0.4);
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getStartDepth() + 0.4);
+                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.5);
                         rigViewModel.setDrillPipeRemainLength(1.6);
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
                     } else if (position == 1) {
                         rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.4);
                         rigViewModel.setRoundTripMeterageLength(0.5);
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getStartDepth() + 0.5);
+                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.6);
                         rigViewModel.setDrillPipeRemainLength(1.5);
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
+
+
                     }
 
                     refreshInfo();
@@ -357,10 +361,11 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         startLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth() + 0.1);
+                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                         rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getStartDepth()) + " m ~ " + Utility.formatDouble(rigViewModel.getEndDepth()) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
                     } catch (Exception e) {
                         startLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                     }
@@ -389,10 +394,11 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         endLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
                         rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth() + 0.1);
+                        rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                         rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getStartDepth()) + " m ~ " + Utility.formatDouble(rigViewModel.getEndDepth()) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
                         refreshInfo();
                     } catch (Exception e) {
                         endLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
