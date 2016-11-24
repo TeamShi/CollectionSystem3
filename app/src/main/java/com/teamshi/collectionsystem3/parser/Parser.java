@@ -628,7 +628,7 @@ public class Parser {
                 //钻头
                 sb.append("").append("#");
                 sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength() - 0.5)).append("#");
 
                 //进尺
                 sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength())).append("#");
@@ -679,7 +679,7 @@ public class Parser {
                 //钻杆
                 sb.append(dstRig.getProbeType()).append("#");
                 sb.append(Utility.formatDouble(dstRig.getProbeLength())).append("#");
-                sb.append("").append("#");
+                sb.append(Utility.formatDouble(dstRig.getDrillToolTotalLength() - 0.25)).append("#");
 
                 //岩芯管
                 sb.append("动").append("#");
@@ -832,7 +832,12 @@ public class Parser {
                 //钻杆
                 sb.append("").append("#");
                 sb.append("").append("#");
-                sb.append("").append("#");
+
+                if(originalSamplingRig.getSamplerPipeDiameter() == 0.9) {
+                    sb.append(Utility.formatDouble(originalSamplingRig.getDrillToolTotalLength() - 0.9)).append("#");
+                } else {
+                    sb.append(Utility.formatDouble(originalSamplingRig.getDrillToolTotalLength() - 0.8)).append("#");
+                }
 
                 //岩芯管
                 sb.append("").append("#");
