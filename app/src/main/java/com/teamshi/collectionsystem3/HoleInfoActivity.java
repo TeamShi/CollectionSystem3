@@ -1,6 +1,7 @@
 package com.teamshi.collectionsystem3;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -1071,6 +1074,42 @@ public class HoleInfoActivity extends AppCompatActivity {
                 intent.putExtra("path", signaturePath);
                 tempImagsMap.put(JPG_SIGN_APPR, file);
                 startActivityForResult(intent, CAP_SIGN_APPROVER);
+            }
+        });
+
+        holeStartDateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar rigDate = holeViewModel.getStartDate();
+                DatePickerDialog dialog = new DatePickerDialog(HoleInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        GregorianCalendar temp = new GregorianCalendar();
+                        temp.set(year, monthOfYear, dayOfMonth);
+                        holeViewModel.setStartDate(temp);
+                        refreshInfo();
+                    }
+                }, rigDate.get(Calendar.YEAR), rigDate.get(Calendar.MONTH), rigDate.get(Calendar.DAY_OF_MONTH));
+
+                dialog.show();
+            }
+        });
+
+        holeEndDateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar rigDate = holeViewModel.getEndDate();
+                DatePickerDialog dialog = new DatePickerDialog(HoleInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        GregorianCalendar temp = new GregorianCalendar();
+                        temp.set(year, monthOfYear, dayOfMonth);
+                        holeViewModel.setEndDate(temp);
+                        refreshInfo();
+                    }
+                }, rigDate.get(Calendar.YEAR), rigDate.get(Calendar.MONTH), rigDate.get(Calendar.DAY_OF_MONTH));
+
+                dialog.show();
             }
         });
 
