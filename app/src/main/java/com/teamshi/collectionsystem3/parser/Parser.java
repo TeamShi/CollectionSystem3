@@ -617,9 +617,9 @@ public class Parser {
                 sb.append("标 贯").append("#");
 
                 //钻杆
-                sb.append(sptRig.getProbeType()).append("#");
-                sb.append(Utility.formatDouble(sptRig.getProbeLength())).append("#");
                 sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength() - 0.5)).append("#");
 
                 //岩芯管
                 sb.append(sptRig.getInjectionToolDiameter()).append("#");
@@ -628,7 +628,7 @@ public class Parser {
                 //钻头
                 sb.append("").append("#");
                 sb.append("").append("#");
-                sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength() - 0.5)).append("#");
+                sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength())).append("#");
 
                 //进尺
                 sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength())).append("#");
@@ -677,13 +677,13 @@ public class Parser {
 
                 sb.append("动 探").append("#");
                 //钻杆
-                sb.append(dstRig.getProbeType()).append("#");
-                sb.append(Utility.formatDouble(dstRig.getProbeLength())).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
                 sb.append(Utility.formatDouble(dstRig.getDrillToolTotalLength() - 0.25)).append("#");
 
                 //岩芯管
-                sb.append("动").append("#");
-                sb.append("").append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
 
                 //钻头
                 sb.append("").append("#");
