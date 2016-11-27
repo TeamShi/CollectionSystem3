@@ -622,8 +622,8 @@ public class Parser {
                 sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength() - 0.5)).append("#");
 
                 //岩芯管
-                sb.append(sptRig.getInjectionToolDiameter()).append("#");
-                sb.append(Utility.formatDouble(sptRig.getInjectionToolLength())).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
 
                 //钻头
                 sb.append("").append("#");
@@ -635,6 +635,7 @@ public class Parser {
                 sb.append(Utility.formatDouble(sptRig.getDrillPipeRemainLength())).append("#");
                 sb.append(Utility.formatDouble(sptRig.getRoundTripMeterageLength())).append("#");
                 sb.append(Utility.formatDouble(sptRig.getAccumulatedMeterageLength())).append("#");
+
                 //护壁措施
                 sb.append("").append("#");
                 sb.append("").append("#");
