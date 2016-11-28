@@ -15,6 +15,7 @@ import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
+import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.parser.HtmlParser;
 import com.teamshi.collectionsystem3.parser.XlsParser;
@@ -218,13 +219,35 @@ public class IOManager {
             return false;
         } else {
             ArrayList<Hole> holes = project.getHoleList();
+            AssetManager assetManager = appContext.getAssets();
+
             if (holes != null && holes.size() > 0) {
-                String projectDirPath = APP_DATA + File.separator + project.getProjectName();
+                String projectDirPath = APP_DATA + File.separator + project.getProjectName()+ File.separator;
                 for (int i = 0; i < holes.size(); i++) {
                     Hole hole = holes.get(i);
-                    String holeDirPath = projectDirPath + File.separator + hole.getHoleId() + File.separator;
+                    String holeDirPath = projectDirPath + hole.getHoleId() + File.separator;
+                    // parse hole xls files
                     XlsParser.parse(holeDirPath, hole);
+
+                    //parse hole html files
+                    ArrayList<Rig> rigs = hole.getRigList();
+                    if(rigs != null && (rigs.size() > 0)) {
+                        for(Rig rig : rigs) {
+                            if(rig instanceof  OriginalSamplingRig)
+                                HtmlParser.parseOriSmlRig(holeDirPath, hole, (OriginalSamplingRig) rig, assetManager);
+                            if(rig instanceof  OtherSamplingRig)
+                                HtmlParser.parseOtherSmlRig(holeDirPath, hole, (OtherSamplingRig) rig, assetManager);
+                        }
+                    }
                 }
+
+                //parse project html files
+                String allRigsPath = HtmlParser.parse(projectDirPath, project, assetManager);
+                String sptRigsPath = HtmlParser.parseSptRigs(projectDirPath, project, assetManager);
+                String dstRigsPath = HtmlParser.parseDstRigs(projectDirPath, project, assetManager);
+                String earthSmplRigsPath = HtmlParser.parseEarthSmlRigs(projectDirPath, project, assetManager);
+                String waterSmplRigsPath = HtmlParser.parseWaterSmlRigs(projectDirPath, project, assetManager);
+                String rockSmplRigsPath = HtmlParser.parseRockSmlRigs(projectDirPath, project, assetManager);
             }
             projects.put(project.getProjectName(), project);
             return true;
