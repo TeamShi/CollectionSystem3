@@ -335,12 +335,14 @@ public class OtherSamplingRigActivity extends AppCompatActivity {
         addDetailedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holeId = getIntent().getStringExtra("holeId");
+
                 if (rigViewModel.getSamplingType().equals("扰动样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("扰动样", "扰" + String.valueOf(rigViewModel.getDetails().size() + 1), DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), "0", 130));
                 } else if (rigViewModel.getSamplingType().equals("岩样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("岩样", "岩" + String.valueOf(rigViewModel.getDetails().size() + 1), DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), "0", 130));
                 } else if (rigViewModel.getSamplingType().equals("水样")) {
-                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), 0, 0, "0", 130));
+                    rigViewModel.getDetails().add(new OtherSamplingRig.OtherSamplingDetail("水样", "水" + String.valueOf(rigViewModel.getDetails().size() + 1), DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), DataManager.getHole(holeId).getLastAccumulatedMeterageLength(), "0", 130));
 
                 }
 
