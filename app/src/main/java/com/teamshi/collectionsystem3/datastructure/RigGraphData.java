@@ -34,8 +34,115 @@ public class RigGraphData {
         }
     }
 
-    // TODO: todo Alfred: add more information
     public static class RigNode {
+        private int height;
+
+        private String drillType;
+        private int drillDiameter;
+
+        private double startDepth;
+        private double endDepth;
+        private double roundTripDepth;
+
+        private double layoutEndDepth;
+
+        private double rockDepth;
+        private int rockLayoutIndex;
+
+        private String description;
+
+        public RigNode(int height, String drillType, int drillDiameter, double startDepth, double endDepth, double roundTripDepth, double layoutEndDepth, double rockDepth, int rockLayoutIndex, String description) {
+            this.height = height;
+            this.drillType = drillType;
+            this.drillDiameter = drillDiameter;
+            this.startDepth = startDepth;
+            this.endDepth = endDepth;
+            this.roundTripDepth = roundTripDepth;
+            this.layoutEndDepth = layoutEndDepth;
+            this.rockDepth = rockDepth;
+            this.rockLayoutIndex = rockLayoutIndex;
+            this.description = description;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public String getDrillType() {
+            return drillType;
+        }
+
+        public void setDrillType(String drillType) {
+            this.drillType = drillType;
+        }
+
+        public int getDrillDiameter() {
+            return drillDiameter;
+        }
+
+        public void setDrillDiameter(int drillDiameter) {
+            this.drillDiameter = drillDiameter;
+        }
+
+        public double getStartDepth() {
+            return startDepth;
+        }
+
+        public void setStartDepth(double startDepth) {
+            this.startDepth = startDepth;
+        }
+
+        public double getEndDepth() {
+            return endDepth;
+        }
+
+        public void setEndDepth(double endDepth) {
+            this.endDepth = endDepth;
+        }
+
+        public double getRoundTripDepth() {
+            return roundTripDepth;
+        }
+
+        public void setRoundTripDepth(double roundTripDepth) {
+            this.roundTripDepth = roundTripDepth;
+        }
+
+        public double getLayoutEndDepth() {
+            return layoutEndDepth;
+        }
+
+        public void setLayoutEndDepth(double layoutEndDepth) {
+            this.layoutEndDepth = layoutEndDepth;
+        }
+
+        public double getRockDepth() {
+            return rockDepth;
+        }
+
+        public void setRockDepth(double rockDepth) {
+            this.rockDepth = rockDepth;
+        }
+
+        public int getRockLayoutIndex() {
+            return rockLayoutIndex;
+        }
+
+        public void setRockLayoutIndex(int rockLayoutIndex) {
+            this.rockLayoutIndex = rockLayoutIndex;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
     }
 
     private ArrayList<GraphNode> dateNodeList;
