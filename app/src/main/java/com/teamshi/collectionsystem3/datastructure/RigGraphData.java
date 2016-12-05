@@ -1,6 +1,5 @@
 package com.teamshi.collectionsystem3.datastructure;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -8,11 +7,11 @@ import java.util.ArrayList;
  */
 
 public class RigGraphData {
-    public static class GraphEntry {
+    public static class GraphNode {
         private String content;
         private int height;
 
-        public GraphEntry(String content, int height) {
+        public GraphNode(String content, int height) {
             this.content = content;
             this.height = height;
         }
@@ -36,98 +35,98 @@ public class RigGraphData {
     }
 
     // TODO: todo Alfred: add more information
-    public static class RigEntry {
+    public static class RigNode {
     }
 
-    private ArrayList<GraphEntry> dateEntryList;
-    private ArrayList<RigEntry> rigEntryList;
-    private ArrayList<GraphEntry> trEntryList;
-    private ArrayList<GraphEntry> rockCoreEntryList;
-    private GraphEntry initialWaterDepthEntry;
-    private GraphEntry finalWaterDepthEntry;
-    private GraphEntry waterDepthDateEntry;
-    private ArrayList<GraphEntry> waterSamplingEntryList;
-    private ArrayList<GraphEntry> originalSamplingEntryList;
-    private ArrayList<GraphEntry> disturbanceSamplingEntryList;
+    private ArrayList<GraphNode> dateNodeList;
+    private ArrayList<RigNode> rigNodeList;
+    private ArrayList<GraphNode> trNodeList;
+    private ArrayList<GraphNode> rockCoreNodeList;
+    private GraphNode initialWaterDepthNode;
+    private GraphNode finalWaterDepthNode;
+    private GraphNode waterDepthDateNode;
+    private ArrayList<GraphNode> waterSamplingNodeList;
+    private ArrayList<GraphNode> originalSamplingNodeList;
+    private ArrayList<GraphNode> disturbanceSamplingNodeList;
 
-    public ArrayList<GraphEntry> getDateEntryList() {
-        return dateEntryList;
+    public ArrayList<GraphNode> getDateNodeList() {
+        return dateNodeList;
     }
 
-    public void setDateEntryList(ArrayList<GraphEntry> dateEntryList) {
-        this.dateEntryList = dateEntryList;
+    public void setDateNodeList(ArrayList<GraphNode> dateNodeList) {
+        this.dateNodeList = dateNodeList;
     }
 
-    public ArrayList<RigEntry> getRigEntryList() {
-        return rigEntryList;
+    public ArrayList<RigNode> getRigNodeList() {
+        return rigNodeList;
     }
 
-    public void setRigEntryList(ArrayList<RigEntry> rigEntryList) {
-        this.rigEntryList = rigEntryList;
+    public void setRigNodeList(ArrayList<RigNode> rigNodeList) {
+        this.rigNodeList = rigNodeList;
     }
 
-    public ArrayList<GraphEntry> getTrEntryList() {
-        return trEntryList;
+    public ArrayList<GraphNode> getTrNodeList() {
+        return trNodeList;
     }
 
-    public void setTrEntryList(ArrayList<GraphEntry> trEntryList) {
-        this.trEntryList = trEntryList;
+    public void setTrNodeList(ArrayList<GraphNode> trNodeList) {
+        this.trNodeList = trNodeList;
     }
 
-    public ArrayList<GraphEntry> getRockCoreEntryList() {
-        return rockCoreEntryList;
+    public ArrayList<GraphNode> getRockCoreNodeList() {
+        return rockCoreNodeList;
     }
 
-    public void setRockCoreEntryList(ArrayList<GraphEntry> rockCoreEntryList) {
-        this.rockCoreEntryList = rockCoreEntryList;
+    public void setRockCoreNodeList(ArrayList<GraphNode> rockCoreNodeList) {
+        this.rockCoreNodeList = rockCoreNodeList;
     }
 
-    public GraphEntry getInitialWaterDepthEntry() {
-        return initialWaterDepthEntry;
+    public GraphNode getInitialWaterDepthNode() {
+        return initialWaterDepthNode;
     }
 
-    public void setInitialWaterDepthEntry(GraphEntry initialWaterDepthEntry) {
-        this.initialWaterDepthEntry = initialWaterDepthEntry;
+    public void setInitialWaterDepthNode(GraphNode initialWaterDepthNode) {
+        this.initialWaterDepthNode = initialWaterDepthNode;
     }
 
-    public GraphEntry getFinalWaterDepthEntry() {
-        return finalWaterDepthEntry;
+    public GraphNode getFinalWaterDepthNode() {
+        return finalWaterDepthNode;
     }
 
-    public void setFinalWaterDepthEntry(GraphEntry finalWaterDepthEntry) {
-        this.finalWaterDepthEntry = finalWaterDepthEntry;
+    public void setFinalWaterDepthNode(GraphNode finalWaterDepthNode) {
+        this.finalWaterDepthNode = finalWaterDepthNode;
     }
 
-    public GraphEntry getWaterDepthDateEntry() {
-        return waterDepthDateEntry;
+    public GraphNode getWaterDepthDateNode() {
+        return waterDepthDateNode;
     }
 
-    public void setWaterDepthDateEntry(GraphEntry waterDepthDateEntry) {
-        this.waterDepthDateEntry = waterDepthDateEntry;
+    public void setWaterDepthDateNode(GraphNode waterDepthDateNode) {
+        this.waterDepthDateNode = waterDepthDateNode;
     }
 
-    public ArrayList<GraphEntry> getWaterSamplingEntryList() {
-        return waterSamplingEntryList;
+    public ArrayList<GraphNode> getWaterSamplingNodeList() {
+        return waterSamplingNodeList;
     }
 
-    public void setWaterSamplingEntryList(ArrayList<GraphEntry> waterSamplingEntryList) {
-        this.waterSamplingEntryList = waterSamplingEntryList;
+    public void setWaterSamplingNodeList(ArrayList<GraphNode> waterSamplingNodeList) {
+        this.waterSamplingNodeList = waterSamplingNodeList;
     }
 
-    public ArrayList<GraphEntry> getOriginalSamplingEntryList() {
-        return originalSamplingEntryList;
+    public ArrayList<GraphNode> getOriginalSamplingNodeList() {
+        return originalSamplingNodeList;
     }
 
-    public void setOriginalSamplingEntryList(ArrayList<GraphEntry> originalSamplingEntryList) {
-        this.originalSamplingEntryList = originalSamplingEntryList;
+    public void setOriginalSamplingNodeList(ArrayList<GraphNode> originalSamplingNodeList) {
+        this.originalSamplingNodeList = originalSamplingNodeList;
     }
 
-    public ArrayList<GraphEntry> getDisturbanceSamplingEntryList() {
-        return disturbanceSamplingEntryList;
+    public ArrayList<GraphNode> getDisturbanceSamplingNodeList() {
+        return disturbanceSamplingNodeList;
     }
 
-    public void setDisturbanceSamplingEntryList(ArrayList<GraphEntry> disturbanceSamplingEntryList) {
-        this.disturbanceSamplingEntryList = disturbanceSamplingEntryList;
+    public void setDisturbanceSamplingNodeList(ArrayList<GraphNode> disturbanceSamplingNodeList) {
+        this.disturbanceSamplingNodeList = disturbanceSamplingNodeList;
     }
 }
 
