@@ -235,6 +235,12 @@ public class RigGraphData {
     public void setDisturbanceSamplingNodeList(ArrayList<GraphNode> disturbanceSamplingNodeList) {
         this.disturbanceSamplingNodeList = disturbanceSamplingNodeList;
     }
+
+    public RigGraphData deepCopy() {
+        RigGraphData newRigGraphData = new RigGraphData();
+
+        return newRigGraphData;
+    }
 }
 
 
