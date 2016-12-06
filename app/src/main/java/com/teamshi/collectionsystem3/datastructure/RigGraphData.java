@@ -1,12 +1,13 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Alfred on 2016/12/4.
  */
 
-public class RigGraphData {
+public class RigGraphData   implements Serializable {
     public static class GraphNode {
         private String content;
         private int height;
