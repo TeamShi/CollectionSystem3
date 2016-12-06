@@ -79,7 +79,7 @@ public class RigGraphActivity extends AppCompatActivity {
         clearGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
