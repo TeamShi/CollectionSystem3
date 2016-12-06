@@ -17,7 +17,6 @@ public class RigGraphData   implements Serializable {
             this.height = height;
         }
 
-
         public String getContent() {
             return content;
         }
@@ -32,6 +31,10 @@ public class RigGraphData   implements Serializable {
 
         public void setHeight(int height) {
             this.height = height;
+        }
+
+        public GraphNode deepCopy() {
+            return new GraphNode(content, height);
         }
     }
 
@@ -144,6 +147,10 @@ public class RigGraphData   implements Serializable {
         public void setDescription(String description) {
             this.description = description;
         }
+
+        public RigNode deepCopy() {
+            return new RigNode(height, drillType, drillDiameter, startDepth, endDepth, roundTripDepth, layoutEndDepth, rockDepth, rockLayoutIndex, description)
+        }
     }
 
     private ArrayList<GraphNode> dateNodeList;
@@ -156,6 +163,19 @@ public class RigGraphData   implements Serializable {
     private ArrayList<GraphNode> waterSamplingNodeList;
     private ArrayList<GraphNode> originalSamplingNodeList;
     private ArrayList<GraphNode> disturbanceSamplingNodeList;
+
+    public RigGraphData() {
+        this.dateNodeList = new ArrayList<>();
+        this.rigNodeList = new ArrayList<>();
+        this.trNodeList = new ArrayList<>();
+        this.rockCoreNodeList = new ArrayList<>();
+        this.initialWaterDepthNode = new GraphNode("", 0);
+        this.finalWaterDepthNode = new GraphNode("", 0);
+        this.waterDepthDateNode = new GraphNode("", 0);
+        this.waterSamplingNodeList = new ArrayList<>();
+        this.originalSamplingNodeList = new ArrayList<>();
+        this.disturbanceSamplingNodeList = new ArrayList<>();
+    }
 
     public ArrayList<GraphNode> getDateNodeList() {
         return dateNodeList;
@@ -240,8 +260,43 @@ public class RigGraphData   implements Serializable {
     public RigGraphData deepCopy() {
         RigGraphData newRigGraphData = new RigGraphData();
 
+        for (GraphNode node : dateNodeList) {
+            newRigGraphData.dateNodeList.add(node.deepCopy());
+        }
+
+        for (RigNode node : rigNodeList) {
+            newRigGraphData.rigNodeList.add(node.deepCopy());
+        }
+
+        for (GraphNode node : trNodeList) {
+            newRigGraphData.trNodeList.add(node.deepCopy());
+        }
+
+        for (GraphNode node : rockCoreNodeList) {
+            newRigGraphData.rockCoreNodeList.add(node.deepCopy());
+        }
+
+        newRigGraphData.initialWaterDepthNode = initialWaterDepthNode.deepCopy();
+
+        newRigGraphData.finalWaterDepthNode = finalWaterDepthNode.deepCopy();
+
+        newRigGraphData.waterDepthDateNode = waterDepthDateNode.deepCopy();
+
+        for (GraphNode node : waterSamplingNodeList) {
+            newRigGraphData.waterSamplingNodeList.add(node.deepCopy());
+        }
+
+        for (GraphNode node : originalSamplingNodeList) {
+            newRigGraphData.originalSamplingNodeList.add(node.deepCopy());
+        }
+
+        for (GraphNode node : disturbanceSamplingNodeList) {
+            newRigGraphData.disturbanceSamplingNodeList.add(node.deepCopy());
+        }
+
         return newRigGraphData;
     }
+
 }
 
 
