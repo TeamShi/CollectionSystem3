@@ -39,6 +39,9 @@ public class HtmlParser extends Parser {
     public static String SMPL_WATER_RIG_EVENT_TEMPLATE = "SampleWater.html";
     public static String SMPL_ROCK_RIG_EVENT_TEMPLATE = "SampleRock.html";
 
+    public  static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
+    public  static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphTable.html";
+    public  static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphT.html";
 
     public static String TBODY_ID = "tableBody";
     public static String PROJECTNAME_ID = "projectName";
@@ -129,7 +132,7 @@ public class HtmlParser extends Parser {
 
         for (Hole hole : holes) {
             try {
-                parseHole(dirPath + hole.getHoleId() + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+                parseHole(dirPath + hole.getHoleId() + File.separator + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
