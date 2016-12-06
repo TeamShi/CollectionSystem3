@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>断层表封底</title>
+    <style>
+        
+        td {
+            width: 1em;
+            text-align: center;
+            vertical-align: top;
+            padding: 0.5em;
+            box-sizing: content-box;
+        }
+        
+        .flex-row {
+            position: absolute;
+            top: 2em;
+            bottom: 2em;
+            left: 4em;
+            right: 2em;
+            
+            display: flex;
+            flex: 1 0 0;
+            justify-content: space-between;
+            align-items: flex-start;
+            
+        }
+        
+        .flex-row > div {
+            display: flex;
+            flex: 1 0 0;
+            flex-direction: column;
+            height: 100%;
+            
+            text-align: start;
+        }
+    </style> 
+</head>
+
+<body style="text-align: center">
+    <div class="flex-row">
+        <div>
+            <table border="1" cellspacing="0" style="height:100%;">
+                <tbody>
+                    <tr style="height:1em">
+                        <td colspan="7">提水试验情况</td>
+                    </tr>
+                    <tr height="1">
+                        <td>提水时间</td>
+                        <td>提水阀水位</td>
+                        <td>管钻容量</td>
+                        <td>提水次数</td>
+                        <td>出水量</td>
+                        <td>提水延续时间</td>
+                        <td>提水后水位</td>
+                    </tr>
+                    <tr height="1">
+                        <td colspan="7">21</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+             <div>实钻地段工程地质特征：</div>
+             <label style="font-size: large; font-weight:bold; margin-top: 100%;"> 地质人员</label>
+        </div>
+    </div>
+</body>
+</html>

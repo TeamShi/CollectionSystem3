@@ -129,8 +129,7 @@ public class HtmlParser extends Parser {
 
         for (Hole hole : holes) {
             try {
-                parseHole(dirPath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
-////            write(dirPath + "/dstRig_" + hole.getHoleId() + ".html", dstRigEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+                parseHole(dirPath + hole.getHoleId() + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;

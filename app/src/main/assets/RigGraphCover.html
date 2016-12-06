@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>断层表封面</title>
+    <style>
+        td {
+            text-align: start;
+            min-width: 6em;
+        }
+        
+        .flex-row {
+            display: flex;
+            flex: 1 0 0;
+            justify-content: space-between;
+            align-items: center;
+            
+            text-align: start;
+            margin-left: 6em;
+        }
+        
+        .flex-row > div {
+            flex-grow: 1;
+        }
+    </style> 
+</head>
+
+<body style="text-align: center">
+    <h1 style="margin: 2em auto 0.5em auto;">铁 道 第 四 勘 查 设 计 院</h1>
+    <p>第__勘测（地质）___队</p>
+    <p>___线___段___测</p>
+    <h2 style="margin: 1.5em auto;">钻 探 记 录</h2>
+    <table style="margin:auto;">
+        <tbody>
+            <tr>
+                <td>工程名称</td>
+                <td></td>
+                <td>钻孔编号</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>里  程</td>
+                <td></td>
+                <td>路线中心</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>孔口绝对标高</td>
+                <td></td>
+                <td>地面绝对标高</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>钻孔设计深度</td>
+                <td></td>
+                <td>钻孔实际深度</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>开工日期</td>
+                <td></td>
+                <td>完工日期</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>钻机类型</td>
+                <td></td>
+                <td>发动机类型</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>水泵类型</td>
+                <td colspan="3"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h2 style="margin: 1em auto 3em auto;">钻孔位置草图</h2>
+    <div class="flex-row">
+        <div>
+             记录者<span id="recorder"></span>
+        </div>
+        
+        <div>
+             班长<span id="class-monitor"></span>
+        </div>
+        
+        <div>
+             班长<span id="machine-monitor"></span>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>
