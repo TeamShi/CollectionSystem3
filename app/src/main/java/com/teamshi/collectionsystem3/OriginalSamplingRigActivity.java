@@ -303,16 +303,16 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.3);
                         rigViewModel.setRoundTripMeterageLength(0.4);
                         rigViewModel.setRockCoreLength(0.4);
-                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.5);
+                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4);
                         rigViewModel.setDrillPipeRemainLength(1.6);
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
                     } else if (position == 1) {
                         rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.4);
                         rigViewModel.setRoundTripMeterageLength(0.5);
                         rigViewModel.setRockCoreLength(0.5);
-                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.6);
+                        rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.5);
                         rigViewModel.setDrillPipeRemainLength(1.5);
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
 
 
                     }
@@ -362,13 +362,13 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         rigViewModel.setStartDepth(Double.valueOf(s.toString()));
                         startLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth() + 0.1);
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth());
                         rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                         rigViewModel.setRockCoreLength(rigViewModel.getRoundTripMeterageLength());
                         rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
                     } catch (Exception e) {
                         startLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                     }
@@ -396,13 +396,13 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         rigViewModel.setEndDepth(Double.valueOf(s.toString()));
                         endLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth() + 0.1);
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth());
                         rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                         rigViewModel.setRockCoreLength(rigViewModel.getRoundTripMeterageLength());
                         rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getLastAccumulatedMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
                         refreshInfo();
                     } catch (Exception e) {
                         endLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
@@ -991,7 +991,7 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.3,
                         1, "厚壁",
-                        DataManager.getHole(holeId).getRockCoreIndex() + 1, DataManager.getHole(holeId).getLastRockCorePipeLength(), 0.3,
+                        DataManager.getHole(holeId).getRockCoreIndex() + 1, DataManager.getHole(holeId).getLastRockCorePipeLength(), 1,
                         Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.1) + " m ~ " + Utility.formatDouble(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4) + " m",
                         DataManager.getHole(holeId).getLastRockName(),
                         DataManager.getHole(holeId).getLastRockColor(),

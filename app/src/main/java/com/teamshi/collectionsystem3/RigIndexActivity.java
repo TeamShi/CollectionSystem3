@@ -29,6 +29,7 @@ import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
+import com.teamshi.collectionsystem3.datastructure.RigGraphData;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
@@ -41,6 +42,7 @@ public class RigIndexActivity extends AppCompatActivity {
     private static final int ACTION_ADD_RIG = 0;
     private static final int ACTION_EDIT_RIG = 1;
     private static final int ACTION_COPY_RIG = 2;
+    private static final int ACTION_EDIT_GRAPH_DATA = 3;
 
     private static final int CONTEXT_MENU_QUERY = 0;
     private static final int CONTEXT_MENU_COPY_NEW = 1;
@@ -56,6 +58,7 @@ public class RigIndexActivity extends AppCompatActivity {
     private String[] holeListSpinnerOptions;
 
     private Button addRigButton;
+    private Button splitRigButton;
 
     private boolean waterDepthFlag = false;
     private boolean refreshLock = false;
@@ -71,6 +74,7 @@ public class RigIndexActivity extends AppCompatActivity {
 
         holeListSpinner = (Spinner)findViewById(R.id.spinner_hole_list);
         addRigButton = (Button) findViewById(R.id.button_add_rig);
+        splitRigButton = (Button) findViewById(R.id.button_split_layer);
 
         holeListSpinnerOptions = DataManager.getHoleIdOptionList();
         holeListSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, holeListSpinnerOptions);
@@ -154,6 +158,15 @@ public class RigIndexActivity extends AppCompatActivity {
 
                 typeDialog = builder.create();
                 typeDialog.show();
+            }
+        });
+
+        splitRigButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RigIndexActivity.this, RigGraphActivity.class);
+                intent.putExtra("holeId", holeId);
+                startActivityForResult(intent, ACTION_EDIT_GRAPH_DATA);
             }
         });
 

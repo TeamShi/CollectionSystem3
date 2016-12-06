@@ -17,17 +17,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <Spinner
-                android:id="@+id/spinner_hole_list"
-                android:textColor="@android:color/black"
-                android:layout_height="@dimen/default_table_height"
-                android:layout_width="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left">
+                <Spinner
+                    android:id="@+id/spinner_hole_list"
+                    android:textColor="@android:color/black"
+                    android:layout_height="@dimen/default_table_height"
+                    android:layout_width="wrap_content"/>
                 <Button
                     android:layout_width="150dp"
                     android:layout_height="@dimen/default_table_height"
                     android:id="@+id/button_add_rig"
                     android:text="录入"
                     android:textSize="@dimen/default_text_size"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="划分到层"
+                        android:id="@+id/button_split_layer" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
         <HorizontalScrollView

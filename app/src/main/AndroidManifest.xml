@@ -35,7 +35,8 @@
         <activity android:name=".TRRigActivity" />
         <activity android:name=".CaptureSignature" />
         <activity android:name=".OriginalSamplingRigActivity" />
-        <activity android:name=".OtherSamplingRigActivity"></activity>
+        <activity android:name=".OtherSamplingRigActivity" />
+        <activity android:name=".RigGraphActivity"></activity>
     </application>
 
 </manifest>
