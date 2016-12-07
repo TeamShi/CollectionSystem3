@@ -149,7 +149,7 @@ public class RigGraphData   implements Serializable {
         }
 
         public RigNode deepCopy() {
-            return new RigNode(height, drillType, drillDiameter, startDepth, endDepth, roundTripDepth, layoutEndDepth, rockDepth, rockLayoutIndex, description)
+            return new RigNode(height, drillType, drillDiameter, startDepth, endDepth, roundTripDepth, layoutEndDepth, rockDepth, rockLayoutIndex, description);
         }
     }
 
