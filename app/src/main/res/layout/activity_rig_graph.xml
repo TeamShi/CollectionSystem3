@@ -59,13 +59,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:id="@+id/linear_layout_information">
 
             <ScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:padding="5dp">
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -74,6 +76,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/table_layout_split_rock_description">
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:text="编号"
+                                android:textColor="@android:color/black"
+                                android:background="@drawable/cell_hint"
+                                android:textSize="@dimen/default_text_size"
+                                android:layout_height="@dimen/default_table_height"
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"/>
+                            <TextView
+                                android:text="层底深度(m)"
+                                android:textColor="@android:color/black"
+                                android:background="@drawable/cell_hint"
+                                android:textSize="@dimen/default_text_size"
+                                android:layout_height="@dimen/default_table_height"
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"/>
+                            <TextView
+                                android:text="厚度(m)"
+                                android:textColor="@android:color/black"
+                                android:background="@drawable/cell_hint"
+                                android:textSize="@dimen/default_text_size"
+                                android:layout_height="@dimen/default_table_height"
+                                android:layout_width="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"/>
+
+                        </TableRow>
 
                     </TableLayout>
                 </HorizontalScrollView>
@@ -83,7 +117,7 @@
             <ScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:padding="5dp">
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -149,6 +183,373 @@
 
             </ScrollView>
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_layout_rig_graph_detail"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:textSize="@dimen/default_text_size"
+                    android:text="确认"
+                    android:id="@+id/button_confirm_rig_detail_graph"/>
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow>
+                    <TextView
+                        android:text="岩芯采取"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="编号"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:layout_weight="2"
+                        android:id="@+id/edittext_regular_rig_rock_core_index"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_length"/>
+                    <TextView
+                        android:text="长度(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:layout_weight="2"
+                        android:id="@+id/edittext_regular_rig_rock_core_length"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:inputType="numberDecimal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_type"/>
+                    <TextView
+                        android:text="采取率"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_weight="2"
+                        android:id="@+id/textview_regular_rig_rock_core_pick_percentage"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@+id/textview_na_rig_type"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="地层"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="本钻起止深度(m)"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
+                    <TextView
+                        android:layout_weight="3"
+                        android:id="@+id/textview_regular_rig_start_end_depth"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:nextFocusDown="@+id/textview_na_rig_type"
+                        android:layout_gravity="center" />
+                    <TextView
+                        android:text="岩土名称"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:text="黏土"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:id="@+id/edittext_regular_rig_rock_type"
+                        android:singleLine="true"
+                        android:nextFocusDown="@+id/edittext_regular_rig_rock_description"
+                        />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="..."
+                        android:id="@+id/button_regular_rig_rock_type"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="颜色"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:text="灰色"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:id="@+id/edittext_regular_rig_rock_color"
+                        android:singleLine="true"
+                        />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="..."
+                        android:id="@+id/button_regular_rig_rock_color"/>
+                    <TextView
+                        android:text="稠度/密实度"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
+                    <EditText
+                        android:text="坚硬"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:id="@+id/edittext_regular_rig_rock_density"
+                        android:singleLine="true"
+                        />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="..."
+                        android:id="@+id/button_regular_rig_rock_density"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="饱和度"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:text="稍湿"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:id="@+id/edittext_regular_rig_rock_saturation"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="..."
+                        android:id="@+id/button_regular_rig_rock_saturation"/>
+                    <TextView
+                        android:text="岩石风化程度"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical" />
+                    <EditText
+                        android:text="全风化"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="2"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:id="@+id/edittext_regular_rig_rock_weathering"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/default_text_size"
+                        android:text="..."
+                        android:id="@+id/button_regular_rig_rock_weathering"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="300dp"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:text="名称及岩性"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="300dp"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="300dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@drawable/cell_input">
+                        <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="80dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:text="描述"
+                            android:id="@+id/button_generate_rock_description"/>
+                        <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="80dp"
+                            android:textSize="@dimen/default_text_size"
+                            android:text="载入模版"
+                            android:id="@+id/button_load_description_template"/>
+                    </LinearLayout>
+                    <EditText
+                        android:layout_weight="5"
+                        android:id="@+id/edittext_regular_rig_rock_description"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="300dp"
+                        android:layout_width="0dp"
+                        android:nextFocusDown="@+id/edittext_regular_rig_note"/>
+                </TableRow>
+
+            </TableLayout>
 
         </LinearLayout>
 
