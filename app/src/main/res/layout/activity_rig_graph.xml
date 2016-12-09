@@ -67,7 +67,7 @@
             <ScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:padding="5dp">
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
-                        android:id="@+id/edittext_regular_rig_rock_core_index"
+                        android:id="@+id/edittext_graph_detail_rig_rock_core_index"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -240,10 +240,9 @@
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:inputType="numberDecimal"
-                        android:nextFocusDown="@+id/edittext_regular_rig_rock_core_length"/>
+                        android:inputType="numberDecimal"/>
                     <TextView
-                        android:text="长度(m)"
+                        android:text="层底深度(m)"
                         android:textColor="@android:color/black"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
@@ -254,7 +253,7 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
-                        android:id="@+id/edittext_regular_rig_rock_core_length"
+                        android:id="@+id/edittext_graph_detail_end_length"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -265,7 +264,7 @@
                         android:layout_gravity="center"
                         android:nextFocusDown="@+id/edittext_regular_rig_rock_type"/>
                     <TextView
-                        android:text="采取率"
+                        android:text="层厚"
                         android:textColor="@android:color/black"
                         android:layout_weight="2"
                         android:background="@drawable/cell_hint"
@@ -276,7 +275,7 @@
                         android:layout_gravity="center"/>
                     <TextView
                         android:layout_weight="2"
-                        android:id="@+id/textview_regular_rig_rock_core_pick_percentage"
+                        android:id="@+id/textview_graph_detail_round_trip_length"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -289,7 +288,7 @@
 
                 <TableRow>
                     <TextView
-                        android:text="地层"
+                        android:text="岩芯采取"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_hint"
@@ -299,7 +298,7 @@
                         android:gravity="center"
                         android:layout_gravity="center"/>
                     <TextView
-                        android:text="本钻起止深度(m)"
+                        android:text="长度(m)"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:background="@drawable/cell_hint"
@@ -307,10 +306,31 @@
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
                         android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:id="@+id/edittext_graph_detail_rock_pick_up_length"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_input"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
                         android:layout_gravity="center" />
                     <TextView
-                        android:layout_weight="3"
-                        android:id="@+id/textview_regular_rig_start_end_depth"
+                        android:text="采取率"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:textSize="@dimen/default_text_size"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/textview_graph_detail_pick_up_percentage"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
@@ -339,9 +359,8 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:id="@+id/edittext_regular_rig_rock_type"
+                        android:id="@+id/edittext_graph_detail_rock_type"
                         android:singleLine="true"
-                        android:nextFocusDown="@+id/edittext_regular_rig_rock_description"
                         />
                     <Button
                         android:layout_width="0dp"
@@ -349,7 +368,7 @@
                         android:layout_height="match_parent"
                         android:textSize="@dimen/default_text_size"
                         android:text="..."
-                        android:id="@+id/button_regular_rig_rock_type"/>
+                        android:id="@+id/button_graph_detail_rock_type"/>
                 </TableRow>
 
                 <TableRow>
@@ -383,7 +402,7 @@
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:id="@+id/edittext_regular_rig_rock_color"
+                        android:id="@+id/edittext_graph_detail_rock_color"
                         android:singleLine="true"
                         />
                     <Button
@@ -392,7 +411,7 @@
                         android:layout_height="match_parent"
                         android:textSize="@dimen/default_text_size"
                         android:text="..."
-                        android:id="@+id/button_regular_rig_rock_color"/>
+                        android:id="@+id/button_graph_detail_rock_color"/>
                     <TextView
                         android:text="稠度/密实度"
                         android:textColor="@android:color/black"
@@ -413,7 +432,7 @@
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:id="@+id/edittext_regular_rig_rock_density"
+                        android:id="@+id/edittext_graph_detail_rock_density"
                         android:singleLine="true"
                         />
                     <Button
@@ -422,7 +441,7 @@
                         android:layout_height="match_parent"
                         android:textSize="@dimen/default_text_size"
                         android:text="..."
-                        android:id="@+id/button_regular_rig_rock_density"/>
+                        android:id="@+id/button_graph_detail_rock_density"/>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -453,7 +472,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:id="@+id/edittext_regular_rig_rock_saturation"
+                        android:id="@+id/edittext_graph_detail_rock_saturation"
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
@@ -464,7 +483,7 @@
                         android:layout_height="match_parent"
                         android:textSize="@dimen/default_text_size"
                         android:text="..."
-                        android:id="@+id/button_regular_rig_rock_saturation"/>
+                        android:id="@+id/button_graph_detail_rock_saturation"/>
                     <TextView
                         android:text="岩石风化程度"
                         android:textColor="@android:color/black"
@@ -483,7 +502,7 @@
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="@dimen/default_table_height"
                         android:layout_width="0dp"
-                        android:id="@+id/edittext_regular_rig_rock_weathering"
+                        android:id="@+id/edittext_graph_detail_rock_weathering"
                         android:singleLine="true"
                         android:gravity="center"
                         android:layout_gravity="center"
@@ -494,7 +513,7 @@
                         android:layout_height="match_parent"
                         android:textSize="@dimen/default_text_size"
                         android:text="..."
-                        android:id="@+id/button_regular_rig_rock_weathering"/>
+                        android:id="@+id/button_graph_detail_rock_weathering"/>
                 </TableRow>
 
                 <TableRow>
@@ -531,22 +550,22 @@
                             android:layout_height="80dp"
                             android:textSize="@dimen/default_text_size"
                             android:text="描述"
-                            android:id="@+id/button_generate_rock_description"/>
+                            android:id="@+id/button_graph_detail_generate_rock_description"/>
                         <Button
                             android:layout_width="fill_parent"
                             android:layout_height="80dp"
                             android:textSize="@dimen/default_text_size"
                             android:text="载入模版"
-                            android:id="@+id/button_load_description_template"/>
+                            android:id="@+id/button_graph_detail_load_description_template"/>
                     </LinearLayout>
                     <EditText
                         android:layout_weight="5"
-                        android:id="@+id/edittext_regular_rig_rock_description"
+                        android:id="@+id/edittext_graph_detail_rock_description"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"
                         android:layout_height="300dp"
                         android:layout_width="0dp"
-                        android:nextFocusDown="@+id/edittext_regular_rig_note"/>
+                        android:nextFocusDown="@+id/edittext_graph_detail_regular_rig_note"/>
                 </TableRow>
 
             </TableLayout>

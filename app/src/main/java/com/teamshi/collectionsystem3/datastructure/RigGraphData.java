@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Alfred on 2016/12/4.
  */
 
-public class RigGraphData   implements Serializable {
+public class RigGraphData implements Serializable {
     public static class GraphNode {
         private String content;
         private int height;

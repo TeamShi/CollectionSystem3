@@ -1,13 +1,18 @@
 package com.teamshi.collectionsystem3;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -19,12 +24,85 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.RigGraphData;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class RigGraphActivity extends Activity {
+    public static class GraphRigNodeRockInfo {
+        private String rockName;
+        private String rockColor;
+        private String rockDensity;
+        private String rockSaturation;
+        private String rockWeathering;
+        private String rockDescription;
+
+        public GraphRigNodeRockInfo(String rockName, String rockColor, String rockDensity, String rockSaturation, String rockWeathering, String rockDescription) {
+            this.rockName = rockName;
+            this.rockColor = rockColor;
+            this.rockDensity = rockDensity;
+            this.rockSaturation = rockSaturation;
+            this.rockWeathering = rockWeathering;
+            this.rockDescription = rockDescription;
+        }
+
+        public String getRockName() {
+            return rockName;
+        }
+
+        public void setRockName(String rockName) {
+            this.rockName = rockName;
+        }
+
+        public String getRockColor() {
+            return rockColor;
+        }
+
+        public void setRockColor(String rockColor) {
+            this.rockColor = rockColor;
+        }
+
+        public String getRockDensity() {
+            return rockDensity;
+        }
+
+        public void setRockDensity(String rockDensity) {
+            this.rockDensity = rockDensity;
+        }
+
+        public String getRockSaturation() {
+            return rockSaturation;
+        }
+
+        public void setRockSaturation(String rockSaturation) {
+            this.rockSaturation = rockSaturation;
+        }
+
+        public String getRockWeathering() {
+            return rockWeathering;
+        }
+
+        public void setRockWeathering(String rockWeathering) {
+            this.rockWeathering = rockWeathering;
+        }
+
+        public String getRockDescription() {
+            return rockDescription;
+        }
+
+        public void setRockDescription(String rockDescription) {
+            this.rockDescription = rockDescription;
+        }
+    }
     private static final String TAG = "CollectionSystem3";
 
+    private String holeId;
+
+
     private Hole holeViewModel;
-    private RigGraphData graphData;
+    private RigGraphData graphDataViewModel;
+    private RigGraphData.RigNode rigNodeViewModel;
+    private GraphRigNodeRockInfo graphRigNodeRockInfoViewModel;
 
     private TableLayout rockDescriptionTableLayout;
     private TableLayout splitRockDescriptionTableLayout;
@@ -39,6 +117,40 @@ public class RigGraphActivity extends Activity {
 
     public Button confirmRigDetailGraphButton;
 
+    private EditText detailRockCoreIndexEditText;
+    private EditText detailEndLengthEditText;
+    private TextView detailRoundTripLengthTextView;
+
+    private EditText detailRockCoreLengthEditText;
+    private TextView detailRockCorePickPercentageTextView;
+
+    private EditText rockTypeEditText;
+    private Button rockTypeButton;
+
+    private EditText rockColorEditText;
+    private Button rockColorButton;
+    private EditText rockDensityEditText;
+    private Button rockDensityButton;
+
+    private EditText rockSaturationEditText;
+    private Button rockSaturationButton;
+    private EditText rockWeatheringEditText;
+    private Button rockWeatheringButton;
+
+    private static final CharSequence[] ROCK_TYPE_OPTIONS = {"黏土", "杂填土", "素填土", "吹填土", "~~土", "粉质黏土", "粉土", "粉砂", "细砂", "中砂" , "粗砂", "砾砂", "漂石",
+            "块石", "卵石", "碎石", "粗圆砾", "粗角砾", "细圆砾", "细角砾", "泥岩", "砂岩", "灰岩", "花岗岩", "~~岩"};
+    private static final CharSequence[] ROCK_COLOR_OPTIONS = {"灰色", "青灰色", "深灰色", "紫色", "棕黄色", "浅黄色", "褐黄色", "红褐色", "棕红色", "棕色", "褐色", "黄褐色",
+            "青色","灰绿色","浅紫色", "暗红色", "黑色", "浅蓝色", "蓝色"};
+    private static final CharSequence[] ROCK_DENSITY_OPTIONS = {"坚硬", "硬塑", "软塑", "流塑", "可塑", "稍密", "中密", "密实", "松散"};
+    private static final CharSequence[] ROCK_SATURATION_OPTIONS = {"稍湿", "潮湿", "饱和"};
+    private static final CharSequence[] ROCK_WEATHERING_OPTIONS = {"全风化", "强风化", "中风化", "弱风化", "微风化", "未风化"};
+
+    private Button generateRockDescriptionButton;
+    private Button loadRockDescriptionTemplateButton;
+    private EditText rockDescriptionEditText;
+
+    private boolean refreshLock;
+
     public RigGraphActivity() {
     }
 
@@ -46,6 +158,8 @@ public class RigGraphActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rig_graph);
+
+        refreshLock = false;
 
         rockDescriptionTableLayout = (TableLayout) findViewById(R.id.table_layout_rock_description_list);
         splitRockDescriptionTableLayout = (TableLayout) findViewById(R.id.table_layout_split_rock_description);
@@ -60,6 +174,30 @@ public class RigGraphActivity extends Activity {
 
         confirmRigDetailGraphButton = (Button) findViewById(R.id.button_confirm_rig_detail_graph);
 
+        detailRockCoreIndexEditText = (EditText) findViewById(R.id.edittext_graph_detail_rig_rock_core_index);
+        detailEndLengthEditText = (EditText) findViewById(R.id.edittext_graph_detail_end_length);
+        detailRoundTripLengthTextView = (TextView) findViewById(R.id.textview_graph_detail_round_trip_length);
+
+        detailRockCoreLengthEditText = (EditText) findViewById(R.id.edittext_dst_rig_rock_core_length);
+        detailRockCorePickPercentageTextView = (TextView) findViewById(R.id.textview_graph_detail_pick_up_percentage);
+
+        rockTypeEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_type);
+        rockTypeButton = (Button) findViewById(R.id.button_graph_detail_rock_type);
+
+        rockColorEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_color);
+        rockColorButton = (Button) findViewById(R.id.button_graph_detail_rock_color);
+        rockDensityEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_density);
+        rockDensityButton = (Button) findViewById(R.id.button_graph_detail_rock_density);
+
+        rockSaturationEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_saturation);
+        rockSaturationButton = (Button) findViewById(R.id.button_graph_detail_rock_saturation);
+        rockWeatheringEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_weathering);
+        rockWeatheringButton = (Button) findViewById(R.id.button_graph_detail_rock_weathering);
+
+        generateRockDescriptionButton = (Button) findViewById(R.id.button_graph_detail_generate_rock_description);
+        loadRockDescriptionTemplateButton = (Button) findViewById(R.id.button_graph_detail_load_description_template);
+        rockDescriptionEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_description);
+
         confirmGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,13 +210,19 @@ public class RigGraphActivity extends Activity {
             public void onClick(View v) {
                 rigGprahDetailLinearLayout.setVisibility(View.VISIBLE);
 
+
                 addGraphButton.setEnabled(false);
                 deleteGraphButton.setEnabled(false);
                 clearGraphButton.setEnabled(false);
 
-
-
                 // TODO: auto fullfil
+                if (graphDataViewModel.getRigNodeList().size() == 0) {
+                    rigNodeViewModel = new RigGraphData.RigNode(0, "", 0, 0, 0, 0, 0, 0, 0, "");
+                    graphRigNodeRockInfoViewModel = new GraphRigNodeRockInfo("", "", "", "", "", "");
+                } else {
+                    rigNodeViewModel = new RigGraphData.RigNode(0, "", 0, 0, 0, 0, 0, 0, 0, "");
+                    graphRigNodeRockInfoViewModel = new GraphRigNodeRockInfo("", "", "", "", "", "");
+                }
 
             }
         });
@@ -86,7 +230,7 @@ public class RigGraphActivity extends Activity {
         deleteGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                graphData.getRigNodeList().remove(graphData.getRigNodeList().size() - 1);
+                graphDataViewModel.getRigNodeList().remove(graphDataViewModel.getRigNodeList().size() - 1);
 
                 refreshInfo();
             }
@@ -95,7 +239,7 @@ public class RigGraphActivity extends Activity {
         clearGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                graphData.getRigNodeList().clear();
+                graphDataViewModel.getRigNodeList().clear();
 
                 refreshInfo();
             }
@@ -106,20 +250,402 @@ public class RigGraphActivity extends Activity {
             public void onClick(View v) {
                 rigGprahDetailLinearLayout.setVisibility(View.GONE);
                 // TODO: fix when finish UI test.
-                graphData.getRigNodeList().add(new RigGraphData.RigNode(0, "", 0, 0, 0, 0, 0, 0, 0, ""));
+                graphDataViewModel.getRigNodeList().add(rigNodeViewModel);
 
                 addGraphButton.setEnabled(true);
                 deleteGraphButton.setEnabled(true);
                 clearGraphButton.setEnabled(true);
 
+                refreshInfo();
+            }
+        });
+
+        rockTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    rockColorEditText.setEnabled(true);
+                    rockColorButton.setEnabled(true);
+                    graphRigNodeRockInfoViewModel.setRockColor("灰色");
+                    rockDensityEditText.setEnabled(true);
+                    rockDensityButton.setEnabled(true);
+                    graphRigNodeRockInfoViewModel.setRockDensity("坚硬");
+                    rockSaturationEditText.setEnabled(true);
+                    rockSaturationButton.setEnabled(true);
+                    graphRigNodeRockInfoViewModel.setRockSaturation("稍湿");
+                    rockWeatheringEditText.setEnabled(true);
+                    rockWeatheringButton.setEnabled(true);
+                    graphRigNodeRockInfoViewModel.setRockWeathering("全风化");
+                    graphRigNodeRockInfoViewModel.setRockDescription("");
+
+                    graphRigNodeRockInfoViewModel.setRockName(s.toString());
+                }
+            }
+        });
+
+        rockTypeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockTypeDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RigGraphActivity.this);
+
+                builder.setTitle("岩土名称");
+
+                builder.setSingleChoiceItems(ROCK_TYPE_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        graphRigNodeRockInfoViewModel.setRockName(ROCK_TYPE_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1])
+                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])
+                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[3])
+                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[6])) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(true);
+                            rockSaturationButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockSaturation("稍湿");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockWeathering("");
+                            graphRigNodeRockInfoViewModel.setRockDescription("");
+                        } else if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[0])
+                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[4])
+                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[5])) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(false);
+                            rockSaturationButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockSaturation("");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockWeathering("");
+                            graphRigNodeRockInfoViewModel.setRockDescription("");
+                        } else if (graphRigNodeRockInfoViewModel.getRockName().endsWith("砂") || graphRigNodeRockInfoViewModel.getRockName().endsWith("石") || graphRigNodeRockInfoViewModel.getRockName().endsWith("砾")) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(true);
+                            rockSaturationButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockSaturation("稍湿");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockWeathering("");
+                            graphRigNodeRockInfoViewModel.setRockDescription("");
+                        } else if (graphRigNodeRockInfoViewModel.getRockName().endsWith("岩")) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(false);
+                            rockDensityButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockDensity("");
+                            rockSaturationEditText.setEnabled(false);
+                            rockSaturationButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockSaturation("");
+                            rockWeatheringEditText.setEnabled(true);
+                            rockWeatheringButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockWeathering("全风化");
+                            graphRigNodeRockInfoViewModel.setRockDescription("");
+                        }
+
+                        refreshInfo();
+                    }
+                });
+
+                rockTypeDialog = builder.create();
+                rockTypeDialog.show();
+            }
+        });
+
+        rockColorEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    graphRigNodeRockInfoViewModel.setRockColor(s.toString());
+                }
+            }
+        });
+
+        rockColorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockColorDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RigGraphActivity.this);
+
+                builder.setTitle("颜色");
+
+                builder.setSingleChoiceItems(ROCK_COLOR_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        graphRigNodeRockInfoViewModel.setRockColor(ROCK_COLOR_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+                    }
+                });
+
+                rockColorDialog = builder.create();
+                rockColorDialog.show();
+
+            }
+        });
+
+        rockDensityEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                graphRigNodeRockInfoViewModel.setRockDensity(s.toString());
+            }
+        });
+
+        rockDensityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockDensityDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RigGraphActivity.this);
+
+                builder.setTitle("稠度/密实度");
+
+                builder.setSingleChoiceItems(ROCK_DENSITY_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        graphRigNodeRockInfoViewModel.setRockDensity(ROCK_DENSITY_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+                    }
+                });
+
+                rockDensityDialog = builder.create();
+                rockDensityDialog.show();
+
+            }
+        });
+
+        rockSaturationEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    graphRigNodeRockInfoViewModel.setRockSaturation(s.toString());
+                }
+            }
+        });
+
+        rockSaturationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockSaturationDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RigGraphActivity.this);
+
+                builder.setTitle("饱和度");
+
+                builder.setSingleChoiceItems(ROCK_SATURATION_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        graphRigNodeRockInfoViewModel.setRockSaturation(ROCK_SATURATION_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+                    }
+                });
+
+                rockSaturationDialog = builder.create();
+                rockSaturationDialog.show();
+
+            }
+        });
+
+        rockWeatheringEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    graphRigNodeRockInfoViewModel.setRockWeathering(s.toString());
+                }
+            }
+        });
+
+        rockWeatheringButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog rockWeatheringDialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(RigGraphActivity.this);
+
+                builder.setTitle("岩石风化程度");
+
+                builder.setSingleChoiceItems(ROCK_WEATHERING_OPTIONS, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        graphRigNodeRockInfoViewModel.setRockWeathering(ROCK_WEATHERING_OPTIONS[which].toString());
+
+                        dialog.dismiss();
+
+                        refreshInfo();
+                    }
+                });
+
+                rockWeatheringDialog = builder.create();
+                rockWeatheringDialog.show();
+
+            }
+        });
+
+        generateRockDescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> stringList = new ArrayList<String>();
+                // TODO: set start end depth
+                // stringList.add(rigViewModel.getRigStartEndDepth());
+                stringList.add(graphRigNodeRockInfoViewModel.getRockName());
+
+                if (!graphRigNodeRockInfoViewModel.getRockColor().equals("")) {
+                    stringList.add(graphRigNodeRockInfoViewModel.getRockColor());
+                }
+
+                if (!graphRigNodeRockInfoViewModel.getRockDensity().equals("")) {
+                    stringList.add(graphRigNodeRockInfoViewModel.getRockDensity());
+                }
+
+                if (!graphRigNodeRockInfoViewModel.getRockSaturation().equals("")) {
+                    stringList.add(graphRigNodeRockInfoViewModel.getRockSaturation());
+                }
+
+                if (!graphRigNodeRockInfoViewModel.getRockWeathering().equals("")) {
+                    stringList.add(graphRigNodeRockInfoViewModel.getRockWeathering());
+                }
+
+                graphRigNodeRockInfoViewModel.setRockDescription(TextUtils.join(", ", stringList));
 
                 refreshInfo();
             }
         });
 
-        String holeId = getIntent().getStringExtra("holeId");
+        loadRockDescriptionTemplateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Map<String, String> configMap = ConfigurationManager.getTemplateDictionary();
+
+                AlertDialog typeDialog;
+
+                final CharSequence[] items = new CharSequence[configMap.size()];
+
+                Set set = configMap.keySet();
+
+                int i = 0;
+
+                for (Iterator iter = set.iterator(); iter.hasNext();)
+                {
+                    items[i] = (String) iter.next();
+                    i++;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(RigGraphActivity.this);
+
+                builder.setTitle("描述模版");
+
+                builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        graphRigNodeRockInfoViewModel.setRockDescription(graphRigNodeRockInfoViewModel.getRockDescription() + ", " + configMap.get(items[which]));
+
+                        refreshInfo();
+
+                        dialog.dismiss();
+                    }
+                });
+
+                typeDialog = builder.create();
+                typeDialog.show();
+
+            }
+        });
+
+        rockDescriptionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    graphRigNodeRockInfoViewModel.setRockDescription(s.toString());
+                }
+            }
+        });
+
+        holeId = getIntent().getStringExtra("holeId");
         holeViewModel = DataManager.getHole(holeId).deepCopy();
-        graphData = holeViewModel.getRigGraphData();
+        graphDataViewModel = holeViewModel.getRigGraphData();
 
         ArrayList<Rig> rigList = holeViewModel.getRigList();
         for (int i = 0; i < rigList.size(); i++) {
@@ -170,12 +696,18 @@ public class RigGraphActivity extends Activity {
     }
 
     protected void refreshInfo() {
-        deleteGraphButton.setEnabled(graphData.getRigNodeList().size() != 0);
+        if (refreshLock) {
+            return;
+        }
+
+        refreshLock = true;
+
+        deleteGraphButton.setEnabled(graphDataViewModel.getRigNodeList().size() != 0);
         while (splitRockDescriptionTableLayout.getChildCount() != 1) {
             splitRockDescriptionTableLayout.removeViewAt(1);
         }
 
-        for (int i = 0; i < graphData.getRigNodeList().size(); i++) {
+        for (int i = 0; i < graphDataViewModel.getRigNodeList().size(); i++) {
             TableRow tr = new TableRow(this);
 
             tr.setBackgroundColor(getResources().getColor(android.R.color.white));
@@ -184,12 +716,84 @@ public class RigGraphActivity extends Activity {
             param.height = TableLayout.LayoutParams.WRAP_CONTENT;
             param.width = TableLayout.LayoutParams.WRAP_CONTENT;
 
-            tr.addView(generateTableRowContent(String.valueOf(graphData.getRigNodeList().get(i).getRockLayoutIndex())));
-            tr.addView(generateTableRowContent(Utility.formatDouble(graphData.getRigNodeList().get(i).getLayoutEndDepth())));
-            tr.addView(generateTableRowContent(Utility.formatDouble(graphData.getRigNodeList().get(i).getHeight())));
+            tr.addView(generateTableRowContent(String.valueOf(graphDataViewModel.getRigNodeList().get(i).getRockLayoutIndex())));
+            tr.addView(generateTableRowContent(Utility.formatDouble(graphDataViewModel.getRigNodeList().get(i).getLayoutEndDepth())));
+            tr.addView(generateTableRowContent(Utility.formatDouble(graphDataViewModel.getRigNodeList().get(i).getHeight())));
 
             splitRockDescriptionTableLayout.addView(tr);
         }
+
+
+        if (DataManager.getHole(holeId).isApproved()) {
+
+        }
+
+        refreshLock = false;
+    }
+
+    protected void refreshDetailTable() {
+        if (getCurrentFocus() != rockTypeEditText) {
+            rockTypeEditText.setText(graphRigNodeRockInfoViewModel.getRockName());
+        }
+
+        if (getCurrentFocus() != rockColorEditText) {
+            rockColorEditText.setText(graphRigNodeRockInfoViewModel.getRockColor());
+        }
+
+        if (getCurrentFocus() != rockDensityEditText) {
+            rockDensityEditText.setText(graphRigNodeRockInfoViewModel.getRockDensity());
+        }
+
+        if (getCurrentFocus() != rockSaturationEditText) {
+            rockSaturationEditText.setText(graphRigNodeRockInfoViewModel.getRockSaturation());
+        }
+
+        if (getCurrentFocus() != rockWeatheringEditText) {
+            rockWeatheringEditText.setText(graphRigNodeRockInfoViewModel.getRockWeathering());
+        }
+
+        if (getCurrentFocus() != rockDescriptionEditText) {
+            rockDescriptionEditText.setText(graphRigNodeRockInfoViewModel.getRockDescription());
+        }
+
+        if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[0]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1])) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (graphRigNodeRockInfoViewModel.getRockName().endsWith("砂") || graphRigNodeRockInfoViewModel.getRockName().endsWith("石") || graphRigNodeRockInfoViewModel.getRockName().endsWith("砾")) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (graphRigNodeRockInfoViewModel.getRockName().endsWith("岩")) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(false);
+            rockDensityButton.setEnabled(false);
+            rockSaturationEditText.setEnabled(false);
+            rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(true);
+            rockWeatheringButton.setEnabled(true);
+        }
+
     }
 
 }
