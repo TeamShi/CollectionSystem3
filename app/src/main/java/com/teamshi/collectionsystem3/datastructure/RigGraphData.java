@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 
 public class RigGraphData implements Serializable {
-    public static class GraphNode {
+    public static class GraphNode implements Serializable {
         private String content;
         private int height;
 
@@ -38,7 +38,7 @@ public class RigGraphData implements Serializable {
         }
     }
 
-    public static class RigNode {
+    public static class RigNode implements Serializable{
         private int height;
 
         private String drillType;
