@@ -9,6 +9,7 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Alfred on 16/7/14.
@@ -145,5 +146,22 @@ public class DataManager {
                 break;
             }
         }
+    }
+
+    public static List<CalculatingRig> getCalculatingList(String holeId) {
+        ArrayList<CalculatingRig> result = new ArrayList<>();
+
+        for (Hole hole : project.getHoleList()) {
+            if (hole.getHoleId().equals(holeId)) {
+                for (Rig rig : hole.getRigList()) {
+                    if (rig instanceof CalculatingRig) {
+                        result.add((CalculatingRig) rig);
+                    }
+                }
+                break;
+            }
+        }
+
+        return result;
     }
 }

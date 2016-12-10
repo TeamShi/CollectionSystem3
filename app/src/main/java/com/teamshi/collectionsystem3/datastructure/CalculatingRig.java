@@ -11,6 +11,18 @@ public class CalculatingRig extends Rig {
     protected double roundTripMeterageLength;         // 回次进尺
     protected double accumulatedMeterageLength;       // 累计进尺
 
+    protected int rockCoreIndex;                      // 岩芯采取编号
+    protected double rockCoreLength;                  // 岩芯长度
+    protected double rockCorePickPercentage;          // 岩芯采取率
+
+    protected String rigStartEndDepth;                // 本钻起止深度
+    protected String rockType;                        // 岩土名称
+    protected String rockColor;                       // 颜色
+    protected String rockDensity;                     // 稠度/密实度
+    protected String rockSaturation;                  // 饱和度
+    protected String rockWeathering;                  // 风化程度
+    protected String rockDescription;                 // 名称及岩性
+
     public CalculatingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                           double drillToolTotalLength, double drillPipeRemainLength,
                           double roundTripMeterageLength, double accumulatedMeterageLength) {
@@ -52,5 +64,85 @@ public class CalculatingRig extends Rig {
 
     public void setAccumulatedMeterageLength(double accumulatedMeterageLength) {
         this.accumulatedMeterageLength = accumulatedMeterageLength;
+    }
+
+    public int getRockCoreIndex() {
+        return rockCoreIndex;
+    }
+
+    public void setRockCoreIndex(int rockCoreIndex) {
+        this.rockCoreIndex = rockCoreIndex;
+    }
+
+    public double getRockCoreLength() {
+        return rockCoreLength;
+    }
+
+    public void setRockCoreLength(double rockCoreLength) {
+        this.rockCoreLength = rockCoreLength;
+    }
+
+    public double getRockCorePickPercentage() {
+        return rockCorePickPercentage;
+    }
+
+    public void setRockCorePickPercentage(double rockCorePickPercentage) {
+        this.rockCorePickPercentage = rockCorePickPercentage;
+    }
+
+    public String getRigStartEndDepth() {
+        return rigStartEndDepth;
+    }
+
+    public void setRigStartEndDepth(String rigStartEndDepth) {
+        this.rigStartEndDepth = rigStartEndDepth;
+    }
+
+    public String getRockType() {
+        return rockType;
+    }
+
+    public void setRockType(String rockType) {
+        this.rockType = rockType;
+    }
+
+    public String getRockColor() {
+        return rockColor;
+    }
+
+    public void setRockColor(String rockColor) {
+        this.rockColor = rockColor;
+    }
+
+    public String getRockDensity() {
+        return rockDensity;
+    }
+
+    public void setRockDensity(String rockDensity) {
+        this.rockDensity = rockDensity;
+    }
+
+    public String getRockSaturation() {
+        return rockSaturation;
+    }
+
+    public void setRockSaturation(String rockSaturation) {
+        this.rockSaturation = rockSaturation;
+    }
+
+    public String getRockWeathering() {
+        return rockWeathering;
+    }
+
+    public void setRockWeathering(String rockWeathering) {
+        this.rockWeathering = rockWeathering;
+    }
+
+    public String getRockDescription() {
+        return rockDescription;
+    }
+
+    public void setRockDescription(String rockDescription) {
+        this.rockDescription = rockDescription;
     }
 }

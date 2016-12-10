@@ -39,10 +39,10 @@ public class RigGraphData implements Serializable {
     }
 
     public static class RigNode {
-        private int height;
+        private double height;
 
         private String drillType;
-        private int drillDiameter;
+        private double drillDiameter;
 
         private double startDepth;
         private double endDepth;
@@ -55,7 +55,7 @@ public class RigGraphData implements Serializable {
 
         private String description;
 
-        public RigNode(int height, String drillType, int drillDiameter, double startDepth, double endDepth, double roundTripDepth, double layoutEndDepth, double rockDepth, int rockLayoutIndex, String description) {
+        public RigNode(double height, String drillType, double drillDiameter, double startDepth, double endDepth, double roundTripDepth, double layoutEndDepth, double rockDepth, int rockLayoutIndex, String description) {
             this.height = height;
             this.drillType = drillType;
             this.drillDiameter = drillDiameter;
@@ -68,11 +68,11 @@ public class RigGraphData implements Serializable {
             this.description = description;
         }
 
-        public int getHeight() {
+        public double getHeight() {
             return height;
         }
 
-        public void setHeight(int height) {
+        public void setHeight(double height) {
             this.height = height;
         }
 
@@ -84,11 +84,11 @@ public class RigGraphData implements Serializable {
             this.drillType = drillType;
         }
 
-        public int getDrillDiameter() {
+        public double getDrillDiameter() {
             return drillDiameter;
         }
 
-        public void setDrillDiameter(int drillDiameter) {
+        public void setDrillDiameter(double drillDiameter) {
             this.drillDiameter = drillDiameter;
         }
 
