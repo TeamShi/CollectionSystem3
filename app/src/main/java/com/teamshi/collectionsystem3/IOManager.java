@@ -251,6 +251,7 @@ public class IOManager {
                         holeRigGraphFolder.mkdirs();
                         HtmlParser.parseRigGraphCover(holeRigGraphDir + "封面.html", hole, assetManager);
                         HtmlParser.parseRigGraphBackCover(holeRigGraphDir + "封底.html" , hole, assetManager);
+                        HtmlParser.parseRigGraphTable(holeRigGraphDir + "数据图.html" , hole, assetManager);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

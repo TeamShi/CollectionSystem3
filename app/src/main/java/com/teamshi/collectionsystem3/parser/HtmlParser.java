@@ -292,7 +292,7 @@ public class HtmlParser extends Parser {
         machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
 
         Element rigType = doc.getElementById(RIGTYPE_ID);
-        rigType.text(hole == null ? "XY-100" : hole.getRigMachineType());
+        rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
 
         Element startDate = doc.getElementById(STARTDATE_ID);
         startDate.text(formatCalendarDateString(hole.getStartDate()));
@@ -345,7 +345,7 @@ public class HtmlParser extends Parser {
         machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
 
         Element rigType = doc.getElementById(RIGTYPE_ID);
-        rigType.text(hole == null ? "XY-100" : hole.getRigMachineType());
+        rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
 
         Element startDate = doc.getElementById(STARTDATE_ID);
         startDate.text(formatCalendarDateString(hole.getStartDate()));
@@ -395,6 +395,31 @@ public class HtmlParser extends Parser {
 
         return true;
 
+    }
+
+    public static boolean parseRigGraphTable(String outPath, Hole hole, AssetManager assetManager) throws IOException {
+
+        boolean isHtml = Utility.verifySuffix(outPath, "html");
+        if (!isHtml) {
+            return false;
+        }
+
+        File rigGraph = Utility.createFile(outPath, false);
+        InputStream inputStream = assetManager.open(RIG_GRAPH_TEMPLATE);
+
+        //读模版文件
+        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+
+//        Element projectName = doc.getElementById(HOLE_DESC);
+//        projectName.text(hole.getNote());
+
+        FileWriter fileWriter = new FileWriter(rigGraph);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(doc.outerHtml());
+        bufferedWriter.close();
+        fileWriter.close();
+
+        return true;
     }
 
     public static String parseSptRigs(String dirPath, Project project, AssetManager assetManager) {
@@ -496,7 +521,7 @@ public class HtmlParser extends Parser {
             return null;
         }
 
-        String[][] earthResults = null;
+        String[][] earthResults;
         String[][] distributionResults = null;
         for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : distributionDetails.entrySet()) {
             String[][] result = convertEarthSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
