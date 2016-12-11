@@ -40,8 +40,8 @@ public class HtmlParser extends Parser {
     public static String SMPL_ROCK_RIG_EVENT_TEMPLATE = "SampleRock.html";
 
     public  static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
-    public  static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphTable.html";
-    public  static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphT.html";
+    public  static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphCover.html";
+    public  static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphBackCover.html";
 
     public static String TBODY_ID = "tableBody";
     public static String PROJECTNAME_ID = "projectName";
@@ -56,6 +56,8 @@ public class HtmlParser extends Parser {
     public static String MACHINENUMBER_ID = "machineNumber";
     public static String RIGTYPE_ID = "rigType";
     public static String STARTDATE_ID = "startDate";
+    public static String ENDDATE_ID = "endDate";
+    public static String HOLE_DESC = "description";
 
     public static String RECORDER_ID = "recorderName";
     public static String SQUAD_ID = "squadName";
@@ -304,6 +306,88 @@ public class HtmlParser extends Parser {
         Element captainName = doc.getElementById(CAPTAIN_ID);
         captainName.text(hole.getMachineMonitor() == null ? "xxx" : hole.getMachineMonitor());
         FileWriter fileWriter = new FileWriter(outPath);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(doc.outerHtml());
+        bufferedWriter.close();
+        fileWriter.close();
+
+        return true;
+
+    }
+
+    public static boolean parseRigGraphCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
+
+        boolean isHtml = Utility.verifySuffix(outPath, "html");
+        if (!isHtml) {
+            return false;
+        }
+
+        File rigGraphCover = Utility.createFile(outPath, false);
+        InputStream inputStream = assetManager.open(RIG_GRAPH_COVER_TEMPLATE);
+
+        //读模版文件
+        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+
+        Element projectName = doc.getElementById(PROJECTNAME_ID);
+        projectName.text(hole.getProjectName());
+
+
+        Element mileageId = doc.getElementById(MILEAGE_ID);
+        mileageId.text(Utility.formatNumber(hole.getMileage()));
+
+        Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
+        holeElevation.text(Utility.formatDouble(hole.getHoleHeight()));
+
+        Element holeId = doc.getElementById(HOLE_ID);
+        holeId.text(hole.getHoleId());
+
+        Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
+        machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
+
+        Element rigType = doc.getElementById(RIGTYPE_ID);
+        rigType.text(hole == null ? "XY-100" : hole.getRigMachineType());
+
+        Element startDate = doc.getElementById(STARTDATE_ID);
+        startDate.text(formatCalendarDateString(hole.getStartDate()));
+
+        Element endDate = doc.getElementById(ENDDATE_ID);
+        endDate.text(formatCalendarDateString(hole.getEndDate()));
+
+        Element recorderName = doc.getElementById(RECORDER_ID);
+        recorderName.text(hole.getRecorder() == null ? "xxx" : hole.getRecorder());
+
+        Element squName = doc.getElementById(SQUAD_ID);
+        squName.text(hole.getClassMonitor() == null ? "xxx" : hole.getClassMonitor());
+
+        Element captainName = doc.getElementById(CAPTAIN_ID);
+        captainName.text(hole.getMachineMonitor() == null ? "xxx" : hole.getMachineMonitor());
+
+        FileWriter fileWriter = new FileWriter(rigGraphCover);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(doc.outerHtml());
+        bufferedWriter.close();
+        fileWriter.close();
+
+        return true;
+    }
+
+    public static boolean parseRigGraphBackCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
+
+        boolean isHtml = Utility.verifySuffix(outPath, "html");
+        if (!isHtml) {
+            return false;
+        }
+
+        File rigGraphBackCover = Utility.createFile(outPath, false);
+        InputStream inputStream = assetManager.open(RIG_GRAPH_BACK_COVER_TEMPLATE);
+
+        //读模版文件
+        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+
+        Element projectName = doc.getElementById(HOLE_DESC);
+        projectName.text(hole.getNote());
+
+        FileWriter fileWriter = new FileWriter(rigGraphBackCover);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(doc.outerHtml());
         bufferedWriter.close();
