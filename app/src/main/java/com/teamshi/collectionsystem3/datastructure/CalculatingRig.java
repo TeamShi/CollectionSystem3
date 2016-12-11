@@ -25,13 +25,27 @@ public class CalculatingRig extends Rig {
 
     public CalculatingRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                           double drillToolTotalLength, double drillPipeRemainLength,
-                          double roundTripMeterageLength, double accumulatedMeterageLength) {
+                          double roundTripMeterageLength, double accumulatedMeterageLength,
+                          int rockCoreIndex, double rockCoreLength, double rockCorePickPercentage,
+                          String rigStartEndDepth, String rockType, String rockColor, String rockDensity,
+                          String rockSaturation, String rockWeathering, String rockDescription) {
         super(classPeopleCount, date, startTime, endTime);
 
         this.drillToolTotalLength = drillToolTotalLength;
         this.drillPipeRemainLength = drillPipeRemainLength;
         this.roundTripMeterageLength = roundTripMeterageLength;
         this.accumulatedMeterageLength = accumulatedMeterageLength;
+
+        this.rockCoreIndex = rockCoreIndex;
+        this.rockCoreLength = rockCoreLength;
+        this.rockCorePickPercentage = rockCorePickPercentage;
+        this.rigStartEndDepth = rigStartEndDepth;
+        this.rockType = rockType;
+        this.rockColor = rockColor;
+        this.rockDensity = rockDensity;
+        this.rockSaturation = rockSaturation;
+        this.rockWeathering = rockWeathering;
+        this.rockDescription = rockDescription;
     }
 
     public double getDrillToolTotalLength() {

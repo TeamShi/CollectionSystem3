@@ -175,6 +175,7 @@ public class RigGraphActivity extends Activity {
         addGraphButton = (Button) findViewById(R.id.button_add_hole_graph);
         deleteGraphButton = (Button) findViewById(R.id.button_delete_hole_graph);
         clearGraphButton = (Button) findViewById(R.id.button_clear_hole_graph);
+        cancelGraphButton = (Button) findViewById(R.id.button_cancel_hole_graph);
 
         confirmRigDetailGraphButton = (Button) findViewById(R.id.button_confirm_rig_detail_graph);
 
@@ -205,7 +206,9 @@ public class RigGraphActivity extends Activity {
         confirmGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DataManager.getHole(holeId).setRigGraphData(graphDataViewModel);
+                RigGraphActivity.this.setResult(RESULT_OK);
+                RigGraphActivity.this.finish();
             }
         });
 
@@ -248,7 +251,7 @@ public class RigGraphActivity extends Activity {
             @Override
             public void onClick(View v) {
                 rigGprahDetailLinearLayout.setVisibility(View.GONE);
-                // TODO: fix when finish UI test.
+
                 graphDataViewModel.getRigNodeList().add(rigNodeViewModel);
 
                 addGraphButton.setEnabled(true);
@@ -256,6 +259,14 @@ public class RigGraphActivity extends Activity {
                 clearGraphButton.setEnabled(true);
 
                 refreshInfo();
+            }
+        });
+
+        cancelGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RigGraphActivity.this.setResult(RESULT_CANCELED);
+                RigGraphActivity.this.finish();
             }
         });
 

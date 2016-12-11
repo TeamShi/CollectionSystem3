@@ -40,19 +40,6 @@ public class SPTRig extends CalculatingRig {
     private String oldRockSaturation;               // 岩土饱和度
     private String otherDescription;                // 其它描述
 
-    private int rockCoreIndex;                      // 隐含参数, 岩芯采取编号
-
-    private double rockCoreLength;                  // 岩芯长度
-    private double rockCorePickPercentage;          // 岩芯采取率
-
-    private String rigStartEndDepth;                // 本钻起止深度
-    private String rockType;                        // 岩土名称
-    private String rockColor;                       // 颜色
-    private String rockDensity;                     // 稠度/密实度
-    private String rockSaturation;                  // 饱和度
-    private String rockWeathering;                  // 风化程度
-    private String rockDescription;                 // 名称及岩性
-
     public SPTRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
                   double drillToolTotalLength, double drillPipeRemainLength, double roundTripMeterageLength, double accumulatedMeterageLength,
                   int injectionToolDiameter, double injectionToolLength,
@@ -76,7 +63,10 @@ public class SPTRig extends CalculatingRig {
                   String rockDensity, String rockSaturation, String rockWeathering,
                   String rockDescription) {
         super(classPeopleCount, date, startTime, endTime,
-                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
+                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
+                rockCoreIndex, rockCoreLength, rockCorePickPerentage,
+                rigStartEndDepth, rockType, rockColor,
+                rockDensity, rockSaturation, rockWeathering, rockDensity);
 
         this.injectionToolDiameter = injectionToolDiameter;
         this.injectionToolLength = injectionToolLength;
@@ -114,20 +104,6 @@ public class SPTRig extends CalculatingRig {
         this.oldRockDensity = oldRockDensity;
         this.oldRockSaturation = oldRockSaturation;
         this.otherDescription = otherDescription;
-
-        this.rockCoreIndex = rockCoreIndex;
-
-        this.rockCoreLength = rockCoreLength;
-        this.rockCorePickPercentage = rockCorePickPerentage;
-
-        this.rigStartEndDepth = rigStartEndDepth;
-        this.rockType = rockType;
-        this.rockColor = rockColor;
-        this.rockDensity = rockDensity;
-        this.rockSaturation = rockSaturation;
-        this.rockWeathering = rockWeathering;
-        this.rockDescription = rockDescription;
-
     }
 
     public int getInjectionToolDiameter() {
@@ -352,86 +328,6 @@ public class SPTRig extends CalculatingRig {
 
     public void setOtherDescription(String otherDescription) {
         this.otherDescription = otherDescription;
-    }
-
-    public int getRockCoreIndex() {
-        return rockCoreIndex;
-    }
-
-    public void setRockCoreIndex(int rockCoreIndex) {
-        this.rockCoreIndex = rockCoreIndex;
-    }
-
-    public double getRockCoreLength() {
-        return rockCoreLength;
-    }
-
-    public void setRockCoreLength(double rockCoreLength) {
-        this.rockCoreLength = rockCoreLength;
-    }
-
-    public double getRockCorePickPercentage() {
-        return rockCorePickPercentage;
-    }
-
-    public void setRockCorePickPercentage(double rockCorePickPercentage) {
-        this.rockCorePickPercentage = rockCorePickPercentage;
-    }
-
-    public String getRigStartEndDepth() {
-        return rigStartEndDepth;
-    }
-
-    public void setRigStartEndDepth(String rigStartEndDepth) {
-        this.rigStartEndDepth = rigStartEndDepth;
-    }
-
-    public String getRockType() {
-        return rockType;
-    }
-
-    public void setRockType(String rockType) {
-        this.rockType = rockType;
-    }
-
-    public String getRockColor() {
-        return rockColor;
-    }
-
-    public void setRockColor(String rockColor) {
-        this.rockColor = rockColor;
-    }
-
-    public String getRockDensity() {
-        return rockDensity;
-    }
-
-    public void setRockDensity(String rockDensity) {
-        this.rockDensity = rockDensity;
-    }
-
-    public String getRockSaturation() {
-        return rockSaturation;
-    }
-
-    public void setRockSaturation(String rockSaturation) {
-        this.rockSaturation = rockSaturation;
-    }
-
-    public String getRockWeathering() {
-        return rockWeathering;
-    }
-
-    public void setRockWeathering(String rockWeathering) {
-        this.rockWeathering = rockWeathering;
-    }
-
-    public String getRockDescription() {
-        return rockDescription;
-    }
-
-    public void setRockDescription(String rockDescription) {
-        this.rockDescription = rockDescription;
     }
 
     @Override

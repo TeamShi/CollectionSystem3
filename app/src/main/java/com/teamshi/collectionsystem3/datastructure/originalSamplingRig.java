@@ -26,7 +26,9 @@ public class OriginalSamplingRig extends CalculatingRig {
                                String rigStartEndDepth, String rockType, String rockColor,
                                String rockDensity, String rockSaturation, String rockWeathering,
                                String rockDescription) {
-        super(classPeopleCount, date, startTime, endTime, drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
+        super(classPeopleCount, date, startTime, endTime, drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
+                rockCoreIndex, rockCoreLength, rockCorePickPerentage,
+                rigStartEndDepth, rockType, rockColor, rockDensity, rockSaturation, rockWeathering, rockDescription);
         this.samplerPipeDiameter = samplerPipeDiameter;
         this.samplerPipeLength = samplerPipeLength;
         this.index = index;
@@ -34,18 +36,6 @@ public class OriginalSamplingRig extends CalculatingRig {
         this.endDepth = endDepth;
         this.count = count;
         this.samplerType = samplerType;
-
-        this.rockCoreIndex = rockCoreIndex;
-        this.rockCoreLength = rockCoreLength;
-        this.rockCorePickPercentage = rockCorePickPerentage;
-
-        this.rigStartEndDepth = rigStartEndDepth;
-        this.rockType = rockType;
-        this.rockColor = rockColor;
-        this.rockDensity = rockDensity;
-        this.rockSaturation = rockSaturation;
-        this.rockWeathering = rockWeathering;
-        this.rockDescription = rockDescription;
     }
 
     public int getSamplerPipeDiameter() {

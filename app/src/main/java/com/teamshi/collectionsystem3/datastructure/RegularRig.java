@@ -22,14 +22,6 @@ public class RegularRig extends CalculatingRig {
     private double rockCoreLength;                  // 岩芯长度
     private double rockCorePickPercentage;          // 岩芯采取率
 
-    private String rigStartEndDepth;                // 本钻起止深度
-    private String rockType;                        // 岩土名称
-    private String rockColor;                       // 颜色
-    private String rockDensity;                     // 稠度/密实度
-    private String rockSaturation;                  // 饱和度
-    private String rockWeathering;                  // 风化程度
-    private String rockDescription;                 // 名称及岩性
-
     private String note;                            // 备注
 
     public RegularRig(String classPeopleCount, Calendar date, Calendar startTime, Calendar endTime,
@@ -40,7 +32,9 @@ public class RegularRig extends CalculatingRig {
                       int rockCoreIndex, double rockCoreLength, double rockCorePickPercentage,
                       String rigStartEndDepth, String rockType, String rockColor, String rockDensity, String rockSaturation, String rockWeathering, String rockDescription, String note) {
         super(classPeopleCount, date, startTime, endTime,
-                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength);
+                drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
+                rockCoreIndex, rockCoreLength, rockCorePickPercentage,
+                rigStartEndDepth, rockType, rockColor, rockDensity, rockSaturation, rockWeathering, rockDescription);
 
         this.rigType = "干钻";
         this.pipeNumber = pipeNumber;

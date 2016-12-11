@@ -2,6 +2,7 @@ package com.teamshi.collectionsystem3;
 
 import com.teamshi.collectionsystem3.datastructure.CalculatingRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
+import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.RegularRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
@@ -154,7 +155,7 @@ public class DataManager {
         for (Hole hole : project.getHoleList()) {
             if (hole.getHoleId().equals(holeId)) {
                 for (Rig rig : hole.getRigList()) {
-                    if (rig instanceof CalculatingRig) {
+                    if (rig instanceof RegularRig || rig instanceof OriginalSamplingRig) {
                         result.add((CalculatingRig) rig);
                     }
                 }
