@@ -232,6 +232,7 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:layout_weight="2"
+                        android:enabled="false"
                         android:id="@+id/edittext_graph_detail_rig_rock_core_index"
                         android:background="@drawable/cell_input"
                         android:textSize="@dimen/default_text_size"

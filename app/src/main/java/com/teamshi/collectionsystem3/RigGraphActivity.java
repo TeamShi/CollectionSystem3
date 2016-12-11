@@ -183,7 +183,7 @@ public class RigGraphActivity extends Activity {
         detailEndLengthEditText = (EditText) findViewById(R.id.edittext_graph_detail_end_length);
         detailRoundTripLengthTextView = (TextView) findViewById(R.id.textview_graph_detail_round_trip_length);
 
-        detailRockCoreLengthEditText = (EditText) findViewById(R.id.edittext_dst_rig_rock_core_length);
+        detailRockCoreLengthEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_pick_up_length);
         detailRockCorePickPercentageTextView = (TextView) findViewById(R.id.textview_graph_detail_pick_up_percentage);
 
         rockTypeEditText = (EditText) findViewById(R.id.edittext_graph_detail_rock_type);
@@ -215,7 +215,8 @@ public class RigGraphActivity extends Activity {
         addGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getNextRigNode() == null) {
+                rigNodeViewModel = getNextRigNode();
+                if (rigNodeViewModel == null) {
                     Toast.makeText(RigGraphActivity.this, "已无钻孔可供切分。", Toast.LENGTH_SHORT).show();
                 } else {
                     rigGprahDetailLinearLayout.setVisibility(View.VISIBLE);
@@ -267,6 +268,35 @@ public class RigGraphActivity extends Activity {
             public void onClick(View v) {
                 RigGraphActivity.this.setResult(RESULT_CANCELED);
                 RigGraphActivity.this.finish();
+            }
+        });
+
+        detailEndLengthEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!refreshLock) {
+                    try {
+                        rigNodeViewModel.setEndDepth(Double.parseDouble(s.toString()));
+                        rigNodeViewModel.setHeight(Double.parseDouble(s.toString()));
+                        rigNodeViewModel.setLayoutEndDepth(Double.parseDouble(s.toString()));
+                        rigNodeViewModel.setRoundTripDepth(rigNodeViewModel.getEndDepth() - rigNodeViewModel.getStartDepth());
+                        detailEndLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
+
+                        refreshDetailTable();
+                    } catch (Exception e) {
+                        detailEndLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    }
+                }
             }
         });
 
@@ -381,7 +411,7 @@ public class RigGraphActivity extends Activity {
                             graphRigNodeRockInfoViewModel.setRockDescription("");
                         }
 
-                        refreshInfo();
+                        refreshDetailTable();
                     }
                 });
 
@@ -424,7 +454,7 @@ public class RigGraphActivity extends Activity {
 
                         dialog.dismiss();
 
-                        refreshInfo();
+                        refreshDetailTable();
                     }
                 });
 
@@ -466,7 +496,7 @@ public class RigGraphActivity extends Activity {
 
                         dialog.dismiss();
 
-                        refreshInfo();
+                        refreshDetailTable();
                     }
                 });
 
@@ -510,7 +540,7 @@ public class RigGraphActivity extends Activity {
 
                         dialog.dismiss();
 
-                        refreshInfo();
+                        refreshDetailTable();
                     }
                 });
 
@@ -554,7 +584,7 @@ public class RigGraphActivity extends Activity {
 
                         dialog.dismiss();
 
-                        refreshInfo();
+                        refreshDetailTable();
                     }
                 });
 
@@ -568,8 +598,7 @@ public class RigGraphActivity extends Activity {
             @Override
             public void onClick(View v) {
                 ArrayList<String> stringList = new ArrayList<String>();
-                // TODO: set start end depth
-                // stringList.add(rigViewModel.getRigStartEndDepth());
+                stringList.add(rigNodeViewModel.getStartDepth() + " m ~ " + rigNodeViewModel.getEndDepth() + " m" );
                 stringList.add(graphRigNodeRockInfoViewModel.getRockName());
 
                 if (!graphRigNodeRockInfoViewModel.getRockColor().equals("")) {
@@ -590,7 +619,7 @@ public class RigGraphActivity extends Activity {
 
                 graphRigNodeRockInfoViewModel.setRockDescription(TextUtils.join(", ", stringList));
 
-                refreshInfo();
+                refreshDetailTable();
             }
         });
 
@@ -622,7 +651,7 @@ public class RigGraphActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         graphRigNodeRockInfoViewModel.setRockDescription(graphRigNodeRockInfoViewModel.getRockDescription() + ", " + configMap.get(items[which]));
 
-                        refreshInfo();
+                        refreshDetailTable();
 
                         dialog.dismiss();
                     }
@@ -656,6 +685,8 @@ public class RigGraphActivity extends Activity {
         holeId = getIntent().getStringExtra("holeId");
         holeViewModel = DataManager.getHole(holeId).deepCopy();
         graphDataViewModel = holeViewModel.getRigGraphData();
+
+        deleteGraphButton.setEnabled(!graphDataViewModel.getRigNodeList().isEmpty());
 
         ArrayList<Rig> rigList = holeViewModel.getRigList();
         for (int i = 0; i < rigList.size(); i++) {
@@ -728,20 +759,50 @@ public class RigGraphActivity extends Activity {
 
             tr.addView(generateTableRowContent(String.valueOf(graphDataViewModel.getRigNodeList().get(i).getRockLayoutIndex())));
             tr.addView(generateTableRowContent(Utility.formatDouble(graphDataViewModel.getRigNodeList().get(i).getLayoutEndDepth())));
-            tr.addView(generateTableRowContent(Utility.formatDouble(graphDataViewModel.getRigNodeList().get(i).getHeight())));
+            tr.addView(generateTableRowContent(Utility.formatDouble(graphDataViewModel.getRigNodeList().get(i).getRoundTripDepth())));
 
             splitRockDescriptionTableLayout.addView(tr);
         }
 
 
         if (DataManager.getHole(holeId).isApproved()) {
-
+            addGraphButton.setEnabled(false);
+            deleteGraphButton.setEnabled(false);
+            clearGraphButton.setEnabled(false);
         }
 
         refreshLock = false;
     }
 
+
+
     protected void refreshDetailTable() {
+        if (refreshLock) {
+            return;
+        }
+
+        refreshLock = true;
+
+        detailRockCoreIndexEditText.setText(String.valueOf(graphDataViewModel.getRigNodeList().size() + 1));
+
+        if (getCurrentFocus() != detailEndLengthEditText) {
+            detailEndLengthEditText.setText(Utility.formatDouble(rigNodeViewModel.getEndDepth()));
+        }
+
+        if (getCurrentFocus() != detailRoundTripLengthTextView) {
+            detailRoundTripLengthTextView.setText(Utility.formatDouble(rigNodeViewModel.getRoundTripDepth()));
+        }
+
+        if (getCurrentFocus() != rockTypeEditText) {
+            rockTypeEditText.setText(graphRigNodeRockInfoViewModel.getRockName());
+        }
+
+
+        if (getCurrentFocus() != rockTypeEditText) {
+            rockTypeEditText.setText(graphRigNodeRockInfoViewModel.getRockName());
+        }
+
+
         if (getCurrentFocus() != rockTypeEditText) {
             rockTypeEditText.setText(graphRigNodeRockInfoViewModel.getRockName());
         }
@@ -803,6 +864,8 @@ public class RigGraphActivity extends Activity {
             rockWeatheringEditText.setEnabled(true);
             rockWeatheringButton.setEnabled(true);
         }
+
+        refreshLock = false;
     }
 
     protected RigGraphData.RigNode getNextRigNode() {
@@ -848,11 +911,12 @@ public class RigGraphActivity extends Activity {
                 continue;
             } else {
                 endIndex = i - 1;
+                break;
             }
         }
 
         if (endIndex == -1) {
-            return null;
+            endIndex = calculatingRigs.size() - 1;
         }
 
         graphRigNodeRockInfoViewModel = new GraphRigNodeRockInfo(calculatingRigs.get(startIndex).getRockType(),
@@ -861,20 +925,21 @@ public class RigGraphActivity extends Activity {
                 calculatingRigs.get(startIndex).getRockSaturation(),
                 calculatingRigs.get(startIndex).getRockWeathering(),
                 Utility.formatDouble(calculatingRigs.get(startIndex).getAccumulatedMeterageLength() - calculatingRigs.get(startIndex).getRoundTripMeterageLength()) + " m ~ " +
-                        Utility.formatDouble(calculatingRigs.get(startIndex).getAccumulatedMeterageLength()) + " m"
-                );
+                            Utility.formatDouble(calculatingRigs.get(endIndex).getAccumulatedMeterageLength()) + " m"
+        );
 
+        double startLength = graphDataViewModel.getRigNodeList().size() == 0?0:graphDataViewModel.getRigNodeList().get(graphDataViewModel.getRigNodeList().size() - 1).getEndDepth();
         RigGraphData.RigNode node = new RigGraphData.RigNode(
                 calculatingRigs.get(endIndex).getAccumulatedMeterageLength(),
-                calculatingRigs.get(startIndex) instanceof RegularRig? ((RegularRig) calculatingRigs.get(startIndex)).getRigType():"",
+                calculatingRigs.get(startIndex).getRockType(),
                 calculatingRigs.get(startIndex) instanceof RegularRig? ((RegularRig) calculatingRigs.get(startIndex)).getDrillBitDiameter(): -1,
-                calculatingRigs.get(startIndex).getAccumulatedMeterageLength() - calculatingRigs.get(startIndex).getRoundTripMeterageLength(),
+                startLength,
                 calculatingRigs.get(endIndex).getAccumulatedMeterageLength(),
+                calculatingRigs.get(endIndex).getAccumulatedMeterageLength() - startLength,
                 calculatingRigs.get(endIndex).getAccumulatedMeterageLength(),
-                calculatingRigs.get(endIndex).getAccumulatedMeterageLength(),
-                calculatingRigs.get(endIndex).getAccumulatedMeterageLength() - calculatingRigs.get(startIndex).getAccumulatedMeterageLength() + calculatingRigs.get(startIndex).getRoundTripMeterageLength(),
-                graphDataViewModel.getRockCoreNodeList().size() + 1,
-                "");
+                calculatingRigs.get(endIndex).getAccumulatedMeterageLength() - startLength,
+                graphDataViewModel.getRigNodeList().size() + 1,
+                    "");
 
         return node;
     }
