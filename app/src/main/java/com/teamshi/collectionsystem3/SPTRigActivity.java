@@ -359,10 +359,9 @@ public class SPTRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
                             DataManager.getHole(holeId).setLastAccumulatedMeterageLength(rigViewModel.getAccumulatedMeterageLength());
                             DataManager.getHole(holeId).setLastRockName(rigViewModel.getRockName());
-                            DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
 
                             DataManager.getHole(holeId).setLastRockCorePipeLength(rigViewModel.getRockCoreLength());
-                            DataManager.getHole(holeId).setRockCoreIndex(rigViewModel.getRockCoreIndex() + 1);
+                            DataManager.getHole(holeId).setRockCoreIndex(rigViewModel.getRockCoreIndex());
                             IOManager.updateProject(DataManager.getProject());
                             SPTRigActivity.this.setResult(RESULT_OK);
                             SPTRigActivity.this.finish();
