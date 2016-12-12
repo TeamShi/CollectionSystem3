@@ -300,19 +300,19 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                     rigViewModel.setSamplerType(SAMPLER_TYPE_OPTIONS[position]);
 
                     if (position == 0) {
-                        rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.3);
+                        rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.2);
                         rigViewModel.setRoundTripMeterageLength(0.4);
                         rigViewModel.setRockCoreLength(0.4);
                         rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.4);
                         rigViewModel.setDrillPipeRemainLength(1.6);
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
                     } else if (position == 1) {
-                        rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.4);
+                        rigViewModel.setEndDepth(rigViewModel.getStartDepth() + 0.3);
                         rigViewModel.setRoundTripMeterageLength(0.5);
                         rigViewModel.setRockCoreLength(0.5);
                         rigViewModel.setAccumulatedMeterageLength(DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 0.5);
                         rigViewModel.setDrillPipeRemainLength(1.5);
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
 
 
                     }
@@ -396,13 +396,13 @@ public class OriginalSamplingRigActivity extends AppCompatActivity {
                         rigViewModel.setEndDepth(Double.valueOf(s.toString()));
                         endLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
-                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth());
+                        rigViewModel.setAccumulatedMeterageLength(rigViewModel.getEndDepth() + 0.1);
                         rigViewModel.setRoundTripMeterageLength(rigViewModel.getAccumulatedMeterageLength() - DataManager.getHole(holeId).getLastAccumulatedMeterageLength());
                         rigViewModel.setRockCoreLength(rigViewModel.getRoundTripMeterageLength());
                         rigViewModel.setDrillPipeRemainLength(rigViewModel.getDrillToolTotalLength() - rigViewModel.getAccumulatedMeterageLength());
                         rigViewModel.setRockCorePickPercentage(rigViewModel.getRockCoreLength() / rigViewModel.getRoundTripMeterageLength());
 
-                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() + 0.1) + " m");
+                        rigViewModel.setRigStartEndDepth(Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength() - rigViewModel.getRoundTripMeterageLength()) + " m ~ " + Utility.formatDouble(rigViewModel.getAccumulatedMeterageLength()) + " m");
                         refreshInfo();
                     } catch (Exception e) {
                         endLengthEditText.setTextColor(getResources().getColor(android.R.color.holo_red_light));

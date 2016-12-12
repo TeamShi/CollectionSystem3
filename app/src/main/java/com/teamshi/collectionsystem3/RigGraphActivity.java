@@ -774,8 +774,6 @@ public class RigGraphActivity extends Activity {
         refreshLock = false;
     }
 
-
-
     protected void refreshDetailTable() {
         if (refreshLock) {
             return;
