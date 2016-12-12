@@ -698,7 +698,7 @@ public class RigGraphActivity extends Activity {
             param.height = TableLayout.LayoutParams.WRAP_CONTENT;
             param.width = TableLayout.LayoutParams.WRAP_CONTENT;
 
-            if (rigList.get(i) instanceof RegularRig) {
+            if (rigList.get(i) instanceof CalculatingRig) {
                 RegularRig rig = (RegularRig) rigList.get(i);
 
                 tr.addView(generateTableRowContent(rig.getDrillBitType()));
