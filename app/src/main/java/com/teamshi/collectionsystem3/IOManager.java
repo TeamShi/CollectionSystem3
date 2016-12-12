@@ -229,6 +229,9 @@ public class IOManager {
                 for (int i = 0; i < holes.size(); i++) {
                     Hole hole = holes.get(i);
                     String holeDirPath = projectDirPath + hole.getHoleId() + File.separator;
+                    //clear path
+                    Utility.deleteDir(new File(holeDirPath));
+
                     // parse hole xls files
                     XlsParser.parse(holeDirPath, hole);
 
@@ -251,7 +254,6 @@ public class IOManager {
                         // export rig graph each time
                         String holeRigGraphDir = holeDirPath+ "分层图" + File.separator;
                         File holeRigGraphFolder = new File(holeRigGraphDir);
-                        Utility.deleteDir(new File(holeDirPath));
                         holeRigGraphFolder.mkdirs();
                         HtmlParser.parseRigGraphCover(holeRigGraphDir + "封面.html", hole, assetManager);
                         HtmlParser.parseRigGraphBackCover(holeRigGraphDir + "封底.html" , hole, assetManager);
