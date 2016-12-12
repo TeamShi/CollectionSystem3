@@ -233,7 +233,11 @@ public class IOManager {
                     XlsParser.parse(holeDirPath, hole);
 
                     //parse hole html files
-                    ArrayList<Rig> rigs = hole.getRigList();
+                    ArrayList<Rig> rigs = hole.getRigIndexViewList();
+                    String sptRigsPath = HtmlParser.parseSptRigs(holeDirPath, project, rigs, assetManager);
+                    String dstRigsPath = HtmlParser.parseDstRigs(holeDirPath, project, rigs, assetManager);
+
+                    //TODO
                     if(rigs != null && (rigs.size() > 0)) {
                         for(Rig rig : rigs) {
                             if(rig instanceof  OriginalSamplingRig)
@@ -259,11 +263,10 @@ public class IOManager {
 
                 //parse project html files
                 String allRigsPath = HtmlParser.parse(projectDirPath, project, assetManager);
-                String sptRigsPath = HtmlParser.parseSptRigs(projectDirPath, project, assetManager);
-                String dstRigsPath = HtmlParser.parseDstRigs(projectDirPath, project, assetManager);
                 String earthSmplRigsPath = HtmlParser.parseEarthSmlRigs(projectDirPath, project, assetManager);
                 String waterSmplRigsPath = HtmlParser.parseWaterSmlRigs(projectDirPath, project, assetManager);
                 String rockSmplRigsPath = HtmlParser.parseRockSmlRigs(projectDirPath, project, assetManager);
+
             }
             projects.put(project.getProjectName(), project);
             return true;
@@ -293,8 +296,13 @@ public class IOManager {
 
         List<String> paths = new ArrayList<>();
         String allRigsPath = HtmlParser.parse(APP_TEMP, project, assetManager);
-        String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, assetManager);
-        String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, assetManager);
+
+        List<Rig> rigs = new ArrayList<>();
+        for(Hole hole: project.getHoleList()) {
+            rigs.addAll(hole.getRigIndexViewList());
+        }
+        String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, rigs, assetManager);
+        String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, rigs, assetManager);
         String earthSmplRigsPath = HtmlParser.parseEarthSmlRigs(APP_TEMP, project, assetManager);
         String waterSmplRigsPath = HtmlParser.parseWaterSmlRigs(APP_TEMP, project, assetManager);
         String rockSmplRigsPath = HtmlParser.parseRockSmlRigs(APP_TEMP, project, assetManager);
