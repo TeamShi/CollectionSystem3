@@ -155,7 +155,7 @@ public class DataManager {
         for (Hole hole : project.getHoleList()) {
             if (hole.getHoleId().equals(holeId)) {
                 for (Rig rig : hole.getRigList()) {
-                    if (rig instanceof RegularRig || rig instanceof OriginalSamplingRig) {
+                    if (rig instanceof CalculatingRig) {
                         result.add((CalculatingRig) rig);
                     }
                 }
