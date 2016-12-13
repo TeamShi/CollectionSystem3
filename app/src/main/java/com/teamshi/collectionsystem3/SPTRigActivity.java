@@ -1275,8 +1275,21 @@ public class SPTRigActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1])
-                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])
-                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[3])
+                                || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            rigViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            rigViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(true);
+                            rockSaturationButton.setEnabled(false);
+                            rigViewModel.setRockSaturation("");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            rigViewModel.setRockWeathering("");
+                            rigViewModel.setRockDescription("");
+                        } else if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[3])
                                 || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[6])) {
                             rockColorEditText.setEnabled(true);
                             rockColorButton.setEnabled(true);

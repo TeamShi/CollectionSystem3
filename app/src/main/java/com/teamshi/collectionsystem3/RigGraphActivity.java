@@ -456,8 +456,21 @@ public class RigGraphActivity extends Activity {
                         dialog.dismiss();
 
                         if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1])
-                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])
-                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[3])
+                                || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])) {
+                            rockColorEditText.setEnabled(true);
+                            rockColorButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockColor("灰色");
+                            rockDensityEditText.setEnabled(true);
+                            rockDensityButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockDensity("坚硬");
+                            rockSaturationEditText.setEnabled(true);
+                            rockSaturationButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockSaturation("");
+                            rockWeatheringEditText.setEnabled(false);
+                            rockWeatheringButton.setEnabled(false);
+                            graphRigNodeRockInfoViewModel.setRockWeathering("");
+                            graphRigNodeRockInfoViewModel.setRockDescription("");
+                        } else if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[3])
                                 || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[6])) {
                             rockColorEditText.setEnabled(true);
                             rockColorButton.setEnabled(true);
@@ -968,22 +981,13 @@ public class RigGraphActivity extends Activity {
             rockDescriptionEditText.setText(graphRigNodeRockInfoViewModel.getRockDescription());
         }
 
-        if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[0]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1])) {
+        if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[0]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])) {
             rockColorEditText.setEnabled(true);
             rockColorButton.setEnabled(true);
             rockDensityEditText.setEnabled(true);
             rockDensityButton.setEnabled(true);
             rockSaturationEditText.setEnabled(false);
             rockSaturationButton.setEnabled(false);
-            rockWeatheringEditText.setEnabled(false);
-            rockWeatheringButton.setEnabled(false);
-        } else if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])) {
-            rockColorEditText.setEnabled(true);
-            rockColorButton.setEnabled(true);
-            rockDensityEditText.setEnabled(true);
-            rockDensityButton.setEnabled(true);
-            rockSaturationEditText.setEnabled(true);
-            rockSaturationButton.setEnabled(true);
             rockWeatheringEditText.setEnabled(false);
             rockWeatheringButton.setEnabled(false);
         } else if (graphRigNodeRockInfoViewModel.getRockName().endsWith("砂") || graphRigNodeRockInfoViewModel.getRockName().endsWith("石") || graphRigNodeRockInfoViewModel.getRockName().endsWith("砾")) {
