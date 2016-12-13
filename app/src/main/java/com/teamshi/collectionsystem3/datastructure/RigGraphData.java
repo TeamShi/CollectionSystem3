@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class RigGraphData implements Serializable {
     public static class GraphNode implements Serializable {
         private String content;
-        private int height;
+        private double height;
 
-        public GraphNode(String content, int height) {
+        public GraphNode(String content, double height) {
             this.content = content;
             this.height = height;
         }
@@ -25,11 +25,11 @@ public class RigGraphData implements Serializable {
             this.content = content;
         }
 
-        public int getHeight() {
+        public double getHeight() {
             return height;
         }
 
-        public void setHeight(int height) {
+        public void setHeight(double height) {
             this.height = height;
         }
 
@@ -53,9 +53,12 @@ public class RigGraphData implements Serializable {
         private double rockDepth;
         private int rockLayoutIndex;
 
+        private double rockPickLength;
+        private double rockPickPercentage;
+
         private String description;
 
-        public RigNode(double height, String drillType, double drillDiameter, double startDepth, double endDepth, double roundTripDepth, double layoutEndDepth, double rockDepth, int rockLayoutIndex, String description) {
+        public RigNode(double height, String drillType, double drillDiameter, double startDepth, double endDepth, double roundTripDepth, double layoutEndDepth, double rockDepth, double rockPickLength, double rockPickPercentage, int rockLayoutIndex, String description) {
             this.height = height;
             this.drillType = drillType;
             this.drillDiameter = drillDiameter;
@@ -64,6 +67,8 @@ public class RigGraphData implements Serializable {
             this.roundTripDepth = roundTripDepth;
             this.layoutEndDepth = layoutEndDepth;
             this.rockDepth = rockDepth;
+            this.rockPickLength = rockPickLength;
+            this.rockPickPercentage = rockPickPercentage;
             this.rockLayoutIndex = rockLayoutIndex;
             this.description = description;
         }
@@ -148,12 +153,29 @@ public class RigGraphData implements Serializable {
             this.description = description;
         }
 
+        public double getRockPickLength() {
+            return rockPickLength;
+        }
+
+        public void setRockPickLength(double rockPickLength) {
+            this.rockPickLength = rockPickLength;
+        }
+
+        public double getRockPickPercentage() {
+            return rockPickPercentage;
+        }
+
+        public void setRockPickPercentage(double rockPickPercentage) {
+            this.rockPickPercentage = rockPickPercentage;
+        }
+
         public RigNode deepCopy() {
-            return new RigNode(height, drillType, drillDiameter, startDepth, endDepth, roundTripDepth, layoutEndDepth, rockDepth, rockLayoutIndex, description);
+            return new RigNode(height, drillType, drillDiameter, startDepth, endDepth, roundTripDepth, layoutEndDepth, rockDepth, rockPickLength, rockPickPercentage, rockLayoutIndex, description);
         }
     }
 
     private ArrayList<GraphNode> dateNodeList;
+    private ArrayList<GraphNode> drillDiameterList;
     private ArrayList<RigNode> rigNodeList;
     private ArrayList<GraphNode> trNodeList;
     private ArrayList<GraphNode> rockCoreNodeList;
@@ -166,6 +188,7 @@ public class RigGraphData implements Serializable {
 
     public RigGraphData() {
         this.dateNodeList = new ArrayList<>();
+        this.drillDiameterList = new ArrayList<>();
         this.rigNodeList = new ArrayList<>();
         this.trNodeList = new ArrayList<>();
         this.rockCoreNodeList = new ArrayList<>();
@@ -179,6 +202,14 @@ public class RigGraphData implements Serializable {
 
     public ArrayList<GraphNode> getDateNodeList() {
         return dateNodeList;
+    }
+
+    public ArrayList<GraphNode> getDrillDiameterList() {
+        return drillDiameterList;
+    }
+
+    public void setDrillDiameterList(ArrayList<GraphNode> drillDiameterList) {
+        this.drillDiameterList = drillDiameterList;
     }
 
     public void setDateNodeList(ArrayList<GraphNode> dateNodeList) {
@@ -262,6 +293,10 @@ public class RigGraphData implements Serializable {
 
         for (GraphNode node : dateNodeList) {
             newRigGraphData.dateNodeList.add(node.deepCopy());
+        }
+
+        for (GraphNode node : drillDiameterList) {
+            newRigGraphData.drillDiameterList.add(node.deepCopy());
         }
 
         for (RigNode node : rigNodeList) {
