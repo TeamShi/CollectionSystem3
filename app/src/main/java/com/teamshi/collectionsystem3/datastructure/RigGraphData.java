@@ -1,5 +1,8 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import com.teamshi.collectionsystem3.DataManager;
+import com.teamshi.collectionsystem3.Utility;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -332,6 +335,87 @@ public class RigGraphData implements Serializable {
         return newRigGraphData;
     }
 
+    public static RigGraphData generateTestInstance() {
+        RigGraphData d = new RigGraphData();
+        d.getDateNodeList().add(new RigGraphData.GraphNode("9/1", 1));
+        d.getDateNodeList().add(new RigGraphData.GraphNode("9/2", 10));
+        d.getDateNodeList().add(new RigGraphData.GraphNode("9/3", 21));
+
+
+        // Drill Type
+        d.getDrillDiameterList().add(new RigGraphData.GraphNode("110", 8));
+        d.getDrillDiameterList().add(new RigGraphData.GraphNode("120", 19));
+
+
+
+        // TR info
+        d.getTrNodeList().add(new RigGraphData.GraphNode("5", 8));
+        d.getTrNodeList().add(new RigGraphData.GraphNode("13", 21));
+
+
+        // Water level
+        d.setInitialWaterDepthNode(new RigGraphData.GraphNode("0.9", 0.9));
+        d.setFinalWaterDepthNode(new RigGraphData.GraphNode("1.5", 1.5));
+        d.setWaterDepthDateNode(new RigGraphData.GraphNode("9/1", 1.5));
+
+        // Sampling
+
+        d.getOriginalSamplingNodeList().add(new RigGraphData.GraphNode("3 ~ 5", 5));
+        d.getOriginalSamplingNodeList().add(new RigGraphData.GraphNode("13 ~ 15", 25));
+        d.getOriginalSamplingNodeList().add(new RigGraphData.GraphNode("23 ~ 25", 25));
+
+        d.getWaterSamplingNodeList().add(new RigGraphData.GraphNode("6 ~ 8", 8));
+        d.getWaterSamplingNodeList().add(new RigGraphData.GraphNode("22 ~ 23.5", 23.5));
+        d.getWaterSamplingNodeList().add(new RigGraphData.GraphNode("34 ~ 35", 35));
+
+        d.getDisturbanceSamplingNodeList().add(new RigGraphData.GraphNode("1.5 ~ 2.5", 2.5));
+        d.getDisturbanceSamplingNodeList().add(new RigGraphData.GraphNode("11.5 ~ 12.5", 12.5));
+        d.getDisturbanceSamplingNodeList().add(new RigGraphData.GraphNode("21.5 ~ 22.5", 22.5));
+
+        d.getRigNodeList().add(new RigGraphData.RigNode(
+                1,
+                "黏土",
+                -1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0.9,
+                0.9,
+                1,
+                "土非常好"));
+
+        d.getRigNodeList().add(new RigGraphData.RigNode(
+                11,
+                "腊鸡土",
+                -1,
+                1,
+                11,
+                10,
+                11,
+                10,
+                7,
+                0.7,
+                2,
+                "黄鹤你不是个东西"));
+
+        d.getRigNodeList().add(new RigGraphData.RigNode(
+                21,
+                "渣土",
+                -1,
+                11,
+                21,
+                10,
+                21,
+                10,
+                8.5,
+                0.85,
+                3,
+                "PPAP"));
+
+        return d;
+    }
 }
 
 
