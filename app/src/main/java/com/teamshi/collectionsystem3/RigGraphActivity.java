@@ -709,6 +709,8 @@ public class RigGraphActivity extends Activity {
             rockDescriptionTableLayout.addView(tr);
         }
 
+        refreshInfo();
+
     }
 
     protected TextView generateTableRowContent(String s) {
