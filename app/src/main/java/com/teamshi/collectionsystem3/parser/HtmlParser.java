@@ -422,17 +422,15 @@ public class HtmlParser extends Parser {
         return true;
     }
 
-    public static String parseSptRigs(String dirPath, Project project, AssetManager assetManager) {
+    public static String parseSptRigs(String dirPath, Project project, List<Rig> rigs, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
 
         ArrayList<SPTRig> sptRigs = new ArrayList<>();
-        for (Hole hole : project.getHoleList()) {
-            for (Rig rig : hole.getRigIndexViewList()) {
-                if (rig instanceof SPTRig) {
-                    sptRigs.add((SPTRig) rig);
-                }
+        for (Rig rig : rigs) {
+            if (rig instanceof SPTRig) {
+                sptRigs.add((SPTRig) rig);
             }
         }
 
@@ -459,18 +457,16 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseDstRigs(String dirPath, Project project, AssetManager assetManager) {
+    public static String parseDstRigs(String dirPath, Project project, List<Rig> rigs, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
 
         ArrayList<DSTRig> dstRigs = new ArrayList<>();
-        for (Hole hole : project.getHoleList()) {
-            for (Rig rig : hole.getRigIndexViewList()) {
-                if (rig instanceof DSTRig) {
-                    DSTRig dst = (DSTRig) rig;
-                    dstRigs.add(dst);
-                }
+        for (Rig rig : rigs) {
+            if (rig instanceof DSTRig) {
+                DSTRig dst = (DSTRig) rig;
+                dstRigs.add(dst);
             }
         }
 
