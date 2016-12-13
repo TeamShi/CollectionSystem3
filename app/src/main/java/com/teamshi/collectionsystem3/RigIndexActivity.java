@@ -701,7 +701,7 @@ public class RigIndexActivity extends AppCompatActivity {
         }
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(rig.getNote()));
 
         return result;
     }
@@ -794,7 +794,7 @@ public class RigIndexActivity extends AppCompatActivity {
         }
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(rig.getOtherDescription()));
 
         return result;
     }
@@ -1104,7 +1104,7 @@ public class RigIndexActivity extends AppCompatActivity {
         }
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
+        result.add(generateRigInfoCell(rig.getNote()));
 
         return result;
     }
