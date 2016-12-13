@@ -699,10 +699,8 @@ public class RigGraphActivity extends Activity {
             param.width = TableLayout.LayoutParams.WRAP_CONTENT;
 
             if (rigList.get(i) instanceof CalculatingRig) {
-                RegularRig rig = (RegularRig) rigList.get(i);
+                CalculatingRig rig = (CalculatingRig) rigList.get(i);
 
-                tr.addView(generateTableRowContent(rig.getDrillBitType()));
-                tr.addView(generateTableRowContent(Utility.formatDouble(rig.getDrillBitDiameter())));
                 tr.addView(generateTableRowContent(Utility.formatDouble(rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())));
                 tr.addView(generateTableRowContent(Utility.formatDouble(rig.getAccumulatedMeterageLength())));
                 tr.addView(generateTableRowContent(rig.getRockDescription()));
