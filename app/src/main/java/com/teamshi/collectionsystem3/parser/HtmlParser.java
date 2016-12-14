@@ -698,6 +698,16 @@ public class HtmlParser extends Parser {
         el.text(finalWaterDepthNode.getContent());
         el.attr("style", "flex-grow:"+ finalWaterDepthNode.getHeight());
 
+        //水位稳定时间
+        RigGraphData.GraphNode waterDepthDateNode = rigGraphData.getWaterDepthDateNode();
+        el =  doc.getElementById("waterDate").appendElement("div");
+        el.text(waterDepthDateNode.getContent());
+        el.attr("style", "flex-grow:"+ waterDepthDateNode.getHeight());
+
+        //TODO rigNodeList
+
+
+
         FileWriter fileWriter = new FileWriter(rigGraph);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(doc.outerHtml());
