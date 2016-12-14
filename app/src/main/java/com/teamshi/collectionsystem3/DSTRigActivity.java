@@ -625,8 +625,8 @@ public class DSTRigActivity extends AppCompatActivity {
                             rockDensityButton.setEnabled(true);
                             rigViewModel.setRockDensity("坚硬");
                             rockSaturationEditText.setEnabled(true);
-                            rockSaturationButton.setEnabled(false);
-                            rigViewModel.setRockSaturation("");
+                            rockSaturationButton.setEnabled(true);
+                            rigViewModel.setRockSaturation("稍湿");
                             rockWeatheringEditText.setEnabled(false);
                             rockWeatheringButton.setEnabled(false);
                             rigViewModel.setRockWeathering("");
