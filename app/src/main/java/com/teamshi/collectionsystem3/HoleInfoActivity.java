@@ -1300,6 +1300,42 @@ public class HoleInfoActivity extends AppCompatActivity {
             finalWaterDepthDateTextView.setText(Utility.formatCalendarDateString(holeViewModel.getFinalWaterDepthLoggedDate()));
         }
 
+        initialWaterDepthDateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar rigDate = holeViewModel.getInitialWaterDepthLoggedDate();
+                DatePickerDialog dialog = new DatePickerDialog(HoleInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        GregorianCalendar temp = new GregorianCalendar();
+                        temp.set(year, monthOfYear, dayOfMonth);
+                        holeViewModel.setInitialWaterDepthLoggedDate(temp);
+                        refreshInfo();
+                    }
+                }, rigDate.get(Calendar.YEAR), rigDate.get(Calendar.MONTH), rigDate.get(Calendar.DAY_OF_MONTH));
+
+                dialog.show();
+            }
+        });
+
+        finalWaterDepthDateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar rigDate = holeViewModel.getFinalWaterDepthLoggedDate();
+                DatePickerDialog dialog = new DatePickerDialog(HoleInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        GregorianCalendar temp = new GregorianCalendar();
+                        temp.set(year, monthOfYear, dayOfMonth);
+                        holeViewModel.setFinalWaterDepthLoggedDate(temp);
+                        refreshInfo();
+                    }
+                }, rigDate.get(Calendar.YEAR), rigDate.get(Calendar.MONTH), rigDate.get(Calendar.DAY_OF_MONTH));
+
+                dialog.show();
+            }
+        });
+
         longtitudeEditText.setText(String.valueOf(holeViewModel.getLongitude()));
         latitudeEditText.setText(String.valueOf(holeViewModel.getLatitude()));
 
