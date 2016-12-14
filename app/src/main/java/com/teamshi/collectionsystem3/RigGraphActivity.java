@@ -746,7 +746,7 @@ public class RigGraphActivity extends Activity {
             @Override
             public void onClick(View v) {
                 ArrayList<String> stringList = new ArrayList<String>();
-                stringList.add(rigNodeViewModel.getStartDepth() + " m ~ " + rigNodeViewModel.getEndDepth() + " m" );
+                stringList.add(Utility.formatDouble(rigNodeViewModel.getStartDepth()) + " m ~ " + Utility.formatDouble(rigNodeViewModel.getEndDepth()) + " m");
                 stringList.add(graphRigNodeRockInfoViewModel.getRockName());
 
                 if (!graphRigNodeRockInfoViewModel.getRockColor().equals("")) {
