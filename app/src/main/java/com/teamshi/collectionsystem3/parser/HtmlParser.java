@@ -9,6 +9,7 @@ import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Project;
 import com.teamshi.collectionsystem3.datastructure.Rig;
+import com.teamshi.collectionsystem3.datastructure.RigGraphData;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
 import org.jsoup.Jsoup;
@@ -17,6 +18,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -623,6 +625,84 @@ public class HtmlParser extends Parser {
         }
 
         return path;
+    }
+
+    public static void main(String[] args) throws IOException {
+        RigGraphData rigGraphData = RigGraphData.generateTestInstance();
+        String outPath = "/Users/yueyue/Desktop/ff.html";
+
+        File rigGraph = Utility.createFile(outPath, false);
+        InputStream inputStream = new FileInputStream("/Users/yueyue/Desktop/"+RIG_GRAPH_TEMPLATE);
+
+        //读模版文件
+        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+
+        //日期
+        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
+            Element el =  doc.getElementById("date").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //钻头直径
+        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
+            Element el =  doc.getElementById("drillDiameter").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //岩芯
+        for(RigGraphData.GraphNode node: rigGraphData.getRockCoreNodeList()) {
+            Element el =  doc.getElementById("rockCore").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //水样
+        for(RigGraphData.GraphNode node: rigGraphData.getWaterSamplingNodeList()) {
+            Element el =  doc.getElementById("waterSampling").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //原样
+        for(RigGraphData.GraphNode node: rigGraphData.getOriginalSamplingNodeList()) {
+            Element el =  doc.getElementById("originalSampling").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //扰动样
+        for(RigGraphData.GraphNode node: rigGraphData.getDisturbanceSamplingNodeList()) {
+            Element el =  doc.getElementById("distSampling").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //下套管
+        for(RigGraphData.GraphNode node: rigGraphData.getTrNodeList()) {
+            Element el =  doc.getElementById("trNode").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "flex-grow:"+ node.getHeight());
+        }
+
+        //初始水位
+        RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
+        Element el =  doc.getElementById("initWater").appendElement("div");
+        el.text(initialWaterDepthNode.getContent());
+        el.attr("style", "flex-grow:"+ initialWaterDepthNode.getHeight());
+
+        //初始水位
+        RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
+        el =  doc.getElementById("finalWater").appendElement("div");
+        el.text(finalWaterDepthNode.getContent());
+        el.attr("style", "flex-grow:"+ finalWaterDepthNode.getHeight());
+
+        FileWriter fileWriter = new FileWriter(rigGraph);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(doc.outerHtml());
+        bufferedWriter.close();
+        fileWriter.close();
     }
 
 }
