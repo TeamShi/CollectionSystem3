@@ -1630,8 +1630,7 @@ public class SPTRigActivity extends AppCompatActivity {
                 Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
 
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                endTime.add(Calendar.MINUTE, 1);
+                Calendar endTime = Calendar.getInstance();
 
                 String rockName = rockNameMap.containsKey(DataManager.getHole(holeId).getLastRockName())?rockNameMap.get(DataManager.getHole(holeId).getLastRockName()): "其它";
 

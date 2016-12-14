@@ -992,8 +992,7 @@ public class DSTRigActivity extends AppCompatActivity {
                 Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
 
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                endTime.add(Calendar.MINUTE, 1);
+                Calendar endTime = Calendar.getInstance();
 
                 rigViewModel = new DSTRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime,
                         DataManager.getHole(holeId).getLastAccumulatedMeterageLength() + 2, 1.9,

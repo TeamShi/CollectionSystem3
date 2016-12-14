@@ -237,8 +237,8 @@ public class NARigInfoActivity extends AppCompatActivity {
                 Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
 
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                endTime.add(Calendar.MINUTE, 1);
+                Calendar endTime = Calendar.getInstance();
+
                 rigViewModel = new NARig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime);
 
                 refreshInfo();

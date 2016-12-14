@@ -1110,8 +1110,7 @@ public class RegularRigActivity extends AppCompatActivity {
             case "ACTION_ADD_RIG":
                 Calendar date = (Calendar) DataManager.getHole(holeId).getLastDate().clone();
                 Calendar startTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                Calendar endTime = (Calendar) DataManager.getHole(holeId).getLastRigEndTime().clone();
-                endTime.add(Calendar.MINUTE, 1);
+                Calendar endTime = Calendar.getInstance();
 
                 if (DataManager.getHole(holeId).getPipeCount() == 0) {
                     rigViewModel = new RegularRig(DataManager.getHole(holeId).getLastClassPeopleCount(), date, startTime, endTime, 1, 0, 0, 108, 0, "合金", 110, 0, 0, 0, 0, 0, DataManager.getHole(holeId).getRockCoreIndex() + 1, 0, 0, "0 m ~ 0 m", "黏土", "灰色", "坚硬", "", "", "", "");
