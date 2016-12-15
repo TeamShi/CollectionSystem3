@@ -136,7 +136,11 @@ public class HtmlParser extends Parser {
 
         for (Hole hole : holes) {
             try {
-                parseHole(dirPath + hole.getHoleId() + File.separator + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+                String path = dirPath + hole.getHoleId() + File.separator + "hole_" + hole.getHoleId() + ".html";
+                Utility.createFile(path, false);
+                parseHole(path, hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+                String tempPath = dirPath + "hole_" + hole.getHoleId() + ".html";
+                Utility.copyFile(new FileInputStream(path), new File(tempPath));
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -399,11 +403,11 @@ public class HtmlParser extends Parser {
 
     }
 
-    public static boolean parseRigGraphTable(String outPath, Hole hole, AssetManager assetManager) throws IOException {
+    public static String parseRigGraphTable(String outPath, Hole hole, AssetManager assetManager) throws IOException {
 
         boolean isHtml = Utility.verifySuffix(outPath, "html");
         if (!isHtml) {
-            return false;
+            return null;
         }
 
         File rigGraph = Utility.createFile(outPath, false);
@@ -412,8 +416,128 @@ public class HtmlParser extends Parser {
         //读模版文件
         Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
 
-//        Element projectName = doc.getElementById(HOLE_DESC);
-//        projectName.text(hole.getNote());
+        RigGraphData rigGraphData = hole.getRigGraphData();
+
+        //日期
+        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
+            Element el =  doc.getElementById("date").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //钻头直径
+        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
+            Element el =  doc.getElementById("drillDiameter").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //岩芯
+        for(RigGraphData.GraphNode node: rigGraphData.getRockCoreNodeList()) {
+            Element el =  doc.getElementById("rockCore").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //水样
+        for(RigGraphData.GraphNode node: rigGraphData.getWaterSamplingNodeList()) {
+            Element el =  doc.getElementById("waterSampling").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //原样
+        for(RigGraphData.GraphNode node: rigGraphData.getOriginalSamplingNodeList()) {
+            Element el =  doc.getElementById("originalSampling").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //扰动样
+        for(RigGraphData.GraphNode node: rigGraphData.getDisturbanceSamplingNodeList()) {
+            Element el =  doc.getElementById("distSampling").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //下套管
+        for(RigGraphData.GraphNode node: rigGraphData.getTrNodeList()) {
+            Element el =  doc.getElementById("trNode").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:"+ node.getHeight()+"rem;");
+        }
+
+        //初始水位
+        RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
+        Element el =  doc.getElementById("initWater").appendElement("div");
+        el.text(initialWaterDepthNode.getContent());
+        el.attr("style", "height:"+ initialWaterDepthNode.getHeight()+"rem;");
+
+        //初始水位
+        RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
+        el =  doc.getElementById("finalWater").appendElement("div");
+        el.text(finalWaterDepthNode.getContent());
+        el.attr("style", "height:"+ finalWaterDepthNode.getHeight()+"rem;");
+
+        //水位稳定时间
+        RigGraphData.GraphNode waterDepthDateNode = rigGraphData.getWaterDepthDateNode();
+        el =  doc.getElementById("waterDate").appendElement("div");
+        el.text(waterDepthDateNode.getContent());
+        el.attr("style", "height:"+ waterDepthDateNode.getHeight()+"rem;");
+
+        List<RigGraphData.RigNode> rigNodes = rigGraphData.getRigNodeList();
+        doc.getElementsByClass("flex-row").attr("style", "height:"+ 30 * rigNodes.size() + "px");
+        for(RigGraphData.RigNode rigNode: rigNodes) {
+            el = doc.getElementById("rockCorePer").appendElement("div");
+            el.text(String.valueOf(rigNode.getRockPickPercentage()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //岩芯编号
+            el = doc.getElementById("rockCoreIndex").appendElement("div");
+            el.text(String.valueOf(rigNode.getRockLayoutIndex()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //岩芯长度
+            el = doc.getElementById("rockCoreLength").appendElement("div");
+            el.text(String.valueOf(rigNode.getRockPickLength()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //岩层描述
+            el = doc.getElementById("desc").appendElement("div");
+            el.text(String.valueOf(rigNode.getDescription()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //钻进深度至
+            el = doc.getElementById("endDepth").appendElement("div");
+            el.text(String.valueOf(rigNode.getEndDepth()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //钻进深度至
+            el = doc.getElementById("depthAll").appendElement("div");
+            el.text(String.valueOf(rigNode.getEndDepth()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //钻进深度由
+            el = doc.getElementById("startDepth").appendElement("div");
+            el.text(String.valueOf(rigNode.getStartDepth()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //层底深度
+            el = doc.getElementById("layerEndDepth").appendElement("div");
+            el.text(String.valueOf(rigNode.getLayoutEndDepth()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //回次进尺
+            el = doc.getElementById("roundTrip").appendElement("div");
+            el.text(String.valueOf(rigNode.getRoundTripDepth()));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //类型 TODO
+            el = doc.getElementById("legend").appendElement("div");
+            el.text(String.valueOf("ff"));
+            el.attr("class", "earth_fill");
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;"+";color:rgba(255,255,255,0)");
+        }
 
         FileWriter fileWriter = new FileWriter(rigGraph);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -421,7 +545,7 @@ public class HtmlParser extends Parser {
         bufferedWriter.close();
         fileWriter.close();
 
-        return true;
+        return outPath;
     }
 
     public static String parseSptRigs(String dirPath, Project project, List<Rig> rigs, AssetManager assetManager) {
