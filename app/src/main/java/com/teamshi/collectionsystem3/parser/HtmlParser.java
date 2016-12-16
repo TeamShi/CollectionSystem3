@@ -425,12 +425,6 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:"+ node.getHeight()+"rem;");
         }
 
-        //钻头直径
-        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
-            Element el =  doc.getElementById("drillDiameter").appendElement("div");
-            el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
-        }
 
         //岩芯
         for(RigGraphData.GraphNode node: rigGraphData.getRockCoreNodeList()) {
@@ -489,7 +483,12 @@ public class HtmlParser extends Parser {
         doc.getElementsByClass("flex-row").attr("style", "height:"+ 30 * rigNodes.size() + "px");
         for(RigGraphData.RigNode rigNode: rigNodes) {
             el = doc.getElementById("rockCorePer").appendElement("div");
-            el.text(String.valueOf(rigNode.getRockPickPercentage()));
+            el.text(String.valueOf(rigNode.getRockPickPercentage() * 100));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //钻头直径
+            el =  doc.getElementById("drillDiameter").appendElement("div");
+            el.text(String.valueOf(rigNode.getDrillDiameter()));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //岩芯编号
@@ -768,13 +767,6 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:"+ node.getHeight()+"rem;");
         }
 
-        //钻头直径
-        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
-            Element el =  doc.getElementById("drillDiameter").appendElement("div");
-            el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
-        }
-
         //岩芯
         for(RigGraphData.GraphNode node: rigGraphData.getRockCoreNodeList()) {
             Element el =  doc.getElementById("rockCore").appendElement("div");
@@ -833,7 +825,12 @@ public class HtmlParser extends Parser {
         doc.getElementsByClass("flex-row").attr("style", "height:"+ 30 * rigNodes.size() + "px");
         for(RigGraphData.RigNode rigNode: rigNodes) {
             el = doc.getElementById("rockCorePer").appendElement("div");
-            el.text(String.valueOf(rigNode.getRockPickPercentage()));
+            el.text(String.valueOf(rigNode.getRockPickPercentage() * 100));
+            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+
+            //钻头直径
+            el =  doc.getElementById("drillDiameter").appendElement("div");
+            el.text(String.valueOf(rigNode.getDrillDiameter()));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //岩芯编号

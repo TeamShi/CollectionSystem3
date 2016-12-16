@@ -47,9 +47,13 @@
         .flex-row .col {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-end;
         }
         .flex-row .col > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
             white-space: nowrap;
             border-bottom: 1px solid black;
             text-align: center;
