@@ -1416,7 +1416,9 @@ public class SPTRigActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                rigViewModel.setRockDensity(s.toString());
+                if (!refreshLock) {
+                    rigViewModel.setRockDensity(s.toString());
+                }
             }
         });
 
