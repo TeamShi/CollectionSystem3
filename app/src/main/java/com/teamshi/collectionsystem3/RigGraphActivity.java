@@ -464,8 +464,8 @@ public class RigGraphActivity extends Activity {
                             rockDensityButton.setEnabled(true);
                             graphRigNodeRockInfoViewModel.setRockDensity("坚硬");
                             rockSaturationEditText.setEnabled(true);
-                            rockSaturationButton.setEnabled(false);
-                            graphRigNodeRockInfoViewModel.setRockSaturation("");
+                            rockSaturationButton.setEnabled(true);
+                            graphRigNodeRockInfoViewModel.setRockSaturation("稍湿");
                             rockWeatheringEditText.setEnabled(false);
                             rockWeatheringButton.setEnabled(false);
                             graphRigNodeRockInfoViewModel.setRockWeathering("");
@@ -981,13 +981,22 @@ public class RigGraphActivity extends Activity {
             rockDescriptionEditText.setText(graphRigNodeRockInfoViewModel.getRockDescription());
         }
 
-        if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[0]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2])) {
+        if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[0])) {
             rockColorEditText.setEnabled(true);
             rockColorButton.setEnabled(true);
             rockDensityEditText.setEnabled(true);
             rockDensityButton.setEnabled(true);
             rockSaturationEditText.setEnabled(false);
             rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[1]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[2]) || graphRigNodeRockInfoViewModel.getRockName().equals(ROCK_TYPE_OPTIONS[3])) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
             rockWeatheringEditText.setEnabled(false);
             rockWeatheringButton.setEnabled(false);
         } else if (graphRigNodeRockInfoViewModel.getRockName().endsWith("砂") || graphRigNodeRockInfoViewModel.getRockName().endsWith("石") || graphRigNodeRockInfoViewModel.getRockName().endsWith("砾")) {

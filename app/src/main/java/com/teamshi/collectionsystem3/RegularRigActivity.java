@@ -1305,13 +1305,22 @@ public class RegularRigActivity extends AppCompatActivity {
             rigNoteEditText.setText(rigViewModel.getNote());
         }
 
-        if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[0]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2])) {
+        if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[0])) {
             rockColorEditText.setEnabled(true);
             rockColorButton.setEnabled(true);
             rockDensityEditText.setEnabled(true);
             rockDensityButton.setEnabled(true);
             rockSaturationEditText.setEnabled(false);
             rockSaturationButton.setEnabled(false);
+            rockWeatheringEditText.setEnabled(false);
+            rockWeatheringButton.setEnabled(false);
+        } else if (rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[1]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[2]) || rigViewModel.getRockType().equals(ROCK_TYPE_OPTIONS[3])) {
+            rockColorEditText.setEnabled(true);
+            rockColorButton.setEnabled(true);
+            rockDensityEditText.setEnabled(true);
+            rockDensityButton.setEnabled(true);
+            rockSaturationEditText.setEnabled(true);
+            rockSaturationButton.setEnabled(true);
             rockWeatheringEditText.setEnabled(false);
             rockWeatheringButton.setEnabled(false);
         } else if (rigViewModel.getRockType().endsWith("砂") || rigViewModel.getRockType().endsWith("石") || rigViewModel.getRockType().endsWith("砾")) {
