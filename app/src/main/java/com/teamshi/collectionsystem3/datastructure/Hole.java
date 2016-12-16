@@ -95,6 +95,9 @@ public class Hole implements Serializable {
     private int lastTRIndex;
     private int lastTR108Index;
 
+    private int lastTRLength;
+    private int lastTR108Length;
+
     private RigGraphData rigGraphData;
 
     public Hole() {
@@ -185,6 +188,9 @@ public class Hole implements Serializable {
 
         this.lastTRIndex = 1;
         this.lastTR108Index = 1;
+
+        this.lastTRLength = 0;
+        this.lastTRLength = 0;
 
         this.rigGraphData = new RigGraphData();
     }
@@ -788,6 +794,22 @@ public class Hole implements Serializable {
         this.rigGraphData = rigGraphData;
     }
 
+    public int getLastTRLength() {
+        return lastTRLength;
+    }
+
+    public void setLastTRLength(int lastTRLength) {
+        this.lastTRLength = lastTRLength;
+    }
+
+    public int getLastTR108Length() {
+        return lastTR108Length;
+    }
+
+    public void setLastTR108Length(int lastTR108Length) {
+        this.lastTR108Length = lastTR108Length;
+    }
+
     public Hole deepCopy() {
         Hole newHole = new Hole(projectName);
 
@@ -889,6 +911,10 @@ public class Hole implements Serializable {
         newHole.setLastTR108Index(lastTR108Index);
 
         newHole.setRigGraphData(rigGraphData.deepCopy());
+
+        newHole.setLastTRLength(lastTRLength);
+
+        newHole.setLastTR108Length(lastTR108Length);
 
         return newHole;
     }

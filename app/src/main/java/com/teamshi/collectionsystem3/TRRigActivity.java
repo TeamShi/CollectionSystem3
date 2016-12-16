@@ -60,6 +60,9 @@ public class TRRigActivity extends AppCompatActivity {
     private int lastTRIndex;
     private int lastTR108Index;
 
+    private int lastTRLength;
+    private int lastTR108Length;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,8 +142,10 @@ public class TRRigActivity extends AppCompatActivity {
 
                         if (position == 1) {
                             rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setIndex(count108 + lastTR108Index - 1);
+                            rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setTotalLength(lastTR108Length);
                         } else {
                             rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setIndex(count127 + lastTRIndex - 1);
+                            rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setTotalLength(lastTRLength);
                         }
 
                         refreshInfo();
@@ -178,7 +183,13 @@ public class TRRigActivity extends AppCompatActivity {
                                 totalLength += info.getLength();
                             }
 
-                            rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(totalLength);
+                            if (rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).getDiameter() == 127) {
+                                rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(lastTRLength + Double.parseDouble(s.toString()));
+                                lastTRLength += Double.parseDouble(s.toString());
+                            } else {
+                                rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(lastTR108Length + Double.parseDouble(s.toString()));
+                                lastTR108Length += Double.parseDouble(s.toString());
+                            }
 
                             detailedInfoLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
 
@@ -201,12 +212,6 @@ public class TRRigActivity extends AppCompatActivity {
         addTRDetailedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double totalLength = 0;
-
-                for (TRRig.TRInfo info : rigViewModel.getTrInfos()) {
-                    totalLength += info.getLength();
-                }
-
                 int count127 = 0;
 
                 for (int k = 0; k < rigViewModel.getTrInfos().size(); k++) {
@@ -215,7 +220,7 @@ public class TRRigActivity extends AppCompatActivity {
                     }
                 }
 
-                rigViewModel.getTrInfos().add(new TRRig.TRInfo("钢管", count127 + lastTRIndex , rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1).getDiameter(), 0, totalLength));
+                rigViewModel.getTrInfos().add(new TRRig.TRInfo("钢管", count127 + lastTRIndex , rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1).getDiameter(), 0, lastTRLength));
                 addDeleteLock = true;
                 refreshInfo();
                 addDeleteLock = false;
@@ -225,6 +230,14 @@ public class TRRigActivity extends AppCompatActivity {
         removeTRDetailedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                TRRig.TRInfo trInfoToDelete = rigViewModel.getTrInfos().get(rigViewModel.getTrInfos().size() - 1);
+
+                if (trInfoToDelete.getDiameter() == 127) {
+                    lastTRLength -= trInfoToDelete.getLength();
+                } else {
+                    lastTR108Length -= trInfoToDelete.getLength();
+                }
 
                 rigViewModel.getTrInfos().remove(rigViewModel.getTrInfos().size() - 1);
 
@@ -427,6 +440,9 @@ public class TRRigActivity extends AppCompatActivity {
 
         lastTRIndex = DataManager.getHole(holeId).getLastTRIndex();
         lastTR108Index = DataManager.getHole(holeId).getLastTR108Index();
+
+        lastTRLength = DataManager.getHole(holeId).getLastTRLength();
+        lastTR108Length = DataManager.getHole(holeId).getLastTR108Length();
 
 
         switch (requestCode) {
