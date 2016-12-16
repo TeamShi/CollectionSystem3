@@ -167,8 +167,8 @@ public class XlsParser extends Parser {
         }
 
 
-        String[][] rigArray = convertHole(hole, "\n");
-        String[][] sptRigArray = convertSpts(sptRigs, "\n");
+        String[][] rigArray = convertHole(hole, "\\");
+        String[][] sptRigArray = convertSpts(sptRigs, "\\");
         String[][] dstRigArray = convertDsts(dstRigs);
         String[][] waterSampleArray = convertWaterSmpls(hole, waterSampleDetails);
         String[][] rockSampleArray = convertRockSmpls(hole, rockSampleDetails);
