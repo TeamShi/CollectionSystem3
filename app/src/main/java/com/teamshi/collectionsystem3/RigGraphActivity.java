@@ -358,6 +358,9 @@ public class RigGraphActivity extends Activity {
 
                 graphDataViewModel.getRigNodeList().add(rigNodeViewModel);
 
+                // Now drillType is used to save rock name
+                rigNodeViewModel.setDrillType(graphRigNodeRockInfoViewModel.getRockName());
+
                 addGraphButton.setEnabled(true);
                 deleteGraphButton.setEnabled(true);
                 clearGraphButton.setEnabled(true);
