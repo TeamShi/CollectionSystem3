@@ -250,8 +250,6 @@ public class RigGraphActivity extends Activity {
 
                     // Drill Type
 
-                    graphDataViewModel.getRigNodeList().clear();
-
                     double currentDrillDiameter = 0;
 
                     for (Rig rig : rigList) {

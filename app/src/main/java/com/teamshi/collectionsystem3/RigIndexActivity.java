@@ -683,9 +683,25 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(""));
         }
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        int i = -1;
+
+        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
+            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
+                i = j;
+                break;
+            }
+        }
+
+        if (i != -1) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+
         result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
@@ -776,9 +792,25 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(""));
         }
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        int i = -1;
+
+        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
+            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
+                i = j;
+                break;
+            }
+        }
+
+        if (i != -1) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+
         result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
@@ -869,9 +901,25 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(""));
         }
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        int i = -1;
+
+        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
+            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
+                i = j;
+                break;
+            }
+        }
+
+        if (i != -1) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+
         result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
@@ -1086,9 +1134,25 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
-        result.add(generateRigInfoCell(""));
+        int i = -1;
+
+        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
+            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
+                i = j;
+                break;
+            }
+        }
+
+        if (i != -1) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        } else {
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+            result.add(generateRigInfoCell(""));
+        }
+
         result.add(generateRigInfoCell(rig.getRockDescription()));
         result.add(generateRigInfoCell(""));
 
