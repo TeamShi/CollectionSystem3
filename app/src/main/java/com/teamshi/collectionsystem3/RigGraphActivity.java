@@ -135,7 +135,6 @@ public class RigGraphActivity extends Activity {
     private TableLayout rockDescriptionTableLayout;
     private TableLayout splitRockDescriptionTableLayout;
     private LinearLayout rigGprahDetailLinearLayout;
-    private LinearLayout informationLinearLayout;
 
     private Button confirmGraphButton;
     private Button cancelGraphButton;
@@ -192,7 +191,6 @@ public class RigGraphActivity extends Activity {
         rockDescriptionTableLayout = (TableLayout) findViewById(R.id.table_layout_rock_description_list);
         splitRockDescriptionTableLayout = (TableLayout) findViewById(R.id.table_layout_split_rock_description);
         rigGprahDetailLinearLayout = (LinearLayout) findViewById(R.id.linear_layout_rig_graph_detail);
-        informationLinearLayout = (LinearLayout) findViewById(R.id.linear_layout_information);
 
         confirmGraphButton = (Button) findViewById(R.id.button_confirm_hole_graph);
         deleteGraphButton = (Button) findViewById(R.id.button_cancel_hole_graph);
@@ -940,11 +938,11 @@ public class RigGraphActivity extends Activity {
         }
 
         if (getCurrentFocus() != detailRockCoreLengthEditText) {
-            detailRockCoreLengthEditText.setText(Utility.formatDouble(graphRigNodeRockInfoViewModel.getRockPickLength()));
+            detailRockCoreLengthEditText.setText(Utility.formatDouble(rigNodeViewModel.getRockPickLength()));
         }
 
         if (getCurrentFocus() != detailRockCorePickPercentageTextView) {
-            detailRockCorePickPercentageTextView.setText(Utility.formatDouble(graphRigNodeRockInfoViewModel.getRockPickPercentage()));
+            detailRockCorePickPercentageTextView.setText(Utility.formatDouble(rigNodeViewModel.getRockPickPercentage() * 100) + "%");
         }
 
         if (getCurrentFocus() != rockTypeEditText) {
