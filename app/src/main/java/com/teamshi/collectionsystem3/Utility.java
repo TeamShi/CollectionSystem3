@@ -332,5 +332,124 @@ public class Utility {
             );
         }
     }
+    public static boolean validateDate(String dateString) {
+        long expiredDate = getExpiredDate(dateString.toUpperCase());
+
+        if (Calendar.getInstance().getTimeInMillis() / 1000 < expiredDate) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static long getExpiredDate(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            sb.append(decodeChar(s.charAt(i)));
+        }
+
+        String temp = sb.toString();
+
+        StringBuilder sb2 = new StringBuilder();
+
+        try {
+            sb2.append(temp.charAt(5));
+            sb2.append(temp.charAt(8));
+            sb2.append(temp.charAt(0));
+            sb2.append(temp.charAt(6));
+            sb2.append(temp.charAt(3));
+            sb2.append(temp.charAt(1));
+            sb2.append(temp.charAt(4));
+            sb2.append(temp.charAt(7));
+            sb2.append(temp.charAt(2));
+            sb2.append(temp.charAt(9));
+        } catch (Exception e) {
+            return Long.MIN_VALUE;
+        }
+
+        long result;
+        try {
+            result = Long.parseLong(sb2.toString());
+        } catch (Exception e){
+            return Long.MIN_VALUE;
+        }
+        return result;
+    }
+
+    public static String decodeChar(char c) {
+        switch (c) {
+            case 'X':
+                return "0";
+            case 'A':
+                return "1";
+            case 'Z':
+                return "2";
+            case 'F':
+                return "3";
+            case 'D':
+                return "4";
+            case 'G':
+                return "5";
+            case 'H':
+                return "6";
+            case 'T':
+                return "7";
+            case 'R':
+                return "8";
+            case 'L':
+                return "9";
+            default:
+                return "";
+        }
+    }
+
+    public static String getExpiredString(long date) {
+        int[] dateArray = new int[10];
+        for (int i = 9; i >= 0; i--) {
+            dateArray[i] = (int)(date % 10);
+            date /= 10;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(encodeNum(dateArray[2]));
+        sb.append(encodeNum(dateArray[5]));
+        sb.append(encodeNum(dateArray[8]));
+        sb.append(encodeNum(dateArray[4]));
+        sb.append(encodeNum(dateArray[6]));
+        sb.append(encodeNum(dateArray[0]));
+        sb.append(encodeNum(dateArray[3]));
+        sb.append(encodeNum(dateArray[7]));
+        sb.append(encodeNum(dateArray[1]));
+        sb.append(encodeNum(dateArray[9]));
+
+        return sb.toString();
+    }
+
+    public static String encodeNum(int i) {
+        switch (i) {
+            case 0:
+                return "X";
+            case 1:
+                return "A";
+            case 2:
+                return "Z";
+            case 3:
+                return "F";
+            case 4:
+                return "D";
+            case 5:
+                return "G";
+            case 6:
+                return "H";
+            case 7:
+                return "T";
+            case 8:
+                return "R";
+            case 9:
+                return "L";
+            default:
+                return "";
+        }
+    }
 
 }

@@ -36,7 +36,8 @@
         <activity android:name=".CaptureSignature" />
         <activity android:name=".OriginalSamplingRigActivity" />
         <activity android:name=".OtherSamplingRigActivity" />
-        <activity android:name=".RigGraphActivity"></activity>
+        <activity android:name=".RigGraphActivity" />
+        <activity android:name=".WelcomeActivity"></activity>
     </application>
 
 </manifest>
