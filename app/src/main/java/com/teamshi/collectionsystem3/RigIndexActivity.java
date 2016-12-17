@@ -22,6 +22,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamshi.collectionsystem3.datastructure.CalculatingRig;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.NARig;
@@ -35,6 +36,8 @@ import com.teamshi.collectionsystem3.datastructure.TRRig;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class RigIndexActivity extends AppCompatActivity {
     private static final String TAG = "Collectionsystem3";
@@ -62,6 +65,8 @@ public class RigIndexActivity extends AppCompatActivity {
 
     private boolean waterDepthFlag = false;
     private boolean refreshLock = false;
+
+    private HashMap<Integer, Integer> rockIndexMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -376,6 +381,20 @@ public class RigIndexActivity extends AppCompatActivity {
 
         ArrayList<Rig> viewList = hole.getRigIndexViewList();
 
+        rockIndexMap = new HashMap<>();
+
+        for (int i = 0; i < hole.getRigGraphData().getRigNodeList().size(); i++) {
+            for (int j = viewList.size() - 1; j >= 0; j--) {
+                if (viewList.get(j) instanceof CalculatingRig && hole.getRigGraphData().getRigNodeList().get(i).getEndDepth() > ((CalculatingRig) viewList.get(j)).getAccumulatedMeterageLength()) {
+                    rockIndexMap.put(j + 1, i);
+                    break;
+                } else if (viewList.get(j) instanceof CalculatingRig && hole.getRigGraphData().getRigNodeList().get(i).getEndDepth() == ((CalculatingRig) viewList.get(j)).getAccumulatedMeterageLength()) {
+                    rockIndexMap.put(j, i);
+                    break;
+                }
+            }
+        }
+
         for (int i = 0; i < viewList.size(); i++) {
             TableRow row = new TableRow(this);
 
@@ -390,34 +409,34 @@ public class RigIndexActivity extends AppCompatActivity {
             if (viewList.get(i) instanceof NARig) {
                 NARig rig = (NARig) viewList.get(i);
 
-                for (TextView tv : generateNARigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
+                for (TextView tv : generateNARigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null, i)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof RegularRig) {
                 RegularRig rig = (RegularRig) viewList.get(i);
 
-                for (TextView tv : generateRegularRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
+                for (TextView tv : generateRegularRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null, i)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof SPTRig) {
                 SPTRig rig = (SPTRig) viewList.get(i);
 
-                for (TextView tv : generateSPTRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
+                for (TextView tv : generateSPTRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null, i)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof DSTRig) {
                 DSTRig rig = (DSTRig) viewList.get(i);
-                for (TextView tv : generateDSTRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
+                for (TextView tv : generateDSTRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null, i)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof TRRig) {
                 TRRig rig = (TRRig) viewList.get(i);
-                for (TextView tv : generateTRRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null)) {
+                for (TextView tv : generateTRRigRowContent(rig, i + 1 < viewList.size()? viewList.get(i + 1): null, i)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof OriginalSamplingRig) {
                 OriginalSamplingRig rig = (OriginalSamplingRig) viewList.get(i);
-                for (TextView tv : generateOriginalSamplingRigContent(rig)) {
+                for (TextView tv : generateOriginalSamplingRigContent(rig, i)) {
                     row.addView(tv);
                 }
             } else if (viewList.get(i) instanceof OtherSamplingRig.OtherSamplingDetail) {
@@ -519,7 +538,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return tv;
     }
 
-    private ArrayList<TextView> generateNARigRowContent(NARig rig, Rig nextRig) {
+    private ArrayList<TextView> generateNARigRowContent(NARig rig, Rig nextRig, int currentIndex) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -613,7 +632,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateRegularRigRowContent(RegularRig rig, Rig nextRig) {
+    private ArrayList<TextView> generateRegularRigRowContent(RegularRig rig, Rig nextRig, int currentIndex) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -683,19 +702,10 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(""));
         }
 
-        int i = -1;
-
-        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
-            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
-                i = j;
-                break;
-            }
-        }
-
-        if (i != -1) {
-            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        if (rockIndexMap.containsKey(currentIndex)) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth())));
         } else {
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
@@ -722,7 +732,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateSPTRigRowContent(SPTRig rig, Rig nextRig) {
+    private ArrayList<TextView> generateSPTRigRowContent(SPTRig rig, Rig nextRig, int currentIndex) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -792,19 +802,10 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(""));
         }
 
-        int i = -1;
-
-        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
-            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
-                i = j;
-                break;
-            }
-        }
-
-        if (i != -1) {
-            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        if (rockIndexMap.containsKey(currentIndex)) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth())));
         } else {
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
@@ -831,7 +832,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateDSTRigRowContent(DSTRig rig, Rig nextRig) {
+    private ArrayList<TextView> generateDSTRigRowContent(DSTRig rig, Rig nextRig, int currentIndex) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -901,19 +902,10 @@ public class RigIndexActivity extends AppCompatActivity {
             result.add(generateRigInfoCell(""));
         }
 
-        int i = -1;
-
-        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
-            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
-                i = j;
-                break;
-            }
-        }
-
-        if (i != -1) {
-            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        if (rockIndexMap.containsKey(currentIndex)) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth())));
         } else {
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
@@ -940,7 +932,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateTRRigRowContent(TRRig rig, Rig nextRig) {
+    private ArrayList<TextView> generateTRRigRowContent(TRRig rig, Rig nextRig, int currentIndex) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -1080,7 +1072,7 @@ public class RigIndexActivity extends AppCompatActivity {
         return result;
     }
 
-    private ArrayList<TextView> generateOriginalSamplingRigContent(OriginalSamplingRig rig) {
+    private ArrayList<TextView> generateOriginalSamplingRigContent(OriginalSamplingRig rig, int currentIndex) {
         ArrayList<TextView> result = new ArrayList<>();
 
         result.add(generateRigInfoCell(rig.getClassPeopleCount()));
@@ -1134,19 +1126,10 @@ public class RigIndexActivity extends AppCompatActivity {
         result.add(generateRigInfoCell(""));
         result.add(generateRigInfoCell(""));
 
-        int i = -1;
-
-        for (int j = 0; j < hole.getRigGraphData().getRigNodeList().size(); j++) {
-            if (hole.getRigGraphData().getRigNodeList().get(j).getStartDepth() >= (rig.getAccumulatedMeterageLength() - rig.getRoundTripMeterageLength())) {
-                i = j;
-                break;
-            }
-        }
-
-        if (i != -1) {
-            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(i).getRockLayoutIndex())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getEndDepth())));
-            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(i).getRoundTripDepth())));
+        if (rockIndexMap.containsKey(currentIndex)) {
+            result.add(generateRigInfoCell(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth())));
+            result.add(generateRigInfoCell(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth())));
         } else {
             result.add(generateRigInfoCell(""));
             result.add(generateRigInfoCell(""));
@@ -1192,6 +1175,13 @@ public class RigIndexActivity extends AppCompatActivity {
                     Toast.makeText(RigIndexActivity.this, "修改成功.", Toast.LENGTH_LONG).show();
                     refreshInfo();
                 }
+                break;
+            case ACTION_EDIT_GRAPH_DATA:
+                if (resultCode == RESULT_OK) {
+                    Toast.makeText(RigIndexActivity.this, "分层成功.", Toast.LENGTH_LONG).show();
+                    refreshInfo();
+                }
+
         }
     }
 
