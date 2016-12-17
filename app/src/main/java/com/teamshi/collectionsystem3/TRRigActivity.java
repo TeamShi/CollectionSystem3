@@ -359,6 +359,9 @@ public class TRRigActivity extends AppCompatActivity {
                             DataManager.getHole(holeId).setLastTR108Index(lastTR108Index + count108);
                             DataManager.getHole(holeId).setLastDate(rigViewModel.getDate());
 
+                            DataManager.getHole(holeId).setLastTRLength(lastTRLength);
+                            DataManager.getHole(holeId).setLastTR108Length(lastTR108Length);
+
                             DataManager.addRig(holeId, rigViewModel);
 
                             DataManager.getHole(holeId).setLastRigEndTime(rigViewModel.getEndTime());
