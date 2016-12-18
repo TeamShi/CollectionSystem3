@@ -659,13 +659,13 @@ public class Parser {
                 sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength() - 0.5)).append("#");
 
                 //岩芯管
-                sb.append(NA).append("#");
-                sb.append(NA).append("#");
+                sb.append("51").append("#");
+                sb.append("0.5").append("#");
 
                 //钻头
                 sb.append("").append("#");
                 sb.append("").append("#");
-                sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength())).append("#");
+                sb.append("").append("#");
 
                 //进尺
                 sb.append(Utility.formatDouble(sptRig.getDrillToolTotalLength())).append("#");
@@ -716,8 +716,8 @@ public class Parser {
                 sb.append(Utility.formatDouble(dstRig.getDrillToolTotalLength() - 0.25)).append("#");
 
                 //岩芯管
-                sb.append(NA).append("#");
-                sb.append(NA).append("#");
+                sb.append("74").append("#");
+                sb.append("0.25").append("#");
 
                 //钻头
                 sb.append("").append("#");
