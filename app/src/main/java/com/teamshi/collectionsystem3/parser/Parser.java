@@ -38,7 +38,7 @@ public class Parser {
 
     protected static String[][] convertSpt(SPTRig sptRig, int index, String BR) {
         String[][] resultData = new String[1][];
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (null == BR || "".equals(BR)) {
             BR = ",";
         }
@@ -183,7 +183,7 @@ public class Parser {
         sb.append("").append("#");
 
         //试件深度
-        sb.append(originalSamplingRig.getStartDepth() + BR + originalSamplingRig.getEndDepth()).append("#");
+        sb.append(Utility.formatDouble(originalSamplingRig.getStartDepth()) + BR + Utility.formatDouble(originalSamplingRig.getEndDepth())).append("#");
 
         //野外鉴定名称
         sb.append("").append("#");
@@ -575,7 +575,7 @@ public class Parser {
                 generateWaterSampleInfo(nextRig, sb);
 
                 //地层
-               generateEarchLayoutInfo(hole, regularRig, sb, i);
+                generateEarchLayoutInfo(hole, regularRig, sb, i);
 
                 //地下水 只填第一行
                 sb.append("").append("#");
@@ -863,7 +863,7 @@ public class Parser {
                 sb.append("").append("#");
                 sb.append("").append("#");
 
-                if(originalSamplingRig.getSamplerPipeDiameter() == 0.9) {
+                if (originalSamplingRig.getSamplerPipeDiameter() == 0.9) {
                     sb.append(Utility.formatDouble(originalSamplingRig.getDrillToolTotalLength() - 0.9)).append("#");
                 } else {
                     sb.append(Utility.formatDouble(originalSamplingRig.getDrillToolTotalLength() - 0.8)).append("#");
@@ -897,12 +897,12 @@ public class Parser {
                 //岩心采取
                 sb.append(String.valueOf(originalSamplingRig.getRockCoreIndex())).append("#");
                 sb.append(Utility.formatDouble(originalSamplingRig.getLastRockCorePipeLength())).append("#");
-                sb.append(Utility.formatDouble(originalSamplingRig.getRockCorePickPercentage() * 100) + "%").append("#");
+                sb.append(Utility.formatDouble(originalSamplingRig.getRockCorePickPercentage() * 100)).append("%").append("#");
 
                 //土样
                 sb.append(originalSamplingRig.getIndex()).append("#");
                 sb.append(Utility.formatDouble(originalSamplingRig.getSamplerPipeDiameter())).append("#");
-                sb.append((originalSamplingRig.getEndDepth() + BR + originalSamplingRig.getStartDepth())).append("#");
+                sb.append((Utility.formatDouble(originalSamplingRig.getStartDepth()) + BR + Utility.formatDouble(originalSamplingRig.getEndDepth()))).append("#");
                 sb.append(originalSamplingRig.getCount()).append("#");
 
                 //水样
