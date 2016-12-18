@@ -115,35 +115,35 @@ public class HtmlParser extends Parser {
 
         //读模版文件
         Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
-        if(hole != null) {
+        if (hole != null) {
             Element projectName = doc.getElementById(PROJECTNAME_ID);
-            if(projectName != null) {
+            if (projectName != null) {
                 projectName.text(hole.getProjectName());
             }
 
             Element positionId = doc.getElementById(POSITION_ID);
-            if(positionId != null) {
+            if (positionId != null) {
                 String projectStage = hole.getHoleIdPart2();
                 positionId.text(projectStage);
             }
 
             Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
-            if(holeElevation != null) {
+            if (holeElevation != null) {
                 holeElevation.text(Utility.formatDouble(hole.getHoleHeight()));
             }
 
             Element holeId = doc.getElementById(HOLE_ID);
-            if(holeId != null) {
+            if (holeId != null) {
                 holeId.text(hole.getHoleId());
             }
 
             Element startDate = doc.getElementById(STARTDATE_ID);
-            if(startDate != null) {
+            if (startDate != null) {
                 startDate.text(formatCalendarDateString(hole.getStartDate()));
             }
 
             Element endDate = doc.getElementById(ENDDATE_ID);
-            if(endDate != null) {
+            if (endDate != null) {
                 endDate.text(formatCalendarDateString(hole.getEndDate()));
             }
 
@@ -205,7 +205,7 @@ public class HtmlParser extends Parser {
                 HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", project, hole.getRigIndexViewList(), assetManager);
                 HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
-                HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html" , hole, assetManager);
+                HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
 
                 // 原状样
                 ArrayList<Rig> rigs = hole.getRigIndexViewList();
@@ -749,10 +749,6 @@ public class HtmlParser extends Parser {
             }
         }
 
-        if (sptRigs.isEmpty()) {
-            return null;
-        }
-
         String[][] sptResults = null;
         for (int i = 0, len = sptRigs.size(); i < len; i++) {
             SPTRig sptRig = sptRigs.get(i);
@@ -761,6 +757,7 @@ public class HtmlParser extends Parser {
         }
 
         try {
+            sptResults = sptResults == null ? new String[0][] : sptResults;
             writeWithHole(path, sptResults, hole, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
@@ -782,9 +779,6 @@ public class HtmlParser extends Parser {
             }
         }
 
-        if (dstRigs.isEmpty()) {
-            return null;
-        }
 
         String[][] dstResults = null;
         for (DSTRig dstRig : dstRigs) {
@@ -793,6 +787,7 @@ public class HtmlParser extends Parser {
         }
 
         try {
+            dstResults = null == dstResults ? new String[0][] : dstResults;
             write(path, dstResults, assetManager.open(DST_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
@@ -823,9 +818,6 @@ public class HtmlParser extends Parser {
             }
         }
 
-        if (distributionDetails.isEmpty()) {
-            return null;
-        }
 
         String[][] earthResults;
         String[][] distributionResults = null;
@@ -834,13 +826,13 @@ public class HtmlParser extends Parser {
             distributionResults = null == distributionResults ? result : Utility.concat(distributionResults, result);
         }
 
+        distributionResults = null == distributionResults ? new String[0][] : distributionResults;
+
         String[][] originalSmplResults = null;
         for (Map.Entry<Hole, OriginalSamplingRig> entry : originalSampling.entrySet()) {
             String[][] result = convertOriSmpl(entry.getKey(), entry.getValue(), "<BR/>");
             originalSmplResults = null == originalSmplResults ? result : Utility.concat(originalSmplResults, result);
         }
-
-        distributionResults = distributionResults == null ? new String[0][] : distributionResults;
         originalSmplResults = originalSmplResults == null ? new String[0][] : originalSmplResults;
 
         earthResults = Utility.concat(distributionResults, originalSmplResults);
@@ -872,10 +864,6 @@ public class HtmlParser extends Parser {
             }
         }
 
-        if (details.isEmpty()) {
-            return null;
-        }
-
         String[][] smplWaterResults = null;
         for (Map.Entry<Hole, OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
             String[][] result = convertWaterSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
@@ -883,6 +871,7 @@ public class HtmlParser extends Parser {
         }
 
         try {
+            smplWaterResults = null == smplWaterResults ? new String[0][] : smplWaterResults;
             write(path, smplWaterResults, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
@@ -909,10 +898,6 @@ public class HtmlParser extends Parser {
             }
         }
 
-        if (details.isEmpty()) {
-            return null;
-        }
-
         String[][] smplRockResults = null;
         for (Map.Entry<Hole, OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
             String[][] result = convertRockSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
@@ -920,6 +905,7 @@ public class HtmlParser extends Parser {
         }
 
         try {
+            smplRockResults = null == smplRockResults ? new String[0][] : smplRockResults;
             write(path, smplRockResults, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
