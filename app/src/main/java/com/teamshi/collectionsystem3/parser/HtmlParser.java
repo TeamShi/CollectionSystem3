@@ -42,9 +42,9 @@ public class HtmlParser extends Parser {
     public static String SMPL_WATER_RIG_EVENT_TEMPLATE = "SampleWater.html";
     public static String SMPL_ROCK_RIG_EVENT_TEMPLATE = "SampleRock.html";
 
-    public  static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
-    public  static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphCover.html";
-    public  static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphBackCover.html";
+    public static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
+    public static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphCover.html";
+    public static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphBackCover.html";
 
     public static String TBODY_ID = "tableBody";
     public static String PROJECTNAME_ID = "projectName";
@@ -420,123 +420,123 @@ public class HtmlParser extends Parser {
         RigGraphData rigGraphData = hole.getRigGraphData();
 
         //日期
-        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
-            Element el =  doc.getElementById("date").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getDateNodeList()) {
+            Element el = doc.getElementById("date").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
 
         //岩芯
-        for(RigGraphData.GraphNode node: rigGraphData.getRockCoreNodeList()) {
-            Element el =  doc.getElementById("rockCore").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getRockCoreNodeList()) {
+            Element el = doc.getElementById("rockCore").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //水样
-        for(RigGraphData.GraphNode node: rigGraphData.getWaterSamplingNodeList()) {
-            Element el =  doc.getElementById("waterSampling").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getWaterSamplingNodeList()) {
+            Element el = doc.getElementById("waterSampling").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //原样
-        for(RigGraphData.GraphNode node: rigGraphData.getOriginalSamplingNodeList()) {
-            Element el =  doc.getElementById("originalSampling").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getOriginalSamplingNodeList()) {
+            Element el = doc.getElementById("originalSampling").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //扰动样
-        for(RigGraphData.GraphNode node: rigGraphData.getDisturbanceSamplingNodeList()) {
-            Element el =  doc.getElementById("distSampling").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getDisturbanceSamplingNodeList()) {
+            Element el = doc.getElementById("distSampling").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //下套管
-        for(RigGraphData.GraphNode node: rigGraphData.getTrNodeList()) {
-            Element el =  doc.getElementById("trNode").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
+            Element el = doc.getElementById("trNode").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //初始水位
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
-        Element el =  doc.getElementById("initWater").appendElement("div");
+        Element el = doc.getElementById("initWater").appendElement("div");
         el.text(initialWaterDepthNode.getContent());
-        el.attr("style", "height:"+ initialWaterDepthNode.getHeight()+"rem;");
+        el.attr("style", "height:" + initialWaterDepthNode.getHeight() + "rem;");
 
         //初始水位
         RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
-        el =  doc.getElementById("finalWater").appendElement("div");
+        el = doc.getElementById("finalWater").appendElement("div");
         el.text(finalWaterDepthNode.getContent());
-        el.attr("style", "height:"+ finalWaterDepthNode.getHeight()+"rem;");
+        el.attr("style", "height:" + finalWaterDepthNode.getHeight() + "rem;");
 
         //水位稳定时间
         RigGraphData.GraphNode waterDepthDateNode = rigGraphData.getWaterDepthDateNode();
-        el =  doc.getElementById("waterDate").appendElement("div");
+        el = doc.getElementById("waterDate").appendElement("div");
         el.text(waterDepthDateNode.getContent());
-        el.attr("style", "height:"+ waterDepthDateNode.getHeight()+"rem;");
+        el.attr("style", "height:" + waterDepthDateNode.getHeight() + "rem;");
 
         List<RigGraphData.RigNode> rigNodes = rigGraphData.getRigNodeList();
-        doc.getElementsByClass("flex-row").attr("style", "height:"+ 30 * rigNodes.size() + "px");
-        for(RigGraphData.RigNode rigNode: rigNodes) {
+        doc.getElementsByClass("flex-row").attr("style", "height:" + 30 * rigNodes.size() + "px");
+        for (RigGraphData.RigNode rigNode : rigNodes) {
             el = doc.getElementById("rockCorePer").appendElement("div");
             el.text(String.valueOf(rigNode.getRockPickPercentage() * 100));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻头直径
-            el =  doc.getElementById("drillDiameter").appendElement("div");
+            el = doc.getElementById("drillDiameter").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getDrillDiameter())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩芯编号
             el = doc.getElementById("rockCoreIndex").appendElement("div");
             el.text(String.valueOf(rigNode.getRockLayoutIndex()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩芯长度
             el = doc.getElementById("rockCoreLength").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getRockPickLength())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩层描述
             el = doc.getElementById("desc").appendElement("div");
             el.text(String.valueOf(rigNode.getDescription()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻进深度至
             el = doc.getElementById("endDepth").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻进深度至
             el = doc.getElementById("depthAll").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻进深度由
             el = doc.getElementById("startDepth").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getStartDepth())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //层底深度
             el = doc.getElementById("layerEndDepth").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getLayoutEndDepth())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //回次进尺
             el = doc.getElementById("roundTrip").appendElement("div");
             el.text(String.valueOf(Utility.formatDouble(rigNode.getRoundTripDepth())));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //类型 TODO
             el = doc.getElementById("legend").appendElement("div");
             el.text(String.valueOf("ff"));
-            el.attr("class", "earth_fill");
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;"+";color:rgba(255,255,255,0)");
+            el.attr("class", getEarthType(rigNode.getDrillType()));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;" + ";color:rgba(255,255,255,0)");
         }
 
         FileWriter fileWriter = new FileWriter(rigGraph);
@@ -546,6 +546,81 @@ public class HtmlParser extends Parser {
         fileWriter.close();
 
         return outPath;
+    }
+
+    private static String getEarthType(String drillType) {
+        String type = "zatiantu";
+        switch (drillType.trim()) {
+            case "黏土":
+                type = "niantu";
+                break;
+            case "杂填土":
+                type = "zatiantu";
+                break;
+            case "素填土":
+                type = "sutiantu";
+                break;
+            case "吹填土":
+                type = "chuitiantu";
+                break;
+            case "粉质黏土":
+                type = "fenzhiniantu";
+                break;
+            case "粉土":
+                type = "fentu";
+                break;
+            case "粉砂":
+                type = "fensha";
+                break;
+            case "细砂":
+                type = "xisha";
+                break;
+            case "中砂":
+                type = "zhongsha";
+                break;
+            case "粗砂":
+                type = "cusha";
+                break;
+            case "砾砂":
+                type = "lisha";
+                break;
+            case "漂石":
+                type = "piaoshi";
+                break;
+            case "块石":
+                type = "kuaishi";
+                break;
+            case "卵石":
+                type = "ruanshi";
+                break;
+            case "碎石":
+                type = "suishi";
+                break;
+            case "粗圆砾":
+                type = "cuyuanli";
+                break;
+            case "粗角砾":
+                type = "cujiaoli";
+                break;
+            case "细角砾":
+                type = "xijiaoli";
+                break;
+            case "泥岩":
+                type = "niyan";
+                break;
+            case "砂岩":
+                type = "shayan";
+                break;
+            case "灰岩":
+                type = "huiyan";
+                break;
+            case "花岗岩":
+                type = "huagangyan";
+                break;
+            default:
+                break;
+        }
+        return type;
     }
 
     public static String parseSptRigs(String dirPath, Project project, List<Rig> rigs, AssetManager assetManager) {
@@ -623,18 +698,18 @@ public class HtmlParser extends Parser {
             return null;
         }
 
-        HashMap<Hole,OtherSamplingRig.OtherSamplingDetail> distributionDetails = new HashMap<>();
-        HashMap<Hole,OriginalSamplingRig> originalSampling= new HashMap<>();
+        HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> distributionDetails = new HashMap<>();
+        HashMap<Hole, OriginalSamplingRig> originalSampling = new HashMap<>();
         for (Hole hole : project.getHoleList()) {
             for (Rig rig : hole.getRigIndexViewList()) {
                 if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
                     OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
-                    if(detail.getSamplingType().equals("扰动样")) {
-                        distributionDetails.put(hole,detail);
+                    if (detail.getSamplingType().equals("扰动样")) {
+                        distributionDetails.put(hole, detail);
                     }
-                }else if( rig instanceof OriginalSamplingRig) {
+                } else if (rig instanceof OriginalSamplingRig) {
                     OriginalSamplingRig originalSamplingRig = (OriginalSamplingRig) rig;
-                    originalSampling.put(hole,originalSamplingRig);
+                    originalSampling.put(hole, originalSamplingRig);
                 }
             }
         }
@@ -645,21 +720,21 @@ public class HtmlParser extends Parser {
 
         String[][] earthResults;
         String[][] distributionResults = null;
-        for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : distributionDetails.entrySet()) {
-            String[][] result = convertEarthSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
+        for (Map.Entry<Hole, OtherSamplingRig.OtherSamplingDetail> entry : distributionDetails.entrySet()) {
+            String[][] result = convertEarthSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
             distributionResults = null == distributionResults ? result : Utility.concat(distributionResults, result);
         }
 
         String[][] originalSmplResults = null;
-        for (Map.Entry<Hole,OriginalSamplingRig> entry : originalSampling.entrySet()) {
-            String[][] result = convertOriSmpl(entry.getKey(),entry.getValue(),"<BR/>");
+        for (Map.Entry<Hole, OriginalSamplingRig> entry : originalSampling.entrySet()) {
+            String[][] result = convertOriSmpl(entry.getKey(), entry.getValue(), "<BR/>");
             originalSmplResults = null == originalSmplResults ? result : Utility.concat(originalSmplResults, result);
         }
 
-        distributionResults = distributionResults == null ? new String [0][]:distributionResults;
-        originalSmplResults = originalSmplResults == null ? new String [0][]:originalSmplResults;
+        distributionResults = distributionResults == null ? new String[0][] : distributionResults;
+        originalSmplResults = originalSmplResults == null ? new String[0][] : originalSmplResults;
 
-        earthResults = Utility.concat(distributionResults,originalSmplResults);
+        earthResults = Utility.concat(distributionResults, originalSmplResults);
 
         String path = dirPath + "smplEarthRigs.html";
 
@@ -678,12 +753,12 @@ public class HtmlParser extends Parser {
             return null;
         }
 
-        HashMap<Hole,OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
+        HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
         for (Hole hole : project.getHoleList()) {
             for (Rig rig : hole.getRigIndexViewList()) {
                 if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
                     OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
-                    if(detail.getSamplingType().equals("水样")) {
+                    if (detail.getSamplingType().equals("水样")) {
                         details.put(hole, detail);
                     }
                 }
@@ -695,8 +770,8 @@ public class HtmlParser extends Parser {
         }
 
         String[][] smplWaterResults = null;
-        for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
-            String[][] result = convertWaterSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
+        for (Map.Entry<Hole, OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
+            String[][] result = convertWaterSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
             smplWaterResults = null == smplWaterResults ? result : Utility.concat(smplWaterResults, result);
         }
 
@@ -717,12 +792,12 @@ public class HtmlParser extends Parser {
             return null;
         }
 
-        HashMap<Hole,OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
+        HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
         for (Hole hole : project.getHoleList()) {
             for (Rig rig : hole.getRigIndexViewList()) {
                 if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
                     OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
-                    if(detail.getSamplingType().equals("岩样")) {
+                    if (detail.getSamplingType().equals("岩样")) {
                         details.put(hole, detail);
                     }
                 }
@@ -734,8 +809,8 @@ public class HtmlParser extends Parser {
         }
 
         String[][] smplRockResults = null;
-        for (Map.Entry<Hole,OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
-            String[][] result = convertRockSmplDetail(entry.getKey(),entry.getValue(),"<BR/>");
+        for (Map.Entry<Hole, OtherSamplingRig.OtherSamplingDetail> entry : details.entrySet()) {
+            String[][] result = convertRockSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
             smplRockResults = null == smplRockResults ? result : Utility.concat(smplRockResults, result);
         }
 
@@ -756,129 +831,129 @@ public class HtmlParser extends Parser {
         String outPath = "/Users/yueyue/Desktop/ff.html";
 
         File rigGraph = Utility.createFile(outPath, false);
-        InputStream inputStream = new FileInputStream("/Users/yueyue/Desktop/"+RIG_GRAPH_TEMPLATE);
+        InputStream inputStream = new FileInputStream("/Users/yueyue/Desktop/" + RIG_GRAPH_TEMPLATE);
 
         //读模版文件
         Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
 
         //日期
-        for(RigGraphData.GraphNode node: rigGraphData.getDateNodeList()) {
-            Element el =  doc.getElementById("date").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getDateNodeList()) {
+            Element el = doc.getElementById("date").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //岩芯
-        for(RigGraphData.GraphNode node: rigGraphData.getRockCoreNodeList()) {
-            Element el =  doc.getElementById("rockCore").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getRockCoreNodeList()) {
+            Element el = doc.getElementById("rockCore").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //水样
-        for(RigGraphData.GraphNode node: rigGraphData.getWaterSamplingNodeList()) {
-            Element el =  doc.getElementById("waterSampling").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getWaterSamplingNodeList()) {
+            Element el = doc.getElementById("waterSampling").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //原样
-        for(RigGraphData.GraphNode node: rigGraphData.getOriginalSamplingNodeList()) {
-            Element el =  doc.getElementById("originalSampling").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getOriginalSamplingNodeList()) {
+            Element el = doc.getElementById("originalSampling").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //扰动样
-        for(RigGraphData.GraphNode node: rigGraphData.getDisturbanceSamplingNodeList()) {
-            Element el =  doc.getElementById("distSampling").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getDisturbanceSamplingNodeList()) {
+            Element el = doc.getElementById("distSampling").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //下套管
-        for(RigGraphData.GraphNode node: rigGraphData.getTrNodeList()) {
-            Element el =  doc.getElementById("trNode").appendElement("div");
+        for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
+            Element el = doc.getElementById("trNode").appendElement("div");
             el.text(node.getContent());
-            el.attr("style", "height:"+ node.getHeight()+"rem;");
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
         //初始水位
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
-        Element el =  doc.getElementById("initWater").appendElement("div");
+        Element el = doc.getElementById("initWater").appendElement("div");
         el.text(initialWaterDepthNode.getContent());
-        el.attr("style", "height:"+ initialWaterDepthNode.getHeight()+"rem;");
+        el.attr("style", "height:" + initialWaterDepthNode.getHeight() + "rem;");
 
         //初始水位
         RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
-        el =  doc.getElementById("finalWater").appendElement("div");
+        el = doc.getElementById("finalWater").appendElement("div");
         el.text(finalWaterDepthNode.getContent());
-        el.attr("style", "height:"+ finalWaterDepthNode.getHeight()+"rem;");
+        el.attr("style", "height:" + finalWaterDepthNode.getHeight() + "rem;");
 
         //水位稳定时间
         RigGraphData.GraphNode waterDepthDateNode = rigGraphData.getWaterDepthDateNode();
-        el =  doc.getElementById("waterDate").appendElement("div");
+        el = doc.getElementById("waterDate").appendElement("div");
         el.text(waterDepthDateNode.getContent());
-        el.attr("style", "height:"+ waterDepthDateNode.getHeight()+"rem;");
+        el.attr("style", "height:" + waterDepthDateNode.getHeight() + "rem;");
 
         //TODO rigNodeList
         List<RigGraphData.RigNode> rigNodes = rigGraphData.getRigNodeList();
-        doc.getElementsByClass("flex-row").attr("style", "height:"+ 30 * rigNodes.size() + "px");
-        for(RigGraphData.RigNode rigNode: rigNodes) {
+        doc.getElementsByClass("flex-row").attr("style", "height:" + 30 * rigNodes.size() + "px");
+        for (RigGraphData.RigNode rigNode : rigNodes) {
             el = doc.getElementById("rockCorePer").appendElement("div");
             el.text(String.valueOf(rigNode.getRockPickPercentage() * 100));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻头直径
-            el =  doc.getElementById("drillDiameter").appendElement("div");
+            el = doc.getElementById("drillDiameter").appendElement("div");
             el.text(String.valueOf(rigNode.getDrillDiameter()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩芯编号
             el = doc.getElementById("rockCoreIndex").appendElement("div");
             el.text(String.valueOf(rigNode.getRockLayoutIndex()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩芯长度
             el = doc.getElementById("rockCoreLength").appendElement("div");
             el.text(String.valueOf(rigNode.getRockPickLength()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩层描述
             el = doc.getElementById("desc").appendElement("div");
             el.text(String.valueOf(rigNode.getDescription()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻进深度至
             el = doc.getElementById("endDepth").appendElement("div");
             el.text(String.valueOf(rigNode.getEndDepth()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻进深度至
             el = doc.getElementById("depthAll").appendElement("div");
             el.text(String.valueOf(rigNode.getEndDepth()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻进深度由
             el = doc.getElementById("startDepth").appendElement("div");
             el.text(String.valueOf(rigNode.getStartDepth()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //层底深度
             el = doc.getElementById("layerEndDepth").appendElement("div");
             el.text(String.valueOf(rigNode.getLayoutEndDepth()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //回次进尺
             el = doc.getElementById("roundTrip").appendElement("div");
             el.text(String.valueOf(rigNode.getRoundTripDepth()));
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //类型 TODO
             el = doc.getElementById("legend").appendElement("div");
             el.text(String.valueOf("ff"));
             el.attr("class", "earth_fill");
-            el.attr("style", "height:"+ rigNode.getHeight()+"rem;"+";color:rgba(255,255,255,0)");
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;" + ";color:rgba(255,255,255,0)");
         }
 
 
