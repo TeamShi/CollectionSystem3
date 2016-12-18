@@ -564,9 +564,9 @@ public class Parser {
                 sb.append("").append("#");
 
                 //岩心采取
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append((String.valueOf(regularRig.getRockCoreIndex())));
+                sb.append((Utility.formatDouble(regularRig.getRockCoreLength())));
+                sb.append((Utility.formatDouble(regularRig.getRockCorePickPercentage() * 100) + "%"));
 
                 //土样
                 generateEarthSampleIndexInfo(nextRig, sb);
