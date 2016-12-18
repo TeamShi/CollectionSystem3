@@ -1,6 +1,7 @@
 package com.teamshi.collectionsystem3.parser;
 
 import com.teamshi.collectionsystem3.Utility;
+import com.teamshi.collectionsystem3.datastructure.CalculatingRig;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.NARig;
@@ -12,6 +13,7 @@ import com.teamshi.collectionsystem3.datastructure.SPTRig;
 import com.teamshi.collectionsystem3.datastructure.TRRig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
@@ -446,6 +448,43 @@ public class Parser {
         }
     }
 
+    protected static HashMap<Integer, Integer> getRockIndexMap(Hole hole) {
+        HashMap<Integer, Integer> rockIndexMap = new HashMap<>();
+        ArrayList<Rig> rigs = hole.getRigIndexViewList();
+
+        for (int i = 0; i < hole.getRigGraphData().getRigNodeList().size(); i++) {
+            for (int j = rigs.size() - 1; j >= 0; j--) {
+                if (rigs.get(j) instanceof CalculatingRig && hole.getRigGraphData().getRigNodeList().get(i).getEndDepth() > ((CalculatingRig) rigs.get(j)).getAccumulatedMeterageLength()) {
+                    rockIndexMap.put(j + 1, i);
+                    break;
+                } else if (rigs.get(j) instanceof CalculatingRig && hole.getRigGraphData().getRigNodeList().get(i).getEndDepth() == ((CalculatingRig) rigs.get(j)).getAccumulatedMeterageLength()) {
+                    rockIndexMap.put(j, i);
+                    break;
+                }
+            }
+        }
+
+        return rockIndexMap;
+    }
+
+    protected static void generateEarchLayoutInfo(Hole hole, CalculatingRig rig, StringBuffer sb, int currentIndex) {
+        HashMap<Integer, Integer> rockIndexMap = getRockIndexMap(hole);
+
+        if (rockIndexMap.containsKey(currentIndex)) {
+            sb.append(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex()));
+            sb.append(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth()));
+            sb.append(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth()));
+        } else {
+            sb.append("").append("#");//编号, 四类普通钻,编号加1
+            sb.append("").append("#"); //底层深度 本次累计进尺
+            sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+        }
+
+        sb.append(rig.getRockDescription()).append("#");
+        sb.append("").append("#"); //岩层等级
+
+    }
+
     protected static String[][] convertHole(Hole hole, String BR) {
         if (BR == null || BR.equals("")) {
             BR = ",";
@@ -456,6 +495,7 @@ public class Parser {
         String initialWaterDepth;
         String finalWaterDepth;
         boolean hasStart = false;
+
         for (int i = 0; i < rows; i++) {
             Rig rig = rigs.get(i);
             boolean isOtherSmplDetail = rig instanceof OtherSamplingRig.OtherSamplingDetail;
@@ -534,11 +574,7 @@ public class Parser {
                 generateWaterSampleInfo(nextRig, sb);
 
                 //地层
-                sb.append("").append("#");//编号, 四类普通钻,编号加1
-                sb.append("").append("#"); //底层深度 本次累计进尺
-                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(regularRig.getRockDescription()).append("#"); // 名称及岩性
-                sb.append("").append("#"); //岩层等级
+               generateEarchLayoutInfo(hole, regularRig, sb, i);
 
                 //地下水 只填第一行
                 sb.append("").append("#");
@@ -658,11 +694,7 @@ public class Parser {
                 generateWaterSampleInfo(nextRig, sb);
 
                 //地层
-                sb.append("").append("#");//编号, 四类普通钻,编号加1
-                sb.append("").append("#"); //底层深度 本次累计进尺
-                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(sptRig.getRockDescription()).append("#"); // 名称及岩性
-                sb.append("").append("#"); //岩层等级
+                generateEarchLayoutInfo(hole, sptRig, sb, i);
 
                 //地下水 只填第一行
                 sb.append("").append("#");
@@ -718,11 +750,7 @@ public class Parser {
                 generateWaterSampleInfo(nextRig, sb);
 
                 //地层
-                sb.append("").append("#");//编号, 四类普通钻,编号加1
-                sb.append("").append("#"); //底层深度 本次累计进尺
-                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(dstRig.getRockDescription()).append("#");
-                sb.append("").append("#"); //岩层等级
+                generateEarchLayoutInfo(hole, dstRig, sb, i);
 
                 //地下水 只填第一行
                 sb.append("").append("#");
@@ -882,11 +910,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //地层
-                sb.append("").append("#");//编号, 四类普通钻,编号加1
-                sb.append("").append("#"); //底层深度 本次累计进尺
-                sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
-                sb.append(originalSamplingRig.getRockDescription()).append("#"); // 名称及岩性
-                sb.append("").append("#"); //岩层等级
+                generateEarchLayoutInfo(hole, originalSamplingRig, sb, i);
 
                 //地下水 只填第一行
                 sb.append("").append("#");
