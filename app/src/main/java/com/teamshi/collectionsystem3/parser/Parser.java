@@ -552,6 +552,7 @@ public class Parser {
                 sb.append(Utility.formatDouble(regularRig.getDrillPipeRemainLength())).append("#");
                 sb.append(Utility.formatDouble(regularRig.getRoundTripMeterageLength())).append("#");
                 sb.append(Utility.formatDouble(regularRig.getAccumulatedMeterageLength())).append("#");
+
                 //护壁措施
                 sb.append("").append("#");
                 sb.append("").append("#");

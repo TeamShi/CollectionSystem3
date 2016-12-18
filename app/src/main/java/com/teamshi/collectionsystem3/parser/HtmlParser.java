@@ -159,9 +159,9 @@ public class HtmlParser extends Parser {
                 holeNode.text(hole.getHoleId());
                 Element holeNodeList = doc.createElement("ul");
                 Element allRigsNode = doc.createElement("li");
-                allRigsNode.appendElement("a").attr("href", allRigsPath);
+                allRigsNode.appendElement("a").attr("href", allRigsPath).text("原始记录表");
                 Element sptNode = doc.createElement("li");
-                sptNode.appendElement("a").attr("href", sptPath).text("原始记录表");
+                sptNode.appendElement("a").attr("href", sptPath).text("标准贯入表");
                 Element dstNode = doc.createElement("li");
                 dstNode.appendElement("a").attr("href", dstPath).text("动力触探表");
                 Element smpleEarthRigNode = doc.createElement("li");
