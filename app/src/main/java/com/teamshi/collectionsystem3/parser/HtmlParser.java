@@ -198,9 +198,9 @@ public class HtmlParser extends Parser {
                 Utility.createFile(absoluteHolepath, false);
 
                 parseHole(absoluteHolepath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
-                HtmlParser.parseEarthSmlRigs(absoluteHolepath + "smplEarthRigs.html", project, assetManager);
-                HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", project, assetManager);
-                HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", project, assetManager);
+                HtmlParser.parseEarthSmlRigs(absoluteHolepath + "smplEarthRigs.html", hole, assetManager);
+                HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", hole, assetManager);
+                HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", hole, assetManager);
                 HtmlParser.parseSptRigs(absoluteHolepath + "sptRigs.html", hole, assetManager);
                 HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", project, hole.getRigIndexViewList(), assetManager);
                 HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
@@ -797,27 +797,27 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseEarthSmlRigs(String path, Project project, AssetManager assetManager) {
-        if (project == null) {
+    public static String parseEarthSmlRigs(String path, Hole hole, AssetManager assetManager) {
+        if (hole == null) {
             return null;
         }
 
+        List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
+
         HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> distributionDetails = new HashMap<>();
         HashMap<Hole, OriginalSamplingRig> originalSampling = new HashMap<>();
-        for (Hole hole : project.getHoleList()) {
-            for (Rig rig : hole.getRigIndexViewList()) {
-                if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
-                    OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
-                    if (detail.getSamplingType().equals("扰动样")) {
-                        distributionDetails.put(hole, detail);
-                    }
-                } else if (rig instanceof OriginalSamplingRig) {
-                    OriginalSamplingRig originalSamplingRig = (OriginalSamplingRig) rig;
-                    originalSampling.put(hole, originalSamplingRig);
+
+        for (Rig rig : rigs) {
+            if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
+                OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
+                if (detail.getSamplingType().equals("扰动样")) {
+                    distributionDetails.put(hole, detail);
                 }
+            } else if (rig instanceof OriginalSamplingRig) {
+                OriginalSamplingRig originalSamplingRig = (OriginalSamplingRig) rig;
+                originalSampling.put(hole, originalSamplingRig);
             }
         }
-
 
         String[][] earthResults;
         String[][] distributionResults = null;
@@ -847,19 +847,19 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseWaterSmlRigs(String path, Project project, AssetManager assetManager) {
-        if (project == null) {
+    public static String parseWaterSmlRigs(String path, Hole hole, AssetManager assetManager) {
+        if (hole == null) {
             return null;
         }
 
+        List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
+
         HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
-        for (Hole hole : project.getHoleList()) {
-            for (Rig rig : hole.getRigIndexViewList()) {
-                if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
-                    OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
-                    if (detail.getSamplingType().equals("水样")) {
-                        details.put(hole, detail);
-                    }
+        for (Rig rig : rigs) {
+            if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
+                OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
+                if (detail.getSamplingType().equals("水样")) {
+                    details.put(hole, detail);
                 }
             }
         }
@@ -881,19 +881,19 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseRockSmlRigs(String path, Project project, AssetManager assetManager) {
-        if (project == null) {
+    public static String parseRockSmlRigs(String path, Hole hole, AssetManager assetManager) {
+        if (hole == null) {
             return null;
         }
+        
+        List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
 
         HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();
-        for (Hole hole : project.getHoleList()) {
-            for (Rig rig : hole.getRigIndexViewList()) {
-                if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
-                    OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
-                    if (detail.getSamplingType().equals("岩样")) {
-                        details.put(hole, detail);
-                    }
+        for (Rig rig : rigs) {
+            if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
+                OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
+                if (detail.getSamplingType().equals("岩样")) {
+                    details.put(hole, detail);
                 }
             }
         }
