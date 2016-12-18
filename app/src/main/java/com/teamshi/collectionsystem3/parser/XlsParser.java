@@ -220,7 +220,7 @@ public class XlsParser extends Parser {
     private static String[][] convertEarthSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> earthSampleDetails) {
         String[][] resultData = new String[0][];
         for (int i = 0, len = earthSampleDetails.size(); i < len; i++) {
-            String[][] lines = convertEarthSmplDetail(hole, earthSampleDetails.get(i), "\n");
+            String[][] lines = convertEarthSmplDetail(hole, earthSampleDetails.get(i), "\\");
             resultData = Utility.concat(lines, resultData);
         }
 
@@ -230,7 +230,7 @@ public class XlsParser extends Parser {
     private static String[][] convertWaterSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> waterSampleRigs) {
         String[][] resultData = new String[0][];
         for (int i = 0, len = waterSampleRigs.size(); i < len; i++) {
-            String[][] lines = convertWaterSmplDetail(hole, waterSampleRigs.get(i), "\n");
+            String[][] lines = convertWaterSmplDetail(hole, waterSampleRigs.get(i), "\\");
             resultData = Utility.concat(lines, resultData);
         }
 
@@ -240,7 +240,7 @@ public class XlsParser extends Parser {
     private static String[][] convertRockSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> details) {
         String[][] resultData = new String[0][];
         for (int i = 0, len = details.size(); i < len; i++) {
-            String[][] lines = convertRockSmplDetail(hole, details.get(i), "\n");
+            String[][] lines = convertRockSmplDetail(hole, details.get(i), "\\");
             resultData = Utility.concat(lines, resultData);
         }
 

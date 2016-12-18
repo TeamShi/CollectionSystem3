@@ -1,12 +1,13 @@
 package com.teamshi.collectionsystem3.datastructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
  * Created by Alfred on 16/8/20.
  */
-public class TRRig extends Rig {
+public class TRRig extends Rig implements Serializable {
     private ArrayList<TRInfo> trInfos;
     private String holeSaturation;
     private String specialDescription;
@@ -18,7 +19,7 @@ public class TRRig extends Rig {
         trInfos.add(new TRInfo("钢管", 1, 127, 0, 0));
     }
 
-    public static class TRInfo {
+    public static class TRInfo implements Serializable {
         public TRInfo(String wallType, int index, int diameter,
                       double length, double totalLength) {
             this.wallType = wallType;

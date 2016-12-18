@@ -885,7 +885,7 @@ public class HtmlParser extends Parser {
         if (hole == null) {
             return null;
         }
-        
+
         List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
 
         HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> details = new HashMap<>();

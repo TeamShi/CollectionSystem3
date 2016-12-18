@@ -422,10 +422,10 @@ public class Parser {
             sb.append((Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth()))).append("#");
             sb.append((String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount()))).append("#");
         } else {
-            sb.append(NA).append("#");
-            sb.append(NA).append("#");
-            sb.append(NA).append("#");
-            sb.append(NA).append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
         }
     }
 
@@ -564,9 +564,9 @@ public class Parser {
                 sb.append("").append("#");
 
                 //岩心采取
-                sb.append((String.valueOf(regularRig.getRockCoreIndex())));
-                sb.append((Utility.formatDouble(regularRig.getRockCoreLength())));
-                sb.append((Utility.formatDouble(regularRig.getRockCorePickPercentage() * 100) + "%"));
+                sb.append((String.valueOf(regularRig.getRockCoreIndex()))).append("#");
+                sb.append((Utility.formatDouble(regularRig.getRockCoreLength()))).append("#");
+                sb.append((Utility.formatDouble(regularRig.getRockCorePickPercentage() * 100) + "%")).append("#");
 
                 //土样
                 generateEarthSampleIndexInfo(nextRig, sb);
