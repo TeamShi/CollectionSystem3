@@ -106,6 +106,77 @@ public class HtmlParser extends Parser {
 
     }
 
+    public static boolean writeWithHole(String outPath, String[][] data, Hole hole, InputStream inputStream) throws IOException {
+        String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
+        if (!fileType.equals("html")) {
+            System.out.println("您的文档格式不正确(非html)！");
+            return false;
+        }
+
+        //读模版文件
+        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+        if(hole != null) {
+            Element projectName = doc.getElementById(PROJECTNAME_ID);
+            if(projectName != null) {
+                projectName.text(hole.getProjectName());
+            }
+
+            Element positionId = doc.getElementById(POSITION_ID);
+            if(positionId != null) {
+                String projectStage = hole.getHoleIdPart2();
+                positionId.text(projectStage);
+            }
+
+            Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
+            if(holeElevation != null) {
+                holeElevation.text(Utility.formatDouble(hole.getHoleHeight()));
+            }
+
+            Element holeId = doc.getElementById(HOLE_ID);
+            if(holeId != null) {
+                holeId.text(hole.getHoleId());
+            }
+
+            Element startDate = doc.getElementById(STARTDATE_ID);
+            if(startDate != null) {
+                startDate.text(formatCalendarDateString(hole.getStartDate()));
+            }
+
+            Element endDate = doc.getElementById(ENDDATE_ID);
+            if(endDate != null) {
+                endDate.text(formatCalendarDateString(hole.getEndDate()));
+            }
+
+        }
+
+        Element tbody = doc.getElementById(TBODY_ID);
+        if (data != null) {
+            // 循环写入行数据
+            for (int i = 0, rows = data.length; i < rows; i++) {
+                StringBuffer row = new StringBuffer();
+                row.append("<tr>");
+                // 循环写入列数据
+                for (int j = 0, cols = data[i].length; j < cols; j++) {
+                    row.append("<td>");
+                    String text = data[i][j].equals("null") ? "" : data[i][j];
+                    row.append(text);
+                    row.append("</td>");
+                }
+                row.append("</tr>");
+                tbody.append(row.toString());
+            }
+        }
+
+        FileWriter fileWriter = new FileWriter(outPath, false);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(doc.outerHtml());
+        bufferedWriter.close();
+        fileWriter.close();
+
+        return true;
+
+    }
+
 
     public static String parse(Project project, AssetManager assetManager) {
         List<Hole> holes = project.getHoleList();
@@ -130,7 +201,7 @@ public class HtmlParser extends Parser {
                 HtmlParser.parseEarthSmlRigs(absoluteHolepath + "smplEarthRigs.html", project, assetManager);
                 HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", project, assetManager);
                 HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", project, assetManager);
-                HtmlParser.parseSptRigs(absoluteHolepath + "sptRigs.html", project, hole.getRigIndexViewList(), assetManager);
+                HtmlParser.parseSptRigs(absoluteHolepath + "sptRigs.html", hole, assetManager);
                 HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", project, hole.getRigIndexViewList(), assetManager);
                 HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
@@ -666,13 +737,13 @@ public class HtmlParser extends Parser {
         return type;
     }
 
-    public static String parseSptRigs(String path, Project project, List<Rig> rigs, AssetManager assetManager) {
-        if (project == null) {
+    public static String parseSptRigs(String path, Hole hole, AssetManager assetManager) {
+        if (hole == null) {
             return null;
         }
 
         ArrayList<SPTRig> sptRigs = new ArrayList<>();
-        for (Rig rig : rigs) {
+        for (Rig rig : hole.getRigIndexViewList()) {
             if (rig instanceof SPTRig) {
                 sptRigs.add((SPTRig) rig);
             }
@@ -690,10 +761,9 @@ public class HtmlParser extends Parser {
         }
 
         try {
-            write(path, sptResults, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, sptResults, hole, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
 
         return path;
