@@ -315,14 +315,16 @@ public class IOManager {
         paths.add(earthSmplRigsPath);
         paths.add(waterSmplRigsPath);
         paths.add(rockSmplRigsPath);
-        for(Hole hole: project.getHoleList()) {
-            try {
-                String rigGraph = HtmlParser.parseRigGraphTable(APP_TEMP+ hole.getHoleId()+"_graph.html", hole, assetManager);
-                paths.add(rigGraph);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        // 岩层图预览
+//        for(Hole hole: project.getHoleList()) {
+//            try {
+//                String rigGraph = HtmlParser.parseRigGraphTable(APP_TEMP+ hole.getHoleId()+"_graph.html", hole, assetManager);
+//                paths.add(rigGraph);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         for (String path : paths) {
             if (null == path) {
