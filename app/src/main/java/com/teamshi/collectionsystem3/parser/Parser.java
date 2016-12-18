@@ -422,10 +422,10 @@ public class Parser {
             sb.append((Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth()))).append("#");
             sb.append((String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount()))).append("#");
         } else {
-            sb.append("").append("#");
-            sb.append("").append("#");
-            sb.append("").append("#");
-            sb.append("").append("#");
+            sb.append(NA).append("#");
+            sb.append(NA).append("#");
+            sb.append(NA).append("#");
+            sb.append(NA).append("#");
         }
     }
 
@@ -442,9 +442,9 @@ public class Parser {
             sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
 
         } else {
-            sb.append("").append("#");
-            sb.append("").append("#");
-            sb.append("").append("#");
+            sb.append(NA).append("#");
+            sb.append(NA).append("#");
+            sb.append(NA).append("#");
         }
     }
 
@@ -471,17 +471,17 @@ public class Parser {
         HashMap<Integer, Integer> rockIndexMap = getRockIndexMap(hole);
 
         if (rockIndexMap.containsKey(currentIndex)) {
-            sb.append(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex()));
-            sb.append(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth()));
-            sb.append(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth()));
+            sb.append(String.valueOf(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRockLayoutIndex())).append("#");
+            sb.append(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getEndDepth())).append("#");
+            sb.append(Utility.formatDouble(hole.getRigGraphData().getRigNodeList().get(rockIndexMap.get(currentIndex)).getRoundTripDepth())).append("#");
         } else {
-            sb.append("").append("#");//编号, 四类普通钻,编号加1
-            sb.append("").append("#"); //底层深度 本次累计进尺
-            sb.append("").append("#");//层厚 本次累计进尺 -上次累计进尺
+            sb.append(NA).append("#");//编号, 四类普通钻,编号加1
+            sb.append(NA).append("#"); //底层深度 本次累计进尺
+            sb.append(NA).append("#");//层厚 本次累计进尺 -上次累计进尺
         }
 
         sb.append(rig.getRockDescription()).append("#");
-        sb.append("").append("#"); //岩层等级
+        sb.append(NA).append("#"); //岩层等级
 
     }
 
@@ -578,10 +578,10 @@ public class Parser {
                 generateEarchLayoutInfo(hole, regularRig, sb, i);
 
                 //地下水 只填第一行
-                sb.append("").append("#");
+                sb.append(NA).append("#");
                 sb.append(initialWaterDepth).append("#");
                 sb.append(finalWaterDepth).append("#");
-                sb.append("").append("#");
+                sb.append(NA).append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(regularRig.getNote().trim().equals("") ? NA : regularRig.getNote()).append("#");
@@ -720,29 +720,30 @@ public class Parser {
                 sb.append("0.25").append("#");
 
                 //钻头
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
 
                 //进尺
                 sb.append(Utility.formatDouble(dstRig.getDrillToolTotalLength())).append("#");
                 sb.append(Utility.formatDouble(dstRig.getDrillPipeRemainLength())).append("#");
                 sb.append(Utility.formatDouble(dstRig.getRoundTripMeterageLength())).append("#");
                 sb.append(Utility.formatDouble(dstRig.getAccumulatedMeterageLength())).append("#");
+
                 //护壁措施
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
 
                 //孔内情况
-                sb.append("").append("#");
+                sb.append(NA).append("#");
 
                 //岩心采取
-                sb.append("").append("#");
-                sb.append("").append("#");
-                sb.append("").append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
+                sb.append(NA).append("#");
 
                 //土样
                 generateEarthSampleIndexInfo(nextRig, sb);
@@ -754,10 +755,10 @@ public class Parser {
                 generateEarchLayoutInfo(hole, dstRig, sb, i);
 
                 //地下水 只填第一行
-                sb.append("").append("#");
+                sb.append(NA).append("#");
                 sb.append(initialWaterDepth).append("#");
                 sb.append(finalWaterDepth).append("#");
-                sb.append("").append("#");
+                sb.append(NA).append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
                 sb.append(NA).append("#");
