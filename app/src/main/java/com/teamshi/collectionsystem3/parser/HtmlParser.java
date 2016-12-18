@@ -12,6 +12,7 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.RigGraphData;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
+import org.apache.poi.hpsf.Util;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -488,7 +489,7 @@ public class HtmlParser extends Parser {
 
             //钻头直径
             el =  doc.getElementById("drillDiameter").appendElement("div");
-            el.text(String.valueOf(rigNode.getDrillDiameter()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getDrillDiameter())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //岩芯编号
@@ -498,7 +499,7 @@ public class HtmlParser extends Parser {
 
             //岩芯长度
             el = doc.getElementById("rockCoreLength").appendElement("div");
-            el.text(String.valueOf(rigNode.getRockPickLength()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getRockPickLength())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //岩层描述
@@ -508,27 +509,27 @@ public class HtmlParser extends Parser {
 
             //钻进深度至
             el = doc.getElementById("endDepth").appendElement("div");
-            el.text(String.valueOf(rigNode.getEndDepth()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //钻进深度至
             el = doc.getElementById("depthAll").appendElement("div");
-            el.text(String.valueOf(rigNode.getEndDepth()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //钻进深度由
             el = doc.getElementById("startDepth").appendElement("div");
-            el.text(String.valueOf(rigNode.getStartDepth()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getStartDepth())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //层底深度
             el = doc.getElementById("layerEndDepth").appendElement("div");
-            el.text(String.valueOf(rigNode.getLayoutEndDepth()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getLayoutEndDepth())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //回次进尺
             el = doc.getElementById("roundTrip").appendElement("div");
-            el.text(String.valueOf(rigNode.getRoundTripDepth()));
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getRoundTripDepth())));
             el.attr("style", "height:"+ rigNode.getHeight()+"rem;");
 
             //类型 TODO
