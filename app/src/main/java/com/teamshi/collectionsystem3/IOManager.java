@@ -193,7 +193,7 @@ public class IOManager {
                 // load *.ser file
                 String projectName = dir.getName();
                 File serFile = new File(dir, projectName + ".ser");
-                if(serFile.exists()) {
+                if (serFile.exists()) {
                     Project project = (Project) parseFileToObject(serFile);
                     // remove invalid files with invalid ser file
                     if (null == project) {
@@ -230,23 +230,12 @@ public class IOManager {
             if (holes != null && holes.size() > 0) {
                 for (int i = 0; i < holes.size(); i++) {
                     Hole hole = holes.get(i);
-                    String holeDirPath =getHolePath(hole);
+                    String holeDirPath = getHolePath(hole);
                     //clear path
                     Utility.deleteDir(new File(holeDirPath));
 
                     // parse hole xls files
                     XlsParser.parse(holeDirPath, hole);
-
-                    ArrayList<Rig> rigs = hole.getRigIndexViewList();
-                    //TODO
-                    if(rigs != null && (rigs.size() > 0)) {
-                        for(Rig rig : rigs) {
-                            if(rig instanceof  OriginalSamplingRig)
-                                HtmlParser.parseOriSmlRig(holeDirPath + "originalSampling.html", hole, (OriginalSamplingRig) rig, assetManager);
-                            if(rig instanceof  OtherSamplingRig)
-                                HtmlParser.parseOtherSmlRig(holeDirPath + "otherSampling.html", hole, (OtherSamplingRig) rig, assetManager);
-                        }
-                    }
                 }
 
                 //parse project html files
@@ -283,7 +272,7 @@ public class IOManager {
         String previewIndexPath = HtmlParser.parse(project, assetManager);
 
         List<Rig> rigs = new ArrayList<>();
-        for(Hole hole: project.getHoleList()) {
+        for (Hole hole : project.getHoleList()) {
             rigs.addAll(hole.getRigIndexViewList());
         }
 

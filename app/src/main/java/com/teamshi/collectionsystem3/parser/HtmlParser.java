@@ -136,6 +136,17 @@ public class HtmlParser extends Parser {
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html" , hole, assetManager);
 
+                // 原状样
+                ArrayList<Rig> rigs = hole.getRigIndexViewList();
+                if (rigs != null && (rigs.size() > 0)) {
+                    for (Rig rig : rigs) {
+                        if (rig instanceof OriginalSamplingRig)
+                            HtmlParser.parseOriSmlRig(absoluteHolepath + "originalSampling.html", hole, (OriginalSamplingRig) rig, assetManager);
+                        if (rig instanceof OtherSamplingRig)
+                            HtmlParser.parseOtherSmlRig(absoluteHolepath + "otherSampling.html", hole, (OtherSamplingRig) rig, assetManager);
+                    }
+                }
+
                 String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
                 String allRigsPath = holePath + "hole_" + hole.getHoleId() + ".html";
                 String sptPath = holePath + "sptRigs.html";
