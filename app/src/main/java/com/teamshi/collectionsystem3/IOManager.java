@@ -50,6 +50,9 @@ public class IOManager {
     public static final String APP_TEMP = APP_ROOT + File.separator + "Temp/";
     private static Context appContext = null;
 
+    public static String getHolePath(Hole hole) {
+        return APP_DATA + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
+    }
 
     public static void initFileSystem(Context applicationContext) {
     /*
@@ -225,49 +228,29 @@ public class IOManager {
             AssetManager assetManager = appContext.getAssets();
 
             if (holes != null && holes.size() > 0) {
-                String projectDirPath = APP_DATA + File.separator + project.getProjectName()+ File.separator;
                 for (int i = 0; i < holes.size(); i++) {
                     Hole hole = holes.get(i);
-                    String holeDirPath = projectDirPath + hole.getHoleId() + File.separator;
+                    String holeDirPath =getHolePath(hole);
                     //clear path
                     Utility.deleteDir(new File(holeDirPath));
 
                     // parse hole xls files
                     XlsParser.parse(holeDirPath, hole);
 
-                    //parse hole html files
                     ArrayList<Rig> rigs = hole.getRigIndexViewList();
-                    String sptRigsPath = HtmlParser.parseSptRigs(holeDirPath, project, rigs, assetManager);
-                    String dstRigsPath = HtmlParser.parseDstRigs(holeDirPath, project, rigs, assetManager);
-
                     //TODO
                     if(rigs != null && (rigs.size() > 0)) {
                         for(Rig rig : rigs) {
                             if(rig instanceof  OriginalSamplingRig)
-                                HtmlParser.parseOriSmlRig(holeDirPath, hole, (OriginalSamplingRig) rig, assetManager);
+                                HtmlParser.parseOriSmlRig(holeDirPath + "originalSampling.html", hole, (OriginalSamplingRig) rig, assetManager);
                             if(rig instanceof  OtherSamplingRig)
-                                HtmlParser.parseOtherSmlRig(holeDirPath, hole, (OtherSamplingRig) rig, assetManager);
+                                HtmlParser.parseOtherSmlRig(holeDirPath + "otherSampling.html", hole, (OtherSamplingRig) rig, assetManager);
                         }
-                    }
-
-                    try {
-                        // export rig graph each time
-                        String holeRigGraphDir = holeDirPath+ "分层图" + File.separator;
-                        File holeRigGraphFolder = new File(holeRigGraphDir);
-                        holeRigGraphFolder.mkdirs();
-                        HtmlParser.parseRigGraphCover(holeRigGraphDir + "封面.html", hole, assetManager);
-                        HtmlParser.parseRigGraphBackCover(holeRigGraphDir + "封底.html" , hole, assetManager);
-                        HtmlParser.parseRigGraphTable(holeRigGraphDir + "数据图.html" , hole, assetManager);
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
                 }
 
                 //parse project html files
-                String allRigsPath = HtmlParser.parse(projectDirPath, project, assetManager);
-                String earthSmplRigsPath = HtmlParser.parseEarthSmlRigs(projectDirPath, project, assetManager);
-                String waterSmplRigsPath = HtmlParser.parseWaterSmlRigs(projectDirPath, project, assetManager);
-                String rockSmplRigsPath = HtmlParser.parseRockSmlRigs(projectDirPath, project, assetManager);
+                HtmlParser.parse(project, assetManager);
 
             }
             projects.put(project.getProjectName(), project);
@@ -297,34 +280,14 @@ public class IOManager {
         AssetManager assetManager = appContext.getAssets();
 
         List<String> paths = new ArrayList<>();
-        String allRigsPath = HtmlParser.parse(APP_TEMP, project, assetManager);
+        String previewIndexPath = HtmlParser.parse(project, assetManager);
 
         List<Rig> rigs = new ArrayList<>();
         for(Hole hole: project.getHoleList()) {
             rigs.addAll(hole.getRigIndexViewList());
         }
-        String sptRigsPath = HtmlParser.parseSptRigs(APP_TEMP, project, rigs, assetManager);
-        String dstRigsPath = HtmlParser.parseDstRigs(APP_TEMP, project, rigs, assetManager);
-        String earthSmplRigsPath = HtmlParser.parseEarthSmlRigs(APP_TEMP, project, assetManager);
-        String waterSmplRigsPath = HtmlParser.parseWaterSmlRigs(APP_TEMP, project, assetManager);
-        String rockSmplRigsPath = HtmlParser.parseRockSmlRigs(APP_TEMP, project, assetManager);
 
-        paths.add(allRigsPath);
-        paths.add(sptRigsPath);
-        paths.add(dstRigsPath);
-        paths.add(earthSmplRigsPath);
-        paths.add(waterSmplRigsPath);
-        paths.add(rockSmplRigsPath);
-
-        // 岩层图预览
-//        for(Hole hole: project.getHoleList()) {
-//            try {
-//                String rigGraph = HtmlParser.parseRigGraphTable(APP_TEMP+ hole.getHoleId()+"_graph.html", hole, assetManager);
-//                paths.add(rigGraph);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        paths.add(previewIndexPath);
 
         for (String path : paths) {
             if (null == path) {
@@ -480,7 +443,7 @@ public class IOManager {
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parseOriSmlRig(APP_TEMP, hole, originalSamplingRig, assetManager);
+        String path = HtmlParser.parseOriSmlRig(APP_TEMP + "originalSampling.html", hole, originalSamplingRig, assetManager);
         if (null == path) {
             Log.d(TAG, "IOManager.previewOriginalSamplingRig: path isnull");
             return null;
@@ -500,7 +463,7 @@ public class IOManager {
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parseOtherSmlRig(APP_TEMP, hole, otherSamplingRig, assetManager);
+        String path = HtmlParser.parseOtherSmlRig(APP_TEMP + "otherSampling.html", hole, otherSamplingRig, assetManager);
         if (null == path) {
             Log.d(TAG, "IOManager.parseOtherSmlRig: path isnull");
             return null;

@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.teamshi.collectionsystem3.IOManager.APP_TEMP;
+import static com.teamshi.collectionsystem3.IOManager.getHolePath;
 import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
 
@@ -104,9 +106,11 @@ public class HtmlParser extends Parser {
 
     }
 
-    public static String parse(String dirPath, Project project, AssetManager assetManager) {
+
+    public static String parse(Project project, AssetManager assetManager) {
         List<Hole> holes = project.getHoleList();
-        String projectPath = dirPath + "project_" + project.getProjectName() + ".html";
+        String projectPath = APP_TEMP + "project_" + project.getProjectName() + ".html";
+        String relativeDataPaths = "../Data/";
         InputStream inputStream;
         try {
             File projectPreviewFile = Utility.createFile(projectPath, false);
@@ -116,12 +120,55 @@ public class HtmlParser extends Parser {
             Element header = doc.getElementById(PROJECTNAME_ID);
             header.appendText("项目名称: " + project.getProjectName());
 
-            Element list = doc.getElementById(PROJECTNAME_LIST);
+            Element list = doc.getElementById(PROJECTNAME_LIST).append("<ul></ul>");
             for (Hole hole : holes) {
-                Element anchor = doc.createElement("a");
-                anchor.attr("href", "" + "hole_" + hole.getHoleId() + ".html");
-                anchor.appendText(hole.getHoleId());
-                list.append("<li>" + anchor.toString() + "</li>");
+                // generate htmls
+                String absoluteHolepath = getHolePath(hole);
+                Utility.createFile(absoluteHolepath, false);
+
+                parseHole(absoluteHolepath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+                HtmlParser.parseEarthSmlRigs(absoluteHolepath + "smplEarthRigs.html", project, assetManager);
+                HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", project, assetManager);
+                HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", project, assetManager);
+                HtmlParser.parseSptRigs(absoluteHolepath + "sptRigs.html", project, hole.getRigIndexViewList(), assetManager);
+                HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", project, hole.getRigIndexViewList(), assetManager);
+                HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
+                HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
+                HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html" , hole, assetManager);
+
+                String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
+                String allRigsPath = holePath + "hole_" + hole.getHoleId() + ".html";
+                String sptPath = holePath + "sptRigs.html";
+                String dstPath = holePath + "dstRigs.html";
+                String smpleEarthRigPath = holePath + "smplEarthRigs.html";
+                String smpleWaterRigPath = holePath + "smplWaterRigs.html";
+                String smpleRockRigPath = holePath + "smplRockRigs.html";
+
+                Element holeNode = doc.createElement("li");
+                holeNode.text(hole.getHoleId());
+                Element holeNodeList = doc.createElement("ul");
+                Element allRigsNode = doc.createElement("li");
+                allRigsNode.appendElement("a").attr("href", allRigsPath);
+                Element sptNode = doc.createElement("li");
+                sptNode.appendElement("a").attr("href", sptPath).text("原始记录表");
+                Element dstNode = doc.createElement("li");
+                dstNode.appendElement("a").attr("href", dstPath).text("动力触探表");
+                Element smpleEarthRigNode = doc.createElement("li");
+                smpleEarthRigNode.appendElement("a").attr("href", smpleEarthRigPath).text("土样表");
+                Element smpleWaterRigNode = doc.createElement("li");
+                smpleWaterRigNode.appendElement("a").attr("href", smpleWaterRigPath).text("水样表");
+                Element smpleRockRigNode = doc.createElement("li");
+                smpleRockRigNode.appendElement("a").attr("href", smpleRockRigPath).text("岩样表");
+
+                holeNodeList.appendChild(allRigsNode);
+                holeNodeList.appendChild(sptNode);
+                holeNodeList.appendChild(dstNode);
+                holeNodeList.appendChild(smpleEarthRigNode);
+                holeNodeList.appendChild(smpleWaterRigNode);
+                holeNodeList.appendChild(smpleRockRigNode);
+
+                holeNode.appendChild(holeNodeList);
+                list.appendChild(holeNode);
             }
 
             FileWriter fileWriter = new FileWriter(projectPreviewFile);
@@ -133,19 +180,6 @@ public class HtmlParser extends Parser {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        }
-
-        for (Hole hole : holes) {
-            try {
-                String path = dirPath + hole.getHoleId() + File.separator + "hole_" + hole.getHoleId() + ".html";
-                Utility.createFile(path, false);
-                parseHole(path, hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
-                String tempPath = dirPath + "hole_" + hole.getHoleId() + ".html";
-                Utility.copyFile(new FileInputStream(path), new File(tempPath));
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
         }
 
 
@@ -172,13 +206,12 @@ public class HtmlParser extends Parser {
     }
 
 
-    public static String parseOriSmlRig(String dirPath, Hole hole, OriginalSamplingRig originalSamplingRig, AssetManager assetManager) {
+    public static String parseOriSmlRig(String path, Hole hole, OriginalSamplingRig originalSamplingRig, AssetManager assetManager) {
         if (originalSamplingRig == null) {
             return null;
         }
 
         String[][] oriRigEventArray = convertOriSmpl(hole, originalSamplingRig, "<br/>");
-        String path = dirPath + "originalSampling.html";
 
         try {
             write(path, oriRigEventArray, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
@@ -190,12 +223,11 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseOtherSmlRig(String dirPath, Hole hole, OtherSamplingRig otherSamplingRig, AssetManager assetManager) {
+    public static String parseOtherSmlRig(String path, Hole hole, OtherSamplingRig otherSamplingRig, AssetManager assetManager) {
         if (otherSamplingRig == null) {
             return null;
         }
 
-        String path = dirPath + "otherSampling.html";
         try {
             String[][] oriRigEventArray = null;
             String htmlTemp = null;
@@ -623,7 +655,7 @@ public class HtmlParser extends Parser {
         return type;
     }
 
-    public static String parseSptRigs(String dirPath, Project project, List<Rig> rigs, AssetManager assetManager) {
+    public static String parseSptRigs(String path, Project project, List<Rig> rigs, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
@@ -646,8 +678,6 @@ public class HtmlParser extends Parser {
             sptResults = sptResults == null ? result : Utility.concat(sptResults, result);
         }
 
-        String path = dirPath + "sptRigs.html";
-
         try {
             write(path, sptResults, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
@@ -658,7 +688,7 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseDstRigs(String dirPath, Project project, List<Rig> rigs, AssetManager assetManager) {
+    public static String parseDstRigs(String path, Project project, List<Rig> rigs, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
@@ -681,8 +711,6 @@ public class HtmlParser extends Parser {
             dstResults = null == dstResults ? result : Utility.concat(dstResults, result);
         }
 
-        String path = dirPath + "dstRigs.html";
-
         try {
             write(path, dstResults, assetManager.open(DST_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
@@ -693,7 +721,7 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseEarthSmlRigs(String dirPath, Project project, AssetManager assetManager) {
+    public static String parseEarthSmlRigs(String path, Project project, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
@@ -736,8 +764,6 @@ public class HtmlParser extends Parser {
 
         earthResults = Utility.concat(distributionResults, originalSmplResults);
 
-        String path = dirPath + "smplEarthRigs.html";
-
         try {
             write(path, earthResults, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
@@ -748,7 +774,7 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseWaterSmlRigs(String dirPath, Project project, AssetManager assetManager) {
+    public static String parseWaterSmlRigs(String path, Project project, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
@@ -775,8 +801,6 @@ public class HtmlParser extends Parser {
             smplWaterResults = null == smplWaterResults ? result : Utility.concat(smplWaterResults, result);
         }
 
-        String path = dirPath + "smplWaterRigs.html";
-
         try {
             write(path, smplWaterResults, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
@@ -787,7 +811,7 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseRockSmlRigs(String dirPath, Project project, AssetManager assetManager) {
+    public static String parseRockSmlRigs(String path, Project project, AssetManager assetManager) {
         if (project == null) {
             return null;
         }
@@ -813,8 +837,6 @@ public class HtmlParser extends Parser {
             String[][] result = convertRockSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
             smplRockResults = null == smplRockResults ? result : Utility.concat(smplRockResults, result);
         }
-
-        String path = dirPath + "smplRockRigs.html";
 
         try {
             write(path, smplRockResults, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));

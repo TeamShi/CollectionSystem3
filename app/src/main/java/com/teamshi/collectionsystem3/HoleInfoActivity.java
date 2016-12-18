@@ -975,6 +975,7 @@ public class HoleInfoActivity extends AppCompatActivity {
                             Hole oldHole = DataManager.getHole(holeId);
                             DataManager.updateHole(oldHole.getHoleId(), holeViewModel);
                             Hole newHole = DataManager.getHole(holeId);
+
                             IOManager.copyImagesFromTemp(tempImagsMap, newHole);
                             IOManager.updateProject(DataManager.getProject());
                             HoleInfoActivity.this.setResult(RESULT_OK);
