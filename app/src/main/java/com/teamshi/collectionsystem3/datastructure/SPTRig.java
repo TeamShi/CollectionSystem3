@@ -66,7 +66,7 @@ public class SPTRig extends CalculatingRig {
                 drillToolTotalLength, drillPipeRemainLength, roundTripMeterageLength, accumulatedMeterageLength,
                 rockCoreIndex, rockCoreLength, rockCorePickPerentage,
                 rigStartEndDepth, rockType, rockColor,
-                rockDensity, rockSaturation, rockWeathering, rockDensity);
+                rockDensity, rockSaturation, rockWeathering, rockDescription);
 
         this.injectionToolDiameter = injectionToolDiameter;
         this.injectionToolLength = injectionToolLength;
@@ -103,7 +103,7 @@ public class SPTRig extends CalculatingRig {
         this.oldRockColor = oldRockColor;
         this.oldRockDensity = oldRockDensity;
         this.oldRockSaturation = oldRockSaturation;
-        this.otherDescription = otherDescription;
+        this.otherDescription = rockDescription;
     }
 
     public int getInjectionToolDiameter() {
