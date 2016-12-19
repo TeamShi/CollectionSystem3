@@ -310,7 +310,7 @@ public class RigGraphActivity extends Activity {
                 DataManager.getHole(holeId).setRigGraphData(graphDataViewModel);
 
                 IOManager.updateProject(DataManager.getProject());
-                
+
                 RigGraphActivity.this.setResult(RESULT_OK);
                 RigGraphActivity.this.finish();
             }

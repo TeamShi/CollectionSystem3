@@ -126,7 +126,8 @@ public class TRRigActivity extends AppCompatActivity {
             detailedInfoDiameterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (!refreshLock && !addDeleteLock) {
+                    String requestCode = getIntent().getStringExtra("requestCode");
+                    if (!refreshLock && !addDeleteLock && requestCode.equals("ACTION_ADD_RIG")) {
                         rigViewModel.getTrInfos().get((Integer) detailedInfoDiameterSpinner.getTag() - 1).setDiameter(Integer.parseInt(TR_INFO_DIAMETER_OPTIONS[position]));
 
                         int count127 = 0;
@@ -194,9 +195,9 @@ public class TRRigActivity extends AppCompatActivity {
                             }
 
                             if (rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).getDiameter() == 127) {
-                                rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(totalLength + Double.parseDouble(s.toString()));
+                                rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(lastTRLength + totalLength + Double.parseDouble(s.toString()));
                             } else {
-                                rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(totalLength108 + Double.parseDouble(s.toString()));
+                                rigViewModel.getTrInfos().get((Integer) detailedInfoLengthEditText.getTag() - 1).setTotalLength(lastTR108Length + totalLength108 + Double.parseDouble(s.toString()));
                             }
 
                             detailedInfoLengthEditText.setTextColor(getResources().getColor(android.R.color.black));
@@ -392,6 +393,9 @@ public class TRRigActivity extends AppCompatActivity {
                             String holeId = getIntent().getStringExtra("holeId");
                             int rigIndex = getIntent().getIntExtra("rigIndex", 0);
 
+                            addTRDetailedButton.setEnabled(false);
+                            removeTRDetailedButton.setEnabled(false);
+
                             DataManager.updateRig(holeId, rigIndex, rigViewModel);
 
                             IOManager.updateProject(DataManager.getProject());
@@ -474,6 +478,9 @@ public class TRRigActivity extends AppCompatActivity {
 
                 rigViewModel = (TRRig) DataManager.getRig(holeId, rigIndex).deepCopy();
 
+                addTRDetailedButton.setEnabled(false);
+                removeTRDetailedButton.setEnabled(false);
+
                 refreshInfo();
                 break;
         }
@@ -484,6 +491,8 @@ public class TRRigActivity extends AppCompatActivity {
         if (refreshLock) {
             return;
         }
+
+        String requestCode = getIntent().getStringExtra("requestCode");
 
         refreshLock = true;
 
@@ -507,6 +516,10 @@ public class TRRigActivity extends AppCompatActivity {
 
                 detailedInfoDiameterSpinners[i].setEnabled(i == rigViewModel.getTrInfos().size() - 1);
 
+                if (requestCode.equals("ACTION_EDIT_RIG")) {
+                    detailedInfoDiameterSpinners[i].setEnabled(false);
+                }
+
                 for (int j = 0; j < TR_INFO_DIAMETER_OPTIONS.length; j++) {
                     if (TR_INFO_DIAMETER_OPTIONS[j].equals(String.valueOf(rigViewModel.getTrInfos().get(i).getDiameter()))) {
                         detailedInfoDiameterSpinners[i].setSelection(j);
@@ -515,6 +528,10 @@ public class TRRigActivity extends AppCompatActivity {
                 }
 
                 detailedInfoLengthEditTexts[i].setEnabled(i == rigViewModel.getTrInfos().size() - 1);
+
+                if (requestCode.equals("ACTION_EDIT_RIG")) {
+                    detailedInfoLengthEditTexts[i].setEnabled(false);
+                }
 
                 if (getCurrentFocus() != detailedInfoLengthEditTexts[i] || addDeleteLock) {
                     detailedInfoLengthEditTexts[i].setText(String.valueOf(Utility.formatDouble(rigViewModel.getTrInfos().get(i).getLength())));
@@ -555,6 +572,11 @@ public class TRRigActivity extends AppCompatActivity {
             holeSituraionEditText.setEnabled(false);
             specialDescriptionEditText.setEnabled(false);
 
+        }
+
+        if (requestCode.equals("ACTION_EDIT_RIG")) {
+            addTRDetailedButton.setEnabled(false);
+            removeTRDetailedButton.setEnabled(false);
         }
 
         refreshLock = false;

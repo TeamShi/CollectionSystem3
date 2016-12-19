@@ -327,7 +327,27 @@ public class RigIndexActivity extends AppCompatActivity {
                     }
 
                     if (deletingRig instanceof TRRig) {
-                        DataManager.getHole(holeId).setLastTRIndex(DataManager.getHole(holeId).getLastTRIndex() - ((TRRig) deletingRig).getTrInfos().size());
+                        int trIndex = 0;
+                        int tr108Index = 0;
+                        int trLength = 0;
+                        int tr108Length = 0;
+
+                        for (TRRig.TRInfo info : ((TRRig) deletingRig).getTrInfos()) {
+                            if (info.getDiameter() == 127) {
+                                trIndex++;
+                                trLength += info.getLength();
+                            } else {
+                                tr108Index++;
+                                tr108Length += info.getLength();
+                            }
+                        }
+
+                        DataManager.getHole(holeId).setLastTRLength(DataManager.getHole(holeId).getLastTRLength() - trLength);
+                        DataManager.getHole(holeId).setLastTR108Length(DataManager.getHole(holeId).getLastTR108Length() - tr108Length);
+
+                        DataManager.getHole(holeId).setLastTRIndex(DataManager.getHole(holeId).getLastTRIndex() - trIndex);
+                        DataManager.getHole(holeId).setLastTR108Index(DataManager.getHole(holeId).getLastTR108Index() - tr108Index);
+
                     }
 
                     DataManager.getHole(holeId).setLastRockName(deletingRig.getLastRockName());
