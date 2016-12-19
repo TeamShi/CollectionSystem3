@@ -18,6 +18,8 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button prevRigButton;
 
+    private Button goBackButton;
+
     public static void setUrls(List<String> url_list) {
         urls = url_list;
     }
@@ -40,10 +42,13 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
 
         nextRigButton = (Button) findViewById(R.id.button_next_rig);
         prevRigButton = (Button) findViewById(R.id.button_previous_rig);
+        goBackButton = (Button) findViewById(R.id.button_back_html);
         nextRigButton.setEnabled(true);
         prevRigButton.setEnabled(true);
+        goBackButton.setEnabled(true);
         nextRigButton.setOnClickListener(this);
         prevRigButton.setOnClickListener(this);
+        goBackButton.setOnClickListener(this);
 
         if (urls.size() <= 1) {
             //invisible paging buttons
@@ -108,7 +113,8 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
                 url = urls.get(++index);
                 webView.loadUrl(url);
                 break;
-
+            case R.id.button_back_html:
+                webView.goBack();
         }
     }
 
