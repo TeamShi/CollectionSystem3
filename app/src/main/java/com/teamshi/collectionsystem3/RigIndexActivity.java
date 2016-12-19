@@ -1153,6 +1153,11 @@ public class RigIndexActivity extends AppCompatActivity {
 
         result.add(generateRigInfoCell(rig.getNote()));
 
+        if (DataManager.getHole(holeId).isApproved()) {
+            addRigButton.setEnabled(false);
+        }
+
+
         return result;
     }
 
