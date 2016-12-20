@@ -321,7 +321,7 @@ public class DSTRigActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Project project = DataManager.getProject();
-                PreviewActivity.setUrls(IOManager.previewDSTRig(rigViewModel));
+                PreviewActivity.setUrls(IOManager.previewDSTRig(DataManager.getHole(holeId), rigViewModel));
                 Intent intent = new Intent(DSTRigActivity.this, PreviewActivity.class);
                 intent.putExtra("projectName", project.getProjectName());
                 startActivity(intent);

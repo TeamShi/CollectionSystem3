@@ -1146,7 +1146,7 @@ public class SPTRigActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Project project = DataManager.getProject();
-                PreviewActivity.setUrls(IOManager.previewSPTRig(rigViewModel));
+                PreviewActivity.setUrls(IOManager.previewSPTRig(DataManager.getHole(holeId),rigViewModel));
                 Intent intent = new Intent(SPTRigActivity.this, PreviewActivity.class);
                 intent.putExtra("projectName", project.getProjectName());
                 startActivity(intent);

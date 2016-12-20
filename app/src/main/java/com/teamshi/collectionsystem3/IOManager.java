@@ -290,7 +290,7 @@ public class IOManager {
         return urls;
     }
 
-    public static List<String> previewSPTRig(SPTRig sptRig) {
+    public static List<String> previewSPTRig(Hole hole, SPTRig sptRig) {
         if (null == sptRig) {
             return null;
         }
@@ -298,7 +298,7 @@ public class IOManager {
         List<String> urls = new ArrayList<>();
         AssetManager assetManager = appContext.getAssets();
 
-        String path = HtmlParser.parseSptRig(APP_TEMP, sptRig, assetManager);
+        String path = HtmlParser.parseSptRig(APP_TEMP, hole, sptRig, assetManager);
         if (null == path) {
             Log.d(TAG, "IOManager.previewSPTRig: path isnull");
             return null;
@@ -310,13 +310,13 @@ public class IOManager {
         return urls;
     }
 
-    public static List<String> previewDSTRig(DSTRig dstRig) {
+    public static List<String> previewDSTRig(Hole hole, DSTRig dstRig) {
         if (null != dstRig) {
 
             List<String> urls = new ArrayList<>();
             AssetManager assetManager = appContext.getAssets();
 
-            String path = HtmlParser.parseDstRig(APP_TEMP, dstRig, assetManager);
+            String path = HtmlParser.parseDstRig(APP_TEMP, hole, dstRig, assetManager);
             if (null == path) {
                 Log.d(TAG, "IOManager.previewSPTRig: path isnull");
                 return null;

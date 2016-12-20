@@ -69,42 +69,42 @@ public class HtmlParser extends Parser {
     public static String CAPTAIN_ID = "captainName";
 
 
-    public static boolean write(String outPath, String[][] data, InputStream inputStream) throws IOException {
-        String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
-        if (!fileType.equals("html")) {
-            System.out.println("您的文档格式不正确(非html)！");
-            return false;
-        }
-
-        //读模版文件
-        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
-        Element tbody = doc.getElementById(TBODY_ID);
-        if (data != null) {
-            // 循环写入行数据
-            for (int i = 0, rows = data.length; i < rows; i++) {
-                StringBuffer row = new StringBuffer();
-                row.append("<tr>");
-                // 循环写入列数据
-                for (int j = 0, cols = data[i].length; j < cols; j++) {
-                    row.append("<td>");
-                    String text = data[i][j].equals("null") ? "" : data[i][j];
-                    row.append(text);
-                    row.append("</td>");
-                }
-                row.append("</tr>");
-                tbody.append(row.toString());
-            }
-        }
-
-        FileWriter fileWriter = new FileWriter(outPath, false);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(doc.outerHtml());
-        bufferedWriter.close();
-        fileWriter.close();
-
-        return true;
-
-    }
+//    public static boolean write(String outPath, String[][] data, InputStream inputStream) throws IOException {
+//        String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
+//        if (!fileType.equals("html")) {
+//            System.out.println("您的文档格式不正确(非html)！");
+//            return false;
+//        }
+//
+//        //读模版文件
+//        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+//        Element tbody = doc.getElementById(TBODY_ID);
+//        if (data != null) {
+//            // 循环写入行数据
+//            for (int i = 0, rows = data.length; i < rows; i++) {
+//                StringBuffer row = new StringBuffer();
+//                row.append("<tr>");
+//                // 循环写入列数据
+//                for (int j = 0, cols = data[i].length; j < cols; j++) {
+//                    row.append("<td>");
+//                    String text = data[i][j].equals("null") ? "" : data[i][j];
+//                    row.append(text);
+//                    row.append("</td>");
+//                }
+//                row.append("</tr>");
+//                tbody.append(row.toString());
+//            }
+//        }
+//
+//        FileWriter fileWriter = new FileWriter(outPath, false);
+//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//        bufferedWriter.write(doc.outerHtml());
+//        bufferedWriter.close();
+//        fileWriter.close();
+//
+//        return true;
+//
+//    }
 
     public static boolean writeWithHole(String outPath, String[][] data, Hole hole, InputStream inputStream) throws IOException {
         String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
@@ -202,7 +202,7 @@ public class HtmlParser extends Parser {
                 HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", hole, assetManager);
                 HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", hole, assetManager);
                 HtmlParser.parseSptRigs(absoluteHolepath + "sptRigs.html", hole, assetManager);
-                HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", project, hole.getRigIndexViewList(), assetManager);
+                HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", hole, hole.getRigIndexViewList(), assetManager);
                 HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
@@ -269,8 +269,8 @@ public class HtmlParser extends Parser {
     }
 
 
-    public static String parseSptRig(String dirPath, SPTRig sptRig, AssetManager assetManager) {
-        if (sptRig == null) {
+    public static String parseSptRig(String dirPath, Hole hole, SPTRig sptRig, AssetManager assetManager) {
+        if (hole == null || sptRig == null) {
             return null;
         }
 
@@ -278,7 +278,7 @@ public class HtmlParser extends Parser {
         String path = dirPath + "sptRigEvent.html";
 
         try {
-            write(path, sptEventArray, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, sptEventArray, hole, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -296,7 +296,7 @@ public class HtmlParser extends Parser {
         String[][] oriRigEventArray = convertOriSmpl(hole, originalSamplingRig, "<br/>");
 
         try {
-            write(path, oriRigEventArray, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, oriRigEventArray, hole, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -330,7 +330,7 @@ public class HtmlParser extends Parser {
                     break;
             }
 
-            write(path, oriRigEventArray, assetManager.open(htmlTemp));
+            writeWithHole(path, oriRigEventArray, hole, assetManager.open(htmlTemp));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -340,7 +340,7 @@ public class HtmlParser extends Parser {
     }
 
 
-    public static String parseDstRig(String dirPath, DSTRig dstRig, AssetManager assetManager) {
+    public static String parseDstRig(String dirPath, Hole hole, DSTRig dstRig, AssetManager assetManager) {
         if (dstRig == null) {
             return null;
         }
@@ -349,7 +349,7 @@ public class HtmlParser extends Parser {
         String path = dirPath + "dstRigEvent.html";
 
         try {
-            write(path, dstEventArray, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, dstEventArray, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -766,8 +766,8 @@ public class HtmlParser extends Parser {
         return path;
     }
 
-    public static String parseDstRigs(String path, Project project, List<Rig> rigs, AssetManager assetManager) {
-        if (project == null) {
+    public static String parseDstRigs(String path, Hole hole, List<Rig> rigs, AssetManager assetManager) {
+        if (hole == null) {
             return null;
         }
 
@@ -788,7 +788,7 @@ public class HtmlParser extends Parser {
 
         try {
             dstResults = null == dstResults ? new String[0][] : dstResults;
-            write(path, dstResults, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, dstResults, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -838,7 +838,7 @@ public class HtmlParser extends Parser {
         earthResults = Utility.concat(distributionResults, originalSmplResults);
 
         try {
-            write(path, earthResults, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, earthResults, hole, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -872,7 +872,7 @@ public class HtmlParser extends Parser {
 
         try {
             smplWaterResults = null == smplWaterResults ? new String[0][] : smplWaterResults;
-            write(path, smplWaterResults, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, smplWaterResults, hole, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -906,7 +906,7 @@ public class HtmlParser extends Parser {
 
         try {
             smplRockResults = null == smplRockResults ? new String[0][] : smplRockResults;
-            write(path, smplRockResults, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));
+            writeWithHole(path, smplRockResults, hole, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
