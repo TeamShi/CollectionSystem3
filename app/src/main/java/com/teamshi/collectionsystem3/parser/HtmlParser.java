@@ -642,7 +642,7 @@ public class HtmlParser extends Parser {
 
             //钻头直径
             el = doc.getElementById("drillDiameter").appendElement("div");
-            el.text(String.valueOf(rigNode.getDrillDiameter() < 0 ? "":Utility.formatDouble(rigNode.getDrillDiameter())));
+            el.text(String.valueOf(rigNode.getDrillDiameter() < 0 ? "" : Utility.formatDouble(rigNode.getDrillDiameter())));
             el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩芯编号
