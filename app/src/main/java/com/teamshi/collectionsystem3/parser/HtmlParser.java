@@ -598,7 +598,7 @@ public class HtmlParser extends Parser {
         doc.getElementsByClass("flex-row").attr("style", "height:" + 30 * rigNodes.size() + "px");
         for (RigGraphData.RigNode rigNode : rigNodes) {
             el = doc.getElementById("rockCorePer").appendElement("div");
-            el.text(String.valueOf(rigNode.getRockPickPercentage() * 100));
+            el.text(Utility.formatDouble(rigNode.getRockPickPercentage() * 100));
             el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //钻头直径
