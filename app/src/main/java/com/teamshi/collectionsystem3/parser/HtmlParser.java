@@ -147,6 +147,46 @@ public class HtmlParser extends Parser {
                 endDate.text(formatCalendarDateString(hole.getEndDate()));
             }
 
+            Element mileageId = doc.getElementById(MILEAGE_ID);
+            if(mileageId != null) {
+                mileageId.text(Utility.formatNumber(hole.getMileage()));
+            }
+
+            Element offset = doc.getElementById(HOLE_OFFSET);
+            if(offset != null) {
+                offset.text(Utility.formatDouble((hole.getOffset())));
+            }
+
+            Element explorationUnit = doc.getElementById(EXPLORATIONUNIT_ID);
+            if(explorationUnit != null) {
+                explorationUnit.text(hole.getCompany() == null ? "铁四院工勘院" : hole.getCompany());
+            }
+
+            Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
+            if(machineNumber != null) {
+                machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
+            }
+
+            Element rigType = doc.getElementById(RIGTYPE_ID);
+            if(rigType != null) {
+                rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
+            }
+
+            Element recorderName = doc.getElementById(RECORDER_ID);
+            if(recorderName != null) {
+                recorderName.text(hole.getRecorder() == null ? "" : hole.getRecorder());
+            }
+
+            Element squName = doc.getElementById(SQUAD_ID);
+            if(squName != null) {
+                squName.text(hole.getClassMonitor() == null ? "" : hole.getClassMonitor());
+            }
+
+            Element captainName = doc.getElementById(CAPTAIN_ID);
+            if(captainName != null) {
+                captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
+            }
+
         }
 
         Element tbody = doc.getElementById(TBODY_ID);
