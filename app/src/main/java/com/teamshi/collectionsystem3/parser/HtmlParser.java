@@ -12,7 +12,6 @@ import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.RigGraphData;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
-import org.apache.poi.hpsf.Util;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -148,42 +147,42 @@ public class HtmlParser extends Parser {
             }
 
             Element mileageId = doc.getElementById(MILEAGE_ID);
-            if(mileageId != null) {
+            if (mileageId != null) {
                 mileageId.text(Utility.formatNumber(hole.getMileage()));
             }
 
             Element offset = doc.getElementById(HOLE_OFFSET);
-            if(offset != null) {
+            if (offset != null) {
                 offset.text(Utility.formatDouble((hole.getOffset())));
             }
 
             Element explorationUnit = doc.getElementById(EXPLORATIONUNIT_ID);
-            if(explorationUnit != null) {
+            if (explorationUnit != null) {
                 explorationUnit.text(hole.getCompany() == null ? "铁四院工勘院" : hole.getCompany());
             }
 
             Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
-            if(machineNumber != null) {
+            if (machineNumber != null) {
                 machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
             }
 
             Element rigType = doc.getElementById(RIGTYPE_ID);
-            if(rigType != null) {
+            if (rigType != null) {
                 rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
             }
 
             Element recorderName = doc.getElementById(RECORDER_ID);
-            if(recorderName != null) {
+            if (recorderName != null) {
                 recorderName.text(hole.getRecorder() == null ? "" : hole.getRecorder());
             }
 
             Element squName = doc.getElementById(SQUAD_ID);
-            if(squName != null) {
+            if (squName != null) {
                 squName.text(hole.getClassMonitor() == null ? "" : hole.getClassMonitor());
             }
 
             Element captainName = doc.getElementById(CAPTAIN_ID);
-            if(captainName != null) {
+            if (captainName != null) {
                 captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
             }
 
@@ -643,7 +642,7 @@ public class HtmlParser extends Parser {
 
             //钻头直径
             el = doc.getElementById("drillDiameter").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getDrillDiameter())));
+            el.text(String.valueOf(rigNode.getDrillDiameter() < 0 ? "":Utility.formatDouble(rigNode.getDrillDiameter())));
             el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
             //岩芯编号
@@ -686,7 +685,7 @@ public class HtmlParser extends Parser {
             el.text(String.valueOf(Utility.formatDouble(rigNode.getRoundTripDepth())));
             el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
-            //类型 TODO
+            //类型
             el = doc.getElementById("legend").appendElement("div");
             el.text(String.valueOf("ff"));
             el.attr("class", getEarthType(rigNode.getDrillType()));
@@ -922,9 +921,7 @@ public class HtmlParser extends Parser {
     }
 
     public static String parseRockSmlRigs(String path, Hole hole, AssetManager assetManager) {
-        if (hole == null) {
-            return null;
-        }
+        if (hole == null) return null;
 
         List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
 
