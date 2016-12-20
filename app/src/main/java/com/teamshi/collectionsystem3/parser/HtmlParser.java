@@ -598,7 +598,7 @@ public class HtmlParser extends Parser {
         //原样
         for (RigGraphData.GraphNode node : rigGraphData.getOriginalSamplingNodeList()) {
             Element el = doc.getElementById("originalSampling").appendElement("div");
-            el.text(node.getContent());
+            el.text(String.valueOf(Double.valueOf(node.getContent())));
             el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
