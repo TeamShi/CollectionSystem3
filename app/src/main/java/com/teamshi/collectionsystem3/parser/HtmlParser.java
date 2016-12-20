@@ -419,13 +419,13 @@ public class HtmlParser extends Parser {
         startDate.text(formatCalendarDateString(hole.getStartDate()));
 
         Element recorderName = doc.getElementById(RECORDER_ID);
-        recorderName.text(hole.getRecorder() == null ? "xxx" : hole.getRecorder());
+        recorderName.text(hole.getRecorder() == null ? "" : hole.getRecorder());
 
         Element squName = doc.getElementById(SQUAD_ID);
-        squName.text(hole.getClassMonitor() == null ? "xxx" : hole.getClassMonitor());
+        squName.text(hole.getClassMonitor() == null ? "" : hole.getClassMonitor());
 
         Element captainName = doc.getElementById(CAPTAIN_ID);
-        captainName.text(hole.getMachineMonitor() == null ? "xxx" : hole.getMachineMonitor());
+        captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
         FileWriter fileWriter = new FileWriter(outPath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(doc.outerHtml());
@@ -475,13 +475,13 @@ public class HtmlParser extends Parser {
         endDate.text(formatCalendarDateString(hole.getEndDate()));
 
         Element recorderName = doc.getElementById(RECORDER_ID);
-        recorderName.text(hole.getRecorder() == null ? "xxx" : hole.getRecorder());
+        recorderName.text(hole.getRecorder() == null ? "" : hole.getRecorder());
 
         Element squName = doc.getElementById(SQUAD_ID);
-        squName.text(hole.getClassMonitor() == null ? "xxx" : hole.getClassMonitor());
+        squName.text(hole.getClassMonitor() == null ? "" : hole.getClassMonitor());
 
         Element captainName = doc.getElementById(CAPTAIN_ID);
-        captainName.text(hole.getMachineMonitor() == null ? "xxx" : hole.getMachineMonitor());
+        captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
 
         FileWriter fileWriter = new FileWriter(rigGraphCover);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
