@@ -597,7 +597,7 @@ public class HtmlParser extends Parser {
         //原样
         for (RigGraphData.GraphNode node : rigGraphData.getOriginalSamplingNodeList()) {
             Element el = doc.getElementById("originalSampling").appendElement("div");
-            el.text(String.valueOf(Double.valueOf(node.getContent())));
+            el.text(String.valueOf(node.getContent()));
             el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
@@ -1022,7 +1022,6 @@ public class HtmlParser extends Parser {
         el.text(waterDepthDateNode.getContent());
         el.attr("style", "height:" + waterDepthDateNode.getHeight() + "rem;");
 
-        //TODO rigNodeList
         List<RigGraphData.RigNode> rigNodes = rigGraphData.getRigNodeList();
         doc.getElementsByClass("flex-row").attr("style", "height:" + 30 * rigNodes.size() + "px");
         for (RigGraphData.RigNode rigNode : rigNodes) {
@@ -1070,7 +1069,7 @@ public class HtmlParser extends Parser {
             el.text(String.valueOf(rigNode.getLayoutEndDepth()));
             el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
-            //回次进尺
+            //回次进尺 岩底厚度
             el = doc.getElementById("roundTrip").appendElement("div");
             el.text(String.valueOf(rigNode.getRoundTripDepth()));
             el.attr("style", "height:" + rigNode.getHeight() + "rem;");

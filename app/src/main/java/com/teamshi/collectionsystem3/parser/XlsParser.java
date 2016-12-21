@@ -8,8 +8,10 @@ import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
+import com.teamshi.collectionsystem3.datastructure.RigGraphData;
 import com.teamshi.collectionsystem3.datastructure.SPTRig;
 
+import org.apache.poi.hpsf.Util;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -22,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -51,6 +54,7 @@ public class XlsParser extends Parser {
             "饱和吸水率", "天然-单轴抗压强度", "干燥-单轴抗压强度", "饱和-单轴抗压强度", "薄片鉴定", "特殊项目", "附注"};
     private static String[] SMPL_EARTH_EVENT_HEADER = new String[]{"试验室", "外业", "勘探点编号",
             "地点", "试件深度", "野外鉴定名称", "工程名称", "原状土", "扰动土", "备注"};
+    private static String[] RIG_GRAPH_HEADER =  new String[] {"编号","层底深度(m)","厚度(m)","岩层描述"};
 
     public static String RegularRig_NAME = "钻孔原始记录";
     public static String SptRig_NAME = "标准贯入";
@@ -58,6 +62,7 @@ public class XlsParser extends Parser {
     public static String SampleWater_NAME = "水样";
     public static String SampleRock_NAME = "岩样";
     private static String SampleEarth_NAME = "土样";
+    private static String RigGraph_NAME = "断层";
 
 
     public static boolean write(String outPath, String[][] array, String sheetName, String[] headerNames) throws Exception {
@@ -173,6 +178,7 @@ public class XlsParser extends Parser {
         String[][] waterSampleArray = convertWaterSmpls(hole, waterSampleDetails);
         String[][] rockSampleArray = convertRockSmpls(hole, rockSampleDetails);
         String[][] earthSampleArray = convertEarthSmpls(hole, earthSampleDetails);
+        String[][] rigGraphArray = convertRigGrapph(hole, hole.getRigGraphData());
 
 
         String filePath = dirPath + "hole_" + hole.getHoleId() + ".xls";
@@ -188,6 +194,7 @@ public class XlsParser extends Parser {
             XlsParser.write(filePath, waterSampleArray, SampleWater_NAME, SMPL_WATER_EVENT_HEADER);
             XlsParser.write(filePath, rockSampleArray, SampleRock_NAME, SMPL_ROCK_EVENT_HEADER);
             XlsParser.write(filePath, earthSampleArray, SampleEarth_NAME, SMPL_EARTH_EVENT_HEADER);
+            XlsParser.write(filePath, rigGraphArray, RigGraph_NAME, RIG_GRAPH_HEADER);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,6 +202,32 @@ public class XlsParser extends Parser {
         }
 
         return filePath;
+    }
+
+    private static String[][] convertRigGrapph(Hole hole, RigGraphData rigGraphData) {
+        if(rigGraphData == null) {
+            return  new String[0][];
+        }
+
+        // "编号","层底深度(m)","厚度(m)","岩层描述"
+        List<RigGraphData.RigNode> nodes =  rigGraphData.getRigNodeList();
+        int rows = nodes.size();
+        String[] layerDepth = new String[rows];
+        String[] layerThickness = new String[rows];
+        String[] desc = new String[rows];
+        for(int i = 0; i < rows; i++)  {
+            RigGraphData.RigNode node = nodes.get(i);
+            layerDepth[i] = Utility.formatDouble(node.getLayoutEndDepth());
+            layerThickness[i] = Utility.formatDouble(node.getRoundTripDepth());
+            desc[i] = node.getDescription();
+        }
+
+        String[][] result = new String[rows][4];
+        for(int r= 0; r < rows; r++) {
+           result[r] = new String[]{String.valueOf(r+1), layerDepth[r], layerThickness[r], desc[r]};
+        }
+
+        return result;
     }
 
     private static String[][] convertDsts(ArrayList<DSTRig> dstRigs) {
