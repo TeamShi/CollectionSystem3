@@ -608,12 +608,21 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
-        //下套管
+        //下套管 FIXME
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
-            Element el = doc.getElementById("trNode").appendElement("div");
+            Element el = doc.getElementById("trNodeEnd").appendElement("div");
             el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
+
+            el = doc.getElementById("trNodeTotal").appendElement("div");
+            el.text(node.getContent());
+            el.attr("style", "height:" + node.getHeight() + "rem;");
+
+            el = doc.getElementById("trNodeStart").appendElement("div");
+            el.text(Utility.formatDouble(Double.valueOf(node.getContent()) - node.getHeight()));
+            el.attr("style", "height:" + node.getHeight() + "rem;");
         }
+        //TODO  最后一个套管要填直径
 
         //初始水位
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
