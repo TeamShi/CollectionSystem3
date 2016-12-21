@@ -3,7 +3,12 @@ package com.teamshi.collectionsystem3;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.ActivityCompat;
+import android.util.Base64;
+
+import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -452,4 +457,12 @@ public class Utility {
         }
     }
 
+    public static String imgToBase64(String path) throws IOException {
+        Bitmap bm = BitmapFactory.decodeFile(path);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+        byte[] b = baos.toByteArray();
+        
+        return Base64.encodeToString(b, Base64.DEFAULT);
+    }
 }
