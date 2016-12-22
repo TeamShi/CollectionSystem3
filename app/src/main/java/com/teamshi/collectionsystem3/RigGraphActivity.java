@@ -305,6 +305,8 @@ public class RigGraphActivity extends Activity {
                         }
                     }
 
+
+                    rigList = DataManager.getHole(holeId).getRigIndexViewList();
                     graphDataViewModel.getWaterSamplingNodeList().clear();
                     for (Rig rig : rigList) {
                         if (rig instanceof OtherSamplingRig.OtherSamplingDetail && ((OtherSamplingRig.OtherSamplingDetail) rig).getSamplingType().equals("水样")) {
