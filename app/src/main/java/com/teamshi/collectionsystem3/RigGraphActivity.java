@@ -374,7 +374,7 @@ public class RigGraphActivity extends Activity {
             @Override
             public void onClick(View v) {
                 rigGprahDetailLinearLayout.setVisibility(View.GONE);
-
+                rigNodeViewModel.setDescription(graphRigNodeRockInfoViewModel.getRockDescription());
                 graphDataViewModel.getRigNodeList().add(rigNodeViewModel);
 
                 // Now drillType is used to save rock name
