@@ -266,12 +266,28 @@ public class RigGraphActivity extends Activity {
                     // TR info
                     graphDataViewModel.getTrNodeList().clear();
 
-                    for (Rig rig : rigList) {
-                        if (rig instanceof TRRig) {
-                            for (TRRig.TRInfo info : ((TRRig) rig).getTrInfos()) {
-                                graphDataViewModel.getTrNodeList().add(new RigGraphData.GraphNode(String.valueOf(info.getLength()), info.getTotalLength()));
+                    double max108Length = -1;
+                    double max127Length = -1;
+
+                    for (int i = 0; i < rigList.size(); i++) {
+                        if (rigList.get(i) instanceof TRRig) {
+                            TRRig r = (TRRig) rigList.get(i);
+                            for (int j = 0; j < r.getTrInfos().size(); j++) {
+                                if (r.getTrInfos().get(j).getDiameter() == 108) {
+                                    max108Length = Math.max(max108Length, r.getTrInfos().get(j).getLength());
+                                } else {
+                                    max127Length = Math.max(max127Length, r.getTrInfos().get(j).getLength());
+                                }
                             }
                         }
+                    }
+
+                    if (max108Length != -1) {
+                        graphDataViewModel.getTrNodeList().add(new RigGraphData.GraphNode("108" ,max108Length));
+                    }
+
+                    if (max127Length != -1) {
+                        graphDataViewModel.getTrNodeList().add(new RigGraphData.GraphNode("127" ,max127Length));
                     }
 
                     // Water level
