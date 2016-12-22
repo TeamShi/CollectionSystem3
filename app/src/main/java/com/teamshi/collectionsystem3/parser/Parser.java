@@ -439,7 +439,6 @@ public class Parser {
             sb.append(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) +
                     " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())).append("#");
             sb.append(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())).append("#");
-            sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
 
         } else {
             sb.append(NA).append("#");
