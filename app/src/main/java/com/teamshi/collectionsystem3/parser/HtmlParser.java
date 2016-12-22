@@ -624,7 +624,15 @@ public class HtmlParser extends Parser {
 
         //下套管 FIXME
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
-            Element el = doc.getElementById("trNodeEnd").appendElement("div");
+            Element el = doc.getElementById("trNodeDiameter").appendElement("div");
+            el.text(Utility.formatDouble(node.getHeight()));
+            el.attr("style", "height:" + node.getHeight() + "rem;");
+
+            el = doc.getElementById("trNodeStart").appendElement("div");
+            el.text(Utility.formatDouble(0));
+            el.attr("style", "height:" + node.getHeight() + "rem;");
+
+            el = doc.getElementById("trNodeEnd").appendElement("div");
             el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
@@ -632,9 +640,7 @@ public class HtmlParser extends Parser {
             el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
-            el = doc.getElementById("trNodeStart").appendElement("div");
-            el.text(Utility.formatDouble(Double.valueOf(node.getContent()) - node.getHeight()));
-            el.attr("style", "height:" + node.getHeight() + "rem;");
+
         }
         //TODO  最后一个套管要填直径
 
