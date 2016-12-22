@@ -58,6 +58,11 @@ public class HtmlParser extends Parser {
     public static String HOLE_ID = "holeId";
     public static String EXPLORATIONUNIT_ID = "company";
     public static String MACHINENUMBER_ID = "machineNumber";
+    public static String ENGIN_ID = "enginType";
+    public static String PUMP_ID = "pumpType";
+    public static String DESIGN_DEPTH_ID = "holeDepth";
+    public static String ACTURAL_DEPTH_ID = "actualDepth";
+
     public static String RIGTYPE_ID = "rigType";
     public static String STARTDATE_ID = "startDate";
     public static String ENDDATE_ID = "endDate";
@@ -501,14 +506,23 @@ public class HtmlParser extends Parser {
         Element holeId = doc.getElementById(HOLE_ID);
         holeId.text(hole.getHoleId());
 
-        Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
-        machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
+        Element pumpType = doc.getElementById(PUMP_ID);
+        pumpType.text(hole.getPumpType() == null ? "" : hole.getPumpType());
 
         Element rigType = doc.getElementById(RIGTYPE_ID);
         rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
 
+        Element enginType = doc.getElementById(ENGIN_ID);
+        enginType.text(hole.getEngineType() == null ? "" : hole.getEngineType());
+
         Element startDate = doc.getElementById(STARTDATE_ID);
         startDate.text(formatCalendarDateString(hole.getStartDate()));
+
+        Element designDepth = doc.getElementById(DESIGN_DEPTH_ID);
+        designDepth.text(Utility.formatDouble(hole.getHoleDepth()));
+
+        Element acturalDepth = doc.getElementById(ACTURAL_DEPTH_ID);
+        acturalDepth.text(Utility.formatDouble(hole.getActualDepth()));
 
         Element endDate = doc.getElementById(ENDDATE_ID);
         endDate.text(formatCalendarDateString(hole.getEndDate()));
@@ -610,7 +624,15 @@ public class HtmlParser extends Parser {
 
         //下套管 FIXME
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
-            Element el = doc.getElementById("trNodeEnd").appendElement("div");
+            Element el = doc.getElementById("trNodeDiameter").appendElement("div");
+            el.text(Utility.formatDouble(node.getHeight()));
+            el.attr("style", "height:" + node.getHeight() + "rem;");
+
+            el = doc.getElementById("trNodeStart").appendElement("div");
+            el.text(Utility.formatDouble(0));
+            el.attr("style", "height:" + node.getHeight() + "rem;");
+
+            el = doc.getElementById("trNodeEnd").appendElement("div");
             el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
@@ -618,9 +640,7 @@ public class HtmlParser extends Parser {
             el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
-            el = doc.getElementById("trNodeStart").appendElement("div");
-            el.text(Utility.formatDouble(Double.valueOf(node.getContent()) - node.getHeight()));
-            el.attr("style", "height:" + node.getHeight() + "rem;");
+
         }
         //TODO  最后一个套管要填直径
 

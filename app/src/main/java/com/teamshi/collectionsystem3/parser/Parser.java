@@ -388,7 +388,7 @@ public class Parser {
         sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
 
         //岩石名称
-        sb.append(detail.getLastRockName()).append("#");
+        sb.append("").append("#");
         sb.append(detail.getLastRockSaturation()).append("#");
 
         //工程名称
@@ -439,7 +439,6 @@ public class Parser {
             sb.append(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) +
                     " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())).append("#");
             sb.append(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())).append("#");
-            sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
 
         } else {
             sb.append(NA).append("#");
@@ -902,7 +901,7 @@ public class Parser {
 
                 //土样
                 sb.append(originalSamplingRig.getIndex()).append("#");
-                sb.append(Utility.formatDouble(originalSamplingRig.getSamplerPipeDiameter())).append("#");
+                sb.append(originalSamplingRig.getSamplerPipeDiameter() < 0 ? "" : Utility.formatDouble(originalSamplingRig.getSamplerPipeDiameter())).append("#");
                 sb.append((Utility.formatDouble(originalSamplingRig.getStartDepth()) + BR + Utility.formatDouble(originalSamplingRig.getEndDepth()))).append("#");
                 sb.append(originalSamplingRig.getCount()).append("#");
 
