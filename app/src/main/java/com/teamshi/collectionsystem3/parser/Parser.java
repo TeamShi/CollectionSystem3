@@ -902,7 +902,7 @@ public class Parser {
 
                 //土样
                 sb.append(originalSamplingRig.getIndex()).append("#");
-                sb.append(Utility.formatDouble(originalSamplingRig.getSamplerPipeDiameter())).append("#");
+                sb.append(originalSamplingRig.getSamplerPipeDiameter() < 0 ? "" : Utility.formatDouble(originalSamplingRig.getSamplerPipeDiameter())).append("#");
                 sb.append((Utility.formatDouble(originalSamplingRig.getStartDepth()) + BR + Utility.formatDouble(originalSamplingRig.getEndDepth()))).append("#");
                 sb.append(originalSamplingRig.getCount()).append("#");
 
