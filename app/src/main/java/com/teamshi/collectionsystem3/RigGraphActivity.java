@@ -236,13 +236,13 @@ public class RigGraphActivity extends Activity {
                     // Date
                     graphDataViewModel.getDateNodeList().clear();
 
-                    String currentDate = Utility.formatCalendarDateStringWithoutYear(rigList.get(0).getStartTime());
+                    String currentDate = Utility.formatCalendarDateStringWithoutYear(rigList.get(0).getDate());
 
                     graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(currentDate, 1));
 
                     for (CalculatingRig rig : calculatingRigs) {
-                        if (!Utility.formatCalendarDateStringWithoutYear(rig.getStartTime()).equals(currentDate)) {
-                            currentDate = Utility.formatCalendarDateStringWithoutYear(rig.getStartTime());
+                        if (!Utility.formatCalendarDateStringWithoutYear(rig.getDate()).equals(currentDate)) {
+                            currentDate = Utility.formatCalendarDateStringWithoutYear(rig.getDate());
 
                             graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(currentDate, rig.getAccumulatedMeterageLength()));
                         }
