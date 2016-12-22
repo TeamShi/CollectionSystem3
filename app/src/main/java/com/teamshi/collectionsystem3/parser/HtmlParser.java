@@ -622,7 +622,7 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
-        //下套管 FIXME
+        //下套管
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
             Element el = doc.getElementById("trNodeDiameter").appendElement("div");
             el.text(Utility.formatDouble(node.getHeight()));
@@ -642,7 +642,6 @@ public class HtmlParser extends Parser {
 
 
         }
-        //TODO  最后一个套管要填直径
 
         //初始水位
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
