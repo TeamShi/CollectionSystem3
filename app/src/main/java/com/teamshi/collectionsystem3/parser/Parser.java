@@ -388,7 +388,7 @@ public class Parser {
         sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
 
         //岩石名称
-        sb.append(detail.getLastRockName()).append("#");
+        sb.append("").append("#");
         sb.append(detail.getLastRockSaturation()).append("#");
 
         //工程名称

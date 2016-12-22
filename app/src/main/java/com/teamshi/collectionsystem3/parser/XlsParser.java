@@ -62,7 +62,7 @@ public class XlsParser extends Parser {
     public static String SampleWater_NAME = "水样";
     public static String SampleRock_NAME = "岩样";
     private static String SampleEarth_NAME = "土样";
-    private static String RigGraph_NAME = "断层";
+    private static String RigGraph_NAME = "钻探记录表";
 
 
     public static boolean write(String outPath, String[][] array, String sheetName, String[] headerNames) throws Exception {
