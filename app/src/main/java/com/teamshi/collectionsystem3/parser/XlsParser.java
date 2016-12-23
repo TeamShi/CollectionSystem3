@@ -6,6 +6,7 @@ package com.teamshi.collectionsystem3.parser;
 import com.teamshi.collectionsystem3.Utility;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
+import com.teamshi.collectionsystem3.datastructure.OriginalSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.OtherSamplingRig;
 import com.teamshi.collectionsystem3.datastructure.Rig;
 import com.teamshi.collectionsystem3.datastructure.RigGraphData;
@@ -54,6 +55,9 @@ public class XlsParser extends Parser {
             "饱和吸水率", "天然-单轴抗压强度", "干燥-单轴抗压强度", "饱和-单轴抗压强度", "薄片鉴定", "特殊项目", "附注"};
     private static String[] SMPL_EARTH_EVENT_HEADER = new String[]{"试验室", "外业", "勘探点编号",
             "地点", "试件深度", "野外鉴定名称", "工程名称", "原状土", "扰动土", "备注"};
+    private static String[] SMPL_ORIGIN_EVENT_HEADER = new String[]{"试验室", "外业", "勘探点编号",
+            "地点", "试件深度", "野外鉴定名称", "工程名称", "原状土", "扰动土", "备注"};
+
     private static String[] RIG_GRAPH_HEADER =  new String[] {"编号","层底深度(m)","厚度(m)","岩层描述"};
 
     public static String RegularRig_NAME = "钻孔原始记录";
@@ -62,6 +66,7 @@ public class XlsParser extends Parser {
     public static String SampleWater_NAME = "水样";
     public static String SampleRock_NAME = "岩样";
     private static String SampleEarth_NAME = "土样";
+    private static String SampleOrigin_NAME = "原状样";
     private static String RigGraph_NAME = "钻探记录表";
 
 
@@ -143,6 +148,7 @@ public class XlsParser extends Parser {
         ArrayList<OtherSamplingRig.OtherSamplingDetail> waterSampleDetails = new ArrayList<>();
         ArrayList<OtherSamplingRig.OtherSamplingDetail> rockSampleDetails = new ArrayList<>();
         ArrayList<OtherSamplingRig.OtherSamplingDetail> earthSampleDetails = new ArrayList<>();
+        ArrayList<OriginalSamplingRig> originalSamplingRigs = new ArrayList<>();
 
         for (Rig rig : hole.getRigIndexViewList()) {
             if (rig instanceof SPTRig) {
@@ -151,6 +157,10 @@ public class XlsParser extends Parser {
 
             if (rig instanceof DSTRig) {
                 dstRigs.add((DSTRig) rig);
+            }
+
+            if( rig instanceof OriginalSamplingRig) {
+                originalSamplingRigs.add((OriginalSamplingRig) rig);
             }
 
             if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
@@ -178,6 +188,7 @@ public class XlsParser extends Parser {
         String[][] waterSampleArray = convertWaterSmpls(hole, waterSampleDetails);
         String[][] rockSampleArray = convertRockSmpls(hole, rockSampleDetails);
         String[][] earthSampleArray = convertEarthSmpls(hole, earthSampleDetails);
+        String[][] originalSampleArray = convertOriginSmpls(hole, originalSamplingRigs);
         String[][] rigGraphArray = convertRigGrapph(hole, hole.getRigGraphData());
 
 
@@ -194,6 +205,7 @@ public class XlsParser extends Parser {
             XlsParser.write(filePath, waterSampleArray, SampleWater_NAME, SMPL_WATER_EVENT_HEADER);
             XlsParser.write(filePath, rockSampleArray, SampleRock_NAME, SMPL_ROCK_EVENT_HEADER);
             XlsParser.write(filePath, earthSampleArray, SampleEarth_NAME, SMPL_EARTH_EVENT_HEADER);
+            XlsParser.write(filePath, originalSampleArray, SampleOrigin_NAME, SMPL_ORIGIN_EVENT_HEADER);
             XlsParser.write(filePath, rigGraphArray, RigGraph_NAME, RIG_GRAPH_HEADER);
 
         } catch (Exception e) {
@@ -259,6 +271,17 @@ public class XlsParser extends Parser {
 
         return resultData;
     }
+
+    private static String[][] convertOriginSmpls(Hole hole, ArrayList<OriginalSamplingRig> originalSamplingRigs) {
+        String[][] resultData = new String[0][];
+        for (int i = 0, len = originalSamplingRigs.size(); i < len; i++) {
+            String[][] lines = convertOriSmpl(hole, originalSamplingRigs.get(i), "\\");
+            resultData = Utility.concat(lines, resultData);
+        }
+
+        return resultData;
+    }
+
 
     private static String[][] convertWaterSmpls(Hole hole, ArrayList<OtherSamplingRig.OtherSamplingDetail> waterSampleRigs) {
         String[][] resultData = new String[0][];

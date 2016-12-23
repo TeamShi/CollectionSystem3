@@ -66,6 +66,8 @@ public class HtmlParser extends Parser {
     public static String RIGTYPE_ID = "rigType";
     public static String STARTDATE_ID = "startDate";
     public static String ENDDATE_ID = "endDate";
+    public static String DATE_RANGE_ID = "dateRange";
+
     public static String HOLE_DESC = "description";
 
     public static String RECORDER_ID = "recorderName";
@@ -394,6 +396,16 @@ public class HtmlParser extends Parser {
 
         try {
             writeWithHole(path, dstEventArray, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+            Document doc = Jsoup.parse(assetManager.open(DST_RIG_EVENT_TEMPLATE), "UTF-8", "./");
+            Element dateRange = doc.getElementById(DATE_RANGE_ID);
+            if (dateRange != null) {
+                dateRange.text(Utility.formatCalendarDateString(dstRig.getStartTime()) + "-" + Utility.formatCalendarDateString(dstRig.getEndTime()));
+            }
+            FileWriter fileWriter = new FileWriter(path, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(doc.outerHtml());
+            bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -435,8 +447,10 @@ public class HtmlParser extends Parser {
         projectName.text(hole.getProjectName());
 
         Element positionId = doc.getElementById(POSITION_ID);
-        String projectStage = hole.getHoleIdPart2();
-        positionId.text(projectStage);
+        if(positionId != null) {
+            String projectStage = hole.getHoleIdPart2();
+            positionId.text(projectStage);
+        }
 
         Element mileageId = doc.getElementById(MILEAGE_ID);
         mileageId.text(Utility.formatNumber(hole.getMileage()));
@@ -622,7 +636,7 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:" + node.getHeight() + "rem;");
         }
 
-        //下套管 FIXME
+        //下套管
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
             Element el = doc.getElementById("trNodeDiameter").appendElement("div");
             el.text(Utility.formatDouble(node.getHeight()));
@@ -642,18 +656,18 @@ public class HtmlParser extends Parser {
 
 
         }
-        //TODO  最后一个套管要填直径
 
         //初始水位
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
         Element el = doc.getElementById("initWater").appendElement("div");
         el.text(initialWaterDepthNode.getContent());
+        el.text(Double.valueOf(initialWaterDepthNode.getContent()).equals(0) ? "" :initialWaterDepthNode.getContent() );
         el.attr("style", "height:" + initialWaterDepthNode.getHeight() + "rem;");
 
-        //初始水位
+        //稳定水位
         RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
         el = doc.getElementById("finalWater").appendElement("div");
-        el.text(finalWaterDepthNode.getContent());
+        el.text(Double.valueOf(finalWaterDepthNode.getContent()).equals(0) ? "" :finalWaterDepthNode.getContent() );
         el.attr("style", "height:" + finalWaterDepthNode.getHeight() + "rem;");
 
         //水位稳定时间
@@ -857,6 +871,18 @@ public class HtmlParser extends Parser {
         try {
             dstResults = null == dstResults ? new String[0][] : dstResults;
             writeWithHole(path, dstResults, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+            Document doc = Jsoup.parse(assetManager.open(DST_RIG_EVENT_TEMPLATE), "UTF-8", "./");
+            Element dateRange = doc.getElementById(DATE_RANGE_ID);
+            if (dateRange != null && dstRigs.size() > 0) {
+                DSTRig firstRig = dstRigs.get(0);
+                DSTRig lastRig = dstRigs.get(dstRigs.size() - 1);
+                dateRange.text(Utility.formatCalendarDateString(firstRig.getStartTime()) + "-" + Utility.formatCalendarDateString(lastRig.getEndTime()));
+            }
+            FileWriter fileWriter = new FileWriter(path, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(doc.outerHtml());
+            bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
