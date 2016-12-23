@@ -201,8 +201,8 @@ public class Parser {
         //扰动土(千克)
         sb.append("").append("#");
 
-        //备注
-        sb.append(originalSamplingRig.getRockDescription()).append("#");
+        //备注 originalSamplingRig.getRockDescription() 空
+        sb.append(NA).append("#");
 
         resultData[0] = convert2Array(sb.toString());
 
