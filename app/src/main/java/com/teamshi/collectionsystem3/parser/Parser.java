@@ -105,9 +105,12 @@ public class Parser {
             sb.append(Utility.formatDouble(detailInfo.getDepth())).append("#");
             sb.append(Utility.formatDouble(detailInfo.getLength())).append("#");
             sb.append(detailInfo.getHitCount()).append("#");
-            sb.append(NA).append("#");
-            sb.append(NA).append("#");
+            //密实度
             sb.append(detailInfo.getSaturationDescription().equals("") ? NA : detailInfo.getSaturationDescription()).append("#");
+            sb.append(NA).append("#");
+            // 附注
+            sb.append(NA).append("#");
+
             resultData[index] = convert2Array(sb.toString());
         }
 
