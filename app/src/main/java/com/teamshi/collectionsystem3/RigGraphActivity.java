@@ -236,17 +236,20 @@ public class RigGraphActivity extends Activity {
                     // Date
                     graphDataViewModel.getDateNodeList().clear();
 
-                    String currentDate = Utility.formatCalendarDateStringWithoutYear(rigList.get(0).getDate());
+                    String lastDate = Utility.formatCalendarDateStringWithoutYear(rigList.get(0).getDate());
 
-                    graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(currentDate, 1));
+                    CalculatingRig lastRig = null;
 
                     for (CalculatingRig rig : calculatingRigs) {
-                        if (!Utility.formatCalendarDateStringWithoutYear(rig.getDate()).equals(currentDate)) {
-                            currentDate = Utility.formatCalendarDateStringWithoutYear(rig.getDate());
-
-                            graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(currentDate, rig.getAccumulatedMeterageLength()));
+                        if (!Utility.formatCalendarDateStringWithoutYear(rig.getDate()).equals(lastDate)) {
+                            graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(lastDate, lastRig.getAccumulatedMeterageLength()));
                         }
+
+                        lastRig = rig;
+                        lastDate = Utility.formatCalendarDateStringWithoutYear(rig.getDate());
                     }
+
+                    graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(Utility.formatCalendarDateStringWithoutYear(calculatingRigs.get(calculatingRigs.size() - 1).getDate()), calculatingRigs.get(calculatingRigs.size() - 1).getAccumulatedMeterageLength()));
 
                     // Drill Type
 
