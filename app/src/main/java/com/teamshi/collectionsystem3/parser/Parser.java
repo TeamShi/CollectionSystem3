@@ -65,14 +65,15 @@ public class Parser {
         sb.append(Utility.formatDouble(sptRig.getDrillEndDepth1()) + BR + Utility.formatDouble(sptRig.getDrillEndDepth2()) + BR + Utility.formatDouble(sptRig.getDrillEndDepth3())).append("#");
 
         //分类
-        sb.append(NA).append("#");
+        sb.append(sptRig.getRockName()).append("#");
 
         //野外描述
         sb.append(sptRig.getOldRockColor()).append("#");
         sb.append(sptRig.getOldRockDensity()).append("#");
         sb.append(NA).append("#");
-        sb.append(sptRig.getRockName()).append("#");
+        sb.append(NA).append("#"); // 黏土等级
         sb.append(sptRig.getOldRockSaturation()).append("#");
+
         //光泽
         sb.append(NA).append("#");
         sb.append(NA).append("#");

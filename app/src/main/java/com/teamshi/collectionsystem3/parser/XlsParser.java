@@ -44,7 +44,7 @@ public class XlsParser extends Parser {
             "水位变化", "特殊情况记录"};
     public static String[] SPTEVENT_HEADER = new String[]{"顺序号", "月", "日", "班次", "自", "至",
             "分层", "贯入深度自", "贯入深度至", "计数深度自", "计数深度至", "钻进深度自",
-            "钻进深度至", "分类", "颜色", "密度", "深度", "黏土等级", "黏土状态", "光泽", "夹杂物", "气味"
+            "钻进深度至", "分类", "颜色", "密度", "湿度", "黏土等级", "黏土状态", "光泽", "夹杂物", "气味"
             , "其他特征及包含", "贯入击数", "初见水位", "静止水位", "备考"};
     public static String[] DSTEVENT_HEADER = new String[]{"探杆总长", "入土深度", "贯入度", "锤击数",
             "密实度", "矫正后击数", "附注"};
@@ -246,7 +246,7 @@ public class XlsParser extends Parser {
         String[][] resultData = new String[0][];
         for (int i = 0, len = dstRigs.size(); i < len; i++) {
             String[][] lines = convertDst(dstRigs.get(i));
-            resultData = Utility.concat(lines, resultData);
+            resultData = Utility.concat(resultData, lines);
         }
 
         return resultData;
@@ -256,7 +256,7 @@ public class XlsParser extends Parser {
         String[][] resultData = new String[0][];
         for (int i = 0, len = sptRigs.size(); i < len; i++) {
             String[][] lines = convertSpt(sptRigs.get(i), (i + 1), BR);
-            resultData = Utility.concat(lines, resultData);
+            resultData = Utility.concat(resultData, lines);
         }
 
         return resultData;
@@ -266,7 +266,7 @@ public class XlsParser extends Parser {
         String[][] resultData = new String[0][];
         for (int i = 0, len = earthSampleDetails.size(); i < len; i++) {
             String[][] lines = convertEarthSmplDetail(hole, earthSampleDetails.get(i), "\\");
-            resultData = Utility.concat(lines, resultData);
+            resultData = Utility.concat(resultData, lines);
         }
 
         return resultData;
@@ -276,7 +276,7 @@ public class XlsParser extends Parser {
         String[][] resultData = new String[0][];
         for (int i = 0, len = originalSamplingRigs.size(); i < len; i++) {
             String[][] lines = convertOriSmpl(hole, originalSamplingRigs.get(i), "\\");
-            resultData = Utility.concat(lines, resultData);
+            resultData = Utility.concat(resultData, lines);
         }
 
         return resultData;
@@ -287,7 +287,7 @@ public class XlsParser extends Parser {
         String[][] resultData = new String[0][];
         for (int i = 0, len = waterSampleRigs.size(); i < len; i++) {
             String[][] lines = convertWaterSmplDetail(hole, waterSampleRigs.get(i), "\\");
-            resultData = Utility.concat(lines, resultData);
+            resultData = Utility.concat(resultData, lines);
         }
 
         return resultData;
@@ -297,7 +297,7 @@ public class XlsParser extends Parser {
         String[][] resultData = new String[0][];
         for (int i = 0, len = details.size(); i < len; i++) {
             String[][] lines = convertRockSmplDetail(hole, details.get(i), "\\");
-            resultData = Utility.concat(lines, resultData);
+            resultData = Utility.concat(resultData, lines);
         }
 
         return resultData;
