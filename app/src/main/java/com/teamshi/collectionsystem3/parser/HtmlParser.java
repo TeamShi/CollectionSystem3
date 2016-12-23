@@ -447,8 +447,10 @@ public class HtmlParser extends Parser {
         projectName.text(hole.getProjectName());
 
         Element positionId = doc.getElementById(POSITION_ID);
-        String projectStage = hole.getHoleIdPart2();
-        positionId.text(projectStage);
+        if(positionId != null) {
+            String projectStage = hole.getHoleIdPart2();
+            positionId.text(projectStage);
+        }
 
         Element mileageId = doc.getElementById(MILEAGE_ID);
         mileageId.text(Utility.formatNumber(hole.getMileage()));
