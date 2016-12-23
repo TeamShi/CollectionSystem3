@@ -661,12 +661,13 @@ public class HtmlParser extends Parser {
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
         Element el = doc.getElementById("initWater").appendElement("div");
         el.text(initialWaterDepthNode.getContent());
+        el.text(Double.valueOf(initialWaterDepthNode.getContent()).equals(0) ? "" :initialWaterDepthNode.getContent() );
         el.attr("style", "height:" + initialWaterDepthNode.getHeight() + "rem;");
 
-        //初始水位
+        //稳定水位
         RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
         el = doc.getElementById("finalWater").appendElement("div");
-        el.text(finalWaterDepthNode.getContent());
+        el.text(Double.valueOf(finalWaterDepthNode.getContent()).equals(0) ? "" :finalWaterDepthNode.getContent() );
         el.attr("style", "height:" + finalWaterDepthNode.getHeight() + "rem;");
 
         //水位稳定时间
