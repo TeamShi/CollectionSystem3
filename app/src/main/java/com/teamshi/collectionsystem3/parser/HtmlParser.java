@@ -66,6 +66,8 @@ public class HtmlParser extends Parser {
     public static String RIGTYPE_ID = "rigType";
     public static String STARTDATE_ID = "startDate";
     public static String ENDDATE_ID = "endDate";
+    public static String DATE_RANGE_ID = "dateRange";
+
     public static String HOLE_DESC = "description";
 
     public static String RECORDER_ID = "recorderName";
@@ -394,6 +396,16 @@ public class HtmlParser extends Parser {
 
         try {
             writeWithHole(path, dstEventArray, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+            Document doc = Jsoup.parse(assetManager.open(DST_RIG_EVENT_TEMPLATE), "UTF-8", "./");
+            Element dateRange = doc.getElementById(DATE_RANGE_ID);
+            if (dateRange != null) {
+                dateRange.text(Utility.formatCalendarDateString(dstRig.getStartTime()) + "-" + Utility.formatCalendarDateString(dstRig.getEndTime()));
+            }
+            FileWriter fileWriter = new FileWriter(path, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(doc.outerHtml());
+            bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -856,6 +868,18 @@ public class HtmlParser extends Parser {
         try {
             dstResults = null == dstResults ? new String[0][] : dstResults;
             writeWithHole(path, dstResults, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+            Document doc = Jsoup.parse(assetManager.open(DST_RIG_EVENT_TEMPLATE), "UTF-8", "./");
+            Element dateRange = doc.getElementById(DATE_RANGE_ID);
+            if (dateRange != null && dstRigs.size() > 0) {
+                DSTRig firstRig = dstRigs.get(0);
+                DSTRig lastRig = dstRigs.get(dstRigs.size() - 1);
+                dateRange.text(Utility.formatCalendarDateString(firstRig.getStartTime()) + "-" + Utility.formatCalendarDateString(lastRig.getEndTime()));
+            }
+            FileWriter fileWriter = new FileWriter(path, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(doc.outerHtml());
+            bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
