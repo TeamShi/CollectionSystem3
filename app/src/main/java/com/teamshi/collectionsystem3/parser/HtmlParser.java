@@ -396,12 +396,12 @@ public class HtmlParser extends Parser {
 
         try {
             writeWithHole(path, dstEventArray, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
-            Document doc = Jsoup.parse(assetManager.open(DST_RIG_EVENT_TEMPLATE), "UTF-8", "./");
+            Document doc = Jsoup.parse(new FileInputStream(path), "UTF-8", "./");
             Element dateRange = doc.getElementById(DATE_RANGE_ID);
             if (dateRange != null) {
                 dateRange.text(Utility.formatCalendarDateString(dstRig.getStartTime()) + "-" + Utility.formatCalendarDateString(dstRig.getEndTime()));
             }
-            FileWriter fileWriter = new FileWriter(path, true);
+            FileWriter fileWriter = new FileWriter(path, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(doc.outerHtml());
             bufferedWriter.close();
@@ -871,14 +871,14 @@ public class HtmlParser extends Parser {
         try {
             dstResults = null == dstResults ? new String[0][] : dstResults;
             writeWithHole(path, dstResults, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
-            Document doc = Jsoup.parse(assetManager.open(DST_RIG_EVENT_TEMPLATE), "UTF-8", "./");
+            Document doc = Jsoup.parse(new FileInputStream(path), "UTF-8", "./");
             Element dateRange = doc.getElementById(DATE_RANGE_ID);
             if (dateRange != null && dstRigs.size() > 0) {
                 DSTRig firstRig = dstRigs.get(0);
                 DSTRig lastRig = dstRigs.get(dstRigs.size() - 1);
-                dateRange.text(Utility.formatCalendarDateString(firstRig.getStartTime()) + "-" + Utility.formatCalendarDateString(lastRig.getEndTime()));
+                dateRange.text(Utility.formatCalendarDateString(firstRig.getStartTime()) + " - " + Utility.formatCalendarDateString(lastRig.getEndTime()));
             }
-            FileWriter fileWriter = new FileWriter(path, true);
+            FileWriter fileWriter = new FileWriter(path, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(doc.outerHtml());
             bufferedWriter.close();
@@ -898,38 +898,38 @@ public class HtmlParser extends Parser {
 
         List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
 
-        HashMap<Hole, OtherSamplingRig.OtherSamplingDetail> distributionDetails = new HashMap<>();
-        HashMap<Hole, OriginalSamplingRig> originalSampling = new HashMap<>();
+        List<OtherSamplingRig.OtherSamplingDetail> distributionDetails = new ArrayList<>();
+        List<OriginalSamplingRig> originalSampling = new ArrayList<>();
 
         for (Rig rig : rigs) {
             if (rig instanceof OtherSamplingRig.OtherSamplingDetail) {
                 OtherSamplingRig.OtherSamplingDetail detail = (OtherSamplingRig.OtherSamplingDetail) rig;
                 if (detail.getSamplingType().equals("扰动样")) {
-                    distributionDetails.put(hole, detail);
+                    distributionDetails.add(detail);
                 }
             } else if (rig instanceof OriginalSamplingRig) {
                 OriginalSamplingRig originalSamplingRig = (OriginalSamplingRig) rig;
-                originalSampling.put(hole, originalSamplingRig);
+                originalSampling.add(originalSamplingRig);
             }
         }
 
         String[][] earthResults;
-        String[][] distributionResults = null;
-        for (Map.Entry<Hole, OtherSamplingRig.OtherSamplingDetail> entry : distributionDetails.entrySet()) {
-            String[][] result = convertEarthSmplDetail(entry.getKey(), entry.getValue(), "<BR/>");
-            distributionResults = null == distributionResults ? result : Utility.concat(distributionResults, result);
+        String[][] distributionResults = new String[0][];
+        for ( OtherSamplingRig.OtherSamplingDetail detail : distributionDetails) {
+            String[][] result = convertEarthSmplDetail(hole, detail, "<BR/>");
+            distributionResults = Utility.concat(distributionResults, result);
         }
 
         distributionResults = null == distributionResults ? new String[0][] : distributionResults;
 
-        String[][] originalSmplResults = null;
-        for (Map.Entry<Hole, OriginalSamplingRig> entry : originalSampling.entrySet()) {
-            String[][] result = convertOriSmpl(entry.getKey(), entry.getValue(), "<BR/>");
+        String[][] originalSmplResults = new String[0][];
+        for (OriginalSamplingRig originalSamplingRig : originalSampling) {
+            String[][] result = convertOriSmpl(hole, originalSamplingRig, "<BR/>");
             originalSmplResults = null == originalSmplResults ? result : Utility.concat(originalSmplResults, result);
         }
         originalSmplResults = originalSmplResults == null ? new String[0][] : originalSmplResults;
 
-        earthResults = Utility.concat(distributionResults, originalSmplResults);
+        earthResults = Utility.concat(originalSmplResults, distributionResults);
 
         try {
             writeWithHole(path, earthResults, hole, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
