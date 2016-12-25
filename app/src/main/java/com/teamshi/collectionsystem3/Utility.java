@@ -13,11 +13,13 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.List;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
@@ -465,4 +467,27 @@ public class Utility {
 
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
+
+    public static List<String[][]> fillArray(String[][] data, int colNum, int rowNum, String placeHolder) {
+        List<String[][]> result = new ArrayList<>();
+        int validSize = data.length;
+        int size = Math.max(1, (int) Math.ceil(((float) data.length) / rowNum));
+        for(int i = 0 ; i < size; i ++) {
+            String[][] page = new String[rowNum][];
+            for(int j = 0 ; j < rowNum; j ++) {
+                if((j + i * rowNum) <  validSize) {
+                    page[j] = data[j + i * rowNum];
+                    continue;
+                }
+
+                page[j] =  new String[colNum];
+                for(int k = 0; k < colNum; k++) {
+                    page[j][k] = placeHolder;
+                }
+            }
+            result.add(page);
+        }
+
+        return result;
+    };
 }

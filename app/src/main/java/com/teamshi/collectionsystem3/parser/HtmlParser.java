@@ -2,6 +2,7 @@ package com.teamshi.collectionsystem3.parser;
 
 import android.content.res.AssetManager;
 
+import com.teamshi.collectionsystem3.IOManager;
 import com.teamshi.collectionsystem3.Utility;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
@@ -74,6 +75,7 @@ public class HtmlParser extends Parser {
     public static String SQUAD_ID = "squadName";
     public static String CAPTAIN_ID = "captainName";
 
+    public static int PAGE_SIZE = 20;
 
 //    public static boolean write(String outPath, String[][] data, InputStream inputStream) throws IOException {
 //        String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
@@ -243,7 +245,7 @@ public class HtmlParser extends Parser {
                 String absoluteHolepath = getHolePath(hole);
                 Utility.createFile(absoluteHolepath, false);
 
-                parseHole(absoluteHolepath + "hole_" + hole.getHoleId() + ".html", hole, assetManager.open(BASIC_RIG_EVENT_TEMPLATE));
+                List<String> allRigsPaths = HtmlParser.parseHole(absoluteHolepath, "hole_" + hole.getHoleId(), assetManager, hole);
                 HtmlParser.parseEarthSmlRigs(absoluteHolepath + "smplEarthRigs.html", hole, assetManager);
                 HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", hole, assetManager);
                 HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", hole, assetManager);
@@ -254,6 +256,7 @@ public class HtmlParser extends Parser {
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
 
 
+                //TODO
                 String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
                 String allRigsPath = holePath + "hole_" + hole.getHoleId() + ".html";
                 String sptPath = holePath + "sptRigs.html";
@@ -405,91 +408,90 @@ public class HtmlParser extends Parser {
     }
 
 
-    public static boolean parseHole(String outPath, Hole hole, InputStream inputStream) throws IOException {
-        String[][] data = convertHole(hole, "<br/>");
-
-        boolean isHtml = Utility.verifySuffix(outPath, "html");
-        if (!isHtml) {
-            return false;
-        }
-
-        //读模版文件
-        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
-        Element tableBody = doc.getElementById(TBODY_ID);
-        if (data != null) {
-            // 循环写入行数据
-            for (int i = 0, rows = data.length; i < rows; i++) {
-                StringBuffer row = new StringBuffer();
-                row.append("<tr>");
-                // 循环写入列数据
-                for (int j = 0, cols = data[i].length; j < cols; j++) {
-                    row.append("<td>");
-                    String text = data[i][j].equals("null") ? "" : data[i][j];
-                    row.append(text);
-                    row.append("</td>");
+    public static List parseHole(String dir, String fileNamePrefix, AssetManager assetManager, Hole hole) throws IOException {
+        String[][] _data = convertHole(hole, "<br/>");
+        List<String> paths = new ArrayList<>();
+        //列数
+        List<String[][]> records = Utility.fillArray(_data, 44, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            String path = dir + fileNamePrefix + "_" + (index + 1 )+ ".html";
+            InputStream inputStream = assetManager.open(BASIC_RIG_EVENT_TEMPLATE);
+            //读模版文件
+            Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
+            Element tableBody = doc.getElementById(TBODY_ID);
+            String[][] data = records.get(index);
+            if (data != null) {
+                // 循环写入行数据
+                for (int i = 0, rows = data.length; i < rows; i++) {
+                    StringBuffer row = new StringBuffer();
+                    row.append("<tr>");
+                    // 循环写入列数据
+                    for (int j = 0, cols = data[i].length; j < cols; j++) {
+                        row.append("<td>");
+                        String text = data[i][j].equals("null") ? "" : data[i][j];
+                        row.append(text);
+                        row.append("</td>");
+                    }
+                    row.append("</tr>");
+                    tableBody.append(row.toString());
                 }
-                row.append("</tr>");
-                tableBody.append(row.toString());
             }
+
+            Element projectName = doc.getElementById(PROJECTNAME_ID);
+            projectName.text(hole.getProjectName());
+
+            Element positionId = doc.getElementById(POSITION_ID);
+            if (positionId != null) {
+                String projectStage = hole.getHoleIdPart2();
+                positionId.text(projectStage);
+            }
+
+            Element mileageId = doc.getElementById(MILEAGE_ID);
+            mileageId.text(Utility.formatNumber(hole.getMileage()));
+
+            Element offset = doc.getElementById(HOLE_OFFSET);
+            offset.text(Utility.formatDouble((hole.getOffset())));
+
+            Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
+            holeElevation.text(Utility.formatDouble(hole.getHoleHeight()));
+
+            Element holeId = doc.getElementById(HOLE_ID);
+            holeId.text(hole.getHoleId());
+
+            Element explorationUnit = doc.getElementById(EXPLORATIONUNIT_ID);
+            explorationUnit.text(hole.getCompany() == null ? "铁四院工勘院" : hole.getCompany());
+
+            Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
+            machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
+
+            Element rigType = doc.getElementById(RIGTYPE_ID);
+            rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
+
+            Element startDate = doc.getElementById(STARTDATE_ID);
+            startDate.text(formatCalendarDateString(hole.getStartDate()));
+
+            Element recorderName = doc.getElementById(RECORDER_ID);
+            recorderName.text(hole.getRecorder() == null ? "" : hole.getRecorder());
+
+            Element squName = doc.getElementById(SQUAD_ID);
+            squName.text(hole.getClassMonitor() == null ? "" : hole.getClassMonitor());
+
+            Element captainName = doc.getElementById(CAPTAIN_ID);
+            captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
+            FileWriter fileWriter = new FileWriter(path);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(doc.outerHtml());
+            bufferedWriter.close();
+            fileWriter.close();
+
+            paths.add(path);
         }
 
-        Element projectName = doc.getElementById(PROJECTNAME_ID);
-        projectName.text(hole.getProjectName());
-
-        Element positionId = doc.getElementById(POSITION_ID);
-        if(positionId != null) {
-            String projectStage = hole.getHoleIdPart2();
-            positionId.text(projectStage);
-        }
-
-        Element mileageId = doc.getElementById(MILEAGE_ID);
-        mileageId.text(Utility.formatNumber(hole.getMileage()));
-
-        Element offset = doc.getElementById(HOLE_OFFSET);
-        offset.text(Utility.formatDouble((hole.getOffset())));
-
-        Element holeElevation = doc.getElementById(HOLEELEVATION_ID);
-        holeElevation.text(Utility.formatDouble(hole.getHoleHeight()));
-
-        Element holeId = doc.getElementById(HOLE_ID);
-        holeId.text(hole.getHoleId());
-
-        Element explorationUnit = doc.getElementById(EXPLORATIONUNIT_ID);
-        explorationUnit.text(hole.getCompany() == null ? "铁四院工勘院" : hole.getCompany());
-
-        Element machineNumber = doc.getElementById(MACHINENUMBER_ID);
-        machineNumber.text(hole.getMachineId() == null ? "4101" : hole.getMachineId());
-
-        Element rigType = doc.getElementById(RIGTYPE_ID);
-        rigType.text(hole.getRigMachineType() == null ? "XY-100" : hole.getRigMachineType());
-
-        Element startDate = doc.getElementById(STARTDATE_ID);
-        startDate.text(formatCalendarDateString(hole.getStartDate()));
-
-        Element recorderName = doc.getElementById(RECORDER_ID);
-        recorderName.text(hole.getRecorder() == null ? "" : hole.getRecorder());
-
-        Element squName = doc.getElementById(SQUAD_ID);
-        squName.text(hole.getClassMonitor() == null ? "" : hole.getClassMonitor());
-
-        Element captainName = doc.getElementById(CAPTAIN_ID);
-        captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
-        FileWriter fileWriter = new FileWriter(outPath);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(doc.outerHtml());
-        bufferedWriter.close();
-        fileWriter.close();
-
-        return true;
+        return paths;
 
     }
 
     public static boolean parseRigGraphCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
-
-        boolean isHtml = Utility.verifySuffix(outPath, "html");
-        if (!isHtml) {
-            return false;
-        }
 
         File rigGraphCover = Utility.createFile(outPath, false);
         InputStream inputStream = assetManager.open(RIG_GRAPH_COVER_TEMPLATE);
@@ -551,11 +553,6 @@ public class HtmlParser extends Parser {
 
     public static boolean parseRigGraphBackCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
 
-        boolean isHtml = Utility.verifySuffix(outPath, "html");
-        if (!isHtml) {
-            return false;
-        }
-
         File rigGraphBackCover = Utility.createFile(outPath, false);
         InputStream inputStream = assetManager.open(RIG_GRAPH_BACK_COVER_TEMPLATE);
 
@@ -576,12 +573,6 @@ public class HtmlParser extends Parser {
     }
 
     public static String parseRigGraphTable(String outPath, Hole hole, AssetManager assetManager) throws IOException {
-
-        boolean isHtml = Utility.verifySuffix(outPath, "html");
-        if (!isHtml) {
-            return null;
-        }
-
         File rigGraph = Utility.createFile(outPath, false);
         InputStream inputStream = assetManager.open(RIG_GRAPH_TEMPLATE);
 
@@ -651,13 +642,13 @@ public class HtmlParser extends Parser {
         RigGraphData.GraphNode initialWaterDepthNode = rigGraphData.getInitialWaterDepthNode();
         Element el = doc.getElementById("initWater").appendElement("div");
         el.text(initialWaterDepthNode.getContent());
-        el.text(initialWaterDepthNode.getContent().equals("") || Double.valueOf(initialWaterDepthNode.getContent()).equals("") ? "" :initialWaterDepthNode.getContent() );
+        el.text(initialWaterDepthNode.getContent().equals("") || Double.valueOf(initialWaterDepthNode.getContent()).equals("") ? "" : initialWaterDepthNode.getContent());
         el.attr("style", "height:" + initialWaterDepthNode.getHeight() + "rem;");
 
         //稳定水位
         RigGraphData.GraphNode finalWaterDepthNode = rigGraphData.getFinalWaterDepthNode();
         el = doc.getElementById("finalWater").appendElement("div");
-        el.text(finalWaterDepthNode.getContent().equals("") || Double.valueOf(finalWaterDepthNode.getContent()).equals("") ? "" :finalWaterDepthNode.getContent() );
+        el.text(finalWaterDepthNode.getContent().equals("") || Double.valueOf(finalWaterDepthNode.getContent()).equals("") ? "" : finalWaterDepthNode.getContent());
         el.attr("style", "height:" + finalWaterDepthNode.getHeight() + "rem;");
 
         //水位稳定时间
@@ -905,7 +896,7 @@ public class HtmlParser extends Parser {
 
         String[][] earthResults;
         String[][] distributionResults = new String[0][];
-        for ( OtherSamplingRig.OtherSamplingDetail detail : distributionDetails) {
+        for (OtherSamplingRig.OtherSamplingDetail detail : distributionDetails) {
             String[][] result = convertEarthSmplDetail(hole, detail, "<BR/>");
             distributionResults = Utility.concat(distributionResults, result);
         }
