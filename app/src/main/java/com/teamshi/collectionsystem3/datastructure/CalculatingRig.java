@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/8/8.
  */
 public class CalculatingRig extends Rig {
+    private static final long serialVersionUID = -5203652021778904665L;
     protected double drillToolTotalLength;            // 钻具总长
     protected double drillPipeRemainLength;           // 钻杆余长
     protected double roundTripMeterageLength;         // 回次进尺

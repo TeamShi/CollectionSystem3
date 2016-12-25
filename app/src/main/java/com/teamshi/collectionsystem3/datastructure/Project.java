@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Created by Alfred on 16/7/14.
  */
 public class Project implements Serializable {
+    private static final long serialVersionUID = 639852686742355896L;
     private String projectName;
     private ArrayList<Hole> holeList;
 

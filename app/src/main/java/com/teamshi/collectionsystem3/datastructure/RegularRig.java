@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/7/26.
  */
 public class RegularRig extends CalculatingRig {
+    private static final long serialVersionUID = 3570300177598372343L;
     private String rigType;                         // 作业项目
     private int pipeNumber;                         // 钻杆编号
     private double pipeLength;                      // 钻杆长度

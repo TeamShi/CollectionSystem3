@@ -7,10 +7,12 @@ import java.util.Calendar;
  * Created by Alfred on 16/9/7.
  */
 public class OtherSamplingRig extends Rig {
+    private static final long serialVersionUID = -8924416849156404466L;
     private ArrayList<OtherSamplingDetail> details;
     private String samplingType;
 
     public static class OtherSamplingDetail extends Rig {
+        private static final long serialVersionUID = -632178456444355967L;
         private String samplingType;
         private String index;
         private double startDepth;

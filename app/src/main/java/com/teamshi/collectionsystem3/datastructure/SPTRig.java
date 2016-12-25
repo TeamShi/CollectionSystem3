@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/8/9.
  */
 public class SPTRig extends CalculatingRig {
+    private static final long serialVersionUID = -7275806060632113058L;
     private int injectionToolDiameter;              // 贯入器直径
     private double injectionToolLength;             // 贯入器长度
     private String probeType;                       // 探头类型

@@ -11,7 +11,10 @@ import java.util.ArrayList;
  */
 
 public class RigGraphData implements Serializable {
+    private static final long serialVersionUID = -4023880943791610892L;
+
     public static class GraphNode implements Serializable {
+        private static final long serialVersionUID = -2012433594588755186L;
         private String content;
         private double height;
 
@@ -43,6 +46,7 @@ public class RigGraphData implements Serializable {
 
 
     public static class RigNode implements Serializable {
+        private static final long serialVersionUID = -1679676837360313236L;
         private double height;
         private String drillType;
         private double drillDiameter;

@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/8/25.
  */
 public class OriginalSamplingRig extends CalculatingRig {
+    private static final long serialVersionUID = -2109973091239801808L;
     protected int samplerPipeDiameter;
     protected double samplerPipeLength;
     protected String index;

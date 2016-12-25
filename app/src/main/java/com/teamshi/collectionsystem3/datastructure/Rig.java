@@ -7,6 +7,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/7/14.
  */
 public class Rig implements UIMethods, Serializable{
+    private static final long serialVersionUID = -7810539800107698029L;
     protected String classPeopleCount;
 
     protected Calendar date;

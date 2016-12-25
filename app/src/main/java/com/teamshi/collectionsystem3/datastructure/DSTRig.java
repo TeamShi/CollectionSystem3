@@ -8,6 +8,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/8/14.
  */
 public class DSTRig extends CalculatingRig  {
+    private static final long serialVersionUID = -6681231273389826864L;
     private String probeType;                           // 探头类型
     private int probeDiameter;                          // 探头直径
     private double probeLength;                         // 探头长度

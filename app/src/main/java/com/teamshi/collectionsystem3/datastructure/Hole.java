@@ -9,6 +9,7 @@ import java.util.Iterator;
  * Created by Alfred on 16/7/14.
  */
 public class Hole implements Serializable {
+    private static final long serialVersionUID = -7800855430416140956L;
     private String projectName;                     // 工程名称
 
     /* 钻探编号或者为五段部分, 或者为其他, 由用户编辑纯文本.*/

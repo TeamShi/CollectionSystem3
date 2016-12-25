@@ -8,6 +8,7 @@ import java.util.Calendar;
  * Created by Alfred on 16/8/20.
  */
 public class TRRig extends Rig implements Serializable {
+    private static final long serialVersionUID = -7933541847228277640L;
     private ArrayList<TRInfo> trInfos;
     private String holeSaturation;
     private String specialDescription;
@@ -20,6 +21,8 @@ public class TRRig extends Rig implements Serializable {
     }
 
     public static class TRInfo implements Serializable {
+        private static final long serialVersionUID = -9089736873823763705L;
+
         public TRInfo(String wallType, int index, int diameter,
                       double length, double totalLength) {
             this.wallType = wallType;
