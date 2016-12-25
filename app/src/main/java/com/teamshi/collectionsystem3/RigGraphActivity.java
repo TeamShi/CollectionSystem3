@@ -314,7 +314,7 @@ public class RigGraphActivity extends Activity {
                     for (Rig rig : rigList) {
                         if (rig instanceof OtherSamplingRig.OtherSamplingDetail && ((OtherSamplingRig.OtherSamplingDetail) rig).getSamplingType().equals("水样")) {
                             OtherSamplingRig.OtherSamplingDetail r = (OtherSamplingRig.OtherSamplingDetail) rig;
-                            graphDataViewModel.getWaterSamplingNodeList().add(new RigGraphData.GraphNode(r.getStartDepth() + " ~ " + r.getEndDepth(), r.getEndDepth()));
+                            graphDataViewModel.getWaterSamplingNodeList().add(new RigGraphData.GraphNode(Utility.formatDouble(r.getStartDepth()) + " ~ " + Utility.formatDouble(r.getEndDepth()), r.getEndDepth()));
                         }
                     }
 
@@ -322,7 +322,7 @@ public class RigGraphActivity extends Activity {
                     for (Rig rig : rigList) {
                         if (rig instanceof OtherSamplingRig.OtherSamplingDetail && ((OtherSamplingRig.OtherSamplingDetail) rig).getSamplingType().equals("扰动样")) {
                             OtherSamplingRig.OtherSamplingDetail r = (OtherSamplingRig.OtherSamplingDetail) rig;
-                            graphDataViewModel.getDisturbanceSamplingNodeList().add(new RigGraphData.GraphNode(r.getStartDepth() + " ~ " + r.getEndDepth(), r.getEndDepth()));
+                            graphDataViewModel.getDisturbanceSamplingNodeList().add(new RigGraphData.GraphNode(Utility.formatDouble(r.getStartDepth()) + " ~ " + Utility.formatDouble(r.getEndDepth()), r.getEndDepth()));
                         }
                     }
                 }
