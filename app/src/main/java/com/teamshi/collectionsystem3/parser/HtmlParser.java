@@ -253,16 +253,6 @@ public class HtmlParser extends Parser {
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
 
-                // 原状样
-                ArrayList<Rig> rigs = hole.getRigIndexViewList();
-                if (rigs != null && (rigs.size() > 0)) {
-                    for (Rig rig : rigs) {
-                        if (rig instanceof OriginalSamplingRig)
-                            HtmlParser.parseOriSmlRig(absoluteHolepath + "originalSampling.html", hole, (OriginalSamplingRig) rig, assetManager);
-                        if (rig instanceof OtherSamplingRig)
-                            HtmlParser.parseOtherSmlRig(absoluteHolepath + "otherSampling.html", hole, (OtherSamplingRig) rig, assetManager);
-                    }
-                }
 
                 String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
                 String allRigsPath = holePath + "hole_" + hole.getHoleId() + ".html";
@@ -639,7 +629,7 @@ public class HtmlParser extends Parser {
         //下套管
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
             Element el = doc.getElementById("trNodeDiameter").appendElement("div");
-            el.text(Utility.formatDouble(node.getHeight()));
+            el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
             el = doc.getElementById("trNodeStart").appendElement("div");
@@ -647,11 +637,11 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
             el = doc.getElementById("trNodeEnd").appendElement("div");
-            el.text(node.getContent());
+            el.text(Utility.formatDouble(node.getHeight()));
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
             el = doc.getElementById("trNodeTotal").appendElement("div");
-            el.text(node.getContent());
+            el.text(Utility.formatDouble(node.getHeight()));
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
 
