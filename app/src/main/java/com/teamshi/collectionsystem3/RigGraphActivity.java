@@ -281,9 +281,9 @@ public class RigGraphActivity extends Activity {
                             TRRig r = (TRRig) rigList.get(i);
                             for (int j = 0; j < r.getTrInfos().size(); j++) {
                                 if (r.getTrInfos().get(j).getDiameter() == 108) {
-                                    max108Length = Math.max(max108Length, r.getTrInfos().get(j).getLength());
+                                    max108Length = Math.max(max108Length, r.getTrInfos().get(j).getTotalLength());
                                 } else {
-                                    max127Length = Math.max(max127Length, r.getTrInfos().get(j).getLength());
+                                    max127Length = Math.max(max127Length, r.getTrInfos().get(j).getTotalLength());
                                 }
                             }
                         }
