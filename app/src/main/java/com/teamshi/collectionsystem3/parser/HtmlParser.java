@@ -226,6 +226,17 @@ public class HtmlParser extends Parser {
     }
 
 
+    public static void appendSubLink(List<String> fileNames, Hole hole, String textPrefix, Document doc, Element parent) {
+        String relativeDataPaths = "../Data/";
+        String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
+        for (int i = 0; i < fileNames.size(); i++) {
+            String hrefPath = holePath + fileNames.get(i);
+            Element node = doc.createElement("li");
+            node.appendElement("a").attr("href", hrefPath).text(textPrefix + "-" + (i + 1));
+            parent.appendChild(node);
+        }
+    }
+
     public static String parse(Project project, AssetManager assetManager) {
         List<Hole> holes = project.getHoleList();
         String projectPath = APP_TEMP + "project_" + project.getProjectName() + ".html";
@@ -268,8 +279,9 @@ public class HtmlParser extends Parser {
                 Element holeNode = doc.createElement("li");
                 holeNode.text(hole.getHoleId());
                 Element holeNodeList = doc.createElement("ul");
-                Element allRigsNode = doc.createElement("li");
-                allRigsNode.appendElement("a").attr("href", allRigsPath).text("原始记录表");
+//                Element allRigsNode = doc.createElement("li");
+//                allRigsNode.appendElement("a").attr("href", allRigsPath).text("原始记录表");
+
                 Element sptNode = doc.createElement("li");
                 sptNode.appendElement("a").attr("href", sptPath).text("标准贯入表");
                 Element dstNode = doc.createElement("li");
@@ -281,7 +293,10 @@ public class HtmlParser extends Parser {
                 Element smpleRockRigNode = doc.createElement("li");
                 smpleRockRigNode.appendElement("a").attr("href", smpleRockRigPath).text("岩样表");
 
-                holeNodeList.appendChild(allRigsNode);
+//                holeNodeList.appendChild(allRigsNode);
+
+                appendSubLink(allRigsPaths, hole, "原始记录表", doc, holeNodeList);
+
                 holeNodeList.appendChild(sptNode);
                 holeNodeList.appendChild(dstNode);
                 holeNodeList.appendChild(smpleEarthRigNode);
@@ -410,11 +425,14 @@ public class HtmlParser extends Parser {
 
     public static List parseHole(String dir, String fileNamePrefix, AssetManager assetManager, Hole hole) throws IOException {
         String[][] _data = convertHole(hole, "<br/>");
-        List<String> paths = new ArrayList<>();
+        List<String> fileNames = new ArrayList<>();
         //列数
         List<String[][]> records = Utility.fillArray(_data, 44, PAGE_SIZE, " ");
         for (int index = 0; index < records.size(); index++) {
-            String path = dir + fileNamePrefix + "_" + (index + 1 )+ ".html";
+            String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+            fileNames.add(fileName);
+            String path = dir + fileName;
+
             InputStream inputStream = assetManager.open(BASIC_RIG_EVENT_TEMPLATE);
             //读模版文件
             Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
@@ -484,10 +502,9 @@ public class HtmlParser extends Parser {
             bufferedWriter.close();
             fileWriter.close();
 
-            paths.add(path);
         }
 
-        return paths;
+        return fileNames;
 
     }
 
