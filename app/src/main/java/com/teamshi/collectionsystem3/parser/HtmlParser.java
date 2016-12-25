@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import static com.teamshi.collectionsystem3.IOManager.APP_TEMP;
 import static com.teamshi.collectionsystem3.IOManager.getHolePath;
@@ -240,7 +241,6 @@ public class HtmlParser extends Parser {
     public static String parse(Project project, AssetManager assetManager) {
         List<Hole> holes = project.getHoleList();
         String projectPath = APP_TEMP + "project_" + project.getProjectName() + ".html";
-        String relativeDataPaths = "../Data/";
         InputStream inputStream;
         try {
             File projectPreviewFile = Utility.createFile(projectPath, false);
@@ -257,51 +257,26 @@ public class HtmlParser extends Parser {
                 Utility.createFile(absoluteHolepath, false);
 
                 List<String> allRigsPaths = HtmlParser.parseHole(absoluteHolepath, "hole_" + hole.getHoleId(), assetManager, hole);
-                HtmlParser.parseEarthSmlRigs(absoluteHolepath + "smplEarthRigs.html", hole, assetManager);
-                HtmlParser.parseWaterSmlRigs(absoluteHolepath + "smplWaterRigs.html", hole, assetManager);
-                HtmlParser.parseRockSmlRigs(absoluteHolepath + "smplRockRigs.html", hole, assetManager);
-                HtmlParser.parseSptRigs(absoluteHolepath + "sptRigs.html", hole, assetManager);
-                HtmlParser.parseDstRigs(absoluteHolepath + "dstRigs.html", hole, hole.getRigIndexViewList(), assetManager);
+                List<String> smpleWaterRigPaths = HtmlParser.parseWaterSmlRigs(absoluteHolepath, "smplWaterRigs", hole, assetManager);
+                List<String> smpleRockRigPaths = HtmlParser.parseRockSmlRigs(absoluteHolepath, "smplRockRigs", hole, assetManager);
+                List<String> smpleEarthRigPaths = HtmlParser.parseEarthSmlRigs(absoluteHolepath, "smplEarthRigs", hole, assetManager);
+                List<String> sptPaths = HtmlParser.parseSptRigs(absoluteHolepath, "sptRigs", hole, assetManager);
+                List<String> dstPaths = HtmlParser.parseDstRigs(absoluteHolepath, "dstRigs", hole, hole.getRigIndexViewList(), assetManager);
                 HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
 
 
-                //TODO
-                String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
-                String allRigsPath = holePath + "hole_" + hole.getHoleId() + ".html";
-                String sptPath = holePath + "sptRigs.html";
-                String dstPath = holePath + "dstRigs.html";
-                String smpleEarthRigPath = holePath + "smplEarthRigs.html";
-                String smpleWaterRigPath = holePath + "smplWaterRigs.html";
-                String smpleRockRigPath = holePath + "smplRockRigs.html";
-
                 Element holeNode = doc.createElement("li");
                 holeNode.text(hole.getHoleId());
                 Element holeNodeList = doc.createElement("ul");
-//                Element allRigsNode = doc.createElement("li");
-//                allRigsNode.appendElement("a").attr("href", allRigsPath).text("原始记录表");
-
-                Element sptNode = doc.createElement("li");
-                sptNode.appendElement("a").attr("href", sptPath).text("标准贯入表");
-                Element dstNode = doc.createElement("li");
-                dstNode.appendElement("a").attr("href", dstPath).text("动力触探表");
-                Element smpleEarthRigNode = doc.createElement("li");
-                smpleEarthRigNode.appendElement("a").attr("href", smpleEarthRigPath).text("土样表");
-                Element smpleWaterRigNode = doc.createElement("li");
-                smpleWaterRigNode.appendElement("a").attr("href", smpleWaterRigPath).text("水样表");
-                Element smpleRockRigNode = doc.createElement("li");
-                smpleRockRigNode.appendElement("a").attr("href", smpleRockRigPath).text("岩样表");
-
-//                holeNodeList.appendChild(allRigsNode);
 
                 appendSubLink(allRigsPaths, hole, "原始记录表", doc, holeNodeList);
-
-                holeNodeList.appendChild(sptNode);
-                holeNodeList.appendChild(dstNode);
-                holeNodeList.appendChild(smpleEarthRigNode);
-                holeNodeList.appendChild(smpleWaterRigNode);
-                holeNodeList.appendChild(smpleRockRigNode);
+                appendSubLink(sptPaths, hole, "标准贯入表", doc, holeNodeList);
+                appendSubLink(dstPaths, hole, "动力触探表", doc, holeNodeList);
+                appendSubLink(smpleEarthRigPaths, hole, "土样表", doc, holeNodeList);
+                appendSubLink(smpleWaterRigPaths, hole, "水样表", doc, holeNodeList);
+                appendSubLink(smpleRockRigPaths, hole, "岩样表", doc, holeNodeList);
 
                 holeNode.appendChild(holeNodeList);
                 list.appendChild(holeNode);
@@ -817,7 +792,7 @@ public class HtmlParser extends Parser {
         return type;
     }
 
-    public static String parseSptRigs(String path, Hole hole, AssetManager assetManager) {
+    public static List<String> parseSptRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -836,17 +811,26 @@ public class HtmlParser extends Parser {
             sptResults = sptResults == null ? result : Utility.concat(sptResults, result);
         }
 
-        try {
-            sptResults = sptResults == null ? new String[0][] : sptResults;
-            writeWithHole(path, sptResults, hole, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
-        } catch (IOException e) {
-            e.printStackTrace();
+        sptResults = sptResults == null ? new String[0][] : sptResults;
+
+        List<String> fileNames = new ArrayList<>();
+        //列数
+        List<String[][]> records = Utility.fillArray(sptResults, 27, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            try {
+                String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+                fileNames.add(fileName);
+                String path = dir + fileName;
+                writeWithHole(path, records.get(index), hole, assetManager.open(SPT_RIG_EVENT_TEMPLATE));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        return path;
+        return fileNames;
     }
 
-    public static String parseDstRigs(String path, Hole hole, List<Rig> rigs, AssetManager assetManager) {
+    public static List<String> parseDstRigs(String dir, String fileNamePrefix, Hole hole, List<Rig> rigs, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -866,30 +850,41 @@ public class HtmlParser extends Parser {
             dstResults = null == dstResults ? result : Utility.concat(dstResults, result);
         }
 
-        try {
-            dstResults = null == dstResults ? new String[0][] : dstResults;
-            writeWithHole(path, dstResults, hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
-            Document doc = Jsoup.parse(new FileInputStream(path), "UTF-8", "./");
-            Element dateRange = doc.getElementById(DATE_RANGE_ID);
-            if (dateRange != null && dstRigs.size() > 0) {
-                DSTRig firstRig = dstRigs.get(0);
-                DSTRig lastRig = dstRigs.get(dstRigs.size() - 1);
-                dateRange.text(Utility.formatCalendarDateString(firstRig.getStartTime()) + " - " + Utility.formatCalendarDateString(lastRig.getEndTime()));
+        dstResults = null == dstResults ? new String[0][] : dstResults;
+        List<String> fileNames = new ArrayList<>();
+
+        //列数
+        List<String[][]> records = Utility.fillArray(dstResults, 7, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            try {
+                String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+                fileNames.add(fileName);
+                String path = dir + fileName;
+
+                writeWithHole(path, records.get(index), hole, assetManager.open(DST_RIG_EVENT_TEMPLATE));
+
+                //NOTICE
+                Document doc = Jsoup.parse(new FileInputStream(dir), "UTF-8", "./");
+                Element dateRange = doc.getElementById(DATE_RANGE_ID);
+                if (dateRange != null && dstRigs.size() > 0) {
+                    DSTRig firstRig = dstRigs.get(0);
+                    DSTRig lastRig = dstRigs.get(dstRigs.size() - 1);
+                    dateRange.text(Utility.formatCalendarDateString(firstRig.getStartTime()) + " - " + Utility.formatCalendarDateString(lastRig.getEndTime()));
+                }
+                FileWriter fileWriter = new FileWriter(dir, false);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(doc.outerHtml());
+                bufferedWriter.close();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            FileWriter fileWriter = new FileWriter(path, false);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(doc.outerHtml());
-            bufferedWriter.close();
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
 
-        return path;
+        return fileNames;
     }
 
-    public static String parseEarthSmlRigs(String path, Hole hole, AssetManager assetManager) {
+    public static List<String> parseEarthSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -929,17 +924,25 @@ public class HtmlParser extends Parser {
 
         earthResults = Utility.concat(originalSmplResults, distributionResults);
 
-        try {
-            writeWithHole(path, earthResults, hole, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        List<String> fileNames = new ArrayList<>();
+        //列数
+        List<String[][]> records = Utility.fillArray(earthResults, 10, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            try {
+                String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+                fileNames.add(fileName);
+                String path = dir + fileName;
+                writeWithHole(path, records.get(index), hole, assetManager.open(SMPL_EARTH_RIG_EVENT_TEMPLATE));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
-        return path;
+        return fileNames;
     }
 
-    public static String parseWaterSmlRigs(String path, Hole hole, AssetManager assetManager) {
+    public static List<String> parseWaterSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -962,18 +965,26 @@ public class HtmlParser extends Parser {
             smplWaterResults = null == smplWaterResults ? result : Utility.concat(smplWaterResults, result);
         }
 
-        try {
-            smplWaterResults = null == smplWaterResults ? new String[0][] : smplWaterResults;
-            writeWithHole(path, smplWaterResults, hole, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        smplWaterResults = null == smplWaterResults ? new String[0][] : smplWaterResults;
+        List<String> fileNames = new ArrayList<>();
+        //列数
+        List<String[][]> records = Utility.fillArray(smplWaterResults, 11, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            try {
+                String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+                fileNames.add(fileName);
+                String path = dir + fileName;
+                writeWithHole(path, records.get(index), hole, assetManager.open(SMPL_WATER_RIG_EVENT_TEMPLATE));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
-        return path;
+        return fileNames;
     }
 
-    public static String parseRockSmlRigs(String path, Hole hole, AssetManager assetManager) {
+    public static List<String> parseRockSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) return null;
 
         List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
@@ -994,15 +1005,24 @@ public class HtmlParser extends Parser {
             smplRockResults = null == smplRockResults ? result : Utility.concat(smplRockResults, result);
         }
 
-        try {
-            smplRockResults = null == smplRockResults ? new String[0][] : smplRockResults;
-            writeWithHole(path, smplRockResults, hole, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        smplRockResults = null == smplRockResults ? new String[0][] : smplRockResults;
+
+        List<String> fileNames = new ArrayList<>();
+        //列数
+        List<String[][]> records = Utility.fillArray(smplRockResults, 18, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            try {
+                String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+                fileNames.add(fileName);
+                String path = dir + fileName;
+                writeWithHole(path, records.get(index), hole, assetManager.open(SMPL_ROCK_RIG_EVENT_TEMPLATE));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
-        return path;
+        return fileNames;
     }
 
     public static void main(String[] args) throws IOException {

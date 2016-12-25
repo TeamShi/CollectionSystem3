@@ -142,7 +142,7 @@ public class Parser {
             sb.append("").append("#");
 
             //试件深度
-            sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+            sb.append(Utility.formatDouble(detail.getStartDepth()) + BR + Utility.formatDouble(detail.getEndDepth())).append("#");
 
             //野外鉴定名称
             sb.append("").append("#");
@@ -233,7 +233,7 @@ public class Parser {
             sb.append("").append("#");
 
             //深度
-            sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+            sb.append(Utility.formatDouble(detail.getStartDepth()) + BR + Utility.formatDouble(detail.getEndDepth())).append("#");
 
             sb.append("").append("#");
             sb.append("").append("#");
@@ -268,7 +268,7 @@ public class Parser {
         sb.append("").append("#");
 
         //深度
-        sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+        sb.append(Utility.formatDouble(detail.getStartDepth()) + BR + Utility.formatDouble(detail.getEndDepth())).append("#");
 
         sb.append("").append("#");
         sb.append("").append("#");
@@ -302,7 +302,7 @@ public class Parser {
             //取样地点
             sb.append("").append("#");
             //深度
-            sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+            sb.append(Utility.formatDouble(detail.getStartDepth()) + BR + Utility.formatDouble(detail.getEndDepth())).append("#");
 
             //岩石名称
             sb.append(otherSamplingRig.getLastRockName()).append("#");
@@ -389,7 +389,7 @@ public class Parser {
         //取样地点
         sb.append("").append("#");
         //深度
-        sb.append(detail.getStartDepth() + BR + detail.getEndDepth()).append("#");
+        sb.append(Utility.formatDouble(detail.getStartDepth()) + BR + Utility.formatDouble(detail.getEndDepth())).append("#");
 
         //岩石名称
         sb.append("").append("#");
