@@ -629,7 +629,7 @@ public class HtmlParser extends Parser {
         //下套管
         for (RigGraphData.GraphNode node : rigGraphData.getTrNodeList()) {
             Element el = doc.getElementById("trNodeDiameter").appendElement("div");
-            el.text(Utility.formatDouble(node.getHeight()));
+            el.text(node.getContent());
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
             el = doc.getElementById("trNodeStart").appendElement("div");
@@ -637,11 +637,11 @@ public class HtmlParser extends Parser {
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
             el = doc.getElementById("trNodeEnd").appendElement("div");
-            el.text(node.getContent());
+            el.text(Utility.formatDouble(node.getHeight()));
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
             el = doc.getElementById("trNodeTotal").appendElement("div");
-            el.text(node.getContent());
+            el.text(Utility.formatDouble(node.getHeight()));
             el.attr("style", "height:" + node.getHeight() + "rem;");
 
 
