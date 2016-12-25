@@ -262,7 +262,7 @@ public class HtmlParser extends Parser {
                 List<String> smpleEarthRigPaths = HtmlParser.parseEarthSmlRigs(absoluteHolepath, "smplEarthRigs", hole, assetManager);
                 List<String> sptPaths = HtmlParser.parseSptRigs(absoluteHolepath, "sptRigs", hole, assetManager);
                 List<String> dstPaths = HtmlParser.parseDstRigs(absoluteHolepath, "dstRigs", hole, hole.getRigIndexViewList(), assetManager);
-                HtmlParser.parseRigGraphTable(absoluteHolepath + "rigGraph.html", hole, assetManager);
+                HtmlParser.parseRigGraphTable(absoluteHolepath, "rigGraph", hole, assetManager);
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
 
@@ -564,8 +564,78 @@ public class HtmlParser extends Parser {
 
     }
 
-    public static String parseRigGraphTable(String outPath, Hole hole, AssetManager assetManager) throws IOException {
-        File rigGraph = Utility.createFile(outPath, false);
+    public static void appendRigNode(List<RigGraphData.RigNode> rigNodes, double offset, Document doc, String path) {
+        for (RigGraphData.RigNode rigNode : rigNodes) {
+            Element el = doc.getElementById("rockCorePer").appendElement("div");
+            el.text(Utility.formatDouble(rigNode.getRockPickPercentage() * 100));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //钻头直径
+            el = doc.getElementById("drillDiameter").appendElement("div");
+            el.text(String.valueOf(rigNode.getDrillDiameter() < 0 ? "" : Utility.formatDouble(rigNode.getDrillDiameter())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //岩芯编号
+            el = doc.getElementById("rockCoreIndex").appendElement("div");
+            el.text(String.valueOf(rigNode.getRockLayoutIndex()));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //岩芯长度
+            el = doc.getElementById("rockCoreLength").appendElement("div");
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getRockPickLength())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //岩层描述
+            el = doc.getElementById("desc").appendElement("div");
+            el.text(String.valueOf(rigNode.getDescription()));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //钻进深度至
+            el = doc.getElementById("endDepth").appendElement("div");
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //钻进深度至
+            el = doc.getElementById("depthAll").appendElement("div");
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //钻进深度由
+            el = doc.getElementById("startDepth").appendElement("div");
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getStartDepth())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //层底深度
+            el = doc.getElementById("layerEndDepth").appendElement("div");
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getLayoutEndDepth())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //回次进尺
+            el = doc.getElementById("roundTrip").appendElement("div");
+            el.text(String.valueOf(Utility.formatDouble(rigNode.getRoundTripDepth())));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+
+            //类型
+            el = doc.getElementById("legend").appendElement("div");
+            el.text(String.valueOf("ff"));
+            el.attr("class", getEarthType(rigNode.getDrillType()));
+            el.attr("style", "height:" + rigNode.getHeight() + "rem;" + ";color:rgba(255,255,255,0)");
+        }
+
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(path, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(doc.outerHtml());
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> parseRigGraphTable(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) throws IOException {
+        File rigGraph = Utility.createFile(dir, false);
         InputStream inputStream = assetManager.open(RIG_GRAPH_TEMPLATE);
 
         //读模版文件
@@ -651,70 +721,48 @@ public class HtmlParser extends Parser {
 
         List<RigGraphData.RigNode> rigNodes = rigGraphData.getRigNodeList();
         doc.getElementsByClass("flex-row").attr("style", "height:" + 30 * rigNodes.size() + "px");
-        for (RigGraphData.RigNode rigNode : rigNodes) {
-            el = doc.getElementById("rockCorePer").appendElement("div");
-            el.text(Utility.formatDouble(rigNode.getRockPickPercentage() * 100));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
 
-            //钻头直径
-            el = doc.getElementById("drillDiameter").appendElement("div");
-            el.text(String.valueOf(rigNode.getDrillDiameter() < 0 ? "" : Utility.formatDouble(rigNode.getDrillDiameter())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+        List<String> fileNames = new ArrayList<>();
 
-            //岩芯编号
-            el = doc.getElementById("rockCoreIndex").appendElement("div");
-            el.text(String.valueOf(rigNode.getRockLayoutIndex()));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
+        double offset = 0;
+        Map<Double, List<RigGraphData.RigNode>> rigNodePages = new HashMap<>();
+        List<RigGraphData.RigNode> nodes = new ArrayList<>();
+        double currentOffset = 0;
+        for (int i = 0; i < rigNodes.size(); i++ ) {
+            RigGraphData.RigNode node  = rigNodes.get(i);
+            currentOffset += node.getHeight();
+            offset += node.getHeight();
+            if (currentOffset > PAGE_SIZE * 2) {
+                rigNodePages.put(offset - currentOffset, nodes);
+                nodes = new ArrayList<>();
+                currentOffset = 0;
+                continue;
+            } else {
+                nodes.add(node);
+            }
 
-            //岩芯长度
-            el = doc.getElementById("rockCoreLength").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getRockPickLength())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //岩层描述
-            el = doc.getElementById("desc").appendElement("div");
-            el.text(String.valueOf(rigNode.getDescription()));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //钻进深度至
-            el = doc.getElementById("endDepth").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //钻进深度至
-            el = doc.getElementById("depthAll").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getEndDepth())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //钻进深度由
-            el = doc.getElementById("startDepth").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getStartDepth())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //层底深度
-            el = doc.getElementById("layerEndDepth").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getLayoutEndDepth())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //回次进尺
-            el = doc.getElementById("roundTrip").appendElement("div");
-            el.text(String.valueOf(Utility.formatDouble(rigNode.getRoundTripDepth())));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;");
-
-            //类型
-            el = doc.getElementById("legend").appendElement("div");
-            el.text(String.valueOf("ff"));
-            el.attr("class", getEarthType(rigNode.getDrillType()));
-            el.attr("style", "height:" + rigNode.getHeight() + "rem;" + ";color:rgba(255,255,255,0)");
+            if( i == (rigNodes.size() -1)) {
+                rigNodePages.put(offset - currentOffset, nodes);
+            }
         }
 
-        FileWriter fileWriter = new FileWriter(rigGraph);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(doc.outerHtml());
-        bufferedWriter.close();
-        fileWriter.close();
+        int index = 0;
+        for (Map.Entry<Double, List<RigGraphData.RigNode>> entry : rigNodePages.entrySet()) {
+            String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+            fileNames.add(fileName);
+            if (index == 0) {
+                appendRigNode(entry.getValue(), entry.getKey(), doc, dir + fileName);
+                index ++;
+                continue;
+            }
+            inputStream = assetManager.open(RIG_GRAPH_TEMPLATE);
+            doc = Jsoup.parse(inputStream, "UTF-8", "./");
+            appendRigNode(entry.getValue(), entry.getKey(), doc, dir + fileName);
+            index ++;
+            //TODO display offset
+        }
 
-        return outPath;
+        return fileNames;
     }
 
     private static String getEarthType(String drillType) {
