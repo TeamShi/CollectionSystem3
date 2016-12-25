@@ -249,6 +249,10 @@ public class RigGraphActivity extends Activity {
                         lastDate = Utility.formatCalendarDateStringWithoutYear(rig.getDate());
                     }
 
+                    if (calculatingRigs.size() == 0) {
+                        return;
+                    }
+
                     graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(Utility.formatCalendarDateStringWithoutYear(calculatingRigs.get(calculatingRigs.size() - 1).getDate()), calculatingRigs.get(calculatingRigs.size() - 1).getAccumulatedMeterageLength()));
 
                     // Drill Type
