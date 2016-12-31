@@ -28,11 +28,13 @@ public class HoleIndexActivity extends AppCompatActivity {
     private static final int ACTION_ADD_HOLE = 1;
     private static final int ACTION_EDIT_HOLE = 2;
     private static final int ACTION_COPY_HOLE = 3;
+    private static final int ACTION_EDIT_FIX = 4;
 
     private static final int CONTEXT_MENU_QUERY = 0;
     private static final int CONTEXT_MENU_INPUT = 1;
     private static final int CONTEXT_MENU_COPY_NEW = 2;
     private static final int CONTEXT_MENU_DELETE = 3;
+    private static final int CONTEXT_MENU_FIX_ITEMS = 4;
 
     private Button saveProjectButton;
     private Button newHoleButton;
@@ -141,6 +143,11 @@ public class HoleIndexActivity extends AppCompatActivity {
                 DataManager.deleteHole(holeId);
                 refreshInfo();
                 break;
+            case CONTEXT_MENU_FIX_ITEMS:
+                Log.d(TAG, "Edit hole fix information.");
+                intent = new Intent();
+                intent.putExtra("holeId", holeId);
+                startActivityForResult(intent, ACTION_EDIT_FIX);
         }
 
         return super.onContextItemSelected(item);

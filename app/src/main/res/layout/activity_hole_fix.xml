@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_hole_fix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.teamshi.collectionsystem3.HoleFixActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button_confirm_edit_hole_fix"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:text="提交"
+                android:textSize="@dimen/default_text_size" />
+
+            <Button
+                android:id="@+id/button_cancel_edit_hole_fix"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:text="取消"
+                android:textSize="@dimen/default_text_size" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="序号"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="原记录内容"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="修正内容"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="6"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_6"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_6"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_7"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_7"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_hint"
+                        android:gravity="center"
+                        android:text="8"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size"></TextView>
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_origin_8"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+
+                    <EditText
+                        android:id="@+id/edit_text_fix_info_after_8"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/default_table_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:background="@drawable/cell_input"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/default_text_size" />
+                </TableRow>
+            </TableLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

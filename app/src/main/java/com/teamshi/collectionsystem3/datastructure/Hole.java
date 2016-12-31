@@ -3,12 +3,44 @@ package com.teamshi.collectionsystem3.datastructure;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Alfred on 16/7/14.
  */
 public class Hole implements Serializable {
+    public static class FixItem {
+        private String originItem;
+        private String fixedItem;
+
+        public String getOriginItem() {
+            return originItem;
+        }
+
+        public void setOriginItem(String originItem) {
+            this.originItem = originItem;
+        }
+
+        public String getFixedItem() {
+            return fixedItem;
+        }
+
+        public void setFixedItem(String fixedItem) {
+            this.fixedItem = fixedItem;
+        }
+
+        public FixItem(String originItem, String fixedItem) {
+            this.originItem = originItem;
+            this.fixedItem = fixedItem;
+        }
+
+        public FixItem deepCopy() {
+            FixItem newItem = new FixItem(originItem, fixedItem);
+
+            return newItem;
+        }
+    }
     private static final long serialVersionUID = -7800855430416140956L;
     private String projectName;                     // 工程名称
 
@@ -100,6 +132,12 @@ public class Hole implements Serializable {
     private int lastTR108Length;
 
     private RigGraphData rigGraphData;
+
+    private List<FixItem> holeFixItems;
+
+    private Calendar fixDate;
+
+    private String fixSignature;
 
     public Hole() {
 
@@ -194,6 +232,16 @@ public class Hole implements Serializable {
         this.lastTRLength = 0;
 
         this.rigGraphData = new RigGraphData();
+
+        this.holeFixItems = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++) {
+            holeFixItems.add(new FixItem("", ""));
+        }
+
+        this.fixSignature = "";
+
+        this.fixDate = Calendar.getInstance();
     }
 
     public String getProjectName() {
@@ -506,6 +554,30 @@ public class Hole implements Serializable {
 
     public void setLastTR108Index(int lastTR108Index) {
         this.lastTR108Index = lastTR108Index;
+    }
+
+    public List<FixItem> getHoleFixItems() {
+        return holeFixItems;
+    }
+
+    public void setHoleFixItems(List<FixItem> holeFixItems) {
+        this.holeFixItems = holeFixItems;
+    }
+
+    public Calendar getFixDate() {
+        return fixDate;
+    }
+
+    public void setFixDate(Calendar fixDate) {
+        this.fixDate = fixDate;
+    }
+
+    public String getFixSignature() {
+        return fixSignature;
+    }
+
+    public void setFixSignature(String fixSignature) {
+        this.fixSignature = fixSignature;
     }
 
     public String getHoleId() {
@@ -916,6 +988,14 @@ public class Hole implements Serializable {
         newHole.setLastTRLength(lastTRLength);
 
         newHole.setLastTR108Length(lastTR108Length);
+
+        for (FixItem item : holeFixItems) {
+            newHole.holeFixItems.add(item.deepCopy());
+        }
+
+        newHole.setFixSignature(fixSignature);
+
+        newHole.setFixDate((Calendar) fixDate.clone());
 
         return newHole;
     }
