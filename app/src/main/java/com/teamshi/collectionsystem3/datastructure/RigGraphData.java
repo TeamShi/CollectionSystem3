@@ -63,6 +63,8 @@ public class RigGraphData implements Serializable {
         private double rockPickLength;
         private double rockPickPercentage;
 
+        private String rockDensity;
+
         private String description;
 
         public RigNode(double height, String drillType, double drillDiameter, double startDepth, double endDepth, double roundTripDepth, double layoutEndDepth, double rockDepth, double rockPickLength, double rockPickPercentage, int rockLayoutIndex, String description) {
@@ -78,6 +80,14 @@ public class RigGraphData implements Serializable {
             this.rockPickPercentage = rockPickPercentage;
             this.rockLayoutIndex = rockLayoutIndex;
             this.description = description;
+        }
+
+        public String getRockDensity() {
+            return rockDensity;
+        }
+
+        public void setRockDensity(String rockDensity) {
+            this.rockDensity = rockDensity;
         }
 
         public double getHeight() {
