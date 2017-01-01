@@ -434,7 +434,7 @@ public class Parser {
         }
     }
 
-    protected static void generateWaterSampleInfo(Rig nextRig, StringBuffer sb) {
+    protected static void generateWaterSampleInfo(Rig nextRig, StringBuffer sb, String BR) {
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
                 && (
@@ -442,7 +442,7 @@ public class Parser {
         )) {
             sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
             sb.append(Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) +
-                    " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())).append("#");
+                    BR + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth())).append("#");
             sb.append(String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount())).append("#");
 
         } else {
@@ -576,7 +576,7 @@ public class Parser {
                 generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
-                generateWaterSampleInfo(nextRig, sb);
+                generateWaterSampleInfo(nextRig, sb, BR);
 
                 //地层
                 generateEarchLayoutInfo(hole, regularRig, sb, i);
@@ -634,7 +634,7 @@ public class Parser {
                 generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
-                generateWaterSampleInfo(nextRig, sb);
+                generateWaterSampleInfo(nextRig, sb, BR);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
@@ -696,7 +696,7 @@ public class Parser {
                 generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
-                generateWaterSampleInfo(nextRig, sb);
+                generateWaterSampleInfo(nextRig, sb, BR);
 
                 //地层
                 generateEarchLayoutInfo(hole, sptRig, sb, i);
@@ -753,7 +753,7 @@ public class Parser {
                 generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
-                generateWaterSampleInfo(nextRig, sb);
+                generateWaterSampleInfo(nextRig, sb, BR);
 
                 //地层
                 generateEarchLayoutInfo(hole, dstRig, sb, i);
@@ -843,7 +843,7 @@ public class Parser {
                 generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
-                generateWaterSampleInfo(nextRig, sb);
+                generateWaterSampleInfo(nextRig, sb, BR);
 
                 //地层
                 sb.append("").append("#");//编号, 四类普通钻,编号加1
