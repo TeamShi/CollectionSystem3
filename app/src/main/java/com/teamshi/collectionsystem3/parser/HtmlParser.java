@@ -277,12 +277,16 @@ public class HtmlParser extends Parser {
         }
 
         Hole.FixItem[] items = hole.getHoleFixItems();
-        String[][] results = new String[items.length][] ;
-        for (int i = 0, len = items.length; i < len; i ++ ) {
-            results[i] = new String[3];
-            results[i][0] = String.valueOf(i + 1);
-            results[i][1] = items[i].getOriginItem();
-            results[i][2] = items[i].getFixedItem();
+        String[][] results = new String[0][];
+
+        if( items != null) {
+            results = new String[items.length][3];
+            for (int i = 0, len = items.length; i < len; i ++ ) {
+                results[i] = new String[3];
+                results[i][0] = String.valueOf(i + 1);
+                results[i][1] = items[i].getOriginItem();
+                results[i][2] = items[i].getFixedItem();
+            }
         }
 
         List<String> fileNames = new ArrayList<>();
