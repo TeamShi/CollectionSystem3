@@ -45,7 +45,7 @@ public class XlsParser extends Parser {
     public static String[] SPTEVENT_HEADER = new String[]{"顺序号", "月", "日", "班次", "自", "至",
             "分层", "贯入深度自", "贯入深度至", "计数深度自", "计数深度至", "钻进深度自",
             "钻进深度至", "分类", "颜色", "密度", "湿度", "黏土等级", "黏土状态", "光泽", "夹杂物", "气味"
-            , "其他特征及包含", "贯入击数", "初见水位", "静止水位", "备考"};
+            , "其他特征及包含", "贯入击数", "初见水位", "静止水位", "备注"};
     public static String[] DSTEVENT_HEADER = new String[]{"探杆总长", "入土深度", "贯入度", "锤击数",
             "密实度", "矫正后击数", "附注"};
     public static String[] SMPL_WATER_EVENT_HEADER = new String[]{"外业", "试验室", "勘探点编号",
