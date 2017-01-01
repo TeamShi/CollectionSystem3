@@ -10,7 +10,9 @@ import java.util.Map;
  * Created by Alfred on 16/7/14.
  */
 public class Hole implements Serializable {
-    public static class FixItem {
+    public static class FixItem implements  Serializable{
+        private static final long serialVersionUID = -6820511806124628509L;
+
         private String originItem;
         private String fixedItem;
 

@@ -2,7 +2,6 @@ package com.teamshi.collectionsystem3.parser;
 
 import android.content.res.AssetManager;
 
-import com.teamshi.collectionsystem3.IOManager;
 import com.teamshi.collectionsystem3.Utility;
 import com.teamshi.collectionsystem3.datastructure.DSTRig;
 import com.teamshi.collectionsystem3.datastructure.Hole;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import static com.teamshi.collectionsystem3.IOManager.APP_TEMP;
 import static com.teamshi.collectionsystem3.IOManager.getHolePath;
@@ -36,85 +34,46 @@ import static com.teamshi.collectionsystem3.Utility.formatCalendarDateString;
 
 public class HtmlParser extends Parser {
 
-    public static String PROJECT_OVERVIEW_TEMPLATE = "Project.html";
+    private static String PROJECT_OVERVIEW_TEMPLATE = "Project.html";
     public static String BASIC_RIG_EVENT_TEMPLATE = "RigEventTable.html";
-    public static String SPT_RIG_EVENT_TEMPLATE = "SPTRigEventTable.html";
-    public static String DST_RIG_EVENT_TEMPLATE = "DSTRigEventTable.html"; // 动力触探
-    public static String SMPL_ORIGIN_RIG_EVENT_TEMPLATE = "SMPLRigEventTable.html";
-    public static String SMPL_EARTH_RIG_EVENT_TEMPLATE = "SampleEarth.html";
-    public static String SMPL_WATER_RIG_EVENT_TEMPLATE = "SampleWater.html";
-    public static String SMPL_ROCK_RIG_EVENT_TEMPLATE = "SampleRock.html";
+    private static String SPT_RIG_EVENT_TEMPLATE = "SPTRigEventTable.html";
+    private static String DST_RIG_EVENT_TEMPLATE = "DSTRigEventTable.html"; // 动力触探
+    private static String SMPL_EARTH_RIG_EVENT_TEMPLATE = "SampleEarth.html";
+    private static String SMPL_WATER_RIG_EVENT_TEMPLATE = "SampleWater.html";
+    private static String SMPL_ROCK_RIG_EVENT_TEMPLATE = "SampleRock.html";
 
-    public static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
-    public static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphCover.html";
-    public static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphBackCover.html";
+    private static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
+    private static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphBackCover.html";
     public static String MODIFY_NOTE_TEMPLATE = "ModificationDesc.html";
 
-    public static String TBODY_ID = "tableBody";
-    public static String PROJECTNAME_ID = "projectName";
-    public static String PROJECTNAME_LIST = "projectList";
-    public static String POSITION_ID = "position";
-    public static String MILEAGE_ID = "mileage";
+    private static String TBODY_ID = "tableBody";
+    private static String PROJECTNAME_ID = "projectName";
+    private static String PROJECTNAME_LIST = "projectList";
+    private static String POSITION_ID = "position";
+    private static String MILEAGE_ID = "mileage";
 
     public static String HOLEELEVATION_ID = "holeElevation";
     public static String HOLE_OFFSET = "offsetRight";
     public static String HOLE_ID = "holeId";
-    public static String EXPLORATIONUNIT_ID = "company";
-    public static String MACHINENUMBER_ID = "machineNumber";
-    public static String ENGIN_ID = "enginType";
-    public static String PUMP_ID = "pumpType";
-    public static String DESIGN_DEPTH_ID = "holeDepth";
-    public static String ACTURAL_DEPTH_ID = "actualDepth";
+    private static String EXPLORATIONUNIT_ID = "company";
+    private static String MACHINENUMBER_ID = "machineNumber";
+    private static String ENGIN_ID = "enginType";
+    private static String PUMP_ID = "pumpType";
+    private static String DESIGN_DEPTH_ID = "holeDepth";
+    private static String ACTURAL_DEPTH_ID = "actualDepth";
 
-    public static String RIGTYPE_ID = "rigType";
-    public static String STARTDATE_ID = "startDate";
-    public static String ENDDATE_ID = "endDate";
-    public static String DATE_RANGE_ID = "dateRange";
+    private static String RIGTYPE_ID = "rigType";
+    private static String STARTDATE_ID = "startDate";
+    private static String ENDDATE_ID = "endDate";
+    private static String DATE_RANGE_ID = "dateRange";
 
-    public static String HOLE_DESC = "description";
+    private static String HOLE_DESC = "description";
 
-    public static String RECORDER_ID = "recorderName";
-    public static String SQUAD_ID = "squadName";
-    public static String CAPTAIN_ID = "captainName";
+    private static String RECORDER_ID = "recorderName";
+    private static String SQUAD_ID = "squadName";
+    private static String CAPTAIN_ID = "captainName";
 
     public static int PAGE_SIZE = 20;
-
-//    public static boolean write(String outPath, String[][] data, InputStream inputStream) throws IOException {
-//        String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
-//        if (!fileType.equals("html")) {
-//            System.out.println("您的文档格式不正确(非html)！");
-//            return false;
-//        }
-//
-//        //读模版文件
-//        Document doc = Jsoup.parse(inputStream, "UTF-8", "./");
-//        Element tbody = doc.getElementById(TBODY_ID);
-//        if (data != null) {
-//            // 循环写入行数据
-//            for (int i = 0, rows = data.length; i < rows; i++) {
-//                StringBuffer row = new StringBuffer();
-//                row.append("<tr>");
-//                // 循环写入列数据
-//                for (int j = 0, cols = data[i].length; j < cols; j++) {
-//                    row.append("<td>");
-//                    String text = data[i][j].equals("null") ? "" : data[i][j];
-//                    row.append(text);
-//                    row.append("</td>");
-//                }
-//                row.append("</tr>");
-//                tbody.append(row.toString());
-//            }
-//        }
-//
-//        FileWriter fileWriter = new FileWriter(outPath, false);
-//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//        bufferedWriter.write(doc.outerHtml());
-//        bufferedWriter.close();
-//        fileWriter.close();
-//
-//        return true;
-//
-//    }
 
     public static boolean writeWithHole(String outPath, String[][] data, Hole hole, InputStream inputStream) throws IOException {
         String fileType = outPath.substring(outPath.lastIndexOf(".") + 1, outPath.length());
@@ -202,13 +161,13 @@ public class HtmlParser extends Parser {
         Element tbody = doc.getElementById(TBODY_ID);
         if (data != null) {
             // 循环写入行数据
-            for (int i = 0, rows = data.length; i < rows; i++) {
-                StringBuffer row = new StringBuffer();
+            for (String[] aData : data) {
+                StringBuilder row = new StringBuilder();
                 row.append("<tr>");
                 // 循环写入列数据
-                for (int j = 0, cols = data[i].length; j < cols; j++) {
+                for (String anAData : aData) {
                     row.append("<td>");
-                    String text = data[i][j].equals("null") ? "" : data[i][j];
+                    String text = anAData.equals("null") ? "" : anAData;
                     row.append(text);
                     row.append("</td>");
                 }
@@ -228,7 +187,7 @@ public class HtmlParser extends Parser {
     }
 
 
-    public static void appendSubLink(List<String> fileNames, Hole hole, String textPrefix, Document doc, Element parent) {
+    private static void appendSubLink(List<String> fileNames, Hole hole, String textPrefix, Document doc, Element parent) {
         String relativeDataPaths = "../Data/";
         String holePath = relativeDataPaths + hole.getProjectName() + File.separator + hole.getHoleId() + File.separator;
         for (int i = 0; i < fileNames.size(); i++) {
@@ -257,7 +216,7 @@ public class HtmlParser extends Parser {
                 String absoluteHolepath = getHolePath(hole);
                 Utility.createFile(absoluteHolepath, false);
 
-                List<String> allRigsPaths = HtmlParser.parseHole(absoluteHolepath, "hole_" + hole.getHoleId(), assetManager, hole);
+                List allRigsPaths = HtmlParser.parseHole(absoluteHolepath, "hole_" + hole.getHoleId(), assetManager, hole);
                 List<String> smpleWaterRigPaths = HtmlParser.parseWaterSmlRigs(absoluteHolepath, "smplWaterRigs", hole, assetManager);
                 List<String> smpleRockRigPaths = HtmlParser.parseRockSmlRigs(absoluteHolepath, "smplRockRigs", hole, assetManager);
                 List<String> smpleEarthRigPaths = HtmlParser.parseEarthSmlRigs(absoluteHolepath, "smplEarthRigs", hole, assetManager);
@@ -399,7 +358,7 @@ public class HtmlParser extends Parser {
     }
 
 
-    public static List parseHole(String dir, String fileNamePrefix, AssetManager assetManager, Hole hole) throws IOException {
+    private static List parseHole(String dir, String fileNamePrefix, AssetManager assetManager, Hole hole) throws IOException {
         String[][] _data = convertHole(hole, "<br/>");
         List<String> fileNames = new ArrayList<>();
         //列数
@@ -416,13 +375,13 @@ public class HtmlParser extends Parser {
             String[][] data = records.get(index);
             if (data != null) {
                 // 循环写入行数据
-                for (int i = 0, rows = data.length; i < rows; i++) {
-                    StringBuffer row = new StringBuffer();
+                for (String[] aData : data) {
+                    StringBuilder row = new StringBuilder();
                     row.append("<tr>");
                     // 循环写入列数据
-                    for (int j = 0, cols = data[i].length; j < cols; j++) {
+                    for (String anAData : aData) {
                         row.append("<td>");
-                        String text = data[i][j].equals("null") ? "" : data[i][j];
+                        String text = anAData.equals("null") ? "" : anAData;
                         row.append(text);
                         row.append("</td>");
                     }
@@ -484,9 +443,10 @@ public class HtmlParser extends Parser {
 
     }
 
-    public static boolean parseRigGraphCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
+    private static boolean parseRigGraphCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
 
         File rigGraphCover = Utility.createFile(outPath, false);
+        String RIG_GRAPH_COVER_TEMPLATE = "RigGraphCover.html";
         InputStream inputStream = assetManager.open(RIG_GRAPH_COVER_TEMPLATE);
 
         //读模版文件
@@ -544,7 +504,7 @@ public class HtmlParser extends Parser {
         return true;
     }
 
-    public static boolean parseRigGraphBackCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
+    private static boolean parseRigGraphBackCover(String outPath, Hole hole, AssetManager assetManager) throws IOException {
 
         File rigGraphBackCover = Utility.createFile(outPath, false);
         InputStream inputStream = assetManager.open(RIG_GRAPH_BACK_COVER_TEMPLATE);
@@ -565,7 +525,7 @@ public class HtmlParser extends Parser {
 
     }
 
-    public static void appendRigNode(List<RigGraphData.RigNode> rigNodes, double offset, Document doc, String path) {
+    private static void appendRigNode(List<RigGraphData.RigNode> rigNodes, double offset, Document doc, String path) {
         RigGraphData.RigNode prevRigNode = null;
         for (int f = 0, len = rigNodes.size(); f < len; f++) {
             RigGraphData.RigNode rigNode = rigNodes.get(f);
@@ -639,22 +599,22 @@ public class HtmlParser extends Parser {
         }
     }
 
-    public static double getRelativeHeight(RigGraphData.GraphNode prevNode, RigGraphData.GraphNode node) {
+    private static double getRelativeHeight(RigGraphData.GraphNode prevNode, RigGraphData.GraphNode node) {
         if (prevNode == null) {
             return node.getHeight();
         }
         return node.getHeight() - prevNode.getHeight();
     }
 
-    public static double getRelativeHeight(RigGraphData.RigNode prevNode, RigGraphData.RigNode node, double offset) {
+    private static double getRelativeHeight(RigGraphData.RigNode prevNode, RigGraphData.RigNode node, double offset) {
         if (prevNode == null) {
             return node.getHeight() - offset;
         }
         return node.getHeight() - prevNode.getHeight();
     }
 
-    public static List<String> parseRigGraphTable(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) throws IOException {
-        File rigGraph = Utility.createFile(dir, false);
+    private static List<String> parseRigGraphTable(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) throws IOException {
+        Utility.createFile(dir, false);
         InputStream inputStream = assetManager.open(RIG_GRAPH_TEMPLATE);
 
         //读模版文件
@@ -761,7 +721,7 @@ public class HtmlParser extends Parser {
         Map<Double, List<RigGraphData.RigNode>> rigNodePages = new HashMap<>();
         List<RigGraphData.RigNode> nodes = new ArrayList<>();
         double offset = 0;
-        double currentOffset = 0;
+        double currentOffset;
         for (int i = 0; i < rigNodes.size(); i++) {
             RigGraphData.RigNode node = rigNodes.get(i);
             currentOffset = node.getHeight() - offset;
@@ -873,7 +833,7 @@ public class HtmlParser extends Parser {
         return type;
     }
 
-    public static List<String> parseSptRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
+    private static List<String> parseSptRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -911,7 +871,7 @@ public class HtmlParser extends Parser {
         return fileNames;
     }
 
-    public static List<String> parseDstRigs(String dir, String fileNamePrefix, Hole hole, List<Rig> rigs, AssetManager assetManager) {
+    private static List<String> parseDstRigs(String dir, String fileNamePrefix, Hole hole, List<Rig> rigs, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -965,7 +925,7 @@ public class HtmlParser extends Parser {
         return fileNames;
     }
 
-    public static List<String> parseEarthSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
+    private static List<String> parseEarthSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -1023,7 +983,7 @@ public class HtmlParser extends Parser {
         return fileNames;
     }
 
-    public static List<String> parseWaterSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
+    private static List<String> parseWaterSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) {
             return null;
         }
@@ -1065,7 +1025,7 @@ public class HtmlParser extends Parser {
         return fileNames;
     }
 
-    public static List<String> parseRockSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
+    private static List<String> parseRockSmlRigs(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
         if (hole == null) return null;
 
         List<Rig> rigs = hole.getRigIndexViewList() == null ? new ArrayList<Rig>() : hole.getRigIndexViewList();
