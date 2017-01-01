@@ -73,6 +73,9 @@ public class HtmlParser extends Parser {
     private static String SQUAD_ID = "squadName";
     private static String CAPTAIN_ID = "captainName";
 
+    private static String MODIFY_STAFF_ID = "checkStaff";
+    private static String MODIFY_DATE_ID = "checkDate";
+
     public static int PAGE_SIZE = 20;
 
     public static boolean writeWithHole(String outPath, String[][] data, Hole hole, InputStream inputStream) throws IOException {
@@ -156,6 +159,15 @@ public class HtmlParser extends Parser {
                 captainName.text(hole.getMachineMonitor() == null ? "" : hole.getMachineMonitor());
             }
 
+            Element modifyDate = doc.getElementById(MODIFY_DATE_ID);
+            if (modifyDate != null) {
+                modifyDate.text(Utility.formatCalendarDateString(hole.getFixDate()));
+            }
+
+            Element modifyStaff = doc.getElementById(MODIFY_STAFF_ID);
+            if (modifyStaff != null) {
+                modifyStaff.text(hole.getFixSignature());
+            }
         }
 
         Element tbody = doc.getElementById(TBODY_ID);
@@ -222,6 +234,7 @@ public class HtmlParser extends Parser {
                 List<String> smpleEarthRigPaths = HtmlParser.parseEarthSmlRigs(absoluteHolepath, "smplEarthRigs", hole, assetManager);
                 List<String> sptPaths = HtmlParser.parseSptRigs(absoluteHolepath, "sptRigs", hole, assetManager);
                 List<String> dstPaths = HtmlParser.parseDstRigs(absoluteHolepath, "dstRigs", hole, hole.getRigIndexViewList(), assetManager);
+                List<String> modifyHoldePaths = HtmlParser.parseModifyHoleDesc(absoluteHolepath, "modifyHole", hole, assetManager);
                 HtmlParser.parseRigGraphTable(absoluteHolepath, "rigGraph", hole, assetManager);
                 HtmlParser.parseRigGraphCover(absoluteHolepath + "rigGraphCover.html", hole, assetManager);
                 HtmlParser.parseRigGraphBackCover(absoluteHolepath + "rigGraphBackCover.html", hole, assetManager);
@@ -237,6 +250,7 @@ public class HtmlParser extends Parser {
                 appendSubLink(smpleEarthRigPaths, hole, "土样表", doc, holeNodeList);
                 appendSubLink(smpleWaterRigPaths, hole, "水样表", doc, holeNodeList);
                 appendSubLink(smpleRockRigPaths, hole, "岩样表", doc, holeNodeList);
+                appendSubLink(modifyHoldePaths, hole, "修正表", doc, holeNodeList);
 
                 holeNode.appendChild(holeNodeList);
                 list.appendChild(holeNode);
@@ -255,6 +269,47 @@ public class HtmlParser extends Parser {
 
 
         return projectPath;
+    }
+
+    private static List<String> parseModifyHoleDesc(String dir, String fileNamePrefix, Hole hole, AssetManager assetManager) {
+        if (hole == null) {
+            return null;
+        }
+
+        Hole.FixItem[] items = hole.getHoleFixItems();
+        String[][] results = new String[items.length][] ;
+        for (int i = 0, len = items.length; i < len; i ++ ) {
+            results[i] = new String[3];
+            results[i][0] = String.valueOf(i + 1);
+            results[i][1] = items[i].getOriginItem();
+            results[i][2] = items[i].getFixedItem();
+        }
+
+        List<String> fileNames = new ArrayList<>();
+
+        //列数
+        List<String[][]> records = Utility.fillArray(results, 3, PAGE_SIZE, " ");
+        for (int index = 0; index < records.size(); index++) {
+            try {
+                String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
+                fileNames.add(fileName);
+                String path = dir + fileName;
+
+                writeWithHole(path, records.get(index), hole, assetManager.open(MODIFY_NOTE_TEMPLATE));
+
+                //NOTICE
+                Document doc = Jsoup.parse(new FileInputStream(dir), "UTF-8", "./");
+                FileWriter fileWriter = new FileWriter(dir, false);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(doc.outerHtml());
+                bufferedWriter.close();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return fileNames;
     }
 
 
