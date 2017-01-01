@@ -514,7 +514,7 @@ public class Parser {
             boolean isTrr = rig instanceof TRRig;
             boolean isOriSmpl = rig instanceof OriginalSamplingRig;
 
-            if (hasStart) {
+            if (!hasStart) {
                 initialWaterDepth = Utility.formatDouble(hole.getInitialWaterDepth());
                 finalWaterDepth = Utility.formatDouble(hole.getFinalWaterDepth());
                 hasStart = true;
