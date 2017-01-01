@@ -133,7 +133,7 @@ public class Hole implements Serializable {
 
     private RigGraphData rigGraphData;
 
-    private List<FixItem> holeFixItems;
+    private FixItem[] holeFixItems;
 
     private Calendar fixDate;
 
@@ -233,10 +233,10 @@ public class Hole implements Serializable {
 
         this.rigGraphData = new RigGraphData();
 
-        this.holeFixItems = new ArrayList<>();
+        this.holeFixItems = new FixItem[8];
 
         for (int i = 0; i < 8; i++) {
-            holeFixItems.add(new FixItem("", ""));
+            holeFixItems[i] = new FixItem("", "");
         }
 
         this.fixSignature = "";
@@ -556,11 +556,11 @@ public class Hole implements Serializable {
         this.lastTR108Index = lastTR108Index;
     }
 
-    public List<FixItem> getHoleFixItems() {
+    public FixItem[] getHoleFixItems() {
         return holeFixItems;
     }
 
-    public void setHoleFixItems(List<FixItem> holeFixItems) {
+    public void setHoleFixItems(FixItem[] holeFixItems) {
         this.holeFixItems = holeFixItems;
     }
 
@@ -989,8 +989,8 @@ public class Hole implements Serializable {
 
         newHole.setLastTR108Length(lastTR108Length);
 
-        for (FixItem item : holeFixItems) {
-            newHole.holeFixItems.add(item.deepCopy());
+        for (int i = 0; i < 8; i++) {
+            newHole.getHoleFixItems()[i] = holeFixItems[i];
         }
 
         newHole.setFixSignature(fixSignature);
