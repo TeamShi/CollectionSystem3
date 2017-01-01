@@ -256,7 +256,6 @@ public class RigGraphActivity extends Activity {
                     graphDataViewModel.getDateNodeList().add(new RigGraphData.GraphNode(Utility.formatCalendarDateStringWithoutYear(calculatingRigs.get(calculatingRigs.size() - 1).getDate()), calculatingRigs.get(calculatingRigs.size() - 1).getAccumulatedMeterageLength()));
 
                     // Drill Type
-
                     double currentDrillDiameter = 0;
 
                     for (Rig rig : rigList) {

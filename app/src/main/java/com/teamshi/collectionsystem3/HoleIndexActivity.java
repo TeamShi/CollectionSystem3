@@ -110,6 +110,7 @@ public class HoleIndexActivity extends AppCompatActivity {
         menu.add(0, CONTEXT_MENU_INPUT, 0, "输入");
         menu.add(0, CONTEXT_MENU_COPY_NEW, 0, "复制新增");
         menu.add(0, CONTEXT_MENU_DELETE, 0, "删除");
+        menu.add(0, CONTEXT_MENU_FIX_ITEMS, 0, "修正内容提示表");
     }
 
     @Override
@@ -145,7 +146,7 @@ public class HoleIndexActivity extends AppCompatActivity {
                 break;
             case CONTEXT_MENU_FIX_ITEMS:
                 Log.d(TAG, "Edit hole fix information.");
-                intent = new Intent();
+                intent = new Intent(HoleIndexActivity.this, HoleFixActivity.class);
                 intent.putExtra("holeId", holeId);
                 startActivityForResult(intent, ACTION_EDIT_FIX);
         }
