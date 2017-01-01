@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>修正内容提示表</title>
+    <style>
+        h2 {
+        text-align: center;
+        letter-spacing: 0.5vw
+        }
+
+        .container {
+            text-align:left;
+        }
+
+        .column {
+            display:inline-block;
+            width:48%;
+        }
+
+        .no-border{
+            border:none;
+        }
+
+        #tableBody  td {
+           height: 24px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <h2>钻孔中间检查原始记录修正内容提示表（用签字笔填写）</h2>
+</header>
+
+
+<table border="1" cellspacing="0" style="margin: auto">
+    <thead>
+    <tr>
+        <th colspan="1">序号</th>
+        <th colspan="1" style="min-width:12em;white-space:nowrap;">原记录内容</th>
+        <th colspan="1" style="min-width:12em;white-space:nowrap;">修正内容</th>
+    </tr>
+    </thead>
+    <tbody id="tableBody">
+
+    </tbody>
+    <tfoot >
+        <tr style="height:60px; min-width:300px">
+            <td colspan="2" class="no-border">检查技术人员签名:<label id='checkStaff'></label></td>
+            <td colspan="1" class="no-border">检查时间:<label id='checkDate'></label></td>
+        </tr>
+    </tfoot>
+
+</table>
+
+</body>
+</html>

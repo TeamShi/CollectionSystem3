@@ -48,6 +48,7 @@ public class HtmlParser extends Parser {
     public static String RIG_GRAPH_TEMPLATE = "RigGraphTable.html";
     public static String RIG_GRAPH_COVER_TEMPLATE = "RigGraphCover.html";
     public static String RIG_GRAPH_BACK_COVER_TEMPLATE = "RigGraphBackCover.html";
+    public static String MODIFY_NOTE_TEMPLATE = "ModificationDesc.html";
 
     public static String TBODY_ID = "tableBody";
     public static String PROJECTNAME_ID = "projectName";
