@@ -414,7 +414,7 @@ public class Parser {
         return resultData;
     }
 
-    protected static void generateEarthSampleIndexInfo(Rig nextRig, StringBuffer sb) {
+    protected static void generateEarthSampleIndexInfo(Rig nextRig, StringBuffer sb, String BR) {
         if (nextRig != null
                 && nextRig instanceof OtherSamplingRig.OtherSamplingDetail
                 && (
@@ -422,8 +422,9 @@ public class Parser {
                         || ((OtherSamplingRig.OtherSamplingDetail) nextRig).getSamplingType().equals("岩样")
         )) {
             sb.append(((OtherSamplingRig.OtherSamplingDetail) nextRig).getIndex()).append("#");
-            sb.append((String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getDiameter()))).append("#");
-            sb.append((Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + " ~ " + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth()))).append("#");
+            double diameter = ((OtherSamplingRig.OtherSamplingDetail) nextRig).getDiameter();
+            sb.append(String.valueOf(diameter < 0 ? "" : diameter)).append("#");
+            sb.append((Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getStartDepth()) + BR + Utility.formatDouble(((OtherSamplingRig.OtherSamplingDetail) nextRig).getEndDepth()))).append("#");
             sb.append((String.valueOf(((OtherSamplingRig.OtherSamplingDetail) nextRig).getCount()))).append("#");
         } else {
             sb.append("").append("#");
@@ -572,7 +573,7 @@ public class Parser {
                 sb.append((Utility.formatDouble(regularRig.getRockCorePickPercentage() * 100) + "%")).append("#");
 
                 //土样
-                generateEarthSampleIndexInfo(nextRig, sb);
+                generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
                 generateWaterSampleInfo(nextRig, sb);
@@ -630,7 +631,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //土样
-                generateEarthSampleIndexInfo(nextRig, sb);
+                generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
                 generateWaterSampleInfo(nextRig, sb);
@@ -692,7 +693,7 @@ public class Parser {
                 sb.append("100%").append("#");
 
                 //土样
-                generateEarthSampleIndexInfo(nextRig, sb);
+                generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
                 generateWaterSampleInfo(nextRig, sb);
@@ -749,7 +750,7 @@ public class Parser {
                 sb.append(NA).append("#");
 
                 //土样
-                generateEarthSampleIndexInfo(nextRig, sb);
+                generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
                 generateWaterSampleInfo(nextRig, sb);
@@ -839,7 +840,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //土样
-                generateEarthSampleIndexInfo(nextRig, sb);
+                generateEarthSampleIndexInfo(nextRig, sb, BR);
 
                 //水样
                 generateWaterSampleInfo(nextRig, sb);
