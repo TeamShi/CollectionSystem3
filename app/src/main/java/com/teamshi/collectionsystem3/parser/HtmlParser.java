@@ -1068,7 +1068,7 @@ public class HtmlParser extends Parser {
         smplWaterResults = null == smplWaterResults ? new String[0][] : smplWaterResults;
         List<String> fileNames = new ArrayList<>();
         //列数
-        List<String[][]> records = Utility.fillArray(smplWaterResults, 11, PAGE_SIZE, " ");
+        List<String[][]> records = Utility.fillArray(smplWaterResults, 39, PAGE_SIZE, " ");
         for (int index = 0; index < records.size(); index++) {
             try {
                 String fileName = fileNamePrefix + "_" + (index + 1) + ".html";

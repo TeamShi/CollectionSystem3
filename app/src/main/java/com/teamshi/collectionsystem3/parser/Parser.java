@@ -276,6 +276,36 @@ public class Parser {
         sb.append("").append("#");
         sb.append("").append("#");
 
+        //extra 28 placeholder
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+
         resultData[0] = convert2Array(sb.toString());
 
         return resultData;
