@@ -58,7 +58,8 @@ public class XlsParser extends Parser {
     private static String[] SMPL_ORIGIN_EVENT_HEADER = new String[]{"试验室", "外业", "勘探点编号",
             "地点", "试件深度", "野外鉴定名称", "工程名称", "原状土", "扰动土", "备注"};
 
-    private static String[] RIG_GRAPH_HEADER =  new String[] {"编号","层底深度(m)","厚度(m)","岩层描述"};
+    private static String[] RIG_GRAPH_HEADER =  new String[] {"主层", "亚层", "次亚层",
+            "层深", "成因", "时代", "稠度", "填充岩性", "岩性描述", "承载力"};
 
     public static String RegularRig_NAME = "钻孔原始记录";
     public static String SptRig_NAME = "标准贯入";
@@ -221,22 +222,35 @@ public class XlsParser extends Parser {
             return  new String[0][];
         }
 
-        // "编号","层底深度(m)","厚度(m)","岩层描述"
         List<RigGraphData.RigNode> nodes =  rigGraphData.getRigNodeList();
         int rows = nodes.size();
-        String[] layerDepth = new String[rows];
         String[] layerThickness = new String[rows];
+        String[] drillTypes = new String[rows];
+        String[] rockDensities = new String[rows];
         String[] desc = new String[rows];
         for(int i = 0; i < rows; i++)  {
             RigGraphData.RigNode node = nodes.get(i);
-            layerDepth[i] = Utility.formatDouble(node.getLayoutEndDepth());
+            node.getRockDensity();
             layerThickness[i] = Utility.formatDouble(node.getRoundTripDepth());
+            rockDensities[i] = node.getRockDensity();
+            drillTypes[i] = node.getDrillType();
             desc[i] = node.getDescription();
         }
 
-        String[][] result = new String[rows][4];
+        String[][] result = new String[rows][10];
         for(int r= 0; r < rows; r++) {
-           result[r] = new String[]{String.valueOf(r+1), layerDepth[r], layerThickness[r], desc[r]};
+           result[r] = new String[]{
+                   "", //主层
+                   "", //次层
+                   "", //次亚层
+                   layerThickness[r], //回次进尺， 层深
+                   "",//成因
+                   "",//时代
+                   rockDensities[r],//稠度
+                   drillTypes[r], //岩性
+                   desc[r],
+                   "",//承载力
+           };
         }
 
         return result;
