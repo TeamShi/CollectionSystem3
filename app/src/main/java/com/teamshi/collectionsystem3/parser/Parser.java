@@ -156,6 +156,36 @@ public class Parser {
             //扰动土(千克)
             sb.append("").append("#");
 
+            //extra 29 placeholder
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+            sb.append("").append("#");
+
             //备注
             sb.append(NA).append("#");
 
@@ -199,6 +229,36 @@ public class Parser {
         sb.append("").append("#");
 
         //扰动土(千克)
+        sb.append("").append("#");
+
+        //extra 29 placeholder
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
         sb.append("").append("#");
 
         //备注 originalSamplingRig.getRockDescription() 空
@@ -276,35 +336,6 @@ public class Parser {
         sb.append("").append("#");
         sb.append("").append("#");
 
-        //extra 28 placeholder
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
-        sb.append("").append("#");
 
         resultData[0] = convert2Array(sb.toString());
 
@@ -392,6 +423,36 @@ public class Parser {
         sb.append("").append("#");
 
         //扰动土(千克)
+        sb.append("").append("#");
+
+        //extra 29 placeholder
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
+        sb.append("").append("#");
         sb.append("").append("#");
 
         //备注
