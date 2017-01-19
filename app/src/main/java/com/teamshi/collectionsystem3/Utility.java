@@ -278,7 +278,7 @@ public class Utility {
 
     public static String formatNumber(double number) {
         int thousands = (int) (number / 1000);
-        String output = thousands > 0 ? thousands+"+"+ (number - 1000 * thousands) : String.valueOf(number);
+        String output = thousands > 0 ? thousands+"+"+ formatDouble(number - 1000 * thousands) : formatDouble(number);
         return output ;
     }
 

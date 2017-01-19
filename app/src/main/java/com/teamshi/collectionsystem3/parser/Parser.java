@@ -260,6 +260,7 @@ public class Parser {
         sb.append("").append("#");
         sb.append("").append("#");
         sb.append("").append("#");
+        sb.append("").append("#");
 
         //备注 originalSamplingRig.getRockDescription() 空
         sb.append(NA).append("#");
@@ -426,6 +427,7 @@ public class Parser {
         sb.append("").append("#");
 
         //extra 29 placeholder
+        sb.append("").append("#");
         sb.append("").append("#");
         sb.append("").append("#");
         sb.append("").append("#");
@@ -679,7 +681,7 @@ public class Parser {
                 sb.append(NA).append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
-                sb.append(regularRig.getNote().trim().equals("") ? NA : regularRig.getNote()).append("#");
+                sb.append(NA).append("#");
 
             } else if (isNAType) {
                 NARig naRig = (NARig) rigs.get(i);
@@ -741,7 +743,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
-                sb.append(naRig.getNaType().trim().equals("") ? NA : naRig.getNaType()).append("#");
+                sb.append(NA).append("#");
 
             } else if (isSpt) {
                 SPTRig sptRig = (SPTRig) rigs.get(i);
@@ -799,7 +801,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
-                sb.append(sptRig.getOtherDescription().trim().equals("") ? NA : sptRig.getOtherDescription()).append("#");
+                sb.append(NA).append("#");
 
             } else if (isDst) {
                 DSTRig dstRig = (DSTRig) rigs.get(i);
@@ -950,7 +952,7 @@ public class Parser {
                 sb.append("").append("#");
 
                 //特殊情况记录 最后一个string 特殊处理
-                sb.append(trRig.getSpecialDescription().trim().equals("") ? NA : trRig.getSpecialDescription()).append("#");
+                sb.append(NA).append("#");
             } else if (isOriSmpl) {
                 OriginalSamplingRig originalSamplingRig = (OriginalSamplingRig) rigs.get(i);
 

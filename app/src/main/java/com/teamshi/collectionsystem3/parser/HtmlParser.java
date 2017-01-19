@@ -1026,7 +1026,7 @@ public class HtmlParser extends Parser {
 
         List<String> fileNames = new ArrayList<>();
         //列数
-        List<String[][]> records = Utility.fillArray(earthResults, 10, PAGE_SIZE, " ");
+        List<String[][]> records = Utility.fillArray(earthResults, 39, PAGE_SIZE, " ");
         for (int index = 0; index < records.size(); index++) {
             try {
                 String fileName = fileNamePrefix + "_" + (index + 1) + ".html";
