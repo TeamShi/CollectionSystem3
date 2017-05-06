@@ -3,6 +3,7 @@ package com.teamshi.collectionsystem3;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -20,8 +21,17 @@ import android.widget.Toast;
 
 import com.teamshi.collectionsystem3.datastructure.Project;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,12 +41,14 @@ public class StartUpActivity extends AppCompatActivity {
     private Button newProjectButton;
     private Button openProjectButton;
     private Button deleteProjectButton;
+    private LinearLayout mainButtonsLinearLayout;
     private ListView projectListView;
     private LinearLayout projectListViewWrapper;
     private TextView validationStatusTextView;
     private ArrayAdapter<String> arrayAdapter;
     private TextView storagePathTextView;
     private String selectedProjectName = null;
+    private String licenseString = null;
 
 
     @Override
@@ -55,6 +67,7 @@ public class StartUpActivity extends AppCompatActivity {
 
         projectListViewWrapper = (LinearLayout) findViewById(R.id.wrapper_project_list);
         projectListView = (ListView) projectListViewWrapper.findViewById(R.id.lv_project_list);
+        mainButtonsLinearLayout = (LinearLayout) findViewById(R.id.linear_layout_main_buttons);
 
         activeButton = (Button) findViewById(R.id.button_active_system);
         newProjectButton = (Button) findViewById(R.id.button_new_project);
@@ -67,7 +80,61 @@ public class StartUpActivity extends AppCompatActivity {
         activeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Alfred, Input key.
+                AlertDialog.Builder builder = new AlertDialog.Builder(StartUpActivity.this);
+                builder.setTitle("请输入验证码");
+
+                final EditText input = new EditText(StartUpActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+                Log.d(TAG, "Pop up window to input new project name.");
+
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "Cancel button is clicked.");
+                        dialog.cancel();
+                    }
+                });
+
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (Utility.validateDate(input.getText().toString())) {
+
+                            Calendar c = new GregorianCalendar();
+                            c.setTimeInMillis(Utility.getExpiredDate(input.getText().toString().toString()) * 1000);
+                            validationStatusTextView.setText("验证成功。过期时间：" + c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + (c.get(Calendar.DAY_OF_MONTH)));
+
+                            projectListView.setVisibility(View.VISIBLE);
+                            mainButtonsLinearLayout.setVisibility(View.VISIBLE);
+
+                            activeButton.setEnabled(false);
+                            activeButton.setText("已激活");
+
+                            String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/license.dat";
+                            try {
+                                FileWriter fw = new FileWriter(licenseFilePath);
+                                BufferedWriter bw = new BufferedWriter(fw);
+                                bw.write(input.getText().toString().toUpperCase());
+                                bw.close();
+                                fw.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+
+                            projectListView.setVisibility(View.GONE);
+
+                            activeButton.setEnabled(true);
+                            activeButton.setText("输入激活码");
+
+                            validationStatusTextView.setText("有效期过期，请重新输入授权码。");
+                        }
+                    }
+                });
+
+                builder.show();
             }
         });
 
@@ -183,25 +250,6 @@ public class StartUpActivity extends AppCompatActivity {
             }
         });
 
-        if (ValidationManager.validate()) {
-            Log.d(TAG, "Validation pass. Load normally.");
-            projectListView.setVisibility(View.VISIBLE);
-
-            activeButton.setEnabled(false);
-            activeButton.setText("已激活");
-
-            validationStatusTextView.setText(ValidationManager.getExpiredDate());
-
-        } else {
-            Log.d(TAG, "Validation failed. Load nothing.");
-            projectListView.setVisibility(View.GONE);
-
-            activeButton.setEnabled(true);
-            activeButton.setText("输入激活码");
-
-            validationStatusTextView.setText("未激活");
-        }
-
         Set<String> names = IOManager.getProjects().keySet();
         final ArrayList<String>  projectNames = new ArrayList<>(Arrays.asList(names.toArray(new String[names.size()])));
         if (projectNames.size() == 0) {
@@ -226,13 +274,80 @@ public class StartUpActivity extends AppCompatActivity {
         });
 //        projectListView.setSelection(-1);
 
-
         storagePathTextView.setFocusable(false);
         storagePathTextView.setOnClickListener(null);
         storagePathTextView.setOnTouchListener(null);
         storagePathTextView.setOnKeyListener(null);
         storagePathTextView.setText("文件保存路径: "+IOManager.APP_ROOT);
 
+        String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/license.dat";
+        File licenseFile = new File(licenseFilePath);
+        if (licenseFile.exists()) {
+            FileReader fr = null;
+            try {
+                fr = new FileReader(licenseFilePath);
+                BufferedReader br = new BufferedReader(fr);
+                licenseString = br.readLine();
+                br.close();
+                fr.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (Utility.validateDate(licenseString)) {
+                Log.d(TAG, "Validation pass. Load normally.");
+                projectListView.setVisibility(View.VISIBLE);
+
+                activeButton.setEnabled(false);
+                activeButton.setText("已激活");
+
+                Calendar c = new GregorianCalendar();
+                c.setTimeInMillis(Utility.getExpiredDate(licenseString) * 1000);
+                validationStatusTextView.setText("验证成功。过期时间：" + c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + (c.get(Calendar.DAY_OF_MONTH)));
+
+            } else {
+                Log.d(TAG, "Validation failed. Load nothing.");
+                projectListView.setVisibility(View.GONE);
+                mainButtonsLinearLayout.setVisibility(View.GONE);
+
+                activeButton.setEnabled(true);
+                activeButton.setText("输入激活码");
+
+                validationStatusTextView.setText("有效期过期，请重新输入授权码。");
+            }
+        } else {
+            File ztFolder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/");
+            ztFolder.mkdir();
+            File ztConfigFolder = new File(Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/");
+            ztConfigFolder.mkdir();
+
+            FileWriter fw = null;
+            long expireDate = 0;
+            try {
+                fw = new FileWriter(licenseFilePath);
+                BufferedWriter bw = new BufferedWriter(fw);
+                Calendar c = new GregorianCalendar();
+                expireDate = c.getTimeInMillis() / 1000;
+                expireDate += 8035200;
+                bw.write(Utility.getExpiredString(expireDate));
+                bw.close();
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            projectListView.setVisibility(View.VISIBLE);
+
+            activeButton.setEnabled(false);
+            activeButton.setText("已激活");
+
+
+            Calendar c = new GregorianCalendar();
+            c.setTimeInMillis(expireDate * 1000);
+            validationStatusTextView.setText("验证成功。过期时间：" + c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + (c.get(Calendar.DAY_OF_MONTH)));
+        }
 
     }
 
