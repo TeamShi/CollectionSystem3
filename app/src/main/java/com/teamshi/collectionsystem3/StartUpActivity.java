@@ -330,23 +330,28 @@ public class StartUpActivity extends AppCompatActivity {
                 BufferedWriter bw = new BufferedWriter(fw);
                 Calendar c = new GregorianCalendar();
                 expireDate = c.getTimeInMillis() / 1000;
-                expireDate += 8035200;
+                expireDate -= 86400;
                 bw.write(Utility.getExpiredString(expireDate));
+                projectListView.setVisibility(View.GONE);
+                mainButtonsLinearLayout.setVisibility(View.GONE);
+
+                activeButton.setEnabled(true);
+
+                activeButton.setText("输入激活码");
+
+                validationStatusTextView.setText("有效期过期，请重新输入授权码。");
                 bw.close();
                 fw.close();
             } catch (IOException e) {
                 e.printStackTrace();
+                projectListView.setVisibility(View.GONE);
+                mainButtonsLinearLayout.setVisibility(View.GONE);
+
+                activeButton.setEnabled(false);
+                activeButton.setText("输入激活码");
+
+                validationStatusTextView.setText("没有存储设备读写权限。");
             }
-
-            projectListView.setVisibility(View.VISIBLE);
-
-            activeButton.setEnabled(false);
-            activeButton.setText("已激活");
-
-
-            Calendar c = new GregorianCalendar();
-            c.setTimeInMillis(expireDate * 1000);
-            validationStatusTextView.setText("验证成功。过期时间：" + c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + (c.get(Calendar.DAY_OF_MONTH)));
         }
 
     }
