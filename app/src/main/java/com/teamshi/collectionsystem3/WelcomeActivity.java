@@ -91,7 +91,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 BufferedWriter bw = new BufferedWriter(fw);
                 Calendar c = new GregorianCalendar();
                 expireDate = c.getTimeInMillis() / 1000;
-                expireDate += 8035200;
                 bw.write(Utility.getExpiredString(expireDate));
                 bw.close();
                 fw.close();
