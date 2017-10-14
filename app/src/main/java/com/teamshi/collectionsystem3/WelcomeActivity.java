@@ -34,7 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Utility.validateDate(licenseEditText.getText().toString())) {
-                    String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/license.dat";
+                    String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + ".zt/license.dat";
                     try {
                         FileWriter fw = new FileWriter(licenseFilePath);
                         BufferedWriter bw = new BufferedWriter(fw);
@@ -54,7 +54,7 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/license.dat";
+        String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + ".zt/license.dat";
         String licenseString = "";
         File licenseFile = new File(licenseFilePath);
         if (licenseFile.exists()) {

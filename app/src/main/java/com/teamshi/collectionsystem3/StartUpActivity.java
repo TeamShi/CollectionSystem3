@@ -112,7 +112,7 @@ public class StartUpActivity extends AppCompatActivity {
                             activeButton.setEnabled(false);
                             activeButton.setText("已激活");
 
-                            String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/license.dat";
+                            String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + ".zt/license.dat";
                             try {
                                 FileWriter fw = new FileWriter(licenseFilePath);
                                 BufferedWriter bw = new BufferedWriter(fw);
@@ -280,7 +280,7 @@ public class StartUpActivity extends AppCompatActivity {
         storagePathTextView.setOnKeyListener(null);
         storagePathTextView.setText("文件保存路径: "+IOManager.APP_ROOT);
 
-        String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + "/ZuanTan/config/license.dat";
+        String licenseFilePath = Environment.getExternalStorageDirectory().getPath() + ".zt/license.dat";
         File licenseFile = new File(licenseFilePath);
         if (licenseFile.exists()) {
             FileReader fr = null;
