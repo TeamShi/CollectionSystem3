@@ -91,6 +91,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 BufferedWriter bw = new BufferedWriter(fw);
                 Calendar c = new GregorianCalendar();
                 expireDate = c.getTimeInMillis() / 1000;
+                expireDate += 0;
+                licenseEditText.setHint("有效期过期，请重新输入授权码。");
+                licenseEditText.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
                 bw.write(Utility.getExpiredString(expireDate));
                 bw.close();
                 fw.close();
