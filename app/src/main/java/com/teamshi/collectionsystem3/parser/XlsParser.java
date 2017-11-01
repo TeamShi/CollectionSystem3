@@ -128,7 +128,7 @@ public class XlsParser extends Parser {
             // 循环写入列数据
             for (int j = 0, cols = array[i].length; j < cols; j++) {
                 Cell cell = row.createCell(j);
-                String text = array[i][j].equals("null") ? "" : array[i][j];
+                String text = null == array[i][j] || array[i][j].equals("null") ? "" : array[i][j];
                 cell.setCellValue(text);
             }
         }
@@ -224,14 +224,14 @@ public class XlsParser extends Parser {
 
         List<RigGraphData.RigNode> nodes =  rigGraphData.getRigNodeList();
         int rows = nodes.size();
-        String[] layerThickness = new String[rows];
+        String[] endDepth = new String[rows];
         String[] drillTypes = new String[rows];
         String[] rockDensities = new String[rows];
         String[] desc = new String[rows];
         for(int i = 0; i < rows; i++)  {
             RigGraphData.RigNode node = nodes.get(i);
             node.getRockDensity();
-            layerThickness[i] = Utility.formatDouble(node.getRoundTripDepth());
+            endDepth[i] = Utility.formatDouble(node.getEndDepth());
             rockDensities[i] = node.getRockDensity();
             drillTypes[i] = node.getDrillType();
             desc[i] = node.getDescription();
@@ -243,7 +243,7 @@ public class XlsParser extends Parser {
                    "", //主层
                    "", //次层
                    "", //次亚层
-                   layerThickness[r], //回次进尺， 层深
+                   endDepth[r], //回次进尺， 层深
                    "",//成因
                    "",//时代
                    rockDensities[r],//稠度
